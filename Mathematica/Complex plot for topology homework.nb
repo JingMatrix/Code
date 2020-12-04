@@ -1,0 +1,130 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4616,        122]
+NotebookOptionsPosition[      4174,        107]
+NotebookOutlinePosition[      4569,        123]
+CellTagsIndexPosition[      4526,        120]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"ComplexPlot3D", "[", 
+  RowBox[{
+   RowBox[{"z", 
+    RowBox[{"(", 
+     RowBox[{"z", "-", "1"}], ")"}], 
+    RowBox[{"(", 
+     RowBox[{"z", "-", "2"}], ")"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"z", ",", 
+     RowBox[{
+      RowBox[{"-", "4"}], "-", 
+      RowBox[{"2", "I"}]}], ",", 
+     RowBox[{"4", "+", 
+      RowBox[{"2", "I"}]}]}], "}"}], ",", " ", 
+   RowBox[{"PlotLegends", "\[Rule]", "Automatic"}], ",", " ", 
+   RowBox[{"Mesh", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Range", "[", 
+      RowBox[{
+       RowBox[{"-", "\[Pi]"}], ",", " ", "\[Pi]", ",", 
+       FractionBox["\[Pi]", "2"]}], "]"}], "}"}]}], ",", " ", 
+   RowBox[{"MeshFunctions", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Arg", "[", "#2", "]"}], "&"}], "}"}]}], ",", 
+   RowBox[{"AxesLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"\"\<\\\\Re (z)\>\"", ",", "TeXForm", ",", "HoldForm"}], "]"}],
+       ",", 
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"\"\<\\\\Im (z)\>\"", ",", "TeXForm", ",", "HoldForm"}], "]"}],
+       ",", "\"\<|u(z)|\>\""}], "}"}]}], ",", 
+   RowBox[{"LabelStyle", "\[Rule]", 
+    RowBox[{"Directive", "[", 
+     RowBox[{"Medium", ",", "Blue", ",", "Bold"}], "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7951458470716324`*^9, 3.7951458484200277`*^9}, {
+  3.795145960418583*^9, 3.7951460202904515`*^9}, {3.7951460625085936`*^9, 
+  3.7951460924534893`*^9}, {3.7951461687215786`*^9, 3.7951462514563346`*^9}, {
+  3.795146284831077*^9, 3.795146318652639*^9}, {3.7951465717675657`*^9, 
+  3.795146628683346*^9}, {3.7951484007894783`*^9, 3.7951484461641088`*^9}, {
+  3.7951485342404213`*^9, 3.7951487105230474`*^9}, {3.7951487638903785`*^9, 
+  3.795148800435629*^9}, {3.7951489747433386`*^9, 3.7951489768995724`*^9}, {
+  3.7951490180276003`*^9, 3.795149020967764*^9}, {3.7951490538468533`*^9, 
+  3.795149059215495*^9}, {3.795149102602479*^9, 3.7951491050309525`*^9}, {
+  3.795149166989279*^9, 3.7951491852943316`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"e155a53a-997c-4caf-8319-92626998ae21"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ResourceFunction", "[", "\"\<RiemannSurfacePlot3D\>\"", "]"}], "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"w", "^", "2"}], "\[Equal]", 
+    RowBox[{"z", 
+     RowBox[{"(", 
+      RowBox[{"z", "-", "1"}], ")"}], 
+     RowBox[{"(", 
+      RowBox[{"z", "-", "2"}], ")"}]}]}], ",", 
+   RowBox[{"Im", "[", "w", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"z", ",", "w"}], "}"}], ",", 
+   RowBox[{"Axes", "\[Rule]", "True"}], ",", " ", 
+   RowBox[{"AxesLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"\"\<\\\\Re (z)\>\"", ",", "TeXForm", ",", "HoldForm"}], "]"}],
+       ",", 
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"\"\<\\\\Im (z)\>\"", ",", "TeXForm", ",", "HoldForm"}], "]"}],
+       ",", 
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"\"\<\\\\Im (w)\>\"", ",", "TeXForm", ",", "HoldForm"}], 
+       "]"}]}], "}"}]}], ",", 
+   RowBox[{"LabelStyle", "\[Rule]", 
+    RowBox[{"Directive", "[", 
+     RowBox[{"Blue", ",", "Large"}], "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7952668934023485`*^9, 3.795266911871503*^9}, {
+  3.7952744884179153`*^9, 3.795274502598585*^9}, {3.7952745373943715`*^9, 
+  3.7952745578036375`*^9}, {3.795274622742279*^9, 3.7952746396476903`*^9}, {
+  3.7952746964669847`*^9, 3.7952747170480905`*^9}, {3.795274750514265*^9, 
+  3.7952747645294504`*^9}, {3.795274803410679*^9, 3.795274807084856*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"1e20e2b9-cd4f-4cb6-8206-3f0abdcd77b2"]
+},
+WindowSize->{1107.75, 602.25},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e48b28fb-a81c-4dd9-be52-141ff9006136"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2103, 48, 111, "Input",ExpressionUUID->"e155a53a-997c-4caf-8319-92626998ae21"],
+Cell[2664, 70, 1506, 35, 71, "Input",ExpressionUUID->"1e20e2b9-cd4f-4cb6-8206-3f0abdcd77b2"]
+}
+]
+*)
+

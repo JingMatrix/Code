@@ -1,0 +1,33 @@
+\documentclass{ctexart}
+%\setCJKmainfont{DejaVu Serif}
+%\setCJKmonofont{Source Code Pro}
+%\setCJKsansfont{YouYuan}
+\title{Crossing GFW in WHU}
+\author{jingmatrix }
+\date{July 2019}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section*{Background}
+Mastering stable methods of crossing the Great Firewall (GFW) is important for students majoring in mathematics. Up to now, popular solutions includes VPN, Shadowsocks, Ipv6 hosts Go-Agent and the hero of today---Ipv6 DNS. We give helpful introduction and estimation about them.
+\section{VPN}\label{method:vpn}
+The vpn applications appearing in Google Play Store gradually deviate from its original definition as providing vpn services; they are not based on protocols such as L2TP , rather the solution \ref{method:ss}. So these applications permit  higher connection speed than earlier ones.
+
+Wuma VPN is recommended since its design can be easily hacked once you have gained the root access. Unfortunately it cannot run on Android 10 as so far.  You can find the full list of all Shadowsocks severs (including password) in its preference html-file in the data folder. Websites free-ss.com also shares this secret to public.
+
+If access to  Google Play Store is not possible, website apkmirror.com is recommended for downloading applications in need.
+\section{Shadowsocks}\label{method:ss}
+Shadowsocks solution is the best choice when ipv6 network is not available. Installing the application and finding proper severs configuration by Google engine permit all we need. Adding configuration through QR scanning or clipboard simplify the whole procedure.
+\section{Ipv6 host}\label{method:host}
+Changing the default hosts file in your system works in all platforms.  Changing ipv4 hosts is impossible nowadays, but some applications seem  to work through this way perfectly. In fact they pair the blocked websites by one fixed ipv4 address that is able to crossing the GFW through other methods. If you are in ipv6 network, such as the Campus-Network, then using ipv6 hosts from GitHub works fine. Additionally, cellular network support ipv6 as well by modifing the ARN settings.
+\section{Go-Agent}\label{method:xxnet}
+Using XX-Net for desktops and Xndroid for Android  phone if you have root access. This solution relays on ipv6 network; it works for all  except on Chromebook users.
+
+Updating the hosts file is needed sometimes.
+\section{Ipv6-DNS}\label{method:dns}
+Change your ipv6 dns to 2001:470:20::2 and visit YouTube from DuckDuckGo if you need. This solution works for IOS , Chromebook 
+and Windows 10. For Android, choose a suitable ipv6 dns application then you finish.
+\section*{Google Products}
+As so far, Google Drive and Gmail is available under ipv6 network without auxiliary efforts if using Google Pixel phone or Chromebook. We can access Google Play Store on Pixel when connected to WHU-STU without obstruction. Note that WHU-WLAN supports ipv6 connection not as well as WHU-STU.
+\end{document}

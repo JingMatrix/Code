@@ -1,0 +1,105 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3630,         97]
+NotebookOptionsPosition[      3285,         83]
+NotebookOutlinePosition[      3678,         99]
+CellTagsIndexPosition[      3635,         96]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"StreamPlot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"x", 
+       RowBox[{"(", 
+        RowBox[{"x", "+", "0.5"}], ")"}]}], ",", 
+      RowBox[{
+       SuperscriptBox["y", "2"], 
+       RowBox[{"(", 
+        RowBox[{"y", "-", "0.5"}], ")"}]}]}], "}"}], "//", "Normalize"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}], "\[Element]", 
+    RowBox[{"Disk", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}], ",", "1"}], "]"}]}], ",", 
+   RowBox[{"StreamPoints", "\[Rule]", "65"}], ",", 
+   RowBox[{"StreamMarkers", "->", "\"\<PinDart\>\""}], ",", 
+   RowBox[{"Epilog", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", "Thick", ",", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Circle", "[", 
+         RowBox[{"origin", ",", "0.2"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"origin", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0.5"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "0.5"}], ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "0.5"}], ",", "0.5"}], "}"}]}], "}"}]}], "}"}]}], 
+       "]"}]}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8032253920478086`*^9, 3.803225482232835*^9}, {
+   3.803225573921872*^9, 3.803225574534871*^9}, {3.8032260503771114`*^9, 
+   3.8032261547221355`*^9}, {3.8032262007221375`*^9, 3.803226228577138*^9}, 
+   3.803226346058622*^9, {3.8032263929237137`*^9, 3.8032264434547453`*^9}, {
+   3.8032264769409122`*^9, 3.8032265223029933`*^9}, {3.8032265573789873`*^9, 
+   3.803226560434019*^9}, {3.803226616239048*^9, 3.803226659536275*^9}, {
+   3.8032267363467894`*^9, 3.8032267815967264`*^9}, {3.8032268488600893`*^9, 
+   3.8032268529670897`*^9}, {3.803226944548195*^9, 3.803227009205514*^9}, {
+   3.803227417511074*^9, 3.803227417910041*^9}, {3.80322751037814*^9, 
+   3.803227538545107*^9}, {3.8032275931553316`*^9, 3.803227708475437*^9}, 
+   3.8032277462444935`*^9, 3.8032277897145276`*^9, {3.803227909006542*^9, 
+   3.803227909426504*^9}, 3.8032282063020024`*^9, {3.8032285929868383`*^9, 
+   3.803228600210803*^9}, {3.8032293001919603`*^9, 3.8032293084509883`*^9}, {
+   3.803229339727959*^9, 3.803229340507958*^9}, 3.803229386604961*^9, {
+   3.803229452755993*^9, 3.8032294683650246`*^9}, 3.8032294997401342`*^9, {
+   3.8032295531721816`*^9, 3.803229575433237*^9}, {3.803229630105701*^9, 
+   3.8032296305066957`*^9}},
+ CellLabel->"In[56]:=",ExpressionUUID->"3965d458-42f8-49e0-8223-6cfd0c02fc82"]
+},
+WindowSize->{960., 507.75},
+WindowMargins->{{0, Automatic}, {Automatic, 21}},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"272c1a01-b043-43f3-8eee-10d387629cda"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2723, 61, 75, "Input",ExpressionUUID->"3965d458-42f8-49e0-8223-6cfd0c02fc82"]
+}
+]
+*)
+

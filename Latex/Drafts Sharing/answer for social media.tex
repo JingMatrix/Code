@@ -1,0 +1,64 @@
+% !TeX spellcheck = en_US
+\documentclass[]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\renewcommand{\labelenumi}%
+{\alph{enumi})}
+\newtheorem{prop}{Question}
+\theoremstyle{remark}
+\newtheorem*{sol}{My Solution}
+%opening
+\title{Drafts for sharing }
+\author{Jianyu MA}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Files from Teachers}
+\subsection{Topology}
+\begin{itemize}
+	\item In feuille 2.5 Exo 1, we should assume $ X $ is a Hausdorff space since this condition is used twice in the provided solution.
+\end{itemize}
+\section{TIM discussion}
+\begin{itemize}
+	\item Define $ v_{1}(t) :=\varphi(t) + \int_{0}^{t} \psi(x) \mathrm{d} x
+	$ and $ v_{2}(t) :=\varphi(t) + \int_{t}^{0} \psi(x) \mathrm{d} x
+	$, then $ u(x,y) = v_{1}(x+y) + v_{2}(x-y) $. We have $ \partial_{x^2}{v_{1}(x+y)} = \partial_{y^2}{v_{1}(x+y)} = v_{1}''(x+y)$ and $ \partial_{y^2}{v_{2}(x-y)} = \partial_{y}(-\partial_{y}v_{2}'(x-y))=v_{2}''(x-y)= \partial_{x^2}{v_{2}(x-y)}$
+	\item $ AC = AC = 4,\angle BAC = \frac{2\pi}{3}, CD\perp AB, AF=? $
+
+	$ AH = 1, DH = \sqrt{3}, DH \parallel FG \text{, so } FH = \frac{EG}{EH} DH = \dfrac{2}{3} \sqrt{3}, AF = \sqrt{FG^2 + AG^2}=\dfrac{4}{\sqrt{3}}. $
+\end{itemize}
+\section{Facebook discussion}
+\begin{prop}
+	 If $ A= (a_{ij}) $, then \[ \operatorname{Tr}\left(A^{k}\right)=\sum_{i_{1}, i_{2}, \ldots, i_{k}=1}^{n} a_{i_{1} i_{2}} a_{i_{2} i_{3}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}. \]
+\end{prop}
+\begin{sol}
+	This prove use a tricky mathematical induction. Keep in mind we have $ (AB)_{ij} =\sum_{k=1}^{n} a_{i k} b_{k j} $.
+	\begin{enumerate}
+		\item Prove this proposition for all $ k=2^n, n\in \mathbb{N} $. For $ n=0,1 $, it is obvious. Notice that $ \operatorname{Tr}\left(A^{2^{n+1}}\right) = \operatorname{Tr}\left((A^2)^{2^n}\right) $ and  $\left(A^{2}\right)_{i j}=\sum_{k=1}^{n} a_{i k} a_{k j}$, so by replacing $ a_{ij} $ with $ \sum_{k=1}^{n} a_{i k} a_{k j} $ we make the induction step from $ n $ to $ n+1 $.
+		\item Prove that if this proposition is true for some $ k_0 \ge 2 $ then it is true for $ k_0 -1 $. Since
+		\[ \frac{\partial\operatorname{Tr}(AB)}{\partial a_{ik} } =\frac{\partial}{\partial a_{ik}}\sum_{i_1,i_2=1}^{n}a_{i_1 i_2} b_{i_2 i_1}  = b_{ki} \]
+		we have the matrix equality $ \frac{\partial\operatorname{Tr}(AB)}{\partial A } :=( \frac{\partial\operatorname{Tr}(AB)}{\partial a_{ik} }) = B^\intercal$, which is same as saying
+		\[ \operatorname{Tr}\left( \frac{\partial\operatorname{Tr}(AB)}{\partial A } \right) =\operatorname{Tr}(B^\intercal)=\operatorname{Tr}(B).
+		\]
+
+		In our case, let $ B:=A^{k_0 -1} $, we get
+		\begin{align*}
+			\operatorname{Tr}(B) = & \operatorname{Tr}(A^{k_0 -1})\\
+			&=\operatorname{Tr}\left( \frac{\partial\operatorname{Tr}(A^{k_0})}{\partial A } \right)\\
+			&=\operatorname{Tr}\left( \frac{\partial}{\partial A } \sum_{i_{1}, i_{2}, \ldots, i_{k}=1}^{n} a_{i_{1} i_{2}} a_{i_{2} i_{3}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}\right)\\
+			&=\operatorname{Tr} \left( \sum_{i_{3}, i_{4}, \ldots, i_{k}=1}^{n} a_{j i_3}a_{i_{3} i_{4}} a_{i_{4} i_{5}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}\right) _{ij}\\
+			&= \sum_{i=j=1}^{n}\left( \sum_{i_{3}, i_{4}, \ldots, i_{k}=1}^{n} a_{j i_3}a_{i_{3} i_{4}} a_{i_{4} i_{5}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}\right) _{ij}\\
+			&=\sum_{j,i_{3}, i_{4}, \ldots, i_{k}=1}^{n} a_{j i_3}a_{i_{3} i_{4}} a_{i_{4} i_{5}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}\\
+			&= \sum_{i_{1}, i_{2}, \ldots, i_{k-1}=1}^{n} a_{i_{1} i_{2}} a_{i_{2} i_{3}} \ldots a_{i_{k-2} i_{k-1}} a_{i_{k-1} i_{1}}.
+		\end{align*}
+		\item Any $ k\in \mathbb{N} $ is small than a $ k_0 = 2^{n_0} $, repeat the second step we see that this proposition is true for $ k $.
+	\end{enumerate}
+\end{sol}
+
+\end{document}

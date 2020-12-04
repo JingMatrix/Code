@@ -1,0 +1,449 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14490,        441]
+NotebookOptionsPosition[     12305,        392]
+NotebookOutlinePosition[     12909,        413]
+CellTagsIndexPosition[     12866,        410]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Preparation", "Section",
+ CellChangeTimes->{{3.810654793677094*^9, 
+  3.810654862138678*^9}},ExpressionUUID->"07908b51-cd98-41b5-aa38-\
+c1a8c4dba977"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "First we generate grid coordinates with parameter ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "a382b753-7746-4f71-9d9f-3a17f57e7d80"],
+ ", the height/width of test square image. Hence we are working with a torus \
+quotient-ed by a square ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"[", 
+     RowBox[{"0", ",", "n"}], "]"}], "\[Times]", 
+    RowBox[{"[", 
+     RowBox[{"0", ",", "n"}], "]"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "29d7b2d4-fd37-4963-b3e0-e3e4b0f893b6"],
+ ".  Take ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "=", "3"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "e0b488c5-eb2d-4535-b26f-3585f6e2f18a"],
+ " for illustrating:"
+}], "Subsubsection",
+ CellChangeTimes->{{3.810653649131461*^9, 3.81065373948584*^9}, {
+  3.810653851146667*^9, 3.8106539064929123`*^9}, {3.810653979613989*^9, 
+  3.810653999914838*^9}, {3.810654132337442*^9, 
+  3.810654304280036*^9}},ExpressionUUID->"0700026d-ede3-4509-b5bb-\
+baec7d9d6e1e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"coords", "[", "n_", "]"}], ":=", 
+   RowBox[{"Array", "[", 
+    RowBox[{"List", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "n"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"coords", "[", "3", "]"}], "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.810653939663267*^9, 3.810653966988533*^9}, {
+  3.810654004687484*^9, 3.810654048046789*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"e9f684d5-4495-479a-a950-6f230bd0502f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Given a matrix ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "51e32007-9afd-40d2-b09a-9b98a2d75e52"],
+ " with determinant \[PlusMinus]1 and no eigenvalue \[PlusMinus]1,  we define \
+a cat map accepting ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "0bea192c-53ae-4357-966f-9005e9b206d6"],
+ ", ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "674d52b1-9d32-48af-9968-0e4714067a99"],
+ " and a coordinate pair as input:"
+}], "Subsubsection",
+ CellChangeTimes->{{3.810654101164452*^9, 3.81065411693953*^9}, {
+  3.810654330939611*^9, 3.8106544087067127`*^9}, {3.810654460909369*^9, 
+  3.810654586169578*^9}, {3.810654633481001*^9, 3.8106546894496183`*^9}, {
+  3.810654744492145*^9, 
+  3.810654755033683*^9}},ExpressionUUID->"dce71230-00d3-42fc-8085-\
+df2bbb020fdb"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"catMap", "[", 
+     RowBox[{"A_", ",", "n_"}], "]"}], "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"Mod", "[", 
+    RowBox[{
+     RowBox[{"A", ".", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "y"}], "}"}]}], ",", "n", ",", "1"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.810654715860841*^9, 3.810654724103179*^9}, 
+   3.810654759753675*^9},
+ CellLabel->"In[3]:=",ExpressionUUID->"d7d838da-43cd-46cb-aa61-84c39dc4fee5"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Transform an image", "Section",
+ CellChangeTimes->{{3.8106548872505093`*^9, 
+  3.8106549227065697`*^9}},ExpressionUUID->"28add60c-1896-43aa-8d7d-\
+29f543cb7b1d"],
+
+Cell[CellGroupData[{
+
+Cell["Import an image and padding it to be a square one", "Subsubsection",
+ CellChangeTimes->{{3.810654930963035*^9, 
+  3.8106549799515676`*^9}},ExpressionUUID->"ea089acd-12a7-481a-9ec6-\
+8d9d8244b0c0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"img", "=", 
+   RowBox[{
+   "Import", "[", "\"\<http://i.stack.imgur.com/yjrEY.png\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"img", "=", 
+   RowBox[{"ImagePad", "[", 
+    RowBox[{"img", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"4", ",", "4"}], "}"}]}], "}"}], ",", "White"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ImageDimensions", "[", "img", "]"}]}], "Input",
+ CellChangeTimes->{{3.810654991576672*^9, 3.81065499777938*^9}, {
+  3.810655035189866*^9, 3.810655035849203*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"0610cd89-1581-4ccd-8ca8-b6ed7d2b66c4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Iterate coordinate transformation with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"[", GridBox[{
+      {"2", "1"},
+      {"1", "1"}
+     }], "]"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "a0c92107-b6fd-4d7a-9522-6c00681c16b4"],
+ " until return, we record all steps as newCoords. By coordinate \
+transformation, I mean coordinate pair ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"[", GridBox[{
+      {"x"},
+      {"y"}
+     }], "]"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "3707a6f3-fe36-4762-b02d-9f7265a79de9"],
+ " goes to ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"[", GridBox[{
+        {"2", "1"},
+        {"1", "1"}
+       }], "]"}], " ", 
+     FormBox[
+      RowBox[{"\[Times]", 
+       RowBox[{"[", GridBox[{
+          {"x"},
+          {"y"}
+         }], "]"}]}],
+      TraditionalForm]}], "=", 
+    RowBox[{"[", GridBox[{
+       {
+        RowBox[{
+         RowBox[{"2", "x"}], "+", "y"}]},
+       {
+        RowBox[{"x", "+", "y"}]}
+      }], "]"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "ea3f4c25-8186-4f19-814f-b6e931b113e7"],
+ " where ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "78afd7af-a5eb-462b-9941-2f198453266e"],
+ " and ",
+ Cell[BoxData[
+  FormBox["y", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "43c0f45e-d064-4468-b5c8-357f1266b22d"],
+ " are positive integers small then ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "f74d91eb-b16e-4386-aff4-92f51520865f"],
+ "."
+}], "Subsubsection",
+ CellChangeTimes->{{3.810655078691324*^9, 3.810655209287704*^9}, {
+  3.810655623995886*^9, 
+  3.810655821554172*^9}},ExpressionUUID->"c1d2947e-3f99-4439-a307-\
+472bbaa77edb"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"n", "=", 
+   RowBox[{"First", "[", 
+    RowBox[{"ImageDimensions", "[", "img", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"A", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"initialCoord", " ", "=", 
+   RowBox[{"coords", "[", "n", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"newCoords", "=", 
+   RowBox[{"NestWhileList", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{"catMap", "[", 
+         RowBox[{"A", ",", "n"}], "]"}], ",", "#", ",", 
+        RowBox[{"{", "2", "}"}]}], "]"}], "&"}], ",", "initialCoord", ",", 
+     RowBox[{
+      RowBox[{"#", "\[NotEqual]", "initialCoord"}], "&"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"newCoords", "//", "Length"}]}], "Input",
+ CellChangeTimes->{{3.8106552536476994`*^9, 3.810655274234262*^9}, {
+  3.810655368890595*^9, 3.810655419055997*^9}},
+ CellLabel->"In[12]:=",ExpressionUUID->"8197a8de-b306-4146-8760-f95b6c49d26b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+From last computation we know it returns after 300 steps, let us show some \
+steps in between:\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.810655447644952*^9, 3.810655522421288*^9}, {
+  3.810656567824101*^9, 
+  3.810656568086492*^9}},ExpressionUUID->"7195d38a-548c-434d-96bf-\
+d442256e4882"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"frames", "=", 
+   RowBox[{"Part", "[", 
+    RowBox[{"newCoords", ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "1", ",", "51", ",", "101", ",", "151", ",", "201", ",", "251", ",", 
+       "275", ",", "301"}], "}"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pixels", "=", 
+    RowBox[{"ImageData", "[", "img", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"draw", "[", 
+     RowBox[{"coords_", ",", "pixels_"}], "]"}], ":=", 
+    RowBox[{"Image", "[", 
+     RowBox[{
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Extract", "[", 
+          RowBox[{"pixels", ",", "#"}], "]"}], "&"}], ",", "coords", ",", 
+        RowBox[{"{", "2", "}"}]}], "]"}], ",", 
+      RowBox[{"ColorSpace", "\[Rule]", "\"\<RGB\>\""}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"Partition", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"draw", "[", 
+       RowBox[{"#", ",", "pixels"}], "]"}], "&"}], "/@", "frames"}], ",", 
+    "4"}], "]"}], "//", "Grid"}]}], "Input",
+ CellChangeTimes->{{3.810586000145053*^9, 3.810586000145763*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"bfa3dc7c-1c8b-4cf9-a0ff-61423eb076a9"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Some experiments...", "Section",
+ CellChangeTimes->{{3.810656249897368*^9, 
+  3.810656261097468*^9}},ExpressionUUID->"53b53bfa-0f51-40e2-b410-\
+756bd7c449d4"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"n", "=", "20"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"A", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"5", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"initialCoord", " ", "=", 
+   RowBox[{"coords", "[", "n", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"newCoords", "=", 
+   RowBox[{"NestWhileList", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{"catMap", "[", 
+         RowBox[{"A", ",", "n"}], "]"}], ",", "#", ",", 
+        RowBox[{"{", "2", "}"}]}], "]"}], "&"}], ",", "initialCoord", ",", 
+     RowBox[{
+      RowBox[{"#", "\[NotEqual]", "initialCoord"}], "&"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"newCoords", "//", "Length"}]}], "Input",
+ CellChangeTimes->{{3.810656201008569*^9, 3.8106562197223377`*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"83550ab5-9596-4de1-9b0b-38b06b184d8f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"n", "=", "30"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"A", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"7", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"initialCoord", " ", "=", 
+   RowBox[{"coords", "[", "n", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"newCoords", "=", 
+   RowBox[{"NestWhileList", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{"catMap", "[", 
+         RowBox[{"A", ",", "n"}], "]"}], ",", "#", ",", 
+        RowBox[{"{", "2", "}"}]}], "]"}], "&"}], ",", "initialCoord", ",", 
+     RowBox[{
+      RowBox[{"#", "\[NotEqual]", "initialCoord"}], "&"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"newCoords", "//", "Length"}]}], "Input",
+ CellChangeTimes->{{3.810656280285055*^9, 3.8106562810965347`*^9}, {
+  3.810656325112391*^9, 3.810656325442129*^9}},
+ CellLabel->"In[20]:=",ExpressionUUID->"b1376d42-e779-4eee-9065-5343cc07a45b"]
+}, Open  ]]
+},
+WindowSize->{1107.75, 623.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"PaperOrientation"->"Portrait",
+"PaperSize"->{Automatic, Automatic},
+"PostScriptOutputFile"->"/home/jing/Documents/catmap.pdf"},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"745f924b-3be3-4f6d-b6bf-d2da6b0556f2"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 156, 3, 68, "Section",ExpressionUUID->"07908b51-cd98-41b5-aa38-c1a8c4dba977"],
+Cell[CellGroupData[{
+Cell[761, 29, 1083, 29, 71, "Subsubsection",ExpressionUUID->"0700026d-ede3-4509-b5bb-baec7d9d6e1e"],
+Cell[1847, 60, 510, 12, 51, "Input",ExpressionUUID->"e9f684d5-4495-479a-a950-6f230bd0502f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2394, 77, 947, 24, 45, "Subsubsection",ExpressionUUID->"dce71230-00d3-42fc-8085-df2bbb020fdb"],
+Cell[3344, 103, 533, 16, 29, "Input",ExpressionUUID->"d7d838da-43cd-46cb-aa61-84c39dc4fee5"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3926, 125, 167, 3, 68, "Section",ExpressionUUID->"28add60c-1896-43aa-8d7d-29f543cb7b1d"],
+Cell[CellGroupData[{
+Cell[4118, 132, 202, 3, 45, "Subsubsection",ExpressionUUID->"ea089acd-12a7-481a-9ec6-8d9d8244b0c0"],
+Cell[4323, 137, 716, 20, 71, "Input",ExpressionUUID->"0610cd89-1581-4ccd-8ca8-b6ed7d2b66c4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5076, 162, 1852, 65, 112, "Subsubsection",ExpressionUUID->"c1d2947e-3f99-4439-a307-472bbaa77edb"],
+Cell[6931, 229, 1248, 34, 113, "Input",ExpressionUUID->"8197a8de-b306-4146-8760-f95b6c49d26b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8216, 268, 302, 7, 45, "Subsubsection",ExpressionUUID->"7195d38a-548c-434d-96bf-d442256e4882"],
+Cell[8521, 277, 1265, 38, 133, "Input",ExpressionUUID->"bfa3dc7c-1c8b-4cf9-a0ff-61423eb076a9"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9835, 321, 164, 3, 68, "Section",ExpressionUUID->"53b53bfa-0f51-40e2-b410-756bd7c449d4"],
+Cell[10002, 326, 1117, 30, 113, "Input",ExpressionUUID->"83550ab5-9596-4de1-9b0b-38b06b184d8f"],
+Cell[11122, 358, 1167, 31, 113, "Input",ExpressionUUID->"b1376d42-e779-4eee-9065-5343cc07a45b"]
+}, Open  ]]
+}
+]
+*)
+

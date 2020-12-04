@@ -1,0 +1,1700 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     70068,       1692]
+NotebookOptionsPosition[     57840,       1436]
+NotebookOutlinePosition[     61834,       1540]
+CellTagsIndexPosition[     61730,       1534]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Benford' s Law Analysis for National Covid-19 Data", "Title",
+ CellChangeTimes->{{3.8120403975326843`*^9, 
+  3.8120404170489883`*^9}},ExpressionUUID->"61d8fe29-0bc7-402e-b1b0-\
+84aed6a0fc00"],
+
+Cell[TextData[{
+ "Author: Jianyu MA\tLink: ",
+ ButtonBox["https://jingmatrix.github.io",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://jingmatrix.github.io"], None},
+  ButtonNote->"https://jingmatrix.github.io"]
+}], "Subsection",
+ CellChangeTimes->{{3.812047913409039*^9, 
+  3.812048007926477*^9}},ExpressionUUID->"61dd3676-ddb6-436a-a535-\
+e3da814d72e1"],
+
+Cell[CellGroupData[{
+
+Cell["Abstract", "Chapter",
+ CellChangeTimes->{{3.8120404060520983`*^9, 3.812040407212779*^9}, {
+  3.8155841770733128`*^9, 
+  3.815584201924035*^9}},ExpressionUUID->"4fc6f7f8-0444-4e88-a34a-\
+7b1bfdfbe64d"],
+
+Cell["\<\
+In this presentation, we use Benford\[CloseCurlyQuote]s law as an criterion \
+to check reliabilities of Covid-19 datasets provided by different \
+countries/governments. 
+
+We hear people questioning governments\[CloseCurlyQuote] Covid-19 data. This \
+time with mathematical tools we can pose our questions and draw our \
+conclusions with more confidence, or we can defeat some suspicions easily. \
+\>", "Subsubsection",
+ CellChangeTimes->{{3.8120404294130907`*^9, 3.8120405007347727`*^9}, {
+   3.8120410435349493`*^9, 3.81204104641343*^9}, {3.812043629914125*^9, 
+   3.812043630735664*^9}, {3.8120436627771177`*^9, 3.812043697846596*^9}, {
+   3.8120438136841784`*^9, 3.812043824871234*^9}, {3.812043860333004*^9, 
+   3.812043873981434*^9}, {3.812043984783792*^9, 3.8120440400404053`*^9}, {
+   3.8120440825659847`*^9, 3.812044105283181*^9}, {3.812044504204568*^9, 
+   3.812044508056794*^9}, {3.812081828176372*^9, 3.8120818290506973`*^9}, {
+   3.812081975302174*^9, 3.812081998352415*^9}, {3.8120823025368958`*^9, 
+   3.812082440087447*^9}, {3.812082489723792*^9, 3.8120825010988827`*^9}, {
+   3.8120825355199957`*^9, 3.812082568719561*^9}, {3.8120827209896727`*^9, 
+   3.812082756509041*^9}, {3.8120828266565323`*^9, 3.812082995544853*^9}, {
+   3.812083041266131*^9, 3.812083041757956*^9}, 3.8120831010209208`*^9, {
+   3.812083171252727*^9, 3.812083215677033*^9}, {3.812083254359777*^9, 
+   3.812083346838552*^9}, {3.8155841631829443`*^9, 3.815584172439762*^9}, {
+   3.815584225152684*^9, 3.81558424017247*^9}, 3.815584279186021*^9, 
+   3.815584316168645*^9, {3.815584947867435*^9, 3.815584948894103*^9}, {
+   3.8158285559487953`*^9, 3.815828556409379*^9}, 
+   3.815828592378997*^9},ExpressionUUID->"716d9c6c-2276-4d32-a662-\
+06840918b876"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Introduction to Benford's distribution", "Chapter",
+ CellChangeTimes->{{3.812040508802003*^9, 3.812040510758814*^9}, {
+   3.8120833727071857`*^9, 3.812083382189424*^9}, 3.812084248180057*^9, 
+   3.8155844471475286`*^9},ExpressionUUID->"9de0e252-2c3b-4de2-997c-\
+334afa14e965"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+The Benford distribution is sometimes referred to as the first digit \
+distribution. It is associated with American physicist Frank Benford, whose \
+eponymous \[OpenCurlyDoubleQuote]Benford\[CloseCurlyQuote]s law\
+\[CloseCurlyDoubleQuote] serves as the cornerstone for the distribution. 
+
+Benford\[CloseCurlyQuote]s law states that, the probability that the first \
+digit of numbers in many classes of real-world datasets is 1 is not given by \
+1/9 \[TildeTilde] 11.1% (as would be naively expected) but is actually closer \
+to 30%. (Assume we use base 10 here.)
+
+We start live coding to show how we deal with data:\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812040521551605*^9, 3.812040523860075*^9}, {
+   3.8120410277139597`*^9, 3.812041033584785*^9}, {3.812044449556686*^9, 
+   3.8120444615245028`*^9}, {3.8120841067688*^9, 3.812084127530015*^9}, {
+   3.81208420419324*^9, 3.812084221553587*^9}, {3.812089364419477*^9, 
+   3.812089379656282*^9}, {3.812089448221716*^9, 3.812089449236947*^9}, 
+   3.812089870158152*^9, {3.812090061645459*^9, 3.812090088392601*^9}, {
+   3.812092150957445*^9, 3.812092150957636*^9}, {3.8121296228910513`*^9, 
+   3.812129647348139*^9}, {3.815584351444167*^9, 3.815584356611383*^9}, {
+   3.815584389271791*^9, 3.815584391508417*^9}, {3.815584426177825*^9, 
+   3.815584426808429*^9}, {3.815584482940536*^9, 3.8155845149042177`*^9}, {
+   3.815584770740058*^9, 3.815584798320751*^9}, {3.8155848822158613`*^9, 
+   3.815584894931601*^9}, 3.815584960301794*^9, {3.815828640308887*^9, 
+   3.815828665088669*^9}, {3.8158286958014593`*^9, 
+   3.815828713355303*^9}},ExpressionUUID->"0057e61f-bfaa-4f37-8ba5-\
+eb988bab3dd9"],
+
+Cell[BoxData[
+ RowBox[{"Print", "[", "\"\<Hello World\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.815584814649658*^9, 3.815584836248711*^9}},
+ CellLabel->"In[18]:=",ExpressionUUID->"8e5434a8-06d5-444b-84f4-341ce985fce2"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Why Benford\[CloseCurlyQuote]s distribution?", "Chapter",
+ CellChangeTimes->{{3.815584668292882*^9, 3.815584673160205*^9}, {
+  3.815584856143003*^9, 
+  3.81558487623323*^9}},ExpressionUUID->"f19665cf-1c33-4247-a830-\
+55a380a02846"],
+
+Cell["\<\
+Benford\[CloseCurlyQuote]s law has been observed to occur empirically across \
+a large number of unrelated datasets, including catalogs of physical and \
+mathematical constants, stock prices, population counts, and death rates. 
+
+In general, Benford\[CloseCurlyQuote]s distribution best approximates \
+distributions of values spanning multiple orders of magnitude. It has also \
+been extended to look at the frequency of second and later digits.
+
+We can assume national confirmed cases data follow Benford\[CloseCurlyQuote]s \
+law since pandemic model are usually exponential.\
+\>", "Subsubsection",
+ CellChangeTimes->{
+  3.81558454838529*^9, {3.8155847451752453`*^9, 3.815584751897204*^9}, {
+   3.8155866937884197`*^9, 
+   3.815586695150256*^9}},ExpressionUUID->"ba48de46-6942-4370-8d87-\
+6eaece7d006d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Examples to Illustrate Benford\[CloseCurlyQuote]s Law", "Chapter",
+ CellChangeTimes->{{3.809526305852837*^9, 3.809526370866303*^9}, {
+  3.8095264256141033`*^9, 3.809526430175642*^9}, {3.8120445570774717`*^9, 
+  3.812044560564864*^9}},ExpressionUUID->"2edfb527-3c56-4ede-bdd9-\
+83f956857efb"],
+
+Cell[CellGroupData[{
+
+Cell["Population of Cities in a Country", "Subchapter",
+ CellChangeTimes->{{3.809526398572073*^9, 
+  3.809526420739522*^9}},ExpressionUUID->"e2d4508e-d221-4db9-ad64-\
+27ab21da88db"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+We check this both for France and United Kingdom. 
+In our plot, real world data are presented as histogram and
+Benford\[CloseCurlyQuote]s law prediction is given as discrete points with a \
+vertical segment on the histogram.\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.809526265361206*^9, 3.809526269019026*^9}, {
+   3.8095264645892477`*^9, 3.8095264688688393`*^9}, 3.812044593222433*^9, {
+   3.8120447509398117`*^9, 3.812044751341692*^9}, 3.812045061192206*^9, {
+   3.812084264969812*^9, 3.8120842816301413`*^9}, {3.812084320436553*^9, 
+   3.81208435343095*^9}, {3.8120848427944937`*^9, 3.812085004317205*^9}, {
+   3.815828809305274*^9, 
+   3.815828868574151*^9}},ExpressionUUID->"ad30d02f-b530-4b59-b2b6-\
+6341d4852c5b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Show", "[", 
+     RowBox[{
+      RowBox[{"Histogram", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"CityData", "[", 
+              RowBox[{"#", ",", "\"\<Population\>\""}], "]"}], "&"}], "/@", 
+            RowBox[{"CityData", "[", 
+             RowBox[{"{", 
+              RowBox[{"All", ",", "#"}], "}"}], "]"}]}], "//", "Normal"}], "//",
+           "IntegerDigits"}], "//", 
+         RowBox[{
+          RowBox[{"Part", "[", 
+           RowBox[{"#", ",", "All", ",", "1"}], "]"}], "&"}]}], ",", 
+        RowBox[{"{", "1", "}"}], ",", "\"\<PDF\>\"", ",", 
+        RowBox[{"ChartStyle", "\[Rule]", 
+         RowBox[{"EdgeForm", "[", "None", "]"}]}]}], "]"}], ",", 
+      RowBox[{"DiscretePlot", "[", 
+       RowBox[{
+        RowBox[{"PDF", "[", 
+         RowBox[{
+          RowBox[{"BenfordDistribution", "[", "10", "]"}], ",", "x"}], "]"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "1", ",", "9"}], "}"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}]}], "]"}], ",", 
+      RowBox[{"AxesLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<first digit\>\"", ",", "\"\<frequency\>\""}], "}"}]}], 
+      ",", " ", 
+      RowBox[{"PlotLabel", "\[Rule]", 
+       RowBox[{"\"\<Population in \>\"", "<>", "#"}]}]}], "]"}], "&"}], "/@", 
+   
+   RowBox[{"{", 
+    RowBox[{"\"\<France\>\"", ",", "\"\<United Kingdom\>\""}], "}"}]}], "//", 
+  "GraphicsRow"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.809526515847397*^9, {3.81204461097381*^9, 3.812044629911903*^9}, {
+   3.812084366729011*^9, 3.812084481174944*^9}, {3.812084524178351*^9, 
+   3.812084558227234*^9}, {3.812084617586925*^9, 3.8120846975683107`*^9}, 
+   3.812084786702731*^9, 3.815589545332549*^9, {3.815589762757264*^9, 
+   3.8155898570060787`*^9}, {3.815590728300894*^9, 3.815590739235704*^9}, {
+   3.815590788057888*^9, 3.815590788585246*^9}, {3.815591061053279*^9, 
+   3.815591062258772*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"1e262b01-4e73-40a5-b37e-d2071c9f40de"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["File Sizes from a Directory of My Computer Disk", "Subchapter",
+ CellChangeTimes->{{3.809526782809176*^9, 3.809526814659163*^9}, {
+  3.812044764583878*^9, 3.812044772677884*^9}, {3.812044926559778*^9, 
+  3.812044943195137*^9}},ExpressionUUID->"68db03f6-fc07-4e25-bf04-\
+e4627afd3551"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Firstly, we collect all file names in which we are interested; in our case, \
+they are located in folder \[OpenCurlyDoubleQuote]~/Documents/\
+\[CloseCurlyDoubleQuote].\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.80952695524866*^9, 3.8095269630128613`*^9}, {
+   3.812044959299686*^9, 3.812044971817402*^9}, {3.812045011602498*^9, 
+   3.8120450537020063`*^9}, {3.812085051351369*^9, 3.81208508638097*^9}, 
+   3.8155849781989183`*^9},ExpressionUUID->"f20586fc-fa62-498f-b806-\
+845028e33c64"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"files", "=", 
+   RowBox[{"FileNames", "[", 
+    RowBox[{"\"\<*\>\"", ",", "\"\<~/Documents/\>\"", ",", "\[Infinity]"}], 
+    "]"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellLabel->"In[18]:=",ExpressionUUID->"1aafc4fe-ccdc-4646-8fd0-518931047664"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Now calculated the leading digit of size for each file (we discard folders \
+and empty files).\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.8095269863468723`*^9, 3.809526989153179*^9}, {
+  3.8120452151284227`*^9, 3.8120452420954237`*^9}, {3.812085109025346*^9, 
+  3.812085109636983*^9}},ExpressionUUID->"18cfed16-8a50-4b93-b996-\
+3803e36186ba"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"digitCounts", "=", 
+   RowBox[{"Counts", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"First", "[", 
+       RowBox[{"IntegerDigits", "[", "#", "]"}], "]"}], "&"}], "/@", 
+     RowBox[{"DeleteCases", "[", 
+      RowBox[{
+       RowBox[{"Quiet", "[", 
+        RowBox[{"FileByteCount", "/@", "files"}], "]"}], ",", 
+       RowBox[{"$Failed", "|", "0"}]}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"digitFrequencies", "=", 
+   RowBox[{"digitCounts", "/", 
+    RowBox[{"Total", "[", "digitCounts", "]"}]}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellLabel->"In[19]:=",ExpressionUUID->"d2d0253e-d8ac-4d96-bb50-6515e4c5d00a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Finally comparing this data with prediction by Benford\[CloseCurlyQuote]s law:\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.809527076136891*^9, 3.8095270877556963`*^9}, {
+  3.81204512638162*^9, 
+  3.8120451867424603`*^9}},ExpressionUUID->"d6926aa6-823c-42e1-84bb-\
+2e82d116de88"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"predictions", "=", 
+   RowBox[{"PDF", "[", 
+    RowBox[{
+     RowBox[{"BenfordDistribution", "[", "10", "]"}], ",", 
+     RowBox[{"Range", "[", "9", "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{
+     RowBox[{"Legended", "[", 
+      RowBox[{"predictions", ",", "\"\<Benford`s\\nPrediction\>\""}], "]"}], 
+     ",", 
+     RowBox[{"PlotStyle", "\[Rule]", "LightBlue"}], ",", 
+     RowBox[{"MeshStyle", "\[Rule]", "Blue"}], ",", 
+     RowBox[{"Mesh", "\[Rule]", "All"}], ",", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Lead digit\>\"", ",", "\"\<Frequency\>\""}], "}"}]}], ",", 
+     RowBox[{
+     "PlotLabel", "\[Rule]", 
+      "\"\<Benford's Law Prediction of File Sizes\>\""}], ",", 
+     RowBox[{"Ticks", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Range", "[", "9", "]"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"i", ",", 
+            RowBox[{"PercentForm", "[", "i", "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "0.05", ",", "0.3", ",", "0.05"}], "}"}]}], 
+         "]"}]}], "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{
+     RowBox[{"Legended", "[", 
+      RowBox[{
+       RowBox[{"KeySort", "[", "digitFrequencies", "]"}], ",", 
+       "\"\<Actual\>\""}], "]"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"Lighter", "[", 
+       RowBox[{"Green", ",", "0.7"}], "]"}]}], ",", 
+     RowBox[{"MeshStyle", "\[Rule]", 
+      RowBox[{"Darker", "[", "Green", "]"}]}], ",", 
+     RowBox[{"Mesh", "\[Rule]", "All"}]}], "]"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", "500"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.812045088996758*^9, 3.812045090547328*^9}},
+ CellLabel->"In[24]:=",ExpressionUUID->"01d1b3c9-19e4-4b17-a521-248e1b095221"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Number of files considered in this case:", "Subsubsection",
+ CellChangeTimes->{{3.809527351174778*^9, 3.809527353435161*^9}, {
+  3.812045259603236*^9, 
+  3.812045264269795*^9}},ExpressionUUID->"18300242-e438-4f9a-b84a-\
+ea27654f2947"],
+
+Cell[BoxData[
+ RowBox[{"Total", "[", "digitCounts", "]"}]], "Input",
+ CellLabel->"In[26]:=",ExpressionUUID->"92860bb5-0813-4c5b-8f32-3da8aaddfe7b"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Analysis of National Covid-19 Datasets", "Chapter",
+ CellChangeTimes->{{3.8120408981102943`*^9, 3.812040921208827*^9}, {
+  3.812040975773974*^9, 3.8120409760625553`*^9}, {3.812045282440134*^9, 
+  3.8120452830684433`*^9}},ExpressionUUID->"ea8f10ce-4e96-48e8-bedb-\
+1d12d7321775"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Now we start to examine national Covid-19 datasets.  
+Firstly we pull these datasets from Wolfram Research Data Center and print \
+some information about them:\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.8120184558771477`*^9, 3.8120184585826817`*^9}, {
+   3.812018607058189*^9, 3.812018689459715*^9}, {3.812018749606185*^9, 
+   3.8120188803307743`*^9}, 3.812019617788402*^9, {3.812045285591922*^9, 
+   3.812045312334384*^9}, {3.812045350395706*^9, 3.8120453630957747`*^9}, {
+   3.812085176350902*^9, 3.812085213707179*^9}, {3.812089504814248*^9, 
+   3.812089506532304*^9}, {3.812089536795945*^9, 3.812089544743711*^9}, {
+   3.812089886676916*^9, 3.8120898866769648`*^9}, {3.8120901007818604`*^9, 
+   3.812090109075409*^9}, {3.812092170838842*^9, 3.812092170838924*^9}, {
+   3.8121296534765797`*^9, 3.812129666465588*^9}, {3.815586099233842*^9, 
+   3.815586111119569*^9}},ExpressionUUID->"e77bc6e0-3fcc-44bb-918e-\
+c325d542475a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"covidData", " ", "=", " ", 
+   RowBox[{
+   "ResourceData", "[", 
+    "\"\<Epidemic Data for Novel Coronavirus COVID-19\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Information", "[", 
+  RowBox[{
+  "ResourceObject", "[", 
+   "\"\<Epidemic Data for Novel Coronavirus COVID-19\>\"", "]"}], 
+  "]"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.812019043564774*^9, 3.81201906123125*^9}, 
+   3.812019178338778*^9, {3.812019528806327*^9, 3.812019530930098*^9}, {
+   3.8120195750390587`*^9, 3.812019575470148*^9}, {3.81202013628158*^9, 
+   3.812020145277236*^9}, {3.81202303877034*^9, 3.812023062870736*^9}, {
+   3.8120859283189573`*^9, 3.812085935034884*^9}, 3.8120860331998873`*^9, {
+   3.815585130888012*^9, 3.815585132141798*^9}, {3.815585177348668*^9, 
+   3.8155852181178017`*^9}, {3.815585322464243*^9, 3.815585333501142*^9}, {
+   3.8155853966586103`*^9, 3.815585398771146*^9}},
+ CellLabel->"In[21]:=",ExpressionUUID->"165860c1-2390-48d5-8156-5d4bc085f6a7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Now we have access to following data properties:", "Subsubsection",
+ CellChangeTimes->{{3.8120230712033043`*^9, 
+  3.81202309553224*^9}},ExpressionUUID->"f4e9c883-2494-4029-87b6-\
+a5a1a38d585e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"covidData", "[", 
+   RowBox[{"1", "/*", "Keys"}], "]"}], "//", "Normal"}]], "Input",
+ CellChangeTimes->{{3.812023110188382*^9, 3.8120231310850277`*^9}, {
+  3.8120266449963617`*^9, 3.812026668818364*^9}},
+ CellLabel->"In[29]:=",ExpressionUUID->"eec5d1b9-47d1-4b1e-837b-5f004f12a3d0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+We code some lines to generate histogram plot and draw hypothesis test \
+conclusion on them. \
+\>", "Subsubsection",
+ CellChangeTimes->{{3.8120198205134773`*^9, 3.812019925799859*^9}, {
+  3.812023542209114*^9, 3.812023636493478*^9}, {3.812024754454987*^9, 
+  3.812024761173155*^9}, {3.8120269153673058`*^9, 3.812026945918751*^9}, {
+  3.8120270125581293`*^9, 3.8120270715327044`*^9}, {3.8120453919836617`*^9, 
+  3.8120454220212297`*^9}, {3.812085238478838*^9, 
+  3.812085258551518*^9}},ExpressionUUID->"2dcf2da0-13e6-40d5-9d3b-\
+f466f3ce04a9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"coronaBenfordPlot", "[", 
+   RowBox[{"dataCase_", ",", "country_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"covidData", "//", "\[IndentingNewLine]", 
+        RowBox[{"Query", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Select", "[", 
+            RowBox[{
+             RowBox[{"#Country", "\[Equal]", "country"}], "&"}], "]"}], "/*", 
+           "Flatten"}], ",", "dataCase", ",", 
+          RowBox[{
+           RowBox[{"#", "[", "\"\<Values\>\"", "]"}], "&"}]}], "]"}]}], "//", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{
+         RowBox[{"Missing", "[", "\"\<NotAvailable\>\"", "]"}], "|", "0"}], 
+        "]"}]}], "//", "\[IndentingNewLine]", 
+      RowBox[{"Map", "[", 
+       RowBox[{"IntegerDigits", "/*", "First"}], "]"}]}], "//", "Normal"}], "//",
+     "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Show", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Histogram", "[", 
+        RowBox[{"#", ",", 
+         RowBox[{"{", "1", "}"}], ",", "\"\<PDF\>\"", ",", 
+         RowBox[{"ChartStyle", "\[Rule]", 
+          RowBox[{"EdgeForm", "[", "None", "]"}]}]}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DiscretePlot", "[", 
+        RowBox[{
+         RowBox[{"PDF", "[", 
+          RowBox[{
+           RowBox[{"BenfordDistribution", "[", "10", "]"}], ",", "x"}], "]"}],
+          ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "1", ",", "9"}], "}"}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", 
+          RowBox[{"PointSize", "[", "Medium", "]"}]}]}], "]"}], ",", 
+       "\[IndentingNewLine]", " ", 
+       RowBox[{"Epilog", "\[Rule]", 
+        RowBox[{"Inset", "[", 
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{"DistributionFitTest", "[", 
+            RowBox[{"#", ",", 
+             RowBox[{"BenfordDistribution", "[", "10", "]"}], ",", 
+             "\"\<ShortTestConclusion\>\""}], "]"}], ",", "Black", ",", 
+           "Bold"}], "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"PlotLabel", "->", 
+        RowBox[{
+         RowBox[{
+         "StringTemplate", "[", "\"\<`` daily `` reports in ``\>\"", "]"}], 
+         "[", 
+         RowBox[{
+          RowBox[{"Length", "[", "#", "]"}], ",", "dataCase", ",", 
+          "country"}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<first digit\>\"", ",", "\"\<frequency\>\""}], "}"}]}]}],
+       "]"}], "&"}]}], "//", "Quiet"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8120197928200006`*^9, 3.81201980219611*^9}, {
+   3.812019970740795*^9, 3.812019974638748*^9}, {3.812021285409293*^9, 
+   3.812021296711838*^9}, {3.812021331582583*^9, 3.812021363567737*^9}, {
+   3.812021586398242*^9, 3.81202166271493*^9}, {3.81202170275567*^9, 
+   3.8120217249016533`*^9}, {3.812021799986117*^9, 3.812021854715692*^9}, {
+   3.812021916390929*^9, 3.812021921484664*^9}, {3.812021953997995*^9, 
+   3.812022032445662*^9}, {3.812022085239201*^9, 3.812022094218648*^9}, 
+   3.812022395896594*^9, 3.812022442598283*^9, {3.812022525624758*^9, 
+   3.812022534622835*^9}, {3.812022654055173*^9, 3.812022665330407*^9}, {
+   3.812022724353282*^9, 3.812022736763413*^9}, {3.812022956583315*^9, 
+   3.812022969585782*^9}, {3.812023221833529*^9, 3.812023273991029*^9}, {
+   3.812023394147187*^9, 3.812023414744276*^9}, {3.812023517941614*^9, 
+   3.812023521072461*^9}, {3.8120237653744287`*^9, 3.812023770356439*^9}, {
+   3.812023820257852*^9, 3.812023868894215*^9}, {3.812023967779229*^9, 
+   3.8120239943252974`*^9}, {3.8120241054771433`*^9, 3.812024147422868*^9}, {
+   3.81202418752293*^9, 3.812024193142111*^9}, {3.8120242276507797`*^9, 
+   3.812024347726942*^9}, {3.812024503251835*^9, 3.812024511476493*^9}, {
+   3.8120248400749283`*^9, 3.812024893717086*^9}, {3.812024974273794*^9, 
+   3.812025116680833*^9}, {3.812025161452878*^9, 3.812025171271703*^9}, {
+   3.81202522408165*^9, 3.812025236501989*^9}, {3.812025271271084*^9, 
+   3.812025415056911*^9}, {3.812025463225222*^9, 3.8120255003157997`*^9}, {
+   3.8120255892480383`*^9, 3.81202559132508*^9}, {3.812025638336459*^9, 
+   3.8120257484312963`*^9}, {3.812025795234187*^9, 3.812025851365665*^9}, {
+   3.812026186467251*^9, 3.81202621606019*^9}, {3.812026280139357*^9, 
+   3.8120263514244623`*^9}, 3.812026464941246*^9, {3.812026818939749*^9, 
+   3.812026848889288*^9}, {3.812032591090081*^9, 3.812032593311122*^9}},
+ CellLabel->"In[23]:=",ExpressionUUID->"26e10c25-de50-48ad-a39e-0b56460cfa59"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Then we take data from Indonesia as our first example, since their data fit \
+this model perfectly. 
+(\[OpenCurlyDoubleQuote]fit\[CloseCurlyDoubleQuote] may be at simple past \
+tense.)\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.8120454248441963`*^9, 3.812045439462902*^9}, {
+   3.812087587462117*^9, 3.812087591592122*^9}, {3.815590350657843*^9, 
+   3.815590374762101*^9}, {3.815591190690621*^9, 3.815591212281459*^9}, {
+   3.8155912560016403`*^9, 3.815591266557212*^9}, 
+   3.815829039015801*^9},ExpressionUUID->"e9dbfa7b-1335-4d18-9679-\
+c3769451bdcf"],
+
+Cell[BoxData[
+ RowBox[{"coronaBenfordPlot", "[", 
+  RowBox[{"\"\<ConfirmedCases\>\"", ",", 
+   TemplateBox[{"\"Indonesia\"", 
+     RowBox[{"Entity", "[", 
+       RowBox[{"\"Country\"", ",", "\"Indonesia\""}], "]"}], 
+     "\"Entity[\\\"Country\\\", \\\"Indonesia\\\"]\"", "\"country\""},
+    "Entity"]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8120263675212173`*^9, 3.81202640168777*^9}, 
+   3.812026499309351*^9, {3.812026595067095*^9, 3.8120266256717863`*^9}, 
+   3.812026679591423*^9, 3.812026740509453*^9, {3.812087568615138*^9, 
+   3.812087570022882*^9}},
+ CellLabel->"In[31]:=",ExpressionUUID->"d9784a87-c666-4888-8d1e-d449c174c85b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Here \"Do not reject / Reject \" means exactly that:", "Subsubsection",
+ CellChangeTimes->{{3.812045477683774*^9, 3.812045513391328*^9}, {
+  3.815590332296669*^9, 
+  3.8155903372613487`*^9}},ExpressionUUID->"29c80352-8b77-47cf-ad6e-\
+395aba7af7d8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"covidData", "//", "\[IndentingNewLine]", 
+      RowBox[{"Query", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Select", "[", 
+          RowBox[{
+           RowBox[{"#Country", "\[Equal]", 
+            TemplateBox[{"\"Indonesia\"", 
+              RowBox[{"Entity", "[", 
+                RowBox[{"\"Country\"", ",", "\"Indonesia\""}], "]"}], 
+              "\"Entity[\\\"Country\\\", \\\"Indonesia\\\"]\"", "\"country\""},
+             "Entity"]}], "&"}], "]"}], "/*", "Flatten"}], ",", 
+        "\"\<ConfirmedCases\>\"", ",", 
+        RowBox[{
+         RowBox[{"#", "[", "\"\<Values\>\"", "]"}], "&"}]}], "]"}]}], "//", 
+     "\[IndentingNewLine]", 
+     RowBox[{"DeleteCases", "[", 
+      RowBox[{
+       RowBox[{"Missing", "[", "\"\<NotAvailable\>\"", "]"}], "|", "0"}], 
+      "]"}]}], "//", "\[IndentingNewLine]", 
+    RowBox[{"Map", "[", 
+     RowBox[{"IntegerDigits", "/*", "First"}], "]"}]}], "//", "Normal"}], "//", 
+  RowBox[{
+   RowBox[{"DistributionFitTest", "[", 
+    RowBox[{"#", ",", 
+     RowBox[{"BenfordDistribution", "[", "10", "]"}], ",", 
+     "\"\<TestConclusion\>\""}], "]"}], "&"}]}]], "Input",
+ CellChangeTimes->{{3.812045541594091*^9, 3.81204557694873*^9}, {
+  3.8120875785730658`*^9, 3.812087580187523*^9}},
+ CellLabel->"In[32]:=",ExpressionUUID->"c707eb22-0f39-4fd9-b04c-e7213743aea0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Of course, we can compare all datasets from all countries.
+To do this, we first extract all countries from our dataset:\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.8120276738911*^9, 3.812027761987409*^9}, {
+  3.812027796990541*^9, 3.812027819628079*^9}, {3.812045602693203*^9, 
+  3.8120456032754917`*^9}},ExpressionUUID->"70083efa-ca40-47ae-91e6-\
+08fd72d77153"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"countries", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"covidData", "[", 
+       RowBox[{"All", ",", "\"\<Country\>\""}], "]"}], "//", "Normal"}], "//",
+      "DeleteDuplicates"}], "//", "DeleteMissing"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.812027333015675*^9, 3.812027334713251*^9}, {
+   3.812027371175829*^9, 3.8120273765910473`*^9}, {3.8120274383584023`*^9, 
+   3.8120274577356367`*^9}, {3.812027553609103*^9, 3.812027555419395*^9}, {
+   3.812027630711382*^9, 3.8120276429715652`*^9}, {3.812027767831477*^9, 
+   3.812027774300205*^9}, 3.812027823840089*^9},
+ CellLabel->"In[24]:=",ExpressionUUID->"cf734075-be2d-4631-bca3-0f716dcaf5f0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["It turns out that we will examine 217 countries' datasets:", \
+"Subsubsection",
+ CellChangeTimes->{{3.812045628411998*^9, 3.8120456747576523`*^9}, {
+  3.8121298006072407`*^9, 
+  3.812129801043057*^9}},ExpressionUUID->"edcee69a-460a-45e4-ac3f-\
+1dec707ca7df"],
+
+Cell[BoxData[
+ RowBox[{"countries", "//", "Length"}]], "Input",
+ CellChangeTimes->{{3.8120278265444202`*^9, 3.812027831748877*^9}},
+ CellLabel->"In[34]:=",ExpressionUUID->"b786bdaf-2f58-48a4-82c0-6e21c0c723db"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Then we perform hypothesis test on each of them and plot test result on a \
+worldwide map.\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812027844286846*^9, 3.812027936280284*^9}, 
+   3.812034616356745*^9, {3.81204569325985*^9, 3.8120457518175907`*^9}, 
+   3.812085348949244*^9, 
+   3.815584991562817*^9},ExpressionUUID->"d61403cd-1349-4069-9ba9-\
+990315cd2850"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rejectQ", "[", 
+   RowBox[{"dataCase_", ",", "country_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"covidData", "//", "\[IndentingNewLine]", 
+         RowBox[{"Query", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Select", "[", 
+             RowBox[{
+              RowBox[{"#Country", "\[Equal]", "country"}], "&"}], "]"}], "/*",
+             "Flatten"}], ",", "dataCase", ",", 
+           RowBox[{
+            RowBox[{"#", "[", "\"\<Values\>\"", "]"}], "&"}]}], "]"}]}], "//",
+         "\[IndentingNewLine]", 
+        RowBox[{"DeleteCases", "[", 
+         RowBox[{
+          RowBox[{"Missing", "[", "\"\<NotAvailable\>\"", "]"}], "|", "0"}], 
+         "]"}]}], "//", "\[IndentingNewLine]", 
+       RowBox[{"Map", "[", 
+        RowBox[{"IntegerDigits", "/*", "First"}], "]"}]}], "//", "Normal"}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "#", "]"}], "\[Equal]", "0"}], "||", 
+       RowBox[{
+        RowBox[{"DistributionFitTest", "[", 
+         RowBox[{"#", ",", 
+          RowBox[{"BenfordDistribution", "[", "10", "]"}], ",", 
+          "\"\<ShortTestConclusion\>\""}], "]"}], " ", "\[Equal]", 
+        "\"\<Reject\>\""}]}], "&"}]}], "//", "Boole"}], "//", 
+   "Quiet"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.812028019260165*^9, 3.812028036244982*^9}, {
+   3.812028087490291*^9, 3.8120281529229097`*^9}, {3.812028278382668*^9, 
+   3.812028304052189*^9}, {3.812028352855133*^9, 3.812028382972158*^9}, 
+   3.812028665618678*^9, {3.812028947216381*^9, 3.812028949580085*^9}, {
+   3.8120289895777197`*^9, 3.812029008323971*^9}, {3.815588962069062*^9, 
+   3.8155889794769697`*^9}},
+ CellLabel->"In[25]:=",ExpressionUUID->"f1365f04-e0a9-464f-ae3d-85cbd20a79e1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"confirmedCasesTestResult", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"#1", "\[Rule]", 
+      RowBox[{"rejectQ", "[", 
+       RowBox[{"\"\<ConfirmedCases\>\"", ",", "#1"}], "]"}]}], "&"}], "/@", 
+    "countries"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"recoveredCasesTestResult", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"#1", "\[Rule]", 
+      RowBox[{"rejectQ", "[", 
+       RowBox[{"\"\<RecoveredCases\>\"", ",", "#1"}], "]"}]}], "&"}], "/@", 
+    "countries"}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.812029437517611*^9, 3.812029484818295*^9}, 
+   3.812029569027719*^9, 3.812036204384862*^9},
+ CellLabel->"In[26]:=",ExpressionUUID->"4fc82a8e-7a0b-46c9-a6d6-be3dde7394f8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+ To be precise, we care about countries which pass our hypothesis test. This \
+means that they get an answer \[OpenCurlyDoubleQuote]Do not reject\
+\[CloseCurlyDoubleQuote] from our program, either for confirmed cases or \
+recovered cases data.\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812029285819789*^9, 3.812029422714061*^9}, {
+  3.8120295927577963`*^9, 3.8120295974786053`*^9}, {3.812045801846828*^9, 
+  3.812045852030675*^9}, {3.812085382578418*^9, 
+  3.812085426919424*^9}},ExpressionUUID->"2f45ee16-4e8f-4482-9885-\
+2886df6b2100"],
+
+Cell[BoxData[
+ RowBox[{"GeoListPlot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Select", "[", 
+       RowBox[{
+        RowBox[{"#", "//", "Association"}], ",", 
+        RowBox[{
+         RowBox[{"#", "==", "0"}], "&"}]}], "]"}], "&"}], "/@", 
+     RowBox[{"{", 
+      RowBox[{"recoveredCasesTestResult", ",", "confirmedCasesTestResult"}], 
+      "}"}]}], "//", "Keys"}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Directive", "[", "Yellow", "]"}], ",", 
+      RowBox[{"Directive", "[", "Blue", "]"}]}], "}"}]}], ",", 
+   RowBox[{"PlotLegends", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<Recovered Cases\>\"", ",", "\"\<Confirmed Cases\>\""}], 
+     "}"}]}], ",", 
+   RowBox[{
+   "PlotLabel", "\[Rule]", 
+    "\"\<Countries that pass Benford's Law Test\>\""}]}], "]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8120298548273487`*^9, 3.812029863742448*^9}, {
+   3.812029909369217*^9, 3.812029915932917*^9}, {3.81203000222547*^9, 
+   3.812030007339707*^9}, {3.812030040343773*^9, 3.812030144518408*^9}, {
+   3.8120302104720697`*^9, 3.812030225912015*^9}, {3.8120303292879972`*^9, 
+   3.812030329700884*^9}, {3.81203042152345*^9, 3.8120304374745703`*^9}, 
+   3.812030488975052*^9, {3.812030522485811*^9, 3.812030573466753*^9}, {
+   3.812030697661536*^9, 3.8120307026390944`*^9}, {3.8120307410078993`*^9, 
+   3.812030783877626*^9}, {3.812030816285349*^9, 3.812030905161161*^9}, {
+   3.812031010501378*^9, 3.812031044968214*^9}, {3.812031146111374*^9, 
+   3.812031155542536*^9}, {3.8120312035541267`*^9, 3.812031291664247*^9}},
+ CellLabel->"In[28]:=",ExpressionUUID->"ba52d75f-a78a-4131-86c5-9b27a8069d41"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "We should list countries which pass both recovered cases and confirmed \
+cases hypothesis test, i.e., those colored ",
+ Cell[BoxData[
+  GraphicsBox[
+   {RGBColor[0.345098, 0.341176, 0.501961], RectangleBox[{0, 0}]},
+   AspectRatio->Full,
+   ImageSize->{18, 18}]], "Output",
+  CellChangeTimes->{3.812046198207787*^9},ExpressionUUID->
+  "8be357d5-f12d-4fa0-94b5-5f8baf58b662"],
+ " above."
+}], "Subsubsection",
+ CellChangeTimes->{{3.812045883071498*^9, 3.812045950914199*^9}, {
+  3.8120460728255873`*^9, 3.812046098020314*^9}, {3.812046160977503*^9, 
+  3.812046256444357*^9}},ExpressionUUID->"ed3358fb-d3ac-4579-9613-\
+c22f60a91b25"],
+
+Cell[BoxData[
+ RowBox[{"Intersection", "@@", 
+  RowBox[{"Keys", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Select", "[", 
+      RowBox[{
+       RowBox[{"#", "//", "Association"}], ",", 
+       RowBox[{
+        RowBox[{"#", "==", "0"}], "&"}]}], "]"}], "&"}], "/@", 
+    RowBox[{"{", 
+     RowBox[{"recoveredCasesTestResult", ",", "confirmedCasesTestResult"}], 
+     "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.812031483496291*^9, 3.812031550522394*^9}},
+ CellLabel->"In[39]:=",ExpressionUUID->"a20baec9-b560-47ef-a441-f03170280509"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+We remark that hypothesis test is stricter than our daily intuition. Take \
+Chile for example, from intuition we can see clearly the influence of Benford\
+\[CloseCurlyQuote]s law, but it is rejected by mathematical hypothesis test. \
+We return to this later.\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.8120322708006268`*^9, 3.812032391376244*^9}, 
+   3.812034616372294*^9, {3.812046294141054*^9, 3.812046448901924*^9}, {
+   3.812085485504219*^9, 
+   3.812085570072074*^9}},ExpressionUUID->"91080066-6a49-4e9b-abc3-\
+d5f6b39c28c1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"coronaBenfordPlot", "[", 
+     RowBox[{"#1", ",", 
+      TemplateBox[{"\"Chile\"", 
+        RowBox[{"Entity", "[", 
+          RowBox[{"\"Country\"", ",", "\"Chile\""}], "]"}], 
+        "\"Entity[\\\"Country\\\", \\\"Chile\\\"]\"", "\"country\""},
+       "Entity"]}], "]"}], "&"}], "/@", 
+   RowBox[{"{", 
+    RowBox[{"\"\<ConfirmedCases\>\"", ",", "\"\<RecoveredCases\>\""}], 
+    "}"}]}], "//", "GraphicsRow"}]], "Input",
+ CellChangeTimes->{{3.812031753804785*^9, 3.812031760004202*^9}, {
+   3.812031791653222*^9, 3.812031870194045*^9}, {3.812031903425167*^9, 
+   3.812031904009637*^9}, {3.812031936461507*^9, 3.812031939077585*^9}, 
+   3.812031983432414*^9, {3.812032026602311*^9, 3.812032050517951*^9}, {
+   3.812032147724766*^9, 3.812032149701082*^9}},
+ CellLabel->"In[40]:=",ExpressionUUID->"4fc7eab7-282f-4321-b0cf-1270b9c5bf9d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Finally we present datasets from France and China:", "Subsubsection",
+ CellChangeTimes->{{3.812032410260365*^9, 3.812032453357829*^9}, {
+   3.812032622843745*^9, 3.812032626100524*^9}, 3.81203274428589*^9, {
+   3.812046469843931*^9, 3.8120464781845703`*^9}, {3.812085614640829*^9, 
+   3.812085626166349*^9}},ExpressionUUID->"133fdbeb-d791-486e-8d18-\
+a7f0ce1961e8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"coronaBenfordPlot", "[", 
+     RowBox[{"\"\<ConfirmedCases\>\"", ",", "#"}], "]"}], "&"}], "/@", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{"\"France\"", 
+       RowBox[{"Entity", "[", 
+         RowBox[{"\"Country\"", ",", "\"France\""}], "]"}], 
+       "\"Entity[\\\"Country\\\", \\\"France\\\"]\"", "\"country\""},
+      "Entity"], ",", 
+     TemplateBox[{"\"China\"", 
+       RowBox[{"Entity", "[", 
+         RowBox[{"\"Country\"", ",", "\"China\""}], "]"}], 
+       "\"Entity[\\\"Country\\\", \\\"China\\\"]\"", "\"country\""},
+      "Entity"]}], "}"}]}], "//", "GraphicsRow"}]], "Input",
+ CellChangeTimes->{{3.812032490666069*^9, 3.812032543384379*^9}, {
+  3.815590160641293*^9, 
+  3.815590163092204*^9}},ExpressionUUID->"24fba151-beed-4359-9bf2-\
+11caf38fd8a3"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Second Digit Distribution Test", "Chapter",
+ CellChangeTimes->{{3.8120465070585203`*^9, 3.812046522177737*^9}, {
+  3.8120865166974154`*^9, 
+  3.812086521779345*^9}},ExpressionUUID->"2d29add6-5e96-4f05-8762-\
+19c2bd836268"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+We can also perform the second digit distribution test for our datasets.
+This is easy for math students, we just need to construct a new probability \
+distribution and rewrite our previous code...\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812032782543542*^9, 3.812032832489546*^9}, 
+   3.812032995827693*^9, {3.8120351786232853`*^9, 3.812035215471895*^9}, {
+   3.8120465339934464`*^9, 3.8120466166434298`*^9}, {3.812085654837656*^9, 
+   3.812085724848028*^9}},ExpressionUUID->"bebf059c-8043-4d2d-b97c-\
+3595ca8ba71f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[ScriptCapitalD]", "=", 
+   RowBox[{"ProbabilityDistribution", "[", 
+    RowBox[{
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{"Log10", "[", 
+        RowBox[{"1", "+", 
+         RowBox[{"1", "/", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"10", "j"}], "+", "d2"}], ")"}]}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"j", ",", "9"}], "}"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d2", ",", "0", ",", "9", ",", "1"}], "}"}]}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"coronaBenfordPlot2", "[", 
+   RowBox[{"dataCase_", ",", "country_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"covidData", "//", "\[IndentingNewLine]", 
+       RowBox[{"Query", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Select", "[", 
+           RowBox[{
+            RowBox[{"#Country", "\[Equal]", "country"}], "&"}], "]"}], "/*", 
+          "Flatten"}], ",", "dataCase", ",", 
+         RowBox[{
+          RowBox[{"#", "[", "\"\<Values\>\"", "]"}], "&"}]}], "]"}]}], "//", 
+      "\[IndentingNewLine]", 
+      RowBox[{"DeleteCases", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Missing", "[", "\"\<NotAvailable\>\"", "]"}], "|", "n_"}], "/;", 
+        RowBox[{"n", "<", "10"}]}], "]"}]}], "//", "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{"IntegerDigits", "/*", 
+       RowBox[{"Extract", "[", 
+        RowBox[{"{", "2", "}"}], "]"}]}], "]"}]}], "//", "Normal"}], "//", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Show", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Histogram", "[", 
+       RowBox[{"#", ",", 
+        RowBox[{"{", "1", "}"}], ",", "\"\<PDF\>\"", ",", 
+        RowBox[{"ChartStyle", "\[Rule]", 
+         RowBox[{"EdgeForm", "[", "None", "]"}]}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"DiscretePlot", "[", 
+       RowBox[{
+        RowBox[{"PDF", "[", 
+         RowBox[{"\[ScriptCapitalD]", ",", "x"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "9"}], "}"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}]}], "]"}], ",", 
+      "\[IndentingNewLine]", " ", 
+      RowBox[{"Epilog", "\[Rule]", 
+       RowBox[{"Inset", "[", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+          RowBox[{"DistributionFitTest", "[", 
+           RowBox[{
+           "#", ",", "\[ScriptCapitalD]", ",", 
+            "\"\<ShortTestConclusion\>\""}], "]"}], ",", "Black", ",", 
+          "Bold"}], "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{"PlotLabel", "->", 
+       RowBox[{
+        RowBox[{
+        "StringTemplate", "[", "\"\<`` daily `` reports in ``\>\"", "]"}], 
+        "[", 
+        RowBox[{
+         RowBox[{"Length", "[", "#", "]"}], ",", "dataCase", ",", "country"}],
+         "]"}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AxesLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<second digit\>\"", ",", "\"\<frequency\>\""}], "}"}]}]}],
+      "]"}], "&"}]}]}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.812035039918519*^9, 3.812035080128583*^9}, {
+  3.8120352328839197`*^9, 3.812035247667514*^9}, {3.812035360956131*^9, 
+  3.812035361946397*^9}, {3.812035712595429*^9, 3.812035712910593*^9}, {
+  3.812035887148384*^9, 3.812035893889522*^9}, {3.8120360206311693`*^9, 
+  3.812036047893312*^9}, {3.812036104120091*^9, 3.8120361067574167`*^9}},
+ CellLabel->"In[29]:=",ExpressionUUID->"d550dbc6-66a2-4e72-81a1-6840e8d088c8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+As we could expect, India understands this distribution as well:\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812046637131563*^9, 3.812046719257213*^9}, {
+  3.812085737632704*^9, 
+  3.81208573785014*^9}},ExpressionUUID->"f9a932e4-cdc1-40c0-a9ce-\
+a387ec57bb5d"],
+
+Cell[BoxData[
+ RowBox[{"coronaBenfordPlot2", "[", 
+  RowBox[{"\"\<ConfirmedCases\>\"", ",", 
+   TemplateBox[{"\"India\"", 
+     RowBox[{"Entity", "[", 
+       RowBox[{"\"Country\"", ",", "\"India\""}], "]"}], 
+     "\"Entity[\\\"Country\\\", \\\"India\\\"]\"", "\"country\""},
+    "Entity"]}], "]"}]], "Input",
+ CellChangeTimes->{3.8120359230540323`*^9},
+ CellLabel->"In[44]:=",ExpressionUUID->"b690704d-092b-4f88-abdd-4dedf3af7452"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+By contrast, have a look at France and China, which country does worse?\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812046744425597*^9, 3.812046806450445*^9}, {
+  3.812085751387455*^9, 
+  3.812085760071166*^9}},ExpressionUUID->"a0f8923d-8f3f-4db1-8b8b-\
+5f0d92b8b165"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"coronaBenfordPlot2", "[", 
+     RowBox[{"\"\<ConfirmedCases\>\"", ",", "#"}], "]"}], "&"}], "/@", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{"\"France\"", 
+       RowBox[{"Entity", "[", 
+         RowBox[{"\"Country\"", ",", "\"France\""}], "]"}], 
+       "\"Entity[\\\"Country\\\", \\\"France\\\"]\"", "\"country\""},
+      "Entity"], ",", 
+     TemplateBox[{"\"China\"", 
+       RowBox[{"Entity", "[", 
+         RowBox[{"\"Country\"", ",", "\"China\""}], "]"}], 
+       "\"Entity[\\\"Country\\\", \\\"China\\\"]\"", "\"country\""},
+      "Entity"]}], "}"}]}], "//", "GraphicsRow"}]], "Input",
+ CellChangeTimes->{3.81203600267899*^9},
+ CellLabel->"In[45]:=",ExpressionUUID->"1c9abb3c-5508-473c-9138-660f06d1c4ea"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+As before, we want to see winners in this hypothesis test for second digit. 
+However, this time we\[CloseCurlyQuote]d better only consider confirmed cases \
+data and remove some countries that cannot provide numbers in their data \
+(especially recovered cases) bigger than 10. 
+We plot winners directly to a global map.\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812036133663974*^9, 3.812036157829767*^9}, {
+  3.812037589747179*^9, 3.812037710059688*^9}, {3.8120377506936007`*^9, 
+  3.812037853720305*^9}, {3.812046824769751*^9, 3.81204685188979*^9}, {
+  3.8120469100063*^9, 3.812046936634081*^9}, {3.812085775602666*^9, 
+  3.812085808998212*^9}, {3.812089662503488*^9, 3.812089666186891*^9}, {
+  3.812089738664627*^9, 3.812089747333095*^9}, {3.815829290412973*^9, 
+  3.815829326201502*^9}, {3.815829359186049*^9, 
+  3.815829395151239*^9}},ExpressionUUID->"73b7e38e-4197-4e09-8d9a-\
+cf45a4051a6b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rejectQ2", "[", 
+   RowBox[{"dataCase_", ",", "country_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"covidData", "//", "\[IndentingNewLine]", 
+        RowBox[{"Query", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Select", "[", 
+            RowBox[{
+             RowBox[{"#Country", "\[Equal]", "country"}], "&"}], "]"}], "/*", 
+           "Flatten"}], ",", "dataCase", ",", 
+          RowBox[{
+           RowBox[{"#", "[", "\"\<Values\>\"", "]"}], "&"}]}], "]"}]}], "//", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Missing", "[", "\"\<NotAvailable\>\"", "]"}], "|", "n_"}], 
+         "/;", 
+         RowBox[{"n", "<", "10"}]}], "]"}]}], "//", "\[IndentingNewLine]", 
+      RowBox[{"Map", "[", 
+       RowBox[{"IntegerDigits", "/*", 
+        RowBox[{"Extract", "[", 
+         RowBox[{"{", "2", "}"}], "]"}]}], "]"}]}], "//", "Normal"}], "//", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Length", "[", "#", "]"}], "\[Equal]", "0"}], " ", "||", 
+      RowBox[{
+       RowBox[{"DistributionFitTest", "[", 
+        RowBox[{
+        "#", ",", "\[ScriptCapitalD]", ",", "\"\<ShortTestConclusion\>\""}], 
+        "]"}], " ", "\[Equal]", "\"\<Reject\>\""}]}], "&"}]}], "//", 
+   "Boole"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.812028019260165*^9, 3.812028036244982*^9}, {
+   3.812028087490291*^9, 3.8120281529229097`*^9}, {3.812028278382668*^9, 
+   3.812028304052189*^9}, {3.812028352855133*^9, 3.812028382972158*^9}, 
+   3.812028665618678*^9, {3.812028947216381*^9, 3.812028949580085*^9}, {
+   3.8120289895777197`*^9, 3.812029008323971*^9}, 3.812036188097508*^9, {
+   3.812036425802867*^9, 3.8120364421447067`*^9}, {3.812036818137794*^9, 
+   3.81203681910819*^9}, 3.81204689215901*^9, {3.815589000448419*^9, 
+   3.815589025902446*^9}, {3.815590254953006*^9, 3.81559025657848*^9}},
+ CellLabel->"In[31]:=",ExpressionUUID->"aaf7899b-dfd9-4090-9546-d612b0dd6be4"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"confirmedCasesTestResult2", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"#1", "\[Rule]", 
+      RowBox[{"rejectQ2", "[", 
+       RowBox[{"\"\<ConfirmedCases\>\"", ",", "#1"}], "]"}]}], "&"}], "/@", 
+    "countries"}]}], ";"}], "\n", 
+ RowBox[{"GeoListPlot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Select", "[", 
+       RowBox[{
+        RowBox[{"#", "//", "Association"}], ",", 
+        RowBox[{
+         RowBox[{"#", "==", "0"}], "&"}]}], "]"}], "&"}], "[", 
+     "confirmedCasesTestResult2", "]"}], "//", "Keys"}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Directive", "[", "Blue", "]"}], "}"}]}], ",", 
+   RowBox[{"PlotLegends", "\[Rule]", 
+    RowBox[{"{", "\"\<Confirmed Cases\>\"", "}"}]}], ",", 
+   RowBox[{
+   "PlotLabel", "\[Rule]", 
+    "\"\<Countries that pass Second Digit's Law Test\>\""}]}], 
+  "]"}]}], "Input",
+ InitializationCell->True,
+ CellLabel->"In[32]:=",ExpressionUUID->"61c0922c-f576-4aa7-99d6-af93b1d1d0be"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Now we have certain confidence that these countries may fit Benford\
+\[CloseCurlyQuote]s law according to our intuition. 
+Take some examples, we can see that they are rejected by mathematical formula \
+but may not by our intuition:\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812038174778264*^9, 3.812038177357313*^9}, {
+  3.8120382093360043`*^9, 3.8120382202115507`*^9}, {3.8120382582210627`*^9, 
+  3.812038343626379*^9}, {3.81204695420684*^9, 3.8120469551424932`*^9}, {
+  3.8120469858058777`*^9, 
+  3.812047102968144*^9}},ExpressionUUID->"37671d3e-c9bb-4d85-b8eb-\
+d35a6f21f564"],
+
+Cell[BoxData[
+ RowBox[{"GraphicsGrid", "[", 
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"coronaBenfordPlot", "[", 
+      RowBox[{"\"\<ConfirmedCases\>\"", ",", "#"}], "]"}], "&"}], ",", 
+    RowBox[{"Partition", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        TemplateBox[{"\"Brazil\"", 
+          RowBox[{"Entity", "[", 
+            RowBox[{"\"Country\"", ",", "\"Brazil\""}], "]"}], 
+          "\"Entity[\\\"Country\\\", \\\"Brazil\\\"]\"", "\"country\""},
+         "Entity"], ",", 
+        TemplateBox[{"\"Peru\"", 
+          RowBox[{"Entity", "[", 
+            RowBox[{"\"Country\"", ",", "\"Peru\""}], "]"}], 
+          "\"Entity[\\\"Country\\\", \\\"Peru\\\"]\"", "\"country\""},
+         "Entity"], ",", 
+        TemplateBox[{"\"India\"", 
+          RowBox[{"Entity", "[", 
+            RowBox[{"\"Country\"", ",", "\"India\""}], "]"}], 
+          "\"Entity[\\\"Country\\\", \\\"India\\\"]\"", "\"country\""},
+         "Entity"], ",", 
+        TemplateBox[{"\"Mexico\"", 
+          RowBox[{"Entity", "[", 
+            RowBox[{"\"Country\"", ",", "\"Mexico\""}], "]"}], 
+          "\"Entity[\\\"Country\\\", \\\"Mexico\\\"]\"", "\"country\""},
+         "Entity"]}], "}"}], ",", "2"}], "]"}], ",", 
+    RowBox[{"{", "2", "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.8120380821629047`*^9, 3.812038144954678*^9, {3.812038395347928*^9, 
+   3.812038471082632*^9}, {3.81203851589784*^9, 3.81203856343746*^9}, {
+   3.812038653372486*^9, 3.812038673038912*^9}, {3.812038752272991*^9, 
+   3.8120387661938457`*^9}, {3.812038817092107*^9, 3.812038825551588*^9}, {
+   3.8120388760806913`*^9, 3.812038876305867*^9}, {3.81203898098816*^9, 
+   3.8120390261114283`*^9}, {3.812039069704213*^9, 3.812039101780385*^9}, {
+   3.812039139850541*^9, 3.812039146903719*^9}, {3.812040791579015*^9, 
+   3.812040792141035*^9}, {3.812085844139597*^9, 3.8120858697390203`*^9}, {
+   3.812087522745379*^9, 3.812087531756812*^9}, {3.81208768316252*^9, 
+   3.8120876855153103`*^9}, {3.8120877232746983`*^9, 3.8120877318369913`*^9}},
+ 
+ CellLabel->"In[34]:=",ExpressionUUID->"68307f48-54be-4563-981d-70e581a1cf18"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Discussion and Conclusion", "Chapter",
+ CellChangeTimes->{{3.812041063866983*^9, 3.8120410879627028`*^9}, {
+  3.812041735233593*^9, 
+  3.8120417393196087`*^9}},ExpressionUUID->"27fc6565-acfb-4ba1-b5f9-\
+6212471d8fe9"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Benford\[CloseCurlyQuote]s law is not easily reproduced by those who make up \
+numbers, partly due to that Benford\[CloseCurlyQuote]s law is not well-known \
+except to probabilists. Hence our examination is effective. 
+
+We remark that if we perform our test in two different days, even they are \
+sequential, we will get different results about which countries pass our \
+hypothesis test. Because we always pull latest data from Wolfram Research \
+Data Center. Confirmed cases data from India is one of such examples, it only \
+fails our latest hypothesis test while we have done more than twenty \
+different tests in different days.
+
+We see that datasets from:\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812041308317519*^9, 3.8120413245533648`*^9}, {
+   3.8120413589875*^9, 3.812041372753119*^9}, {3.8120414389824553`*^9, 
+   3.812041676101119*^9}, {3.8120417079031057`*^9, 3.8120417761068277`*^9}, {
+   3.8120418067582493`*^9, 3.812041928600909*^9}, {3.812041987091127*^9, 
+   3.812042180531548*^9}, {3.812042223124023*^9, 3.812042254765534*^9}, {
+   3.812042288440918*^9, 3.812042419191721*^9}, {3.8120424609033318`*^9, 
+   3.812042603027739*^9}, {3.8120426674787903`*^9, 3.812042680312772*^9}, {
+   3.812042761834454*^9, 3.812043044402969*^9}, {3.812043095268784*^9, 
+   3.812043217642248*^9}, {3.812043253734956*^9, 3.812043433502326*^9}, {
+   3.812043466716601*^9, 3.812043589985134*^9}, {3.8120462720068417`*^9, 
+   3.812046272051182*^9}, {3.8120471336800747`*^9, 3.812047222990076*^9}, {
+   3.812047281619989*^9, 3.812047295709976*^9}, {3.812047327279955*^9, 
+   3.8120475001491213`*^9}, {3.812047559535666*^9, 3.8120475675231743`*^9}, {
+   3.812047597948*^9, 3.8120476116937*^9}, {3.812047644566865*^9, 
+   3.81204772915989*^9}, {3.812048931411087*^9, 3.812048944860302*^9}, {
+   3.812048997404915*^9, 3.8120490762855167`*^9}, {3.812083438634687*^9, 
+   3.812083441249341*^9}, 3.812086345747966*^9, 3.81208638817974*^9, {
+   3.812086436797401*^9, 3.812086456654134*^9}, {3.8120864914047117`*^9, 
+   3.8120864971188107`*^9}, {3.812087646346794*^9, 3.812087650628914*^9}, {
+   3.812087792101324*^9, 3.812087827394486*^9}, {3.812087902242779*^9, 
+   3.812088041292034*^9}, {3.812088088749446*^9, 3.812088153684423*^9}, {
+   3.812088201381336*^9, 3.812088381700405*^9}, 3.8120901956240463`*^9, 
+   3.815584991608659*^9, {3.815586429781337*^9, 3.815586438201365*^9}, {
+   3.815586615804679*^9, 3.815586616239131*^9}, {3.815586775266749*^9, 
+   3.8155868144140997`*^9}, {3.815830072592664*^9, 
+   3.8158300954178057`*^9}},ExpressionUUID->"a3fe3373-1149-4f69-94b5-\
+df7e50d8259c"],
+
+Cell[BoxData[
+ RowBox[{"Intersection", "@@", 
+  RowBox[{"Keys", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Select", "[", 
+      RowBox[{
+       RowBox[{"#", "//", "Association"}], ",", 
+       RowBox[{
+        RowBox[{"#", "\[Equal]", "0"}], "&"}]}], "]"}], "&"}], "/@", 
+    RowBox[{"{", 
+     RowBox[{"recoveredCasesTestResult", ",", "confirmedCasesTestResult"}], 
+     "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.81558682778018*^9, 3.815586827783391*^9}},
+ CellLabel->"In[51]:=",ExpressionUUID->"772dc778-c976-4248-ab11-20c57822d9a9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+pass perfectly Benford\[CloseCurlyQuote]s law hypothesis test about confirmed \
+cases and recovered cases. This indicates that their data are highly reliable \
+from our perspective. 
+
+As mentioned before, we can assume national confirmed cases data follow \
+Benford\[CloseCurlyQuote]s law since pandemic models are usually exponential. \
+
+However, as so far we don\[CloseCurlyQuote]t have good reason to ask national \
+recovered cases or death data to follow the same distribution. Therefore, we \
+could also accept datasets from counties that pass only confirmed cases \
+hypothesis test, they are: \
+\>", "Subsubsection",
+ CellChangeTimes->{
+  3.81558680744452*^9, {3.815830131468587*^9, 3.8158301525356483`*^9}, 
+   3.8158301954918137`*^9},ExpressionUUID->"71f9d98f-24c4-4629-b8df-\
+4a8f97fba65c"],
+
+Cell[BoxData[
+ RowBox[{"confirmedCasesTestResult", "//", 
+  RowBox[{
+   RowBox[{"Keys", "[", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"#", "//", "Association"}], ",", 
+      RowBox[{
+       RowBox[{"#", "\[Equal]", "0"}], "&"}]}], "]"}], "]"}], 
+   "&"}]}]], "Input",
+ CellLabel->"In[50]:=",ExpressionUUID->"f1e0584a-7efd-4204-b193-85a64ccb097c"]
+}, Open  ]],
+
+Cell["\<\
+
+To draw weaker conclusion, we perform the second digit distribution \
+hypothesis test. 
+
+Result of this test offers us a reasonable subset of countries to do further \
+examination. 
+That is to say, we have some confidence on their data and it is reasonable to \
+calculate actual p-values of their data and see if we can find more plausible \
+information.
+
+For other counties, i.e., those not shown in our two worldwide map plots, we \
+should ask for explanations. 
+
+We are not saying that they have certainly provided fake data. The matter is \
+that without reasonable explanation their data are not convincing. 
+
+To save them from suspicion, further investigation should be performed. For \
+example, we can do this by performing hypothesis test in a lager scale. To be \
+concrete, we can test data for a group of counties which share similar \
+political characteristics. Though our code in this presentation can easily \
+adapted to perform so, it is beyond our discussion about national Covid-19 \
+data hypothesis test. \
+\>", "Subsubsection",
+ CellChangeTimes->{{3.812087807559514*^9, 3.8120878168810997`*^9}, 
+   3.815584991640366*^9, {3.815586851126712*^9, 3.8155869170306787`*^9}, 
+   3.815591096362238*^9, 3.8158301888717213`*^9, {3.815830234233433*^9, 
+   3.81583023799774*^9}, {3.815830278630254*^9, 
+   3.8158303151473007`*^9}},ExpressionUUID->"53213034-6edf-43df-8f53-\
+eaae937399b3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Reference", "Chapter",
+ CellChangeTimes->{{3.8120834432782497`*^9, 3.812083484022841*^9}, {
+  3.812083568653284*^9, 
+  3.812083587203535*^9}},ExpressionUUID->"cfb154ad-e102-49b6-b3f9-\
+9d59b9c3e286"],
+
+Cell[TextData[{
+ "1. Wolfram Language & System Documentation Center, BenfordDistribution ",
+ ButtonBox["https://reference.wolfram.com/language/ref/BenfordDistribution.\
+html ",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://reference.wolfram.com/language/ref/BenfordDistribution.html \
+"], None},
+  ButtonNote->
+   "https://reference.wolfram.com/language/ref/BenfordDistribution.html "]
+}], "Text",
+ CellChangeTimes->{{3.812083585671274*^9, 3.812083590269669*^9}, {
+  3.8120836851299543`*^9, 3.812083687576886*^9}, {3.8120837175997267`*^9, 
+  3.812083805376383*^9}, {3.8120838376841*^9, 3.8120838560730124`*^9}, {
+  3.812083906774198*^9, 3.8120839258524847`*^9}, {3.812083970386732*^9, 
+  3.812083971088458*^9}},
+ CellTags->
+  "refbenford",ExpressionUUID->"bfe4ffcd-a298-4b7e-bb3d-106218701113"],
+
+Cell[TextData[{
+ "2. Wolfram Research, \[OpenCurlyDoubleQuote]Epidemic Data for Novel \
+Coronavirus COVID-19\[CloseCurlyDoubleQuote] from the Wolfram Data \
+Repository(2020)\:2002 ",
+ ButtonBox["https://doi.org/10.24097/wolfram.04123.data",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://doi.org/10.24097/wolfram.04123.data"], None},
+  ButtonNote->"https://doi.org/10.24097/wolfram.04123.data"]
+}], "Text",
+ CellChangeTimes->{{3.812084016794365*^9, 3.812084036273204*^9}, 
+   3.8120841440560226`*^9, {3.812090009549786*^9, 3.812090035918563*^9}},
+ CellTags->
+  "refdataset",ExpressionUUID->"7f672b05-1849-47f9-a475-28f19e82edd1"]
+}, Open  ]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Scrolling Presentation",
+WindowSize->{1107.75, 602.25},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+PrintingCopies->1,
+PrintingStartingPageNumber->1,
+PrintingPageRange->{Automatic, Automatic},
+PageHeaders->{{
+   Cell[
+    TextData[{
+      StyleBox[
+       CounterBox["Page"], "PageNumber"], "   ", "|", "Jianyu", " ", "MA"}], 
+    "Header", CellMargins -> {{0, Inherited}, {Inherited, Inherited}}], None, 
+   None}, {None, None, 
+   Cell[
+    TextData[{
+      ValueBox["FileName"], " ", "|", "   ", 
+      StyleBox[
+       CounterBox["Page"], "PageNumber"]}], "Header", 
+    CellMargins -> {{Inherited, 0}, {Inherited, Inherited}}]}},
+PageFooters->{{None, None, None}, {None, None, None}},
+PageHeaderLines->{False, False},
+PageFooterLines->{False, False},
+PrintingOptions->{"FacingPages"->True,
+"FirstPageFace"->Left,
+"FirstPageFooter"->True,
+"FirstPageHeader"->False,
+"PaperOrientation"->"Landscape",
+"PaperSize"->{Automatic, Automatic},
+"PostScriptOutputFile"->"",
+"PrintCellBrackets"->False,
+"PrintMultipleHorizontalPages"->False,
+"PrintRegistrationMarks"->True,
+"PrintingMargins"->{{54, 54}, {72, 72}}},
+TaggingRules->{
+ "WelcomeScreenSettings" -> {"FEStarting" -> False}, 
+  "PresenterSettings" -> {
+   "SlideBreakStyles" -> {}, "ShowSlideBreaks" -> False, 
+    "Dialogs" -> {
+     "SlideBreakDefaults" -> 0, "PresenterControlsPalette" -> 0, 
+      "ThemeOptionsPalette" -> 31, "ThemeOptions" -> 0}, 
+    "WindowSize" -> {1107.75, 602.25}, "WindowMargins" -> {{0, 0}, {0, 21}}, 
+    "Theme" -> {
+     "ThemeName" -> "Sky", "FontSetName" -> "Default", "ColorSetName" -> 
+      "Sky"}}, "TryRealOnly" -> False},
+ShowCellTags->True,
+Magnification:>0.7 Inherited,
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> 
+     FrontEnd`FileName[{"PresenterTools"}, "Sky.nb", CharacterEncoding -> 
+       "UTF-8"]]], 
+   Cell[
+    StyleData["Notebook"], 
+    StyleHints -> {
+     ParentList, 
+      "FontSet" -> {
+       "Display1" -> "Source Sans Pro", "Display2" -> "Source Sans Pro", 
+        "Display3" -> "Source Sans Pro", "Text1" -> "Source Sans Pro", 
+        "Text2" -> "Source Sans Pro", "Text3" -> "Source Sans Pro", "Dingbat" -> 
+        "Source Sans Pro", "Default" -> "Source Sans Pro"}, 
+      "ColorSet" -> {
+       "Display1" -> RGBColor[0, 0.482353, 0.760784], "Display2" -> 
+        RGBColor[0, 0.658824, 0.968627], "Display3" -> 
+        RGBColor[0, 0.482353, 0.760784], "Text1" -> GrayLevel[0.388235], 
+        "Text2" -> GrayLevel[1], "Text3" -> GrayLevel[0], "Text1Reverse" -> 
+        GrayLevel[0.75], "Text2Reverse" -> GrayLevel[0.75], "Text3Reverse" -> 
+        GrayLevel[0.75], "Dingbat" -> RGBColor[0, 0.658824, 0.968627], 
+        "Default" -> GrayLevel[0.388235], "Background" -> 
+        RGBColor[0, 0.482353, 0.760784]}, "CodeFont" -> "Source Code Pro", 
+      "GroupOpener" -> "Inline", "SlideBreakStyles" -> {}, 
+      "SlideBreakMargins" -> {{0, 0}, {0, 80}}}, MenuSortingValue -> None], 
+   Cell[
+    StyleData["FirstSlide"], 
+    PrivateCellOptions -> {
+     "PagewiseNotebookBaseStyle" -> {
+       BackgroundAppearance -> 
+        FrontEnd`FileName[{"PresenterTools"}, "Background-Sky-Sky.png"]}}, 
+    MenuSortingValue -> 10000]}, Visible -> False, FrontEndVersion -> 
+  "12.1 for Linux x86 (64-bit) (June 19, 2020)", StyleDefinitions -> 
+  "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"f9b2c870-5ff8-4994-95bb-384a62a18675"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "refbenford"->{
+  Cell[56361, 1400, 807, 17, 76, "Text",ExpressionUUID->"bfe4ffcd-a298-4b7e-bb3d-106218701113",
+   CellTags->"refbenford"]},
+ "refdataset"->{
+  Cell[57171, 1419, 641, 13, 76, "Text",ExpressionUUID->"7f672b05-1849-47f9-a475-28f19e82edd1",
+   CellTags->"refdataset"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"refbenford", 61440, 1525},
+ {"refdataset", 61582, 1528}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 197, 3, 183, "Title",ExpressionUUID->"61d8fe29-0bc7-402e-b1b0-84aed6a0fc00"],
+Cell[780, 27, 368, 10, 58, "Subsection",ExpressionUUID->"61dd3676-ddb6-436a-a535-e3da814d72e1"],
+Cell[CellGroupData[{
+Cell[1173, 41, 206, 4, 67, "Chapter",ExpressionUUID->"4fc6f7f8-0444-4e88-a34a-7b1bfdfbe64d"],
+Cell[1382, 47, 1749, 27, 184, "Subsubsection",ExpressionUUID->"716d9c6c-2276-4d32-a662-06840918b876"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3168, 79, 282, 4, 160, "Chapter",ExpressionUUID->"9de0e252-2c3b-4de2-997c-334afa14e965"],
+Cell[CellGroupData[{
+Cell[3475, 87, 1658, 27, 272, "Subsubsection",ExpressionUUID->"0057e61f-bfaa-4f37-8ba5-eb988bab3dd9"],
+Cell[5136, 116, 221, 3, 30, "Input",ExpressionUUID->"8e5434a8-06d5-444b-84f4-341ce985fce2"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5406, 125, 237, 4, 160, "Chapter",ExpressionUUID->"f19665cf-1c33-4247-a830-55a380a02846"],
+Cell[5646, 131, 814, 16, 302, "Subsubsection",ExpressionUUID->"ba48de46-6942-4370-8d87-6eaece7d006d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6497, 152, 297, 4, 160, "Chapter",ExpressionUUID->"2edfb527-3c56-4ede-bdd9-83f956857efb"],
+Cell[CellGroupData[{
+Cell[6819, 160, 181, 3, 52, "Subchapter",ExpressionUUID->"e2d4508e-d221-4db9-ad64-27ab21da88db"],
+Cell[CellGroupData[{
+Cell[7025, 167, 733, 13, 96, "Subsubsection",ExpressionUUID->"ad30d02f-b530-4b59-b2b6-6341d4852c5b"],
+Cell[7761, 182, 2188, 54, 113, "Input",ExpressionUUID->"1e262b01-4e73-40a5-b37e-d2071c9f40de",
+ InitializationCell->True]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9998, 242, 290, 4, 52, "Subchapter",ExpressionUUID->"68db03f6-fc07-4e25-bf04-e4627afd3551"],
+Cell[CellGroupData[{
+Cell[10313, 250, 499, 9, 66, "Subsubsection",ExpressionUUID->"f20586fc-fa62-498f-b806-845028e33c64"],
+Cell[10815, 261, 291, 7, 41, "Input",ExpressionUUID->"1aafc4fe-ccdc-4646-8fd0-518931047664",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11143, 273, 354, 7, 37, "Subsubsection",ExpressionUUID->"18cfed16-8a50-4b93-b996-3803e36186ba"],
+Cell[11500, 282, 696, 19, 66, "Input",ExpressionUUID->"d2d0253e-d8ac-4d96-bb50-6515e4c5d00a",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12233, 306, 289, 6, 37, "Subsubsection",ExpressionUUID->"d6926aa6-823c-42e1-84bb-2e82d116de88"],
+Cell[12525, 314, 2015, 51, 195, "Input",ExpressionUUID->"01d1b3c9-19e4-4b17-a521-248e1b095221"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14577, 370, 240, 4, 37, "Subsubsection",ExpressionUUID->"18300242-e438-4f9a-b84a-ea27654f2947"],
+Cell[14820, 376, 147, 2, 30, "Input",ExpressionUUID->"92860bb5-0813-4c5b-8f32-3da8aaddfe7b"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15028, 385, 284, 4, 160, "Chapter",ExpressionUUID->"ea8f10ce-4e96-48e8-bedb-1d12d7321775"],
+Cell[CellGroupData[{
+Cell[15337, 393, 939, 15, 96, "Subsubsection",ExpressionUUID->"e77bc6e0-3fcc-44bb-918e-c325d542475a"],
+Cell[16279, 410, 1022, 21, 66, "Input",ExpressionUUID->"165860c1-2390-48d5-8156-5d4bc085f6a7",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17338, 436, 200, 3, 37, "Subsubsection",ExpressionUUID->"f4e9c883-2494-4029-87b6-a5a1a38d585e"],
+Cell[17541, 441, 317, 6, 30, "Input",ExpressionUUID->"eec5d1b9-47d1-4b1e-837b-5f004f12a3d0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17895, 452, 552, 10, 37, "Subsubsection",ExpressionUUID->"2dcf2da0-13e6-40d5-9d3b-f466f3ce04a9"],
+Cell[18450, 464, 4640, 95, 300, "Input",ExpressionUUID->"26e10c25-de50-48ad-a39e-0b56460cfa59",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23127, 564, 566, 11, 66, "Subsubsection",ExpressionUUID->"e9dbfa7b-1335-4d18-9679-c3769451bdcf"],
+Cell[23696, 577, 639, 12, 38, "Input",ExpressionUUID->"d9784a87-c666-4888-8d1e-d449c174c85b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24372, 594, 254, 4, 37, "Subsubsection",ExpressionUUID->"29c80352-8b77-47cf-ad6e-395aba7af7d8"],
+Cell[24629, 600, 1396, 34, 109, "Input",ExpressionUUID->"c707eb22-0f39-4fd9-b04c-e7213743aea0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26062, 639, 373, 7, 66, "Subsubsection",ExpressionUUID->"70083efa-ca40-47ae-91e6-08fd72d77153"],
+Cell[26438, 648, 723, 15, 41, "Input",ExpressionUUID->"cf734075-be2d-4631-bca3-0f716dcaf5f0",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27198, 668, 264, 5, 37, "Subsubsection",ExpressionUUID->"edcee69a-460a-45e4-ac3f-1dec707ca7df"],
+Cell[27465, 675, 210, 3, 30, "Input",ExpressionUUID->"b786bdaf-2f58-48a4-82c0-6e21c0c723db"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27712, 683, 371, 8, 37, "Subsubsection",ExpressionUUID->"d61403cd-1349-4069-9ba9-990315cd2850"],
+Cell[28086, 693, 1873, 45, 160, "Input",ExpressionUUID->"f1365f04-e0a9-464f-ae3d-85cbd20a79e1",
+ InitializationCell->True],
+Cell[29962, 740, 749, 20, 66, "Input",ExpressionUUID->"4fc82a8e-7a0b-46c9-a6d6-be3dde7394f8",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30748, 765, 550, 10, 66, "Subsubsection",ExpressionUUID->"2f45ee16-4e8f-4482-9885-2886df6b2100"],
+Cell[31301, 777, 1698, 37, 89, "Input",ExpressionUUID->"ba52d75f-a78a-4131-86c5-9b27a8069d41",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33036, 819, 648, 15, 66, "Subsubsection",ExpressionUUID->"ed3358fb-d3ac-4579-9613-c22f60a91b25"],
+Cell[33687, 836, 540, 14, 30, "Input",ExpressionUUID->"a20baec9-b560-47ef-a441-f03170280509"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34264, 855, 542, 10, 96, "Subsubsection",ExpressionUUID->"91080066-6a49-4e9b-abc3-d5f6b39c28c1"],
+Cell[34809, 867, 895, 19, 38, "Input",ExpressionUUID->"4fc7eab7-282f-4321-b0cf-1270b9c5bf9d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35741, 891, 371, 5, 37, "Subsubsection",ExpressionUUID->"133fdbeb-d791-486e-8d18-a7f0ce1961e8"],
+Cell[36115, 898, 833, 21, 38, "Input",ExpressionUUID->"24fba151-beed-4359-9bf2-11caf38fd8a3"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36997, 925, 228, 4, 160, "Chapter",ExpressionUUID->"2d29add6-5e96-4f05-8762-19c2bd836268"],
+Cell[CellGroupData[{
+Cell[37250, 933, 530, 9, 96, "Subsubsection",ExpressionUUID->"bebf059c-8043-4d2d-b97c-3595ca8ba71f"],
+Cell[37783, 944, 3576, 91, 300, "Input",ExpressionUUID->"d550dbc6-66a2-4e72-81a1-6840e8d088c8",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41396, 1040, 271, 6, 37, "Subsubsection",ExpressionUUID->"f9a932e4-cdc1-40c0-a9ce-a387ec57bb5d"],
+Cell[41670, 1048, 433, 9, 38, "Input",ExpressionUUID->"b690704d-092b-4f88-abdd-4dedf3af7452"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42140, 1062, 279, 6, 37, "Subsubsection",ExpressionUUID->"a0f8923d-8f3f-4db1-8b8b-5f0d92b8b165"],
+Cell[42422, 1070, 779, 19, 38, "Input",ExpressionUUID->"1c9abb3c-5508-473c-9138-660f06d1c4ea"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[43238, 1094, 909, 15, 125, "Subsubsection",ExpressionUUID->"73b7e38e-4197-4e09-8d9a-cf45a4051a6b"],
+Cell[44150, 1111, 2099, 49, 160, "Input",ExpressionUUID->"aaf7899b-dfd9-4090-9546-d612b0dd6be4",
+ InitializationCell->True],
+Cell[46252, 1162, 1031, 30, 113, "Input",ExpressionUUID->"61c0922c-f576-4aa7-99d6-af93b1d1d0be",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47320, 1197, 592, 11, 125, "Subsubsection",ExpressionUUID->"37671d3e-c9bb-4d85-b8eb-d35a6f21f564"],
+Cell[47915, 1210, 2131, 44, 68, "Input",ExpressionUUID->"68307f48-54be-4563-981d-70e581a1cf18"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50095, 1260, 223, 4, 160, "Chapter",ExpressionUUID->"27fc6565-acfb-4ba1-b5f9-6212471d8fe9"],
+Cell[CellGroupData[{
+Cell[50343, 1268, 2594, 40, 302, "Subsubsection",ExpressionUUID->"a3fe3373-1149-4f69-94b5-df7e50d8259c"],
+Cell[52940, 1310, 545, 14, 30, "Input",ExpressionUUID->"772dc778-c976-4248-ab11-20c57822d9a9"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53522, 1329, 809, 16, 243, "Subsubsection",ExpressionUUID->"71f9d98f-24c4-4629-b8df-4a8f97fba65c"],
+Cell[54334, 1347, 362, 10, 30, "Input",ExpressionUUID->"f1e0584a-7efd-4204-b193-85a64ccb097c"]
+}, Open  ]],
+Cell[54711, 1360, 1405, 29, 537, "Subsubsection",ExpressionUUID->"53213034-6edf-43df-8f53-eaae937399b3"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56153, 1394, 205, 4, 160, "Chapter",ExpressionUUID->"cfb154ad-e102-49b6-b3f9-9d59b9c3e286"],
+Cell[56361, 1400, 807, 17, 76, "Text",ExpressionUUID->"bfe4ffcd-a298-4b7e-bb3d-106218701113",
+ CellTags->"refbenford"],
+Cell[57171, 1419, 641, 13, 76, "Text",ExpressionUUID->"7f672b05-1849-47f9-a475-28f19e82edd1",
+ CellTags->"refdataset"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

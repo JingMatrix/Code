@@ -1,0 +1,184 @@
+\documentclass[]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\renewcommand{\labelenumi}%
+{(\roman{enumi})}
+\newtheorem{prop}{Question}
+\theoremstyle{remark} 
+\newtheorem*{sol}{My Solution}
+%opening
+\title{Jianyu MA's DM Algebra}
+\author{Jianyu MA}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{prop}[Changement de base] 
+	Soient
+	\[ f: A \longrightarrow B \]
+	un morphisme d'anneaux commutatifs, $M$ un $A$-module. Montrez que la règle
+	\[ b \cdot\left(b^{\prime} \otimes x\right)=b b^{\prime} \otimes x \] $b, b^{\prime} \in B, x \in M$ définit une structure d'un $B$-module sur $B \otimes_{A} M .$
+\end{prop}
+
+\begin{sol}
+	$B \otimes_{A} M $ is a $A$-module hence a Abel group. By the definition of ring $ B $ action over  $B \otimes_{A} M $,  $ \forall b_1, b_2, b^{\prime} \in B, x \in M $ and $ 1 \in B $ the multiplicative identity, we can check following properties:
+		\begin{itemize}
+			\item distributive law, this is included in how we define this action,  $ b \cdot (u + v):= b \cdot u + b \cdot v,\, \forall u,v\in B \otimes_{A} M $ . And due to this property, we can check other properties only for tensor product of two elements in $ B $ and $ M $.
+			\item a monoid action, $ (b_1 b_2)  \cdot\left(b^{\prime} \otimes x\right)=b_1 b_2 b^{\prime} \otimes x=b_1 (b_2 b^{\prime}) \otimes x = b_1 \cdot (b_2 \cdot (b^{\prime} \otimes x))$, $ 1 \cdot\left(b^{\prime} \otimes x\right)=1 b^{\prime} \otimes x = b^{\prime} \otimes x $
+			\item linearity, $ (b_1 + b_2)  \cdot\left(b^{\prime} \otimes x\right)=( b_1 +b_2) b^{\prime} \otimes x =b_1 b^{\prime} \otimes x + b_2 b^{\prime} \otimes x=b_1   \cdot\left(b^{\prime} \otimes x\right) + b_2 \cdot\left(b^{\prime} \otimes x\right)$
+			
+		\end{itemize}
+\end{sol}
+\begin{prop}
+	Soient $A$ un anneau commutatif, $S \subset A$ une partie multiplicative, d'où le morphisme d'anneaux canonique
+	\[ i: A \longrightarrow A_{S} \]
+	Soit $M$ un $A$-module, d'où un $A_{S}$-module $A_{S} \otimes_{A} M,$ d'après Ex. $1 .$ Définir un isomorphisme de $A_{S}$-modules \[ A_{S}\otimes_{A}M \stackrel{\sim}{\longrightarrow} M_{S} \]
+\end{prop}
+
+\begin{sol}
+	Consider a bilinear map $ \tilde{f} $ from $ A_{S}\times_{A}M $ to $ M_{S} $,
+	\begin{align*}
+	\tilde{f} :  A_{S}\times_{A}M &\rightarrow M_{S}\\
+	(\frac{a}{t}, x)&\mapsto\frac{a\cdot x}{t}
+	\end{align*} 
+	we then get a uniquely determined map $ f $ from $ A_{S}\otimes_{A}M $ to $ M_{S} $ which sends $ \frac{a}{t}\otimes x $ to $ \frac{a\cdot x}{t} $.
+	
+	$ f $ is surjective since $ f(\frac{1}{t}\otimes x) = \frac{x}{t} $. Assume that $ \sum_{j} \frac{a_j}{t_j}\otimes x_j $ is an element in the kernel of $ f $, where $ a_j\in A, t_j\in S, x_j \in M $, then $ \sum_{j} \frac{a_j\cdot x_j}{t_j} = 0$ in $ S^{-1}M $ which means $ \exists t\in S, t(\sum_{j}a_j x_j \prod_{i \ne j}t_i) =0 $, where $ i,j $ ranges over a given finite index set.
+	Thus,
+	\begin{align*}
+		\sum_{j} \frac{a_j}{t_j}\otimes x_j &=  \sum_{j}\frac{1}{t_j}\otimes a_j\cdot x_j =
+	\sum_{j}\frac{1}{t\prod_{i}t_i} \otimes t(a_j x_j \prod_{i \ne j}t_i) \\&
+	=\frac{1}{t\prod_{i}t_i} \otimes t(\sum_{j}a_j x_j \prod_{i \ne j}t_i)
+	=0 
+	\end{align*}
+	we prove that $ f $ is injective since the kernel of $ f $ is trivial.
+	
+	Hence $ f $ is a isomorphism from $ A_{S}\otimes_{A}M $ onto $ M_{S} $
+	
+	
+\end{sol}
+
+\begin{prop}
+	Soient $A$ un anneau commutatif, $M, N, L$ des $A$ -modules. Définissons un morphisme des $A$ -modules
+	\[ \phi: \operatorname{Hom}_{A}\left(M \otimes_{A} N, L\right) \longrightarrow \operatorname{Hom}_{A}\left(M, \operatorname{Hom}_{A}(N, L)\right) \] par la régle suivante. Si $f \in \operatorname{Hom}_{A}\left(M \otimes_{A} N, L\right)$ alors \[ \phi(f)(x)(y)=f(x \otimes y), x \in M, y \in N \] Montrer que $\phi$ est un isomorphisme (définir le morphisme inverse).
+\end{prop}
+
+\begin{sol}
+	We prove it by defining an inverse morphism
+	\[ \psi: \operatorname{Hom}_{A}\left(M, \operatorname{Hom}_{A}(N, L)\right) \longrightarrow \operatorname{Hom}_{A}\left(M \otimes_{A} N, L\right) . \]
+	
+	First, we define a
+	$\tilde{\psi}: \operatorname{Hom}_{A}\left(M, \operatorname{Hom}_{A}(N, L)\right) \rightarrow \operatorname{Hom}_{A}\left(M \times N, L\right) $, if $ g \in \operatorname{Hom}_{A}\left(M, \operatorname{Hom}_{A}(N, L)\right) $ then
+	$ \tilde{\psi}(g)(x, y) := g(x)(y)  $. $ \tilde{\psi}(g) $ is a bilinear morphism, so we can define $ \psi(g) $ as the unique morphism in $ \operatorname{Hom}_{A}\left(M \times N, L\right) $ induced by $ \tilde{\psi} $. Let's check that $ \psi $ and $ \phi $ are inverse to each other.
+	
+	If $f \in \operatorname{Hom}_{A}\left(M \otimes_{A} N, L\right)$, for $ x \in M, y \in N $,
+	\[ \psi(\phi(f))(x \otimes y) = \tilde{\psi} (\phi(f))(x , y) = \phi(f)(x)(y)=f(x \otimes y)  \]
+	so $  \psi(\phi(f)) = f $ since both sides coincide with all $ x\otimes y \in M\otimes N $.
+	
+	If $ g \in \operatorname{Hom}_{A}\left(M, \operatorname{Hom}_{A}(N, L)\right) $, for $ x \in M, y \in N $,
+	\[ \phi(\psi(g))(x)(y) = \psi(g)(x \otimes y) = \tilde{\psi(g)}(x,y) = g(x)(y) \]
+	so $ \phi(\psi(g)) =g $.
+	
+\end{sol}
+ 
+\begin{prop}[Fonctorialité de Hom]
+	Soient $A$ un anneau commutatif, $M, M^{\prime}, N, N^{\prime}$ des $A$ -modules. Un morphisme des A-modules
+	\[ f: N \longrightarrow N^{\prime}  \] 
+induit le morphisme des $ A $-modules
+\[ f_{*}: \operatorname{Hom}_{A}(M, N) \longrightarrow \operatorname{Hom}_{A}\left(M, N^{\prime}\right) \] Où
+\[ f_{*}(h):=f h, \quad h \in \operatorname{Hom}_{A}(M, N) \] De même, un morphisme des $A$ -modules
+\[ g: M \longrightarrow M^{\prime} \]
+	induit le morphisme des $A$ -modules
+	\[ g^{*}: \operatorname{Hom}_{A}\left(M^{\prime}, N\right) \longrightarrow \operatorname{Hom}_{A}(M, N) \]
+	Où
+\[ g^{*}\left(h^{\prime}\right)=h^{\prime} g, h^{\prime} \in \operatorname{Hom}_{A}\left(M^{\prime}, N\right) \]
+\begin{enumerate}
+	\item Montrez que
+	\[ {\operatorname{Id}_{N}}_*=\operatorname{Id}_{\operatorname{Hom}_{A}(M, N)}={\operatorname{Id}_{M}}^{*} \]
+	\item Montrer que si
+	\[ N \stackrel{g}{\longrightarrow} N^{\prime} \stackrel{f}{\longrightarrow} N^{\prime \prime} \] sont des morphismes des $A$-modules alors \[ (f g)_{*}=f_{*} g_{*}: \operatorname{Hom}_{A}(M, N) \longrightarrow \operatorname{Hom}_{A}\left(M, N^{\prime \prime}\right) \]
+	\item Montrer que si
+	\[ M \stackrel{g}{\longrightarrow} M^{\prime} \stackrel{f}{\longrightarrow} M^{\prime \prime} \] sont des morphismes des $A$-modules alors \[ (f g)^{*}=g^{*} f^{*}: \operatorname{Hom}_{A}\left(M^{\prime \prime}, N\right) \longrightarrow \operatorname{Hom}_{A}(M, N) \]
+\end{enumerate}
+\end{prop}
+\begin{sol}
+	\begin{enumerate}
+		\item If $ f \in \operatorname{Hom}_{A}(M, N) $, then by definition
+		\[  {\operatorname{Id}_{N}}_*(f) = \operatorname{Id}_{N}f = f = f \operatorname{Id}_{M} = {\operatorname{Id}_{M}}^{*}(f).\] 
+		\item If $ h \in \operatorname{Hom}_{A}(M, N) $, then by definition
+		\[ (f g)_{*}(h)=f gh= f(gh)=f_{*} g_{*}(h) \]
+		\item If $ h \in \operatorname{Hom}_{A}\left(M^{\prime \prime}, N\right) $, then by definition
+		\[ (f g)^{*}(h)=h f g= (hf)g=g^{*} f^{*}(h) \]
+	\end{enumerate}
+\end{sol}
+\renewcommand{\labelenumi}%
+{(\alph{enumi})}
+\begin{prop}
+	Montrer que
+	\begin{enumerate}
+		\item  une suite de morphismes de $A$-modules \[ 0 \longrightarrow N^{\prime} \stackrel{f}{\longrightarrow} N \stackrel{g}{\longrightarrow} N^{\prime \prime} \] est exacte ssi pour tout $A$-module $M$ la suite \[ 0 \longrightarrow \operatorname{Hom}_{A}(M, N') \stackrel{f_*}{\longrightarrow} \operatorname{Hom}_{A}\left(M, N\right) \stackrel{g_*}{\longrightarrow} \operatorname{Hom}_{A}\left(M, N^{\prime \prime}\right) \] est exacte (la partie ``seulement" si a étée fait déjà);
+		\item une suite de morphismes de $A$-modules \[ M^{\prime} \stackrel{f}{\longrightarrow} M \stackrel{g}{\longrightarrow} M^{\prime \prime} \longrightarrow 0 \]
+		est exacte ssi pour tout $A$-module $N$ la suite \[ 0 \longrightarrow \operatorname{Hom}_{A}\left(M^{\prime \prime}, N\right) \stackrel{g^{*}}{\longrightarrow} \operatorname{Hom}_{A}\left(M, N\right) \stackrel{f^{*}}{\longrightarrow} \operatorname{Hom}_{A}(M', N) \] est exacte.
+	\end{enumerate}
+\end{prop}
+\begin{sol}
+	\begin{enumerate}
+		\item If we have an exact sequence
+		 \[ 0 \longrightarrow N^{\prime} \stackrel{f}{\longrightarrow} N \stackrel{g}{\longrightarrow} N^{\prime \prime} ,\]
+		 then for $ h \in \operatorname{Hom}_{A}(M, N') $, $ fh=0 $ is equivalent to $ h=0 $ 
+		 \[ \operatorname{kernel}(f_*) = \{ h \in \operatorname{Hom}_{A}(M, N') | f_*h=fh = 0 \} =\{ h \in \operatorname{Hom}_{A}(M, N') | h = 0 \} ;\]
+		 as for $ \operatorname{kernel}(g_*) = \{ k \in \operatorname{Hom}_{A}(M, N') | g_*k=gk = 0 \} $ it is obvious that $ \operatorname{image}(f_*) \subset \operatorname{kernel}(g_*)$ and inversely for $ k \in \operatorname{kernel}(g_*) $ and $ x\in N' $ we define $  f_k(x)  $ as the only element in set $ f^{-1}\{k(x)\} $. $ f_k \in \operatorname{Hom}_{A}(M, N') $ since $ f $ and $ k $ are morphisms and $ f_*(f_k) = k $, so $   \operatorname{kernel}(g_*)\subset \operatorname{image}(f_*)$. Hence we prove the existence of the other exact sequence.
+		 
+		 If we have an exact sequence
+		 \[ 0 \longrightarrow \operatorname{Hom}_{A}(M, N') \stackrel{f_*}{\longrightarrow} \operatorname{Hom}_{A}\left(M, N\right) \stackrel{g_*}{\longrightarrow} \operatorname{Hom}_{A}\left(M, N^{\prime \prime}\right) ,\]
+		 since $ \operatorname{Hom}_{A}(M, \operatorname{kernel}(f)) \subset \operatorname{kernel}(f_*) $ we have $ \operatorname{Hom}_{A}(M, \operatorname{kernel}(f)) = 0 $ and hence $  \operatorname{kernel}(f) =0 $; from $ g_* f_* = (gf)_* =0 $ we know $ gf =0 $, so  $ \operatorname{image}(f)= \operatorname{kernel}(g)$. Then we prove the other exact sequence.
+		 
+		 \item If we have an exact sequence
+		  \[ M^{\prime} \stackrel{f}{\longrightarrow} M \stackrel{g}{\longrightarrow} M^{\prime \prime} \longrightarrow 0 ,\]
+		  then $ \operatorname{image}(g) = M'' $ and $ hg =0 $ implies $ h=0 $
+		  \[ \operatorname{kernel}(g_*) = \{ h \in \operatorname{Hom}_{A}(M'', N) | g^*h=hg = 0 \} = 0; \]
+		  moreover $ \operatorname{kernel}(f^*) = \{ k \in \operatorname{Hom}_{A}(M, N) | f^*k=kf = 0 \} $, for $ k \in \operatorname{kernel}(f^*) $ and $ y \in M $ we define a $ g_k $ from 
+		  $ M'' = \operatorname{image}(f) $ to $ N $ such that $ g_k(g(y)) = k(y) $. This is well-defined because if $ g(y_1) = g(y_2)  $ for $ y1, y2 \in M $ then $ y_1 - y_2 \in \operatorname{kernel}(g) = \operatorname{image}(f) $ and $ k(y_1 - y_2) = k(y_1) -k(y_2) =0 $ which gives $ g_k(g(y_1)) = g_k(g(y_2))$. By definition, we can check that $ g_k \in \operatorname{Hom}_{A}(M, N') $ and $ g^*(g_k) = k $. Therefore, $ \operatorname{image}(g^*)= \operatorname{kernel}(f^*) $ and we get the other exact sequence.
+		  
+		  Assume now we have an exact sequence
+		  \[ 0 \longrightarrow \operatorname{Hom}_{A}\left(M^{\prime \prime}, N\right) \stackrel{g^{*}}{\longrightarrow} \operatorname{Hom}_{A}\left(M, N\right) \stackrel{f^{*}}{\longrightarrow} \operatorname{Hom}_{A}(M', N). \]
+		  Consider the canonical projection $ \pi: M'' \rightarrow M''/g(M) $,  from $ \pi g =0 $ we have $ g^* \pi^* = (\pi g)^* =0 $ so $ \pi^*(\operatorname{Hom}_{A}(M''/g(M), N)) \subset \operatorname{kernel}(g^*) = 0 $. Then either $ \operatorname{Hom}_{A}(M''/g(M), N) =0 $ or $ \pi $ is trivial, but both imply  $ M''/g(M) =0 $. In addition, $ (fg)^* = g^* f^* = 0 $ we have $ fg =0 $ and hence get the other exact sequence.
+	\end{enumerate}
+\end{sol}
+\begin{prop}
+	 Soient
+	\[ 0 \longrightarrow M^{\prime} \stackrel{f}{\longrightarrow} M \stackrel{g}{\longrightarrow} M^{\prime \prime} \longrightarrow 0 \] une suite exacte de $A$ -modules et $N$ un $A$ -module. Mq la suite
+	\[ M^{\prime} \otimes_{A} N \stackrel{f\otimes \operatorname{Id}_N}{\longrightarrow} M \otimes_{A} N \stackrel{g\otimes \operatorname{Id}_N}{\longrightarrow} M^{\prime \prime} \otimes_{A} N \longrightarrow 0 \] est exacte.
+\end{prop}
+\begin{sol}
+	For two $ A $-module $ N, L $, $ \operatorname{Hom}_{A}\left(N, L\right) $ is another $ A $-module $ N $, so by functor property of  $ \operatorname{Hom} $ we have an exact sequence:
+	 \[ 0 \longrightarrow \operatorname{Hom}_{A}\left(M^{\prime \prime}, \operatorname{Hom}_{A}\left(N, L\right)\right) \stackrel{g^{*}}{\longrightarrow} \operatorname{Hom}_{A}\left(M, \operatorname{Hom}_{A}\left(N, L\right)\right) \stackrel{f^{*}}{\longrightarrow} \operatorname{Hom}_{A}(M', \operatorname{Hom}_{A}\left(N, L\right)). \]
+	 
+	 Since $ \operatorname{Hom}_{A}\left(M, \operatorname{Hom}_{A}\left(N, L\right)\right) $ is isomorphic to $ \operatorname{Hom}_{A}\left(M \otimes_{A} N, L\right) $ we get:
+	 	\[ 0 \longrightarrow \operatorname{Hom}_{A}\left(M'' \otimes_{A} N, L\right) \stackrel{\psi g^{*}}{\longrightarrow} \operatorname{Hom}_{A}\left(M \otimes_{A} N, L\right) \stackrel{\psi f^{*}}{\longrightarrow} \operatorname{Hom}_{A}\left(M' \otimes_{A} N, L\right). \]
+	 	
+	 Use this functor property again, we finish the proof,
+	 \[ M^{\prime} \otimes_{A} N \stackrel{f\otimes \operatorname{Id}_N}{\longrightarrow} M \otimes_{A} N \stackrel{g\otimes \operatorname{Id}_N}{\longrightarrow} M^{\prime \prime} \otimes_{A} N \longrightarrow 0 .\]
+	 
+\end{sol}
+
+\begin{prop}
+  Soit $A$ un anneau commutatif, $\mathfrak{p} \subset A$ un idéal premier. Rappelons que $A_{\mathfrak{p}}$ désigne l'anneau de fractions $A_{S}$ pour $S=A \backslash \mathfrak{p} .$ De même, pour un $A$ -module $M, M_{\mathfrak{p}}$ désigne $M_{S}$.
+	Montrez que $M=0$ ssi $M_{\mathfrak{p}}=0$ pour tout $\mathfrak{p} \in \operatorname{Spec}(A)$.
+\end{prop}
+
+\begin{sol}
+	If $ M =0 $, then obviously $M_{\mathfrak{p}}=0$ for all $\mathfrak{p} \in \operatorname{Spec}(A)$.
+	
+	On the other hand, if $M_{\mathfrak{p}}=0$ then $ A_{\mathfrak{p}} \otimes_{A} M = 0 $ for all $\mathfrak{p} \in \operatorname{Spec}(A)$ by the first question. 
+	Consider a morphism between two $ A $-module $ A $ and $ M $
+	\begin{align*}
+		v: A &\rightarrow M \\
+		a &\mapsto a\cdot 1_M
+	\end{align*}
+	if $ M \ne 0 $ then $ \operatorname{kernel}(v) $ is a proper ideal of $ A $. Let $ \mathfrak{q} $ be the maximal ideal contains $ \operatorname{kernel}(v) $. We have $\mathfrak{q} \in \operatorname{Spec}(A)$ and $ A_{\mathfrak{q}} \otimes_{A} M \ne 0 $ since $ \frac{1}{1} \otimes_{A} 1_M \ne 0 $ as its isomorphic image $ \frac{1_M}{1} $ is not zero in $ M_{\mathfrak{q}} $.
+\end{sol}
+\end{document}

@@ -1,0 +1,26 @@
+#!/bin/zsh 
+# use mathpix api for math ocr
+set -e
+xclip -selection clipboard -t image/png -o > /tmp/equa.png 
+image=$( base64 -i /tmp/equa.png | tr -d \\n) 
+curl -s -X POST https://api.mathpix.com/v3/latex \
+-H "app_id: $app_id" \
+-H "app_key: $app_key" \
+-H 'Content-Type: application/json' \
+--data '{ 
+	"src": "data:image/jpeg;base64,'$image'", 
+	"ocr": ["math", "text"],
+	"skip_recrop": true,
+	"formats": [
+		"latex_simplified",
+		"latex_styled",
+		"asciimath",
+		"latex_list"
+	 ],
+	 "format_options": {
+		 "latex_styled": {"transforms": ["rm_spaces"]}
+	 }
+	}
+' -o .json 
+jq '.latex_simplified' .json  -r | xclip -in -selection clipboard
+jq '.' .json

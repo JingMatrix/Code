@@ -1,0 +1,224 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8377,        216]
+NotebookOptionsPosition[      7579,        194]
+NotebookOutlinePosition[      8141,        215]
+CellTagsIndexPosition[      8098,        212]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], ":=", 
+   RowBox[{"Exp", "[", 
+    RowBox[{
+     RowBox[{"-", "10"}], "x"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol", "=", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"step", "=", "0.0001"}], "}"}], ",", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"y", "'"}], "[", "x", "]"}], " ", "\[Equal]", " ", 
+             RowBox[{"Evaluate", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"f", "'"}], "[", "x", "]"}], "/.", 
+               RowBox[{"f", "\[Rule]", "y"}]}], "]"}]}], ",", " ", 
+            RowBox[{
+             RowBox[{"y", "[", "0", "]"}], " ", "\[Equal]", " ", 
+             RowBox[{"f", "[", "0", "]"}]}]}], "}"}], ",", 
+          RowBox[{"y", "[", "x", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "0", ",", "4"}], "}"}], ",", " ", 
+          RowBox[{"StartingStepSize", "\[Rule]", "step"}], ",", " ", 
+          RowBox[{"Method", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"\"\<FixedStep\>\"", ",", 
+             RowBox[{"Method", "->", "mt"}]}], "}"}]}]}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"mt", ",", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<ExplicitEuler\>\"", ",", "\"\<ExplicitMidpoint\>\"", ",", 
+            "\"\<LinearlyImplicitEuler\>\""}], "}"}]}], "}"}]}], "]"}]}], 
+     "]"}], "//", "Flatten"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Evaluate", "[", 
+    RowBox[{"Prepend", "[", 
+     RowBox[{
+      RowBox[{"ReplaceList", "[", 
+       RowBox[{
+        RowBox[{"y", "[", "x", "]"}], ",", 
+        RowBox[{"{", "sol", "}"}]}], "]"}], ",", " ", 
+      RowBox[{"f", "[", "x", "]"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "4"}], "}"}], ",", " ", 
+   RowBox[{"PlotLegends", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<Exact Solution: \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{
+         RowBox[{"f", "[", "x", "]"}], "//", "TraditionalForm"}], "]"}]}], 
+      ",", " ", "\"\<ExplicitEuler\>\"", ",", "\"\<ExplicitMidpoint\>\"", 
+      ",", "\"\<LinearlyImplicitEuler\>\""}], "}"}]}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Black", ",", "Thin"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"Thin", ",", "Red"}], "}"}], ",", "Dashed", ",", 
+      RowBox[{"{", 
+       RowBox[{"Thick", ",", "LightYellow"}], "}"}]}], "}"}]}], ",", 
+   RowBox[{"Background", "\[Rule]", "LightGray"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.7959549386836605`*^9, 3.7959552226914997`*^9}, {
+   3.795955348842222*^9, 3.7959553529778976`*^9}, {3.7959554733976927`*^9, 
+   3.795955476017488*^9}, {3.7959559180000353`*^9, 3.7959559192516403`*^9}, {
+   3.7959559594948215`*^9, 3.7959560759979086`*^9}, 3.795956217348503*^9, {
+   3.7959562573700876`*^9, 3.7959562595340233`*^9}, {3.7959563349682856`*^9, 
+   3.795956360216567*^9}, {3.795956421655492*^9, 3.795956494401387*^9}, {
+   3.795956546852525*^9, 3.7959566306494913`*^9}, {3.7959566701413965`*^9, 
+   3.7959566744334607`*^9}, {3.795956733602623*^9, 3.7959567374272947`*^9}, {
+   3.7959567967428136`*^9, 3.79595696347416*^9}, {3.7959569964070888`*^9, 
+   3.795957038989345*^9}, {3.795957072362039*^9, 3.795957113193739*^9}, {
+   3.7959571510826845`*^9, 3.7959571573657603`*^9}, {3.795958433076329*^9, 
+   3.79595847358736*^9}, {3.7959585418318577`*^9, 3.7959585435990915`*^9}, {
+   3.795958592487501*^9, 3.7959586735730596`*^9}, {3.7959600788899183`*^9, 
+   3.795960124086135*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"4d9b14f4-66a3-4414-9898-a801840790ce"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.79596473107551*^9, 
+  3.7959647334084735`*^9}},ExpressionUUID->"654418a3-81bc-4438-8a74-\
+9e2360b1d009"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], ":=", 
+   RowBox[{"Sin", "[", "x", "]"}]}], ";", 
+  RowBox[{"sol1", "=", " ", 
+   RowBox[{
+    RowBox[{"NDSolve", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"y", "'"}], "[", "x", "]"}], " ", "\[Equal]", " ", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"f", "'"}], "[", "x", "]"}], "/.", 
+           RowBox[{"f", "\[Rule]", "y"}]}], "]"}]}], ",", " ", 
+        RowBox[{
+         RowBox[{"y", "[", "0", "]"}], " ", "\[Equal]", " ", 
+         RowBox[{"f", "[", "0", "]"}]}]}], "}"}], ",", 
+      RowBox[{"y", "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "4"}], "}"}], ",", " ", 
+      RowBox[{"StartingStepSize", "\[Rule]", "1"}], ",", " ", 
+      RowBox[{"Method", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<FixedStep\>\"", ",", 
+         RowBox[{"Method", "->", "\"\<ExplicitEuler\>\""}]}], "}"}]}], ",", 
+      RowBox[{"InterpolationOrder", "\[Rule]", "2"}]}], "]"}], "//", 
+    "Flatten"}]}]}]], "Input",
+ CellChangeTimes->{{3.7960083031417627`*^9, 3.796008360840535*^9}, {
+  3.796008429359355*^9, 3.796008439049448*^9}, {3.796008478226676*^9, 
+  3.7960085066307406`*^9}},
+ CellLabel->"In[10]:=",ExpressionUUID->"8683396c-f9e7-43e2-9084-6d75fbd1029d"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Evaluate", "[", 
+    RowBox[{"Prepend", "[", 
+     RowBox[{
+      RowBox[{"ReplaceList", "[", 
+       RowBox[{
+        RowBox[{"y", "[", "x", "]"}], ",", 
+        RowBox[{"{", "sol1", "}"}]}], "]"}], ",", " ", 
+      RowBox[{"f", "[", "x", "]"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "4"}], "}"}], ",", " ", 
+   RowBox[{"PlotLegends", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<Exact Solution: \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{
+         RowBox[{"f", "[", "x", "]"}], "//", "TraditionalForm"}], "]"}]}], 
+      ",", " ", "\"\<ExplicitEuler\>\""}], "}"}]}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Black", ",", "Thin"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"Thin", ",", "Red"}], "}"}]}], "}"}]}], ",", 
+   RowBox[{"Background", "\[Rule]", "LightGray"}], ",", 
+   RowBox[{"PlotPoints", "\[Rule]", "5"}], ",", 
+   RowBox[{"MaxRecursion", "\[Rule]", "1"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.796008381730659*^9, 3.7960084093129177`*^9}, {
+  3.796008586987938*^9, 3.7960086085861654`*^9}, {3.79600864883858*^9, 
+  3.7960087437478113`*^9}, {3.796008832154487*^9, 3.7960088600419006`*^9}, {
+  3.7960089667037425`*^9, 3.796009005533931*^9}},
+ CellLabel->"In[24]:=",ExpressionUUID->"0adc9365-d11d-44b6-9baa-f2017b5a49c5"]
+},
+WindowSize->{948.75, 496.5},
+WindowMargins->{{0, Automatic}, {Automatic, 21}},
+PrintingCopies->1,
+PrintingPageRange->{32000, 32000},
+PrintingOptions->{"Magnification"->1.,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{595.1999999999999, 841.98}},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"3eacfc97-b685-404b-8952-a3311fad01e0"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3978, 92, 216, "Input",ExpressionUUID->"4d9b14f4-66a3-4414-9898-a801840790ce"],
+Cell[4539, 114, 153, 3, 29, "Input",ExpressionUUID->"654418a3-81bc-4438-8a74-9e2360b1d009"],
+Cell[4695, 119, 1382, 35, 71, "Input",ExpressionUUID->"8683396c-f9e7-43e2-9084-6d75fbd1029d"],
+Cell[6080, 156, 1495, 36, 92, "Input",ExpressionUUID->"0adc9365-d11d-44b6-9baa-f2017b5a49c5"]
+}
+]
+*)
+

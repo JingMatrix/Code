@@ -1,0 +1,420 @@
+% !TeX spellcheck = en_US
+\chapter{Background theory}
+\section{Browinan motion}
+
+%The Brownian motion or Wiener motion definition in physics is a mathematical description of a ``big" particule immerged in a fluid and which is not subjected to any other interaction than shocks with the “small” molecules of the surrounding fluid.
+Brownian motion, in the physical literature, is the random motion of particles suspended in a fluid (a liquid or a gas) resulting from their collision with the fast-moving molecules in the fluid.
+But in our case we will focus on the mathematical tool called Brownian motion which is what we will define later a particular continuous stochastic process. Also called Wiener process, it is a crucial tool used in stochastic integration that will make us able to solve (give the form of the solution) an probability equivalent of ODEs : Stochastic differential equations.
+
+\subsection{Stochastic process}
+
+\begin{definition}[Stochastic process]
+	Let us consider a probability space $(\Omega,\mathscr{F}, \mathbb{P})$. A stochastic process  $X=:\left(X_{t}\right)_{t \in T}$ is a family of random variables $X_{t}$ on $(\Omega,\mathscr{F})$ indexed by a set $T$.
+
+	A stochastic process depends on two parameters : $X_{t}(\omega)$ depends on $t$ (time) and $\omega \in \Omega$.
+	We say that a stochastic process $X=\left(X_{t}\right)_{t \in T}$ has independant increments when for all $p \in \mathbb{N}^{*} $ and $0<t_{1}<$
+	$t_{2}<\cdots<t_{p},$ the random variables $X_{t_{1}}, X_{t_{2}}-X_{t_{1}}, \ldots, X_{t_{p}}-X_{t_{p-1}}$ are independants.
+\end{definition}
+\begin{definition}
+	Two processes $X$ and $X^{\prime}$ defined respectively on the probability spaces $(\Omega, \mathscr{F}, P)$ and $\left(\Omega^{\prime}, \mathcal{F}^{\prime}, P^{\prime}\right),$ having the same state space $(E, \mathscr{E}),$ are said
+	to be equivalent if for any finite sequence $t_{1}, \ldots, t_{n}$ and sets $A_{i} \in \mathscr{E}$
+	\[
+	P\left[X_{t_{1}} \in A_{1}, X_{t_{2}} \in A_{2}, \ldots, X_{t_{n}} \in A_{n}\right]=P^{\prime}\left[X_{t_{1}}^{\prime} \in A_{1}, X_{t_{2}}^{\prime} \in A_{2}, \ldots, X_{t_{n}}^{\prime} \in A_{n}\right]
+	\]
+\end{definition}
+We also say that each one is a version of the other or that they are versions of the same process.
+We will then admit a very useful theorem:
+\begin{theorem}\label{thm:existence_random_variable}
+	Given a probability measure $\mu$ on $\mathbb{R}$, there exist a probability
+	space $(\Omega, \mathscr{F}, P)$ and a sequence of independent random variables $X_{n},$ defined on
+	$\Omega,$ such that $X_{n}(P)=\mu$ for every $n .$
+\end{theorem}
+As a consequence, we get the
+\begin{proposition}
+	Let $H$ be a separable real Hilbert space. There exist a probability space $(\Omega, \mathscr{F}, P)$ and a family $X(h), h \in H,$ of random variables on this space, such that:
+	\begin{itemize}
+		\item the map $h\rightarrow X(h)$ is linear;
+		\item for each $h$, the random variable X(h) is gaussian centered and
+		$$
+		E\left[X(h)^{2}\right]=\|h\|_{H}^{2} .
+		$$
+	\end{itemize}
+
+\end{proposition}
+\begin{proof}
+	 Pick an orthonormal basis $\left\{e_{n}\right\}$ in $H .$ By Theorem \eqref{thm:existence_random_variable} there is a probabil-
+	ity space $(\Omega, \mathscr{F}, P)$ on which one can define a sequence of independent reduced
+	real Gaussian variables $g_{n} .$ The series $\sum_{0}^{\infty}\left\langle h, e_{n}\right\rangle_{H} g_{n}$ converges in $L^{2}(\Omega, \mathscr{F}, P)$  (because it is an hilbert space) to a random variable which we call $X(h) .$ The proof is then easily completed.
+
+\end{proof}
+
+Now we can find a stochastic process $X=\left(X_{t}\right)_{t \in T}$ (if for instance $T=\mathbb{R^+}$) such that for any $t$, $X_{t}$ is a real Gaussian variable. It is called a \textit{gaussian process} and \textit{centered} if the esperence of $X_t$ for any $t$ is equal to zero.
+\begin{definition}
+	Let $E$ be a topological space and $\mathscr{E}$ the $\sigma$-algebra of its Borel subsets. A process $X$ with values in $(E, \mathscr{E})$ is said to be a.s. continuous if, for almost all $\omega^{\prime} s,$ the function $t \rightarrow X_{t}(\omega)$ is continuous.
+\end{definition}
+
+\subsection{Presentation of Brownian motion}
+We will now discuss about the BM and the very useful properties that it satisfies. We won't discuss about the existence of it but the theory behind is essentially based about the fact that $L^{2}(0,1)$ with the norm $\|f\|_{2}:=\sqrt{<f, f>},$ where $<\cdot, \cdot>$ is the scalar product:
+$$
+<f, g>:=\int_{0}^{1} f(x) g(x) d x, \quad f, g \in L^{2}(0,1)
+$$
+is an Hilbert space, with an orthonormal basis again.
+
+\begin{definition}
+	Let $(B_t)_{t \in\mathbb{R^+}}$ a stochastic process with values in $\mathbb{R}$. It is called a Brownian motion if it is a gaussian centered process with continuous trajectories and a covariance function given by:
+	\[
+	K(s, t)=\operatorname{Cov}\left(B_{s}, B_{t}\right)=\min \{s, t\}, \quad s, t \in\mathbb{R^+})
+	\]
+\end{definition}
+
+%We can interpret this proprety of the covariance as: The simulatenous variation of any pair of variables $X_t$, $X_s$ depends only on $\min(t,s)$: The present leads the future ``change".
+
+\begin{theorem}[Kolmogorov's continuity criterion]
+	A real-valued process $X$ for which there exist three constants $\alpha, \beta, C>0$ such that
+	\[
+	E\left[\left|X_{t+h}-X_{t}\right|^{\alpha}\right] \leq C h^{1+\beta}
+	\]
+	for every t and $h,$ has a modification which is almost-surely continuous.
+\end{theorem}
+In the case of the process $B$ above, the r.v. $B_{t+h}-B_{t}$ is Gaussian centered and has variance $h,$ so that
+\[
+E\left[\left(B_{t+h}-B_{t}\right)^{4}\right]=3 h^{2}
+\]
+The Kolmogorov criterion applies and we get
+\begin{theorem}\label{thm:construct_Brownian_motion}
+	There exists an almost surely continuous process $B$ with independent increments such that for each $t$, the random variable $B_{t}$ is centered, Gaussian and has variance $t$.
+\end{theorem}
+The properties stated in Theorem \eqref{thm:construct_Brownian_motion} imply those we already know. For instance, for $s<t,$ the increments $B_{t}-B_{s}$ are Gaussian centered with variance $t-s ;$ indeed, we can write
+\[
+B_{t}=B_{s}+\left(B_{t}-B_{s}\right)
+\]
+and using the independence of $B_{s}$ and $B_{t}-B_{s},$ we get, taking characteristic functions,
+\[
+\exp \left(-\frac{t u^{2}}{2}\right)=\exp \left(-\frac{s u^{2}}{2}\right) E\left[\exp \left(i u\left(B_{t}-B_{s}\right)\right)\right]
+\]
+whence $E\left[\exp \left(i u\left(B_{t}-B_{s}\right)\right)\right]=\exp \left(-\frac{(t-s)}{2} u^{2}\right)$ follows.
+We have an equivalence in the theorem  between the assertions $\operatorname{var}(X_t)=t$ and $\operatorname{cov}(X_t,X_s)=\min(t,s)$. Indeed if as proven above (supposing $t-s>0$) $\operatorname{var}(X_t-X_s)=t-s$  then $E[(X_t-X_s)^2)]=t-s$ so $E[X_t^2+X_s^2]-2E(X_t*X_s)=\operatorname{var}(X_t)+\operatorname{var}(X_s)-2\operatorname{cov}(X_t,X_s)=t+s-2\operatorname{cov}(X_t,X_s)=t-s$ so that $\operatorname{cov}(X_t,X_s)=\min(s,t)=s$
+
+By discarding a negligible set, we may, and often will, consider that all paths of $B$ are continuous.
+
+
+\begin{definition}
+	Consider $\mathcal{C}\left(\mathbb{R}^{+}, \mathbb{R}\right)$ the space of continuous function from  $\mathbb{R}^{+}$ to $\mathbb{R}$ and $(\Omega, \mathcal{F}, \mathbb{P})$ a probability space. Brownian motion is the application
+	\begin{align*}
+		B: \Omega &\rightarrow C\left(\mathbb{R}^{+}, \mathbb{R}\right)\\
+		\omega : &\mapsto \left(t \mapsto B_{t}(\omega)\right)\\
+	\end{align*}
+The Wiener measure (or Brownian law of motion), often noted $W(\mathrm{d} \omega)$, is the image measure of $\mathbb{P}(\mathrm{d} \omega)$ by this application $B$. In other words, it is the probability measure $W$ on $\mathcal{C}\left(\mathbb{R}^{+}, \mathbb{R}\right)$ as for every
+	$A \subset \mathcal{C}\left(\mathbb{R}^{+}, \mathbb{R}\right)$
+	\[
+	W(A)=\mathbb{P}\left(\left(B_{t}\right)_{t \geq 0} \in A\right)
+	\]
+\end{definition}
+
+
+\begin{definition}
+
+	A family $\left(\mathcal{F}_{t}\right)_{t \geq 0}$  of sub $\sigma$-algebras of $\mathcal{A}$ is a filtration of the space $(\Omega, \mathcal{A}, \mathbb{P})$ if
+	\[
+	\mathcal{F}_{s} \subset \mathcal{F}_{t}, \quad 0 \leq s \leq t
+	\]
+	The space $\left(\Omega, \mathcal{A},\left(\mathcal{F}_{t}\right)_{t \geq 0}, \mathbb{P}\right)$ is then called a filtred probability space.
+	We denote $\mathcal{F}_{\infty}:=\sigma\left(\mathcal{F}_{t}: t \geq 0\right) .$ If each $\sigma$-algebra $\mathcal{F}_{t}$ contains the subset of null measure $\mathcal{F}_{\infty},$ the filtration is called complete. We define the $\sigma$-algebra:
+	\[
+	\mathcal{F}_{t+}:=\bigcap_{\varepsilon>0} \mathcal{F}_{t+\varepsilon}
+	\]
+	Then $\left(\mathcal{F}_{t+}\right)_{t \geq 0}$ is a new filtration. We say that the filtration  $\left(\mathcal{F}_{t}\right)_{t \geq 0}$ is continuous at right side if $\mathcal{F}_{t+}=\mathcal{F}_{t}$ for all $t \geq 0 $. We call a filtration that is complete and right continuous ``usual condition".
+\end{definition}
+We can always get the complete case by replacing $\mathcal{F}_{t}$ by $\bar{\mathcal{F}}_{t}:=\sigma\left(\mathcal{F}_{t}, \mathcal{N}\right),$ where $\mathcal{N}$ is the classe of negligeable subsets of  $\mathcal{F}_{\infty} .$ Furthermore notice that $\left(\mathcal{F}_{t+}\right)_{t \geq 0}$ is the smallest right continuous filtration containing $\left(\mathcal{F}_{t}\right)_{t \geq 0} .$
+We will then consider the standard obtened filtration of the Brownian motion.
+\begin{definition}
+	A process $X$ is adapted to a filtration $\left(\mathcal{F}_{t}\right)_{t \geq 0}$ if $X_{t}$ is $\mathcal{F}_{t}$ mesureable for all $t \geq 0$ .And is said ``progressive" (progressively mesurable) if for any $t \geq 0,(s, \omega) \mapsto X_{s}(\omega)$ is measurable on the product $[0, t] \times \Omega$ with the $\sigma-$algebra: $\mathcal{B}([0, t]) \otimes \mathcal{F}_{t}$
+\end{definition}
+
+\section{Semimartingale}
+\begin{definition}
+	Let us consider a an adapted process to a filtration ($\left.\mathcal{F}_{t}\right)_{t \geq 0},$ and where each $X_t$ are integrable.
+	We say that X is a martingal with respect to $\left(\mathcal{F}_{t}\right)_{t \geq 0},$ if  $\mathbb{E}[X_{t} | \mathcal{F}_{s}]=X_{s}$ for all $0 \leq s \leq t$.
+
+	Then a martingale is a stochastic process where the prediction of the trajectory at the time  with respect to the past time $ s $ is simply the trajectory at the time $ s $.
+\end{definition}
+	\begin{definition}
+		A random variable $\tau: \Omega \rightarrow[0,+\infty]$ is called a stopping time if $\{\tau \leq t\} \in \mathcal{F}_{t}$ for all $t \geq 0$
+	\end{definition}
+
+	The intuition behind the definition is that at any particular time $t$ for a certain phenomena, you can look so far in the time and tell if it is time to stop regarding the phenoma occuring.
+	An example in real life might be the time at which a gambler leaves the gambling table, which might be a function of their previous winnings (for example, he might leave only when he goes broken), but he can't choose to go or stay based on the outcome of games that haven't been played yet.
+
+
+	\begin{definition}
+
+		A process $X$ is a local martingale, with respect to a filtration ( $\mathcal{F}_{t}$ ). if there exists an increasing sequence of stopping times $\tau_{n}$ such that $\tau_{n} \underset{n \rightarrow+\infty}{\longrightarrow}+\infty$
+		a.s. and $\left\{X\left(t \wedge \tau_{n}\right), t \geq 0\right\}$ is an
+		$\left(\mathcal{F}_{t}\right)$-martingale for all $n$.
+
+	\end{definition}
+	\begin{theorem}
+		Let $M$ be a local martingale. Then there is a unique continuous and adapted growing process called the quadratic variation of $M$ and written $\left(\langle M, M\rangle_{t}\right)_{t \geq 0}$ such that $M^{2}-\langle M, M\rangle$ is a local martingale. In addition, if $0=t_{0}^{k}<t_{1}^{k}<\cdots<t_{p_{k}}^{k}=t$
+		is a series of nested subdivisions of the interval $[0, t]$ of steps tends towards 0 when $k \rightarrow \infty,$ we have the following probability convergence :
+		\[ \langle M, M\rangle_{t}=\lim _{k \rightarrow \infty} \sum_{i=1}^{p_{k}}\left(M_{t_{i}^{k}}-M_{t_{i-1}^{k}}\right)^{2} \]
+	\end{theorem}
+
+
+	\begin{definition}
+		A continuous stochastic process $X_t$ is said to have finite variation if there is a signed measure (ie. difference between two positives measures) $\mu$ such that $X_t(\omega)=\mu([0, t])$ for all $t \in[0, T]$ and almost every $\omega$.
+	\end{definition}
+
+	The measure $\mu$ is then determined in a unique way : the expression $\mu(0, t)=X_t(\omega)-X_s(\omega)$ determines it only on the family of intervals $]s, t]$ And then , because it is a monotone class , $\mathcal{B}([0, T]) .$ Moreover, $F$ being continuous, $\mu$ has no atomes.
+
+\begin{proposition}
+Brownian motion is a process with infinite variation almost everywhere.
+\end{proposition}
+\begin{proof}
+	We restrict ourselves to the more simple time interval $[0,1]$.
+	We fix $C>0$ and let us consider:
+	$$
+	A_{n}=\left\{w: \exists s \text { t.q. }\left|B_{t}-B_{s}\right| \leq 2 C|t-s| \text { if }|t-s| \leq 2 / n\right\}
+	$$
+	The $A_ {n}$ form an increasing sequence of events whose union $A$ contains the set of trajectories having at some point a derivative lower in absolute value than $ C. $ Let us define the random variables
+	$$
+	Y_{k}=\max \left(\left|B_{k+2 / n}-B_{k+1 / n}\right|,\left|B_{k+1 / n}-B_{k / n}\right|,\left|B_{k / n}-B_{k-1 / n}\right|\right)
+	$$
+If $s$ is at a distance of 0 and 1 greater than $1/n,$ we can choose $k$ as the largest integer such as $k/n \leq s $ and then show that $A_{n}$ is included in the set
+	$$
+	B_{n}=\left\{w: \text { at least one } Y_{k} \leq \frac{6 C}{n}\right\}=\bigcup_{k=1}^{n-2}\left\{Y_{k} \leq \frac{6 C}{n}\right\}
+	$$
+	(The case where $ s $ is at a distance of 0 or 1 less than $1/n$ is treated in a similar way).
+	It remains to show that $\mathbb{P} \left(B_{n} \right) $ tends to $0.$ Or,
+	$$
+	\begin{aligned}
+	P\left(B_{n}\right) &\left.=\mathbb{P}\left(\bigcup_{k=1}^{n-2}\left\{Y_{k} \leq \frac{6 C}{n}\right\}\right) \leq n \mathbb{P}\left(Y_{1} \leq \frac{6 C}{n}\right\}\right) \\
+	&\left.\leq n\left(\mathbb{P}\left(\left|B_{1 / n}\right| \leq 6 C / n\right\}\right)\right)^{3} \\
+	&=n\left(\frac{\sqrt{n}}{\sqrt{2 \pi}} \int_{-6 C / n}^{6 C / n} e^{-n x^{2} / 2} d x\right)^{3} \\
+	&=n\left(\frac{1}{\sqrt{2 \pi n}} \int_{-6 C}^{6 C} e^{-x^{2} / 2 n} d x\right)^{3}=\mathcal{O}\left(n^{-1 / 2}\right)
+	\end{aligned}
+	$$
+	Then we get, $\lim _{n \rightarrow+\infty} \mathbb{P}\left(A_{n}\right)=0$ and then $\mathbb{P}(A)=0$
+\end{proof}
+
+\begin{theorem} \label{thm:finit_var_martingale}
+		Let $M$ be a local (continuous) martingal starting from $0$.Then if $M$ a finite variation process, $M$ is equivalent to $0.$
+\end{theorem}
+
+	If $M$ and $N$ are two local martingals we get their hook product by a polarisation :
+	$$
+	\langle M, N\rangle_{t}=\frac{1}{2}\left(\langle M+N, M+N\rangle_{t}-\langle M, M\rangle_{t}-\langle N, N\rangle_{t}\right)
+	$$
+	\begin{definition}
+		A process $X=\left(X_{t}\right)_{t \geq 0}$ is a continous semimartingal if it can be written as $X_{t}=X_{0}+M_{t}+A_{t}$ where $M$ is a local martingal starting from $0$, $A$ is a finite variation process.
+	\end{definition}
+	Thanks to the theorem \eqref{thm:finit_var_martingale}, the decomposition is unique modulo an equivalent process. If $Y_{t}=Y_{0}+M_{t}^{\prime}+A_{t}^{\prime}$ is another continuous semimartingale, we should have
+\[ 	\langle X, Y \rangle_{t}:= \langle M, M^{\prime}\rangle_{t}, \]
+	in particular, $\langle X, X \rangle_{t}= \langle M, M \rangle_{t}$
+	.
+\section{Stochastic integral}
+	For complex-valued measurable adapted processes $X,$ on $R^d$ we want to introduce the integrals $\int_{a}^{b} X(t) \diff t$ and $\int_{a}^{b} X(t) \diff B_{j}(t)$ for $b \geq a \geq 0, j=1, \ldots, d .$ These
+	two integrals will define $\mathcal{F}_{b}$ -measurable random variables, up to equivalence. The integrals will not change if the integrand process $X$ is replaced with a process $X^{\prime}$ such that $X^{\prime}(t, \omega)=X(t, \omega)$ almost everywhere with respect to ``Lebesgue measure". Therefore two complex measurable adapted processes $X$ and $X^{\prime}$ are called equivalent if $X^{\prime}(t, \omega)=X(t, \omega)$ almost everywhere with respect to ``Lebesgue measure" $\otimes \mathbb{P},$ that is if
+	\[
+	\mathbb{P}\left[\int_{0}^{+\infty}\left|X(t)-X^{\prime}(t)\right| \diff t=0\right]=1
+	\]
+	We can see that if $X^{\prime}$ is a measurable modification of $X,$ then $X^{\prime}$ is equivalent to $X$
+	\begin{definition}
+
+		$\mathcal{M}^{p}$ is the linear space of the (equivalence classes of) progressively measurable complex processes $X$ such that
+		$
+		\int_{0}^{t} \mathbb{E}\left[|X(s)|^{p}\right] \mathrm{d} s<+\infty, \quad \forall t \geq 0
+		$
+	\end{definition}
+
+
+\begin{definition}
+
+		$\mathcal{L}^{p}$ is the linear space of the (equivalence classes of) progressively measurable complex processes $X$ such that
+		$
+		\mathbb{P}\left[\int_{0}^{t}|X(s)|^{p} \mathrm{d} s<+\infty\right]=1, \quad \forall t \geq 0
+		$
+
+\end{definition}
+
+	Of course $\mathcal{M}^{p} \subset \mathcal{L}^{p},$ and for $p<p^{\prime}$ we have $\mathcal{M}^{p^{\prime}} \subset \mathcal{M}^{p}$ and $\mathcal{L}^{p^{\prime}} \subset \mathcal{L}^{p} .$ As usual,
+	we do not distinguish between an equivalence class and a single representative of the class.
+
+	When $X \in \mathcal{L}^{1},$ by the definition of $\mathcal{L}^{1},$ the trajectories of $X$ are Lebesgue measurable and there exists a set $\Omega_{T}$ such that $\mathbb{P}\left(\Omega_{T}\right)=1$ and $\int_{t_{0}}^{T}|X(s, \omega)| d s<+\infty$ for $\omega \in \Omega_{T} .$ Moreover, by the continuity of the usual integrals over time, the function $\left[t_{0}, T\right] \ni t \mapsto \int_{t_{0}}^{t} X(s, \omega) \mathrm{d} s$ is continuous for $\omega \in \Omega_{T} .$ By Fubini theorem, $\omega \mapsto \int_{t_{0}}^{t} X(s, \omega) \mathrm{d} s$ is an a.s. finite measurable function $\left(t \geq t_{0}\right) .$ By usual hypotheses, we have that $\Omega_{T} \in \mathcal{F}_{0} \subset \mathcal{F}_{t} ;$ then, we can modify the definition of this integral over time by taking it to be zero on $\Omega_{T}^{c}$ and in this way we obtain a process which is $\left(\mathcal{F}_{t}\right)$-adapted, finite everywhere and continuous as a function of $t .$
+
+	Note that the $\mathcal{F}_{t}$-measurability of our integral neSDE the progressive character of $X $; adaptedness and measurability would imply only that the integral is a.s. equal to a random variable having this property. When $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), \mathbb{P}\right)$ satisfies the usual conditions, as we assume, and $X \in \mathcal{L}^{1}$ by $t \mapsto \int_{t_{0}}^{t} X(s) \mathrm{d} s$ we always mean a (everywhere defined) continuous, adapted (and, so, progressive) version of the process.
+
+	When $X \in \mathcal{M}^{1},$ the mean value of the integral exists and, thanks to the joint
+	$(t, \omega)$ -measurability and Fubini theorem,
+	\[
+	\mathbb{E}\left[\int_{t_{0}}^{t} X(s) \mathrm{d} s\right]=\int_{t_{0}}^{t} \mathbb{E}[X(s)] \mathrm{d} s
+	\]
+
+	We will then see a definition of stochastic integral that is analogic to Riemman integral in analysis for a particular class of integrands with respect to the Brownian motion (we will here understand why it is also called Wiener measure).
+
+	\begin{definition}
+		A process $G$ is said to be simple if there exist a sequence of times $0=t_{1}<t_{2}<\cdots$ (without finite limit points) and a sequence of random variables $G_{1}, G_{2}, \ldots$ such that $G_{\alpha}$ is $\mathcal{F}_{t_{\alpha}}$-measurable and $G(t)=\sum_{\alpha=1}^{+\infty} G_{\alpha} 1_{\left[t_{\alpha}, t_{\alpha+1}\right)}(t) .$
+	\end{definition}
+
+	We will now define some integrals with respect to class processes that we have introduced before . For all what is following we will denote :$(H \cdot M)_{t}=\int_{0}^{t} H_{s} d M_{s}$
+
+	\begin{definition}
+		Let A be a finite variation process and $H$ progessive process such that:
+		$$
+		\forall t \geq 0, \forall \omega \in \Omega, \quad \int_{0}^{t}\left|H_{s}(\omega)\right|\left|d A_{s}(\omega)\right|<+\infty
+		$$
+		Then the process $H \cdot A$ is defined
+		$$
+		(H \cdot A)_{t}(\omega):=\int_{0}^{t} H_{s}(\omega) d A_{s}(\omega)
+		$$
+		is also a finite variation process
+	\end{definition}
+
+	We can extend the previous definitions to integrals in $\mathbb{R}_{+}$ assuming that $ f  $ is $ d F $ -integrable. In particular, we can define $ \int_ {0} ^{+\infty} f(s) dF(s)$ for any function $ f $ such as
+	 \[ \int_{0}^{+\infty}|f (s)||dF(s)| = \sup_{T> 0}\int_ {0}^{T} |f(s)||dF(s)|<+\infty \]
+	Note that the function $t\mapsto \int_{0}^{t}f(s)dF(s)$ is also at finite variation. The associated measure is then simply $\mu^{\prime}(d s)=f(s)\mu(d)$ and its canonical decomposition is
+	$$
+	\left(\int_{0}^{t} f^{+}(s) d F^{+}(s)+\int_{0}^{t} f^{-}(s) d F^{-}(s)\right)-\left(\int_{0}^{t} f^{-}(s) d F^{+}(s)+\int_{0}^{t} f^{+}(s) d F^{-}(s)\right)
+	$$
+
+	\begin{proof}
+		According to this $H \cdot A $ has finite variations. It therefore remains only to justify that $ H \cdot A $ is suitable. %todo what is suitable
+		To do this, it suffices to see that, if $ h: [0, t] \times \Omega \rightarrow \mathbb{R} $ is measurable for the product tribe $ \mathcal{B} ([0, t]) \otimes \mathcal{F} _ {t} $ and if $ \int_ {0}^{t} | h (s, \omega) | \left | dA_ {s} (\omega) \right | $ is finite for all $ \omega, $ then the variable $ \int_ {0}^{t} h (s, \omega) d A_ {s} (\omega) $ is $ \mathcal{F}_{t}$-
+		measurable (By Fubini).\\
+		First, for $ h (s, \omega) = 1_ {]u, v]} (s) 1_ {\Gamma} (\omega) $with $u, v\subset [0, t] $ and $ \Gamma \in \mathcal{F}_{t}, $ we have
+		$$
+		\int_{0}^{t} h(s, \omega)dA_ {s} (\omega) = \left (A_ {v}(\omega)-A_{u}(\omega) \right) \mathbf{1}_{\Gamma} (\omega)
+		$$
+		which is clearly $ \mathcal{F}_{t}$-measurable since $\left(A_{t}\right)_{t \geq 0} $ is adapted and $ \Gamma \in \mathcal{F}_{t} $
+		By a monotonous class argument, like $ \left\lbrace  ]u, v] \times \Gamma, ]u, v] \subset [0, t]: \Gamma \in \mathcal{F}_{t} \right\rbrace  $ engender $\mathcal{B}([0, t]) \otimes \mathcal{F}_{t}, $ we justify that for $h=1_ {G}, G \in \mathcal{B} ([0, t]) \otimes \mathcal{F}_{t}, \int_{0}^{t} h(s, \omega)dA_{s}(\omega)$ is
+		again $\mathcal{F}_{t} $-measurable.
+	\end{proof}
+	\begin{theorem}
+		Let $M$ be a local martingal starting from 0. For all $H \in L^{2}(M),$ there existe a unique local martingale starting from $0$ $H \cdot M .$ Moreover the local martingal $H \cdot M$ is caracterised by :
+		$$
+		\langle H \cdot M, N\rangle= H \cdot\langle M, N\rangle
+		$$
+		For any local martingal $N$
+	\end{theorem}
+	\begin{definition}
+		(Integral with respect to a semimartingal) Let $X=X_{0}+M+A$ Be a continuous semimartingal, and let $H$ be a bounded progressive process . The stochastic integral $H \cdot X$ is then defined by:
+		$$
+		H \cdot X=H \cdot M+H \cdot A
+		$$
+	\end{definition}
+
+\section{Itô's formula}
+	\begin{theorem}
+		(Itô's formula)
+		Let $X$  be a semimartingal and $F: \mathbb{R} \rightarrow \mathbb{R}$ a function of class $C^{2} .$ then
+		$$
+		F\left(X_{t}\right)=F\left(X_{0}\right)+\int_{0}^{t} F^{\prime}\left(X_{s}\right) d X_{s}+\frac{1}{2} \int_{0}^{t} F^{\prime \prime}\left(X_{s}\right) d\langle X, X\rangle_{s}
+		$$
+		And if we considere $d$ continous semimartingales $X^{1}, \ldots, X^{d}$ et $F: \mathbb{R}^{d} \rightarrow \mathbb{R}$ of class $C^{2}$ then,
+		$$
+		\begin{aligned}
+		F\left(X_{t}^{1}, \ldots, X_{t}^{d}\right)=& F\left(X_{0}^{1}, \ldots, X_{0}^{d}\right)+\sum_{i=1}^{d} \int_{0}^{t} \frac{\partial F}{\partial x_{i}}\left(X_{s}^{1}, \ldots, X_{s}^{d}\right) d X_{s}^{i} \\
+		&+\frac{1}{2} \sum_{i, j=1}^{d} \int_{0}^{t} \frac{\partial^{2} F}{\partial x_{i} \partial x_{j}}\left(X_{s}^{1}, \ldots, X_{s}^{d}\right) d\left\langle X^{i}, X^{j}\right\rangle_{s}
+		\end{aligned}
+		$$
+	\end{theorem}
+
+
+	\begin{corollary}
+		(Integration by parts) If $X$ and $Y$ are two continuous semimartingals, we have
+		$$
+		X_{t} Y_{t}=X_{0} Y_{0}+\int_{0}^{t} X_{s} d Y_{s}+\int_{0}^{t} Y_{s} d X_{s}+\langle X, Y\rangle_{t}
+		$$
+		The term $\langle X, Y\rangle$ is zero if $X$ or $Y$ has finite variation.
+	\end{corollary}
+
+	It is present when we consider (true) semimartingales and this additional term testifies to the difference between stochastic calculus and deterministic differential calculus.
+
+	\begin{theorem}\label{thm:condition_Brownian_motion}
+		Let $B(t), t \geq 0,$ be a continuous d-dimensional adapted real pro-
+		cess defined in a stochastic basis $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), \mathbb{P}\right) .$ Let us assume that $B(0)=0$ and that the complex process $\operatorname{exp}\left\{\mathrm{i} \sum_{j} \lambda_{j} B_{j}(t)+\frac{1}{2}|\lambda|^{2} t\right\}$ is a martingale for all
+		$\lambda \in \mathbb{R}^{d} .$ Then, $B$ is a d-dimensional Wiener process with respect to $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), \mathbb{P}\right)$
+		If $B$ is not continuous, but the stochastic basis satisfies usual conditions, then there
+		is a continuous modification of $B$ which is a Wiener process.
+	\end{theorem}
+	\begin{proof}
+		The martingale property
+		$$
+		\mathbb{E}\left[\exp \left\{\mathrm{i} \sum_{j} \lambda_{j} B_{j}(t)+\frac{1}{2}|\lambda|^{2} t\right\} | \mathcal{F}_{s}\right]=\exp \left\{\mathrm{i} \sum_{j} \lambda_{j} B_{j}(s)+\frac{1}{2}|\lambda|^{2} s\right\}
+		$$
+		can be rewritten as
+		$$
+		\mathbb{E}\left[\exp \left\{\mathrm{i} \sum_{j} \lambda_{j}\left(B_{j}(t)-B_{j}(s)\right)\right\} | \mathcal{F}_{s}\right]=\exp \left\{-\frac{1}{2}|\lambda|^{2}(t-s)\right\}
+		$$
+	\end{proof}
+
+	Most continuous processes important in practice satisfying an equation of the form
+	$$
+	X_{t}=x_{0}+\int_{0}^{t} b\left(s, X_{s}\right) d s+\int_{0}^{t} \sigma\left(s, X_{s}\right) d B_{s}
+	$$
+
+	or in a differential form,
+
+	$$
+	\left\{\begin{array}{l}
+	{d X_{t}=b\left(t, X_{t}\right) d t+\sigma\left(t, X_{t}\right) d B_{t}} \\
+	{X_{0}=x_{0}}
+	\end{array}\right.
+	$$
+
+	As we saw with Itô's formula, there is a close link between probability theory and the older ones of partial differential equations, and this type of stochastic differential equation (DHS) above allows you to switch from one to the other. To illustrate our point, we will first introduce three classic SDE and show how their solutions can be found by simple methods. On the other hand, as soon as the equation is made a little more complex, as in the deterministic case, it turns out that these resolution methods are no longer accessible and then the questions of existence and uniqueness of these solutions arise.
+
+	Let's start with one of the most known SDE:
+	$$
+	\left\{\begin{array}{l}
+	d X_{t}=\mu X_{t} d t+\sigma X_{t} d B_{t} \\
+	X_{0}=x_{0}>0
+	\end{array}\right.
+	$$
+	where the constants $\mu$ and $\sigma$ are in $\mathbb{R}$ et $(0, \infty),$ respectivly. To solve this SDE, we will use the Itô formula and look for a solution of the form $X_{t}=f\left(B_{t}, t\right)$
+
+	Then we get:
+	$$
+	d X_{t}=f_{x}\left(B_{t}, t\right) d B_{t}+\left(\frac{1}{2} f_{x x}\left(B_{t}, t\right)+f_{t}\left(B_{t}, t\right)\right) d t
+	$$
+	where $f_{x}$ et $f_{t}$ are the first derivatives of $f$ in respectivly space and time and $f_{x x}$ is the second derivative in space. By identifying the coefficients, we have:
+	$$
+	\left\{\begin{array}{l}
+	\mu f(x, t)=\frac{1}{2} f_{x x}(x, t)+f_{t}(x, t) \\
+	\sigma f(x, t)=f_{x}(x, t)
+	\end{array}\right.
+	$$
+	A solution of the second equation is of the form $f(x, t)=\exp (\sigma x+g(t)),$ where $g$ is an arbitrary function. So, by reinjecting it into the first equation, we find that
+	$g$ has to satisfy $g^{\prime}(t)=\mu-\sigma^{2} / 2 .$ As a result, an SDE solution is
+	$$
+	X_{t}=x_{0} \exp \left(\sigma B_{t}+\left(\mu-\frac{\sigma^{2}}{2}\right) t\right)
+	$$
+	For the moment, we must admit that there may be other solutions to this SDE. We will see later that in fact it is the only solution. This process, commonly called geometric Brownian motion, is one of the most used in stochastic calculus, and in particular in finance and economics (this is the famous BlackScholes model). Regarding this process, we note a strange phenomenon: we have $\mathbb{E}\left[X_{t}\right]=x_{0} e^{\mu t}$ while as a.s., $B_{t} / t \rightarrow 0$ when $t \rightarrow \infty,$ we show that a.s., $X_{t} \rightarrow 0$ in the case where $\sigma^{2}>2 \mu: X_{t}$ tend a.s. towards 0 whereas on average it tends towards infinity very quickly, at an exponential speed.
+
+	This SDE is a particular easy case of a more general class of SDE where we can get a theorem of existence and unicity of solution that is close to Cauchy-Lipschitz in ODE. Further material on this topic is cover in Appendix \ref{Appendix: A}.
+%
+%	The objective of this last paragraph is to study how the notions of semimartingales and martingales transform when we replace the generic probability $\mathbb{P}$ by an absolutely continuous probability $\mathbb{Q}$ with respect to $\mathbb{P}$. We remind that $\mathcal{F}_{\infty}:=\sigma\left(\mathcal{F}_{t}: t \geq 0\right)$ let's start by giving two lemmas that would be useful further.
+%
+%	\begin{lemma}
+%		Let $\mathbb{Q}$
+%		an absolutely continuous probability on $\mathcal{F}_{\infty}$ with respect to $\mathbb{P}$,of Radon-Nikodym derivative $d\mathbb{Q}/d \mathbb{P} .$ For all $t \in[0, \infty),$ we denote $D_{t}$ the restriction of
+%		$d \mathbb{Q} / d \mathbb{P}$ to the $\sigma$-algebra $\mathcal{F}_{t},$ that we suppose continuous:
+%		\\(i) The process $D$ is a $\mathbb{P}$ -martingale continuous et uniformemly integrable.
+%		\\(ii) For any stopping time $\tau, D_{\tau}$ is de restriction of $d\mathbb{Q}/d\mathbb{P} $ to the $\sigma$-algebra $\mathcal{F}_{\tau}$.
+%		\\(iii) if we assume that the two probabilities are equivalent, i.e. $\mathbb{P}$ is also an absolutely continuous probability with respect to $\mathbb{Q},$ then a.s. $D_{t}>0$ for any $t\geq0$
+%	\end{lemma}
+%
+%	\begin{lemma}
+%		Let $D$ be a strictly positive local martingale. So there is a
+%		unique local martingale $L$ such as
+%		$$
+%		D=\exp \left(L-\frac{1}{2}[L, L]\right)=\mathscr{E}(L)
+%		$$
+%		In addition, the process $ L $ is given by the formula
+%		$$
+%		L_{t}=\log \left(D_{0}\right)+\int_{0}^{t} \frac{d D_{s}}{D_{s}}, \quad t \geq 0
+%		$$
+%
+%	\end{lemma}
+%	\begin{proof}
+%		Uniqueness is a consequence of Theorem 2.23 . For existence, it suffices to apply the formula of Itô to the logarithm function, the process $D$ being strictly positive. Note that it is useless to get tired of calculating the hook $[D,D]$ because $L$ defined as above satisfies $d[L,L] = d[D,D]/D^{2}$
+%	\end{proof}

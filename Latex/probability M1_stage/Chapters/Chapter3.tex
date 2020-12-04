@@ -1,0 +1,267 @@
+% !TeX spellcheck = en_US
+\chapter{Quantum Mechanics}
+%Some mathematical materials concerned in our discussions such as well-known theorems and tricky proof are placed in the Appendix \ref{Appendix: A} to make things go smoothly.
+%\section{Formulation of quantum mechanics}
+%Quantum mechanics can be regarded as a general theoretical framework for physical theories. It consist out of a mathematical core which becomes a physical theory when adding a set of correspondence rules telling us which mathematical objects we have to use in different physical situations. In contrast to classical physical theories, these correspondence rules are not very intuitive as linear operators on Hilbert spaces are quite far from everyday life.
+
+%After introducing basic notations and all assumptions needed, we could focus on questions promoted from this form and dive into a safe area consisting of only mathematical theory. Our formulation determines what we could ask and how to answer them.
+
+We discuss two statistic formulations of Schrödinger equation in quantum mechanics, linear and non-linear form, separately in the first section and the third section.
+%We aim at proving the existence and uniqueness of solutions to ``stochastic master equation'', which can be formulated either in linear or non-linear form.
+The former, as we may deduce from the word ``linear'', behaves well in theory but appears indirect in intuitive explanation; the non-linear one, called stochastic master equation in physical literature, does the opposite. In the second section, we apply results from previous chapter to study the existence and uniqueness of solution to the linear stochastic master equation.
+%It is often useful to divide physical experiments into two parts: preparation and measurement. This innocent looking step already covers one of the basic differences between the quantum and the classical world, as in classical physics there is no need to talk about measurements in the first place. The preparation of a quantum system is the set of actions which determines all probability distributions of any possible measurement. It has to be a procedure which, when applied to a statistical ensemble, leads to converging relative frequencies and thus allows us to talk about probabilities. Since many different preparations can have the same effect in the sense that all the resulting probability distributions coincide it is reasonable to introduce the concept of a state, which specifies the effect of a preparation regardless of how it has actually been performed. Note that, in contrast to classical mechanics, a quantum mechanical `state' does not refer to the attributes of an individual system but rather describes a statistical ensemble---the effect of a preparation in a statistical experiment. Although it is quite common, one should neither assign states to single events nor interpret them as elements of reality.
+
+
+\section{The Linear Stochastic Master Equation}
+
+We identify linear operators in finite dimension with their matrix representation. The trace of an operator $A$ is $\operatorname{Tr}\{A\}=\sum_{i} A_{i i},$ which does not depend on the chosen basis. Recall that, for every $a, b \in \mathbb{C}$, \[ \operatorname{Tr}\{a A+b B\}=a \operatorname{Tr}\{A\}+b \operatorname{Tr}\{B\}, \quad \operatorname{Tr}\{A B\}=\operatorname{Tr}\{B A\} \]
+
+Let us denote by $\mathcal{S}(\mathcal{H})$ the set of all statistical operators on a finite vector space $\mathcal{H}$ :
+\[ \mathcal{S}(\mathcal{H}):=\left\{\text { all operators } \rho \text { on } \mathcal{H} \text { such that: } \rho^{*}=\rho, \rho \geq 0, \operatorname{Tr}\{\rho\}=1\right\}. \]
+
+\begin{assumption}\label{assump:state}
+	The initial state is a statistical operator $\rho_{0} \in \mathcal{S}(\mathcal{H})$, where $\mathcal{H} \equiv \mathbb{C}^{n}$.
+\end{assumption}
+The initial state depends on the way the system has been experimentally prepared and it determines the probability distributions of every measurement performed on the system.. To introduce the linear stochastic master equation, we give the restrictions on its coefficients in the next assumption. We define the commutator $ [A,B] := AB - BA $ and anti-commutator
+$ \{A, B\} := AB + BA$. And we use the operator norm,
+\begin{equation}\label{def:operator_norm}
+	\|A\| \equiv\|A\|_{\infty}:=\sup _{\psi \in \mathcal{H}:\|\psi\|=1}\|A \psi\|.
+\end{equation}
+
+\begin{assumption}\label{assump:condition}
+	 The process $W$ is a continuous $m$-dimensional Wiener process in a stochastic basis $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), \mathbb{Q}\right)$ satisfying usual conditions and $\mathcal{F}=\mathcal{F}_{\infty}:=\bigvee_{t \geq 0} \mathcal{F}_{t} $; $ W $ has increments independent of the past. The maps $\mathcal{R}_{j}(t), \mathcal{L}(t)$ are linear operators over the space $M_{n}$ of $n \times n$ complex matrices $\tau$ with the structure
+	\[ \begin{array}{c}\mathcal{R}_{j}(t)[\tau]=R_{j}(t) \tau+\tau R_{j}(t)^{*} \\ \mathcal{L}(t)=\mathcal{L}_{0}(t)+\mathcal{L}_{1}(t)\end{array}, \] where
+	\[ 	\mathcal{L}_{1}(t)[\tau]=\sum_{j=1}^{m}\left(R_{j}(t) \tau R_{j}(t)^{*}-\frac{1}{2}\left\{R_{j}(t)^{*} R_{j}(t), \tau\right\}\right) \] \[ \mathcal{L}_{0}(t)[\tau]=-\mathrm{i}[H(t), \tau]+\sum_{j=m+1}^{d}\left(R_{j}(t) \tau R_{j}(t)^{*}-\frac{1}{2}\left\{R_{j}(t)^{*} R_{j}(t), \tau\right\}\right)  \]
+	The coefficients $R_{j}(t), H(t)$ are (non-random) linear operators on $\mathcal{H} \equiv \mathbb{C}^{n}$ and $H(t)=H(t)^{*} $. The functions $t \mapsto H(t)$ and $t \mapsto R_{j}(t)$ are measurable and such that $\forall T \in(0,+\infty)$,
+	\begin{equation}\label{cond:bounded}
+	\quad \sup _{t \in[0, T]}\|H(t)\|<+\infty, \quad \sup _{t \in[0, T]}\left\|\sum_{j=1}^{d} R_{j}(t)^{*} R_{j}(t)\right\|<+\infty .
+	\end{equation}
+\end{assumption}
+
+The linear stochastic master equation is defined as, for an operator-valued process $\sigma:$
+\begin{equation}
+\left\{\begin{array}{l}\diff \sigma(t)=\mathcal{L}(t)[\sigma(t)] \diff t+\sum_{j=1}^{m} \mathcal{R}_{j}(t)[\sigma(t)] \diff W_{j}(t) \\ \sigma(0)=\rho_{0} \in \mathcal{S}(\mathcal{H})\end{array}\right.
+\label{eq:linear_master_SDE},
+\end{equation}
+where $ m $ and $ d $ are two positive integers and $ m \le d $.
+
+They are the only two assumptions needed in our discussion and here we collect their heuristic interpretation in theory of continuous measurements.
+\begin{itemize}
+	\item $\rho_{0}$ is the initial state of the quantum system;
+	\item $(\Omega, \mathcal{F})$ is the measurable space of the possible outcomes of our experiment;
+	\item $\mathcal{F}_{t}$ is the collection of events verifiable already at time $t$;
+	\item the $m$ stochastic processes $W_{j}(t)$ are the output of the continuous measurement and their derivatives $\diff{W}_{j}(t)$ can be interpreted as instantaneous imprecise measurements of the quantum observables $R_{j}(t)+R_{j}(t)^{*}$ performed at time $t$;
+	\item the operator $H(t)$ has a role of effective Hamiltonian of the system and that the operators $R_{j}(t)$ with indexes $j=m+1, \ldots, d$ characterise the unobserved channels. On the other side we say that the operators $R_{j}(t)$ with indexes $j=1, \ldots, m,$ appearing as coefficients in the diffusive part of SDE \eqref{eq:linear_master_SDE} and in $\mathcal{L}_{1}(t),$ characterise the observed channels. If $m<d,$ that is if the Liouvillian $\mathcal{L}_{0}(t)$ is not simply Hamiltonian, we say that the measurement is incomplete.
+	\item the structure of maps $\mathcal{R}_{j}(t), \mathcal{L}(t)$ are determined by the physical probabilities that involves martingale properties.
+\end{itemize}
+
+We consider also the fundamental solution $\mathcal{A}(t, s)$ of the linear SDE \eqref{eq:linear_master_SDE}, defined by
+\begin{equation}
+	\left\{\begin{array}{l}\diff \mathcal{A}(t, s)=\mathcal{L}(t) \circ \mathcal{A}(t, s) \diff t+\sum_{j=1}^{m} \mathcal{R}_{j}(t) \circ \mathcal{A}(t, s) \diff W_{j}(t) \\ \mathcal{A}(s, s)=\mathrm{Id}_{n}\end{array}\right.
+	\label{eq:linear_master_SDEfundamental}
+\end{equation}
+ We call $\mathcal{A}(t, s)$ the stochastic evolution map or, borrowing a terminology used in theoretical physics, the propagator associated to the linear SDE.
+
+
+\section{Existence and Uniqueness of Solution to Linear Statistical SDE}
+
+%We must use the concept of completely positivity due to some physical and mathematical consideration. Consider an evolution which, in the Schrödinger picture, is described by a map $T: \mathcal{B}(\mathcal{H}) \rightarrow \mathcal{B}\left(\mathcal{H}\right) $, where $\mathcal{B} (\mathcal{H}) $ is operator space of $ \mathcal{H}$. When describing a physically meaningful evolution $T$
+%we ask $T$ to map statistical operators onto themselves is that it has to be a positive map, i.e., $T\left(A^{\dagger} A\right) \geq 0$ for all $A \in \mathcal{B}(\mathcal{H})$. Positivity alone is, however, not sufficient: consider $\mathcal{H}$ as part of a bipartite system so that the evolution of the larger system is described by $T \otimes\operatorname{id}$. That is, the additional system merely plays the role of a spectator as the evolution on this part is the trivial one. Yet $T \otimes$ id should again be a positive map---a requirement which is stronger than positivity. So the relevant condition is complete positivity of $T$ which means positivity of the map $T \otimes$ $ \operatorname{id}_n $ for all $n \in \mathbb{N}$ where $ \operatorname{id}_n $ is the identity map on $ \mathcal{B}(\mathcal{H}) $ when $ \mathcal{H} $ is of dimension $ n$. We want to mention that complete positivity does not satisfy our requirement, i.e., mapping from $ \mathcal{S}(\mathcal{H}) $ to $ \mathcal{S}(\mathcal{H}) $; we still need trace preserving at least.
+We introduce the natural two-times filtrations of $W:$
+\[  \mathcal{G}_{t}^{s}:=\sigma\left\{W_{j}(r)-W_{j}(s), r \in[s, t], j=1, \ldots, m\right\} \]
+\[ \mathcal{G}:=\bigvee_{t \geq 0} \mathcal{G}_{t}^{0}, \quad \mathcal{N}_{\mathcal{G}}:=\{A \in \mathcal{G}: \mathbb{Q}(A)=0\} \]
+\[ \bar{\mathcal{G}}_{t}^{s}:=\mathcal{G}_{t}^{s} \vee \mathcal{N}_{\mathcal{G}}  \]
+
+Let us note that
+\[ \mathcal{G} \subset \mathcal{F}, \quad \mathcal{N}_{\mathcal{G}} \subset \mathcal{N} \equiv\{A \in \mathcal{F}: \mathbb{Q}(A)=0\}, \quad \mathcal{G}_{t}^{s} \subset \bar{\mathcal{G}}_{t}^{s} \subset \mathcal{F}_{t} \] Moreover, $\left(\Omega, \mathcal{G},\left(\bar{\mathcal{G}}_{t}^{0}\right), \mathbb{Q}\right)$ is a stochastic basis satisfying usual conditions. $ \bar{\mathcal{G}}_{t}^{0}$ is the collection of events verifiable already at time $t$ which effectively regard the continuous measurement.
+\begin{theorem}
+	Under Assumptions \ref{assump:condition}, the linear stochastic master equation \eqref{eq:linear_master_SDE} admits continuous strong solutions in $[0,+\infty)$. Pathwise uniqueness and uniqueness in law hold. The solution $\sigma(t)$ of \eqref{eq:linear_master_SDE} with initial condition $\sigma(0)=\rho_{0} \in$ $\mathcal{S}(\mathcal{H})$, is non-negative. Moreover, $p(t):=\operatorname{Tr}\{\sigma(t)\}$ is a mean one $\mathbb{Q}$-martingale, it is $a.s.$ strictly positive and it can be written as  \begin{equation}\label{conclusion:expression_p(t)}
+	p(t)=\operatorname{Tr}\{\sigma(t)\}=\exp \left\{\sum_{j=1}^{m}\left[\int_{0}^{t} v_{j}(s) \diff W_{j}(s)-\frac{1}{2} \int_{0}^{t} v_{j}(s)^{2} \diff s\right]\right\}
+	\end{equation} where
+	 \begin{equation}\label{def:v(j)}
+	v_{j}(t):=\operatorname{Tr}\left\{\left(R_{j}(t)+R_{j}(t)^{*}\right) \rho(t)\right\}=2 \operatorname{Re} \operatorname{Tr}\left\{R_{j}(t) \rho(t)\right\},
+	 \end{equation}
+	 \begin{equation}\label{def:rho}
+	  \rho(t):=p(t)^{-1} \sigma(t)
+	 \end{equation}
+	The linear SDE \eqref{eq:linear_master_SDEfundamental} admits strong solutions in $(s,+\infty)$, for every $s \geq 0$. Pathwise uniqueness and uniqueness in law hold. $\mathcal{A}(t, s)$ is $ \mathbb{Q} $-independent of $\mathcal{F}_{s}, \bar{\mathcal{G}}_{t}^{s}$ measurable, positive, i.e., mapping positive matrices to positive matrices, and continuous in $t$. Moreover, for $0 \leq r \leq s \leq t$ one has $a.s.$
+	 \begin{equation}\label{conclusion:composition_fundamental_solution}
+	\mathcal{A}(t, s) \circ \mathcal{A}(s, r)=\mathcal{A}(t, r), \quad \sigma(t)=\mathcal{A}(t, 0)\left[\rho_{0}\right]
+	\end{equation}
+	The master equation
+	 \begin{equation}\label{eq:master_equation}
+	\mathcal{T}(t, s)=\mathrm{Id}_{n}+\int_{s}^{t} \mathcal{L}(r) \circ \mathcal{T}(r, s) \diff r
+	\end{equation}
+	admits a unique solution in $[s,+\infty),$ for every $s \geq 0 .$ Moreover, the solution admits the representation
+	 \begin{equation}\label{conclusion:representation_instrument}
+	\mathcal{T}(t, s)=\mathbb{E}_{\mathbb{Q}}[\mathcal{A}(t, s)]
+	\end{equation}
+	it is continuous in $t$, positive, trace preserving, and it satisfies the composition law :
+	 \begin{equation}\label{conclusion:composition_instrument}
+	\mathcal{T}(t, r)=\mathcal{T}(t, s) \circ \mathcal{T}(s, r), \quad 0 \leq r \leq s \leq t .
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	Equation \eqref{eq:linear_master_SDE} is for an $ (n \times n) $-dimensional process and \eqref{eq:linear_master_SDEfundamental} for an $ (n^2\times n^2) $-
+	dimensional one; in both cases we have finite dimensional processes. The bounds
+	 \eqref{cond:bounded} and the linearity give that the global Lipschitz condition \ref{hypo:GlobalLip} and the linear
+	growth condition \ref{hypo:LinearGrowth} hold. Then, as the measurability condition \ref{hypo:SDEclass} trivially
+	holds, Theorem \ref{thm:Main_theorem_solution} gives the existence of strong solutions and the uniqueness
+	statements for both SDEs.
+
+	By completeness, let us check in detail Hypotheses \ref{hypo:GlobalLip}
+	and \ref{hypo:LinearGrowth} for $ t \in \left[ 0, T \right]  $. We make use of following two norms, the  Hilbert-Schmidt norm:
+	\[ \|A\|_{2}:=\sqrt{\operatorname{Tr}\left\{A^{*} A\right\}}=\sqrt{\sum_{i j}\left|A_{i j}\right|^{2}} \] and the trace norm:
+	\[ \|A\|_{1}:=\operatorname{Tr}\{\sqrt{A^{*} A}\} .\]
+
+	First of all, let us note that
+	\[ \left\|\tau^{*} \tau\right\|_{1}=\left\|\tau \tau^{*}\right\|_{1}=\|\tau\|_{2}^{2}, \] which follows from the definitions of the two norms and from the positivity of $\tau^{*} \tau$ and $\tau \tau^{*}$. Moreover, for any matrix $A$ we have, recalling that $ \|A\| $ still stands for operator norm \eqref{def:operator_norm},
+	\[ \|A \tau\|_{2}^{2}=\operatorname{Tr}\left\{\tau^{*} A^{*} A \tau\right\}=\operatorname{Tr}\left\{A^{*} A \tau \tau^{*}\right\} \leq\left\|A^{*} A\right\|\left\|\tau \tau^{*}\right\|_{1}=\|A\|^{2}\|\tau\|_{2}^{2} \] so that
+
+	\[ \begin{aligned}
+	\left\|A \tau A^{*}\right\|_{2}^{2}
+	&=\operatorname{Tr}\left\{A \tau^{*} A^{*} A \tau A^{*}\right\}=\operatorname{Tr}\left\{A^{*} A \tau^{*} A^{*} A \tau\right\} \\
+	&  \leq\left\|A^{*} A \tau^{*}\right\|_{2}\left\|A^{*} A \tau\right\|_{2} \leq\left\|A^{*} A\right\|\left\|\tau^{*}\right\|_{2}\left\|A^{*} A\right\|\|\tau\|_{2}=\left\|A^{*} A\right\|^{2}\|\tau\|_{2}^{2}
+	\end{aligned} \]
+	We also set
+	\[ \ell_{T}:=\max \left(\sup _{0 \leq t \leq T}\|H(t)\|, \sup _{0 \leq t \leq T}\left\|\sum_{j=1}^{d} R_{j}(t)^{*} R_{j}(t)\right\|\right); \] by \eqref{cond:bounded}, $\ell_{T}<+\infty $. Since $\sum_{j} R_{j}(t)^{*} R_{j}(t)$ is a sum of positive operators, we have also
+	\[ \left\|R_{j}(t)\right\|^{2}=\left\|R_{j}(t)^{*} R_{j}(t)\right\| \leq \ell_{T}. \]
+
+	In the case of \eqref{eq:linear_master_SDE} the relevant norm, needed in Hypotheses \ref{hypo:GlobalLip} and \ref{hypo:LinearGrowth}, is the Hilbert-Schmidt norm. We have
+	\[ \begin{aligned}
+	\|\mathcal{L}(t)[\tau]\|_{2} &\leq 2\|H(t) \tau\|_{2}+\sum_{j=1}^{d}\left\|R_{j}(t) \tau R_{j}(t)^{*}\right\|_{2}+\left\|\sum_{j=1}^{d} R_{j}(t)^{*} R_{j}(t) \tau\right\|_{2} \\
+	&\leq 2\|H(t)\|\|\tau\|_{2}+\sum_{j=1}^{d}\left\|R_{j}(t)^{*} R_{j}(t)\right\|\|\tau\|_{2}+\left\|\sum_{j=1}^{d} R_{j}(t)^{*} R_{j}(t)\right\|\|\tau\|_{2} \\
+	&\leq(3+d) \ell_{T}\|\tau\|_{2},
+	\end{aligned} \]
+	 \[
+	 \begin{aligned}
+	 \sum_{j=1}^{m}\left\|\mathcal{R}_{j}(t)[\tau]\right\|_{2}^{2} \leq 2 \sum_{j=1}^{m}\left(\left\|R_{j}(t) \tau\right\|_{2}^{2}+\left\|\tau R_{j}(t)^{*}\right\|_{2}^{2}\right)
+	  \leq  4 \sum_{j=1}^{m}\left\|R_{j}(t)\right\|^{2}\|\tau\|_{2}^{2} \leq 4 m \ell_{T}\|\tau\|_{2}^{2}.
+	 \end{aligned} \] These two estimates imply both Hypothesis \ref{hypo:GlobalLip} and Hypothesis \ref{hypo:LinearGrowth}.
+
+	 The proof of existence and uniqueness of the solution of SDE \eqref{eq:linear_master_SDEfundamental} is completely similar and it is based on the estimates \[ \sum_{k, l=1}^{n}\|\mathcal{L}(t) \circ \mathcal{A}(t ; s)[|k\rangle\langle l|]\|_{2}^{2} \leq(3+d)^{2} \ell_{T}^{2} \sum_{k, l=1}^{n}\|\mathcal{A}(t ; s)[|k\rangle\langle l|]\|_{2}^{2}, \]
+	 \[ \quad \sum_{k, l=1}^{n} \sum_{j=1}^{m}\left\|\mathcal{R}_{j}(t) \circ \mathcal{A}(t ; s)[|k\rangle\langle l|]\right\|_{2}^{2} \leq 4 m \ell_{T} \sum_{k, l=1}^{n}\|\mathcal{A}(t ; s)[|k\rangle\langle l|]\|_{2}^{2}, \] where $\{|k\rangle\}_{k=1}^{n}$ is a basis in $\mathcal{H}$; here we use Dirac Notations to represent a vector: $ \langle\psi|=({\psi_{1}}, {\psi_{2}}, \ldots, {\psi_{n}}) $ is row complex vector and $ |\psi\rangle  $ means its conjugated transpose.
+
+	 The continuity in $t$ of $\sigma(t)$ and $\mathcal{A}(t, s)$ comes from the fact that we are working in a stochastic basis in usual hypotheses and it is included in
+	 Definition \ref{def:strong_solution_SDE} of strong solution.
+	 Because of the existence of strong solutions and pathwise uniqueness, the random variable $\mathcal{A}(t, s)$ is $\bar{\mathcal{G}}_{t}^{s}$-measurable; then, the statement about the $\mathbb{Q}$-independence of $\mathcal{F}_{s}$ follows from the independent-increment property of the Wiener process. Moreover, the two sides of the composition law in \eqref{conclusion:composition_fundamental_solution} satisfy the same SDE \eqref{eq:linear_master_SDEfundamental} for $t \leq s$ and so they are equal by the uniqueness statement of Theorem
+	 \ref{thm:Main_theorem_solution}. Analogously, $\sigma(t)$ and $\mathcal{A}(t, 0)\left[\rho_{0}\right]$ are $a.s.$ equal because they satisfy the same SDE \eqref{eq:linear_master_SDE} with the same initial condition.
+
+
+	 To prove that $ \mathcal{A}(t, s) $ is positive we need to introduce another SDE:
+	 \begin{equation}\label{eq:vertor_master_SDE}
+	 	\left\{\begin{array}{l}\diff A_{t}^{s}=K(t) A_{t}^{s} \diff t+\sum_{j=1}^{d} R_{j}(t) A_{t}^{s} \diff W_{j}(t) \\ A_{s}^{s}=\mathbb{1}\end{array}\right.
+	 \end{equation}
+	 Once the operators $H(t)$ and $R_{j}(t)$ appearing in Assumption \ref{assump:condition} have been fixed and the stochastic evolution operator $A_{t}^{s}$ solution of the SDE \eqref{eq:vertor_master_SDE} with $K(t)=-\mathrm{i}\, H(t)-\frac{1}{2} \sum_{j=1}^{d} R_{j}(t)^{*} R_{j}(t)$ has been constructed, one can check that the map $\mathbb{E}_{\mathbb{Q}}\left[A_{t}^{s} \bullet A_{t}^{s *} | \bar{\mathcal{G}}_{t}^{s}\right]$ satisfies the same SDE as $\mathcal{A}(t, s)$. Since a conditional expectation is a positive map and the same is true for a map of the type $\rho \mapsto A \rho A^{*},$ the map $\mathbb{E}_{\mathbb{Q}}\left[A_{t}^{s} \bullet A_{t}^{s *} | \bar{\mathcal{G}}_{t}^{s}\right]$ is positive. Therefore, by the uniqueness in law of the solution of the SDE \eqref{eq:linear_master_SDEfundamental} $ \mathcal{A}(t, s)$ is positive, too.
+
+	 We can see the master equation \eqref{eq:master_equation} as a particular case of SDE; by the properties of the coefficients and Theorem \ref{thm:Main_theorem_solution}, for every $s \geq 0$ the solution is pathwise unique. Moreover, by Theorem \ref{thm:Main_theorem_solution}, the mean of $\mathcal{A}(t, s)$ exists and the stochastic integral in \eqref{eq:linear_master_SDEfundamental} has mean zero, so that $\mathbb{E}_{\mathbb{Q}}[\mathcal{A}(t, s)]$ is well defined and satisfies \eqref{eq:master_equation}. For what concerns the composition law, the two sides of \eqref{conclusion:composition_instrument} satisfy the same equation with the same initial condition; they are equal by uniqueness of the solution. The continuity in $t$ follows from the integral representation \eqref{conclusion:representation_instrument}, the positivity from the same property of $\mathcal{A}(t, s)$ and the trace preserving property from the structure of any Liouville operator, which guarantees $\operatorname{Tr}\{\mathcal{L}(r)[\tau]\}=0$ for every operator $\tau .$
+
+	 The positivity of $\mathcal{A}(t, 0)$ and $\rho \geq 0,$ imply $\sigma(t) \geq 0$. By taking the trace of the linear stochastic master equation \eqref{eq:linear_master_SDE} we get  \begin{equation}\label{eq:trace_sigma(t)}
+	 \operatorname{Tr}\{\sigma(t)\}=1+\sum_{j=1}^{m} \int_{0}^{t} 2 \operatorname{Re}\left(\operatorname{Tr}\left\{R_{j}(s) \sigma(s)\right\}\right) \diff W_{j}(s)
+	 \end{equation}
+
+	 By the bound \eqref{cond:bounded} and the estimate of Theorem \ref{thm:Main_theorem_solution} for the process $\sigma,$ we have that the integrand in the equation above is in the class $\mathcal{M}^{2} ;$ therefore, the stochastic integral is a $\mathbb{Q}$-martingale by Remark \ref{rmk:ito_integral_Brownian_motion}.
+	 Let $\rho_{\star}$ be a fixed statistical operator and let us define
+	 \[ \rho(t)=\left\{\begin{array}{ll}(\operatorname{Tr}\{\sigma(t)\})^{-1} \sigma(t), & \text { if } \operatorname{Tr}\{\sigma(t)\}>0 \\ \rho_{\star}, & \text { if } \operatorname{Tr}\{\sigma(t)\}=0\end{array}\right. \] Then, \eqref{eq:trace_sigma(t)} can be written as
+	 \[ \operatorname{Tr}\{\sigma(t)\}=1+\sum_{j=1}^{m} \int_{0}^{t} \operatorname{Tr}\{\sigma(s)\} v_{j}(s) \diff W_{j}(s) \]
+	 where $v_{j}$ is given by \eqref{def:v(j)}. The solution of this Doléans equation \eqref{eq:dolean_equation} is unique and it is given by \eqref{conclusion:expression_p(t)}. Being of exponential form, it is strictly positive with probability one.
+\end{proof}
+
+
+
+
+\section{The Stochastic Master Equation}
+  Starting from the linear stochastic master equation \eqref{eq:linear_master_SDE} we introduce the physical probabilities, the \textit{a posteriori} states and the \textit{a priori} states. Let us recall that the initial state at time zero is the statistical operator $\rho_{0} \in \mathcal{S}(\mathcal{H})$.
+
+We define the adjoint of a linear map $\mathcal{O}:\left(M_{n},\|\bullet\|_{1}\right) \rightarrow\left(M_{n},\|\bullet\|_{1}\right)$ as the linear map $ \mathcal{O}^{*}:\left(M_{n},\|\bullet\|_{\infty}\right) \rightarrow\left(M_{n},\|\bullet\|_{\infty}\right)$:
+\[
+\operatorname{Tr}\left\{\mathcal{O}^{*}[A] B\right\}=\operatorname{Tr}\{A \mathcal{O}[B]\}, \quad \forall A, B \in M_{n}
+\]
+
+A measurement on a quantum system can produce different results with some probability distribution depending on the state $ \rho $. An event regarding such a measurement, which can occur or cannot, is represented by an effect $E$: a self-adjoint operator $E$ such that $0 \leq E \leq \mathbb{1}$. We denote by $[0, \mathbb{1}]$ the set of all effects. Obviously, $E \leq \mathbb{1}$ means $\mathbb{1}-E \geq 0$.
+\begin{definition}
+	We define the quantities  \begin{equation}\label{def:POM}
+	E_{t}^{s}(G):=\int_{G} \mathcal{A}(t, s ; \omega)^{*}[\mathbb{1}] \mathbb{Q}(\diff \omega) \equiv \mathbb{E}_{\mathbb{Q}}\left[1_{G} \mathcal{A}(t, s)^{*}[\mathbb{1}]\right], \quad G \in \bar{\mathcal{G}}_{t}^{s}
+	\end{equation}
+	\begin{equation}\label{def:physical probabilities}
+	\mathbb{P}_{\rho_{0}}^{t}(G):=\operatorname{Tr}\left\{E_{t}^{0}(G) \rho_{0}\right\}=\mathbb{E}_{\mathbb{Q}}\left[1_{G} \operatorname{Tr}\{\sigma(t)\}\right], \quad G \in \bar{\mathcal{G}}_{t}^{0}
+	\end{equation}
+\end{definition}
+\begin{definition}
+	Let $(\Omega, \mathcal{F})$ be a measurable space; a positive operator-valued measure (POM) is a map $E$ from $\mathcal{F}$ into the set of the effects such that it is normalised and $\sigma$-additive, i.e.,  $E(\Omega)=\mathbb{1}$ and for any sequence $F_{1}, F_{2}, \ldots$ of incompatible events (disjoint sets) one has $E\left(\bigcup_{k=1}^{\infty} F_{k}\right)=\sum_{k=1}^{\infty} E\left(F_{k}\right)$.
+\end{definition}
+ \begin{proposition}\label{prop:explanation_intuition}
+ 	$E_{t}^{s}$ is a positive operator-valued measure on the value space $\left(\Omega, \bar{\mathcal{G}}_{t}^{s}\right)$ and $\mathbb{P}_{\rho 0}^{t}$ is a probability measure on the value space $\left(\Omega, \bar{\mathcal{G}}_{t}^{0}\right)$. The family of probability measures $\left\{\mathbb{P}_{\rho_{0}}^{t}, t>0\right\}$ is consistent, i.e.,  $\mathbb{P}_{\rho_{0}}^{t}(G)=\mathbb{P}_{\rho_{0}}^{s}(G)$ for any $G \in \bar{\mathcal{G}}_{s}^{0}$ with $0<s<t .$ Analogously, we have the consistency of the POMs:
+ 	\[ 0 \leq s<t<T, \quad G \in \bar{\mathcal{G}}_{t}^{s} \quad \Rightarrow \quad E_{t}^{s}(G)=E_{T}^{s}(G) \]
+ 	Let $T$ be an arbitrary positive time. Under the probability $\mathbb{P}_{\rho_{0}}^{T},$ the processes
+ 	\begin{equation}\label{def:W_hat}
+ 	\widehat{W}_{j}(t):=W_{j}(t)-\int_{0}^{t} v_{j}(s) \diff s, \quad j=1, \ldots, m, \quad t \in[0, T]
+ 	\end{equation} are independent, $\left(\bar{\mathcal{G}}_{t}^{0}\right)$-adapted, standard Wiener processes.
+ \end{proposition}
+
+\begin{proof}
+	By the properties of $\mathcal{A}(t, s)$ we have \[ 0 \leq \mathbb{E}_{\mathbb{Q}}\left[1_{G} \mathcal{A}(t, s)^{*}[\mathbb{1}]\right] \leq \mathbb{E}_{\mathbb{Q}}\left[\mathcal{A}(t, s)^{*}[\mathbb{1}]\right]=\mathcal{T}(t, s)^{*}[\mathbb{1}]=\mathbb{1} \text { . } \]
+	Then, from the Definition \eqref{def:POM} one can check that all the properties characterising a POM hold. The consistency of the POMs follows from the composition property of the propagator $\mathcal{A}$, the independence of $1_{G} \mathcal{A}(t, s)^{*}$ and $\mathcal{A}(T, t)^{*}$ and $\mathcal{T}(T, t)^{*}[\mathbb{1}]=\mathbb{1}$ :
+\[ \begin{aligned}
+ E_{T}^{s}(G) &=\mathbb{E}_{\mathbb{Q}}\left[1_{G} \mathcal{A}(T, s)^{*}[\mathbb{1}]\right]=\mathbb{E}_{\mathbb{Q}}\left[1_{G} \mathcal{A}(t, s)^{*} \circ \mathcal{A}(T, t)^{*}[\mathbb{1}]\right] \\ &=\mathbb{E}_{\mathbb{Q}}\left[1_{G} \mathcal{A}(t, s)^{*} \circ \mathcal{T}(T, t)^{*}[\mathbb{1}]\right]=\mathbb{E}_{\mathbb{Q}}\left[1_{G} \mathcal{A}(t, s)^{*}[\mathbb{1}]\right]=E_{t}^{s}(G) \end{aligned} \]
+
+ $E_{t}^{0}$ being a POM and $\rho_{0}$ a state, Definition \eqref{def:physical probabilities} defines a probability measure. Consistency follows from the fact that $\operatorname{Tr}\{\sigma(t)\}$ is a martingale or from the consistency of the POMs.
+  The statement on $\widehat{W}(t)$ is from corollary \ref{thm:Girsanov_we_use} of Girsanov theorem where $ M = W_j $,
+ \[  L = \sum_{j=1}^{m} \left[ \int_{0}^{t} v_{j}(s) \diff W_{j}(s)-\frac{1}{2} \int_{0}^{t} v_{j}(s)^{2} \diff s\right]  \]
+ and we have
+ \[
+ \begin{aligned}
+ \langle W_j, L\rangle &= \langle W_j, \sum_{j=1}^{m} \left[ \int_{0}^{t} v_{j}(s) \diff W_{j}(s)-\frac{1}{2} \int_{0}^{t} v_{j}(s)^{2} \diff s\right] \rangle \\
+ & =\langle W_j, \sum_{j=1}^{m} \left[ \int_{0}^{t} v_{j}(s) \diff W_{j}(s)\right] \rangle = \int_{0}^{t} v_{j}(s) \diff s.
+ \end{aligned}
+ \]
+\end{proof}
+
+The observables of the theory are represented by the POMs $E_{t}^{0}$ and the pre-measurement state by $\rho_{0}$. Then, the physical probabilities are defined by \eqref{def:physical probabilities} and their structure in terms of a $\mathrm{POM}$ and a state guarantees that the usual axioms of quantum mechanics are not violated. Moreover, we can write
+\[ \mathbb{P}_{\rho_{0}}^{t}(\diff \omega)=\left.\operatorname{Tr}\{\sigma(t, \omega)\} \mathbb{Q}(\diff \omega)\right|_{\bar{\mathcal{G}}_{t}^{0}} \]
+
+The value space of the POM $E_{t}^{0}$ is $\left(\Omega, \bar{\mathcal{G}}_{t}^{0}\right)$, but $\bar{\mathcal{G}}_{t}^{0}$ is generated by $W$ and this allows to identify the $m$-dimensional process $W$ with the output. The output of the measurement has to be considered under the physical probability $ \mathbb{P}_{\rho 0}^{T} $.
+
+The random statistical operator $\rho(t)$ defined in \eqref{def:rho} can be consistently interpreted as the state of the system at time $t$ conditional on the output observed up to time $t:$ for every $0 \leq s \leq t \leq T,$ the conditional probability $\mathbb{P}_{\rho 0}^{T}\left(G | \bar{\mathcal{G}}_{s}^{0}\right)$ of an event $G \in \bar{\mathcal{G}}_{t}^{s}$  can be computed using the POM $E_{t}^{s}$ defined by \eqref{def:POM} and just $\rho(s)$ as the conditional state of the system at time $s$. Indeed, taken $G \in \bar{\mathcal{G}}_{t}^{s}$, for all $\bar{\mathcal{G}}_{s}^{0}$-measurable random variables $Y$ we have
+\[
+\begin{aligned}
+\mathbb{E}_{\rho_{O}}^{T}\left[1_{G} Y\right]&=\mathbb{E}_\mathbb{Q}\left[\operatorname{Tr}\{\sigma(t)\} 1_{G} Y\right]=\mathbb{E}_{\mathbb{Q}}\left[\operatorname{Tr}\left\{\mathbb{E}_\mathbb{Q}\left[\left.1_{G} \mathcal{A}(t, s)\right|\bar{\mathcal{G}}_{s}^{0}\right] \sigma(s)\right\} Y\right]\\
+&=\mathbb{E}_{Q}\left[\operatorname{Tr}\left\{\mathbb{E}_{Q}\left[1_{G} \mathcal{A}(t, s)\right] \sigma(s)\right\} Y\right]=\mathbb{E}_{Q}\left[\operatorname{Tr}\left\{\mathbb{E}_{Q}\left[1_{G} \mathcal{A}(t, s)^{*}[\mathbb{I}]\right] \sigma(s)\right\} Y\right]\\
+&=\mathbb{E}_{Q}\left[\operatorname{Tr}\left\{E_{t}^{s}(G) \sigma(s)\right\} Y\right]=\mathbb{E}_{\rho_{0}}^{T}\left[\operatorname{Tr}\left\{\rho(s) E_{t}^{s}(G)\right\} Y\right]
+\end{aligned}
+ \]
+
+This proves that $\operatorname{Tr}\left\{\rho(s) E_{t}^{s}(G)\right\}$ is the conditional expectation of $1_{G}$ given $\bar{\mathcal{G}}_{s}^{0} .$ So, we have: $\forall G \in \bar{\mathcal{G}}_{t}^{s}, 0 \leq s \leq t \leq T$,
+\[ \begin{aligned} \mathbb{P}_{\rho_{0}}^{T}\left(G | \bar{\mathcal{G}}_{s}^{0}\right) &=\operatorname{Tr}\left\{\rho(s) E_{t}^{s}(G)\right\} \end{aligned} \]
+The random state $\rho(t)$ is called \textit{a posteriori} state.
+
+The mean of the \textit{a posteriori} state
+\[ \eta(t):=\mathbb{E}_{\rho_{0}}^{T}[\rho(t)]=\mathbb{E}_{\mathbb{Q}}[\sigma(t)] \] is the state to be assigned to the system when the result of the observation is not known or not taken into account; it is known as \textit{a priori} state. We have \[ \eta(0)=\rho_{0}, \quad \eta(t)=\mathcal{T}(t, 0)\left[\rho_{0}\right] \]
+
+By using the composition property $\mathcal{A}(t, 0)=\mathcal{A}(t, s) \circ \mathcal{A}(s, 0)$ and the fact that $\mathcal{A}(t, s)$ and $\mathcal{A}(s, 0)$ are $\mathbb{Q}$-independent, we obtain for $0 \leq s<t \leq T$ \[ \mathbb{E}_{\mathbb{Q}}\left[\sigma(t) | \mathcal{F}_{s}\right]=\mathcal{T}(t, s)[\sigma(s)], \quad \mathbb{E}_{\rho_{0}}^{T}\left[\rho(t) | \mathcal{F}_{s}\right]=\mathcal{T}(t, s)[\rho(s)]. \]
+
+By differentiating \eqref{def:rho} we get a stochastic evolution equation for the \textit{a posteriori} states, known in the physical literature as stochastic master equation.
+
+\begin{proposition}
+	Under the physical probability $\mathbb{P}_{\rho_{0}}^{T}$, the a posteriori states satisfy the nonlinear SDE
+	\begin{equation}\label{eq:stochastic_master_eq}
+	\diff \rho(t)=\mathcal{L}(t)[\rho(t)] \diff t+\sum\left[R_{j}(t) \rho(t)+\rho(t) R_{j}(t)^{*}-v_{j}(t) \rho(t)\right] \diff \widehat{W}_{j}(t)
+	\end{equation}
+	with initial condition $\rho(0)=\rho_{0} \in \mathcal{S}(\mathcal{H})$.
+	The quantities $v_{j}(t)$ are real random variables which depend on $\rho(t)$ and are given by \eqref{def:v(j)}.
+\end{proposition}
+
+\begin{proof}
+	By using \eqref{eq:linear_master_SDE} and \eqref{def:W_hat} we can express the stochastic differential of $\sigma(t)$ in terms of the new noise $\widehat{W}$ :
+	\[ \begin{aligned} \diff \sigma(t)&= \mathcal{L}(t)[\sigma(t)] \diff t+\sum_{j=1}^{m}\left(R_{j}(t) \sigma(t)+\sigma(t) R_{j}(t)^{*}\right) \diff \widehat{W}_{j}(t) \\ &+\sum_{j=1}^{m}\left(R_{j}(t) \sigma(t)+\sigma(t) R_{j}(t)^{*}\right) v_{j}(t) \diff t \end{aligned} \]
+
+	From formula \eqref{conclusion:expression_p(t)} we have immediately \[ \begin{aligned}(\operatorname{Tr}\{\sigma(t)\})^{-1} &=\exp \left\{-\sum_{j=1}^{m}\left[\int_{0}^{t} v_{j}(s) \diff W_{j}(s)-\frac{1}{2} \int_{0}^{t} v_{j}(s)^{2} \diff s\right]\right\} \\ &=\exp \left\{-\sum_{j=1}^{m}\left[\int_{0}^{t} v_{j}(s) \diff \widehat{W}_{j}(s)+\frac{1}{2} \int_{0}^{t} v_{j}(s)^{2} \diff s\right]\right\} \end{aligned} \]
+	by Itô formula we get
+	\[ \diff(\operatorname{Tr}\{\sigma(t)\})^{-1}=-(\operatorname{Tr}\{\sigma(t)\})^{-1} \sum_{j=1}^{m} v_{j}(t) \diff \widehat{W}_{j}(t) \]
+
+	Finally, by Itô formula for products we get \eqref{eq:stochastic_master_eq}.
+\end{proof}
+
+Let us stress that our starting point was the linear SDE \eqref{eq:linear_master_SDE} for $\sigma(t)$ in the stochastic basis $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), \mathbb{Q}\right) .$ Then, we constructed the a posteriori states $\rho(t)$ by \eqref{def:rho} and the stochastic basis $\left(\Omega, \mathcal{G},\left(\bar{\mathcal{G}}_{t}^{0}\right), \mathbb{P}_{\rho_{0}}^{T}\right) .$ Finally, we showed that, in this new stochastic basis, $\rho(t)$ satisfies \eqref{eq:stochastic_master_eq}. So, we have by construction that the nonlinear SDE  \eqref{eq:stochastic_master_eq} has a solution in a particular stochastic basis, the by Definition \ref{def:weak_solution_SDE}
+we have shown that \eqref{eq:stochastic_master_eq} has a weak solution. If the SDE \eqref{eq:stochastic_master_eq} is  extended from $ \mathcal{S}(\mathcal{H}) $ to the whole $ M_n $ then it has strong
+solutions, see Chapter 5 in \cite{alberto2009quantum} for more details.

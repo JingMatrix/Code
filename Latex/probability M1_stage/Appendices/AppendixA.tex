@@ -1,0 +1,204 @@
+% !TeX spellcheck = en_US
+\chapter{Additional Materials in Mathematics}\label{Appendix: A}
+This appendix is devoted to additional materials we need in the chapter of quantum mechanics. We should recall some already defined notations to make a coherent discussion here.
+\section{Probability Space and Solution of SDE}
+Let us start with familiar settings, suppose $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space. A filtration is a family $\left(\mathcal{F}_{t}\right)_{t \geq 0}$ of increasing sub-$\sigma$-algebras of $\mathcal{F},$ i.e., $\mathcal{F}_{s} \subset \mathcal{F}_{t} \subset \mathcal{F}$ for $0 \leq s<t<+\infty .$ Sometimes, $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), \mathbb{P}\right)$ is said to be a stochastic basis. Typically, a filtration describes the accumulation of information during time: each $\mathcal{F}_{t}$ is the collection of all the events which we can decide whether they have been verified or not up to time $t .$
+
+Let us denote by $\mathcal{N}$ the class of all $\mathbb{P}$-null sets in $\mathcal{F}$, i.e., \[ \mathcal{N}:=\{A \in \mathcal{F}: \mathbb{P}(A)=0\} \]
+\begin{definition}
+	The filtration is said to be right continuous if $\mathcal{F}_{t}=\mathcal{F}_{t_{+}}$ for all $t \geq 0,$ where $\mathcal{F}_{t_{+}}$ is the $\sigma$-algebra of events decidable immediately after $t$, i.e., \[ \mathcal{F}_{t_{+}}:=\bigcap_{s: s>t} \mathcal{F}_{s} .\]
+
+The stochastic basis (or the filtration) is said to satisfy the usual conditions if the filtration is right continuous and $\mathcal{F}_{0}$ contains $\mathcal{N}$. Obviously $\mathcal{N} \subset \mathcal{F}_{0}$ implies $\mathcal{N} \subset \mathcal{F}_{t}, \forall t \geq 0$.
+\end{definition}
+
+\begin{hypothesis}\label{hypo:SDEclass}
+	Let $b$ and $\sigma_{j}, j=1, \ldots, d,$ be (Borel) measurable deterministic functions from $\mathbb{C}^{n} \times\left[t_{0}, T\right]$ to $ \mathcal{H} := \mathbb{C}^{n}$.
+\end{hypothesis}
+
+Deterministic here means independent of $(\Omega, \mathcal{F}, \mathbb{P})$.
+
+Recall that $ \mathcal{L}^{p}$ is the linear space of the (equivalence classes of) progressively measurable complex processes $X$ such that \[ \mathbb{P}\left[\int_{0}^{t}|X(s)|^{p} \mathrm{d} s<+\infty\right]=1, \quad \forall t \geq 0. \]
+A process $\left\{X(t), t \geq t_{0} \geq 0\right\}$ is called Itô process if it is a continuous, adapted process such that, for every $t \geq t_{0}$ \[ X_{i}(t)=X_{i}\left(t_{0}\right)+\int_{t_{0}}^{t} F_{i}(s) \mathrm{d} s+\sum_{j=1}^{d} \int_{t_{0}}^{t} G_{i j}(s) \mathrm{d} W_{j}(s), \quad i=1, \ldots, n \] with $X_{i}\left(t_{0}\right)$ being $\mathcal{F}_{t_{0}}$-measurable and $F_{i} \in \mathcal{L}^{1}, G_{i j} \in \mathcal{L}^{2} .$ It is usual to say that $X$ has initial value $X_{i}\left(t_{0}\right)$ and it admits the stochastic differential \[ \mathrm{d} X_{i}(t)=F_{i}(t) \mathrm{d} t+\sum_{j=1}^{d} G_{i j}(t) \mathrm{d} W_{j}(t) \]
+We consider the SDE
+\begin{equation}\label{eq:generalSDE}
+\diff X(t)=b(X(t), t) \diff t+\sum_{j=1}^{d} \sigma_{j}(X(t), t) \diff W_{j}(t)
+\end{equation}
+for processes $  X  $ with values in $ \mathbb{C}^{n}$.
+
+A solution of \eqref{eq:generalSDE} with initial condition $X\left(t_{0}\right)=\eta$ is an Itô process satisfying (a.s., $ \forall t \geq t_{0}$)
+ \begin{equation}\label{eq:solution_SDE}
+  X(t)=\eta+\int_{t_{0}}^{t} b(X(s), s) \diff s+\sum_{j=1}^{d} \int_{t_{0}}^{t} \sigma_{j}(X(s), s) \diff W_{j}(s)
+ \end{equation}
+
+
+ \begin{definition}\label{def:strong_solution_SDE}
+ 	The SDE \eqref{eq:generalSDE} admits strong solutions if, for any choice of a stochastic basis satisfying usual conditions with a Wiener process $W$ and for every $x_{0} \in \mathcal{H},$ there exists a continuous adapted process $X$ such that Eq. \eqref{eq:solution_SDE} holds with $\eta=x_{0}$.
+ \end{definition}
+
+ \begin{definition}\label{def:weak_solution_SDE}
+ 	A weak solution of the SDE \eqref{eq:generalSDE} with an initial condition with law $\mu$ is a stochastic basis $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), \mathbb{P}\right)$ satisfying the usual conditions, with a Wiener process $W,$ an $\mathcal{H}$-valued $\mathcal{F}_{t_{0}}$-measurable random variable $\eta \sim \mu$ and an adapted, continuous process $X$ such that for every $t \geq t_{0} $ Eq. \eqref{eq:solution_SDE} holds.
+ \end{definition}
+
+
+ \begin{definition}
+ 	The solution of the SDE \eqref{eq:generalSDE} is unique in law if, taken any two solutions $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), P\right), W, \eta, X$ and $\left(\Omega^{\prime}, \mathcal{F}^{\prime},\left(\mathcal{F}_{t}^{\prime}\right), P^{\prime}\right), W^{\prime}, \eta^{\prime}, X^{\prime},$ with $\eta \sim \eta^{\prime}$ then the processes $X$ and $X^{\prime}$ have the same law.
+ \end{definition}
+
+When $\{\omega \in \Omega: X(t, \omega)=Y(t, \omega), \forall t \geq 0\}$ is measurable, which is usually true when some regularity properties hold for the trajectories of the two processes, we can say that $X$ and $Y$ are indistinguishable if \[ \mathbb{P}[X(t)=Y(t), \forall t \geq 0]=1. \]
+\begin{definition}
+	The solution of the SDE \eqref{eq:generalSDE} is pathwise unique if taken any two solutions $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), P\right), W, \eta, X$ and $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), P\right), W, \eta, X^{\prime},$ then the processes $X$ and $X^{\prime}$ are indistinguishable.
+\end{definition}
+\section{Stochastic Integral}
+We denote by $H^{2}$ the subset of $\mathcal{L}^{2}$-bounded continuous martingales, and $H_{0}^{2}$ the subset of elements of $H^{2}$ vanishing at zero.
+
+\begin{definition}
+	If $M \in H^{2},$ we call $\mathscr{L}^{2}(M)$ the space of progressively measurable processes $K$ such that
+	\[ \|K\|_{M}^{2}=E\left[\int_{0}^{\infty} K_{s}^{2} d\langle M, M\rangle_{s}\right]<+\infty \]
+\end{definition}
+As usual, $L^{2}(M)$ will denote the space of equivalence classes of elements of $\mathscr{L}^{2}(M)$; it is of course a Hilbert space for the norm $\|\cdot\|_{M}$.
+\begin{theorem}
+	 Let $M \in H^{2}$; for each $K \in L^{2}(M)$, there is a unique element of $H_{0}^{2}$ denoted by $K \cdot M$, such that \[ \langle K \cdot M, N\rangle=K \cdot\langle M, N\rangle \]
+\end{theorem}
+\begin{proof}
+	See Theorem (2.2), Chapter IV, p.127 in \cite{revuz2013continuous}.
+\end{proof}
+\begin{definition}
+	The martingale $K \cdot M$ is called the stochastic integral (also called the Itô integral) of $K$ with respect to $M$ and is also denoted by
+	\[ \int_{0}^{.} K_{s} d M_{s} \]
+\end{definition}
+The resulting process of Itô integral is a martingale.
+
+\begin{remark}\label{rmk:ito_integral_Brownian_motion}
+	Since the Brownian motion stopped at a fixed time $t$ is in $H^{2}$, if $K$ is a process which satisfies
+	\[ E\left[\int_{0}^{t} K_{s}^{2} d s\right]<\infty, \quad \text { for all } t \]
+	we can define $\int_{0}^{t} K_{s} d B_{s}$ for each $t$ hence on the whole positive half-line and the resulting process is a martingale although not an element of $H^{2} $.
+\end{remark}
+\section{Lipschitz Condition of SDE}
+
+The norm $ \|A\| $ for a matrix $ A $ in sequential discussion is not specified but must be fixed, which means these propositions stay valid for any particular matrix norm. There are various sufficient sets of hypotheses which imply existence and uniqueness of the solution of our SDE \eqref{eq:generalSDE}.
+\begin{hypothesis}[Global Lipschitz condition]\label{hypo:GlobalLip} There exists a constant $L(T)>0$ such that
+\[ \|b(x, t)-b(y, t)\|^{2}+\sum_{j}\left\|\sigma_{j}(x, t)-\sigma_{j}(y, t)\right\|^{2} \leq L(T)\|x-y\|^{2} \] for all $x, y \in \mathbb{C}^{n}$ and $t \in\left[t_{0}, T\right]$
+\end{hypothesis}
+%\begin{hypothesis}[Local Lipschitz condition]\label{hypo:LocalLip}
+%For every $N>0$ there exists a constant $L(N, T)>0$ such that
+%\[\|b(x, t)-b(y, t)\|^{2}+\sum_{j}\left\|\sigma_{j}(x, t)-\sigma_{j}(y, t)\right\|^{2} \leq L(N, T)\|x-y\|^{2} \] for all $t \in\left[t_{0}, T\right]$ and for all $x, y \in \mathbb{C}^{n}$ with $\|x\| \leq N,\|y\| \leq N$
+%\end{hypothesis}
+\begin{hypothesis}[Linear growth condition]\label{hypo:LinearGrowth}
+There exists a constant $M(T)>0$ such that
+\[ \|b(x, t)\|+\left(\sum_{j}\left\|\sigma_{j}(x, t)\right\|^{2}\right)^{1 / 2} \leq M(T)(1+\|x\|) \] for all $x \in \mathbb{C}^{n}$ and $t \in\left[t_{0}, T\right]$
+\end{hypothesis}
+
+%We often use Dirac Notations\label{def: Dirac Notations} in physics. If $\psi$ is a vector in $\mathcal{H},$ the ``ket'' $|\psi\rangle$ denotes $\psi$ itself thought as a column vector and the ``bra" $\langle\psi|$ denotes the transposed conjugated vector:
+%$|\psi\rangle=\left(\begin{array}{c}\psi_{1} \\ \psi_{2} \\ \vdots \\ \psi_{n}\end{array}\right), \quad \quad\langle\psi|=(\bar{\psi_{1}}, \bar{\psi_{2}} \ldots \bar{\psi_{n}})$.
+%Therefore, $|\psi\rangle\left\langle\psi^{\prime}\right|$ is the rank-one operator $\varphi \mapsto\left\langle\psi^{\prime} | \varphi\right\rangle \psi$ with matrix elements \[ \left(|\psi\rangle\left\langle\psi^{\prime}\right|\right)_{i j}=\psi_{i} \overline{\psi_{j}^{\prime}} \] Note that, for every operator $A, \operatorname{Tr}\{A|\psi\rangle\langle\varphi|\}=\langle\varphi | A \psi\rangle$.
+%\begin{hypothesis}[Monotone condition]\label{hypo:Monotone} There exists a constant $C(T) \geq 0$ such that
+%\[ \operatorname{Re}\langle x | b(x, t)\rangle+\frac{1}{2} \sum_{j}\left\|\sigma_{j}(x, t)\right\|^{2} \leq C(T)\left(1+\|x\|^{2}\right) \] for all $x \in \mathbb{C}^{n}$ and $t \in\left[t_{0}, T\right]$
+%\end{hypothesis}
+%It is not hard to find that:
+%\begin{itemize}
+%\item The linear growth condition \ref{hypo:LinearGrowth} implies the monotone condition \ref{hypo:Monotone};
+%\item The global Lipschitz condition \ref{hypo:GlobalLip} implies the local Lipschitz condition \ref{hypo:LocalLip}.
+%\end{itemize}
+\begin{theorem}[existence-and-uniqueness theorem]\label{thm:Main_theorem_solution}
+Under Hypotheses \ref{hypo:SDEclass}, \ref{hypo:GlobalLip},  \ref{hypo:LinearGrowth} the SDE \eqref{eq:generalSDE} admits strong solutions in $ \left[  t_0, T\right] $. Pathwise uniqueness and uniqueness in law hold. And the SDE \eqref{eq:generalSDE} with initial condition $\eta \in L^{2}\left(\Omega, \mathcal{F}_{t_{0}}, \mathbb{P} ; \mathcal{H}\right)$ has a pathwise unique solution $X$ in $\left[t_{0}, T\right]$. The solution satisfies
+\[ \int_{t_{0}}^{T} \mathbb{E}\left[\|X(t)\|^{2}\right] \diff t<+\infty .\]
+If Hypotheses \ref{hypo:SDEclass},  \ref{hypo:GlobalLip}, \ref{hypo:LinearGrowth} hold for every $T>0$, then the SDE \eqref{eq:generalSDE} admits a unique strong solution in  $\left[ t_{0}, \infty\right) $.
+\end{theorem}
+\begin{proof}
+	Our conditions is stronger than what we need, see Theorem 2.9, Chapter 5, p. 289 in \cite{KaratzasIoannisBmas}.
+\end{proof}
+When the assumptions of the existence-and-uniqueness theorem hold for every $T>0,$ the unique strong solution in $\left[t_{0}, \infty\right)$ is called a global solution.
+
+\section{Doléans equation and Girsanov Theorem}
+
+Let $W$ be a $ d $-dimensional Wiener process defined in a stochastic basis $\left(\Omega, \mathcal{F},\left(\mathcal{F}_{t}\right), \mathbb{P}\right)$ satisfying the usual conditions.
+Let us take some stochastic processes $F \in \mathcal{L}^{1}, G_{j} \in \mathcal{L}^{2}, j=1, \ldots, d,$ and let us introduce the complex Itô process
+\begin{equation}\label{def:X}
+ X(t):=\sum_{j=1}^{d} \int_{0}^{t} G_{j}(s) \diff W_{j}(s)+\int_{0}^{t} F(s) \diff s
+\end{equation}
+
+Then, we consider the exponential of $X$ times a generic constant:
+\begin{equation}\label{def:Z}
+ Z(t):=z_{0} \exp \{X(t)\}, \quad z_{0} \in \mathbb{C}
+\end{equation}
+
+The process $Z$ is an Itô process by and, by Itô formula, we get  \begin{equation}\label{eq:expression_Z}
+Z(t)=z_{0}+\sum_{j=1}^{d} \int_{0}^{t} Z(s) G_{j}(s) \diff W_{j}(s)+\int_{0}^{t} Z(s)\left[F(s)+\frac{1}{2} \sum_{j=1}^{d} G_{j}(s)^{2}\right] \diff s,
+\end{equation}
+that is
+\begin{equation}\label{eq:dolean_equation}
+\left\{\begin{array}{l}\diff Z(t)=\sum_{j=1}^{d} Z(t) G_{j}(t) \diff W_{j}(t)+Z(t)\left[F(t)+\frac{1}{2} \sum_{j=1}^{d} G_{j}(t)^{2}\right] \diff t \\ Z(0)=z_{0}\end{array}\right.
+\end{equation}
+
+The integrals in Eq. \eqref{def:X} are well defined and, so, $\mathbb{P}[|X(t)|<$ $+\infty]=1 .$ For $z_{0} \neq 0,$ this implies $\mathbb{P}[Z(t)=0]=0$ and, so, $Z(t)^{-1}$ is a \textit{bona fide} random variable. Obviously, $Z(t)^{-1}=\exp \{-X(t)\} / z_{0}$ and by Itô formula we get
+\begin{equation}\label{eq:Z^-1}
+\begin{aligned} Z(t)^{-1}=& \frac{1}{z_{0}}-\sum_{j=1}^{d} \int_{0}^{t} Z(s)^{-1} G_{j}(s) \diff W_{j}(s) \\ &+\int_{0}^{t} Z(s)^{-1}\left[-F(s)+\frac{1}{2} \sum_{j=1}^{d} G_{j}(s)^{2}\right] \diff s . \end{aligned}
+\end{equation}
+
+\begin{proposition}
+	For $F \in \mathcal{L}^{1}, G_{j} \in \mathcal{L}^{2}, j=1, \ldots, d,$ the process $Z,$ defined by Eqs.\eqref{def:X}, \eqref{def:Z}, is the pathwise unique solution of the Doléans equation \eqref{eq:dolean_equation}.
+\end{proposition}
+
+\begin{proof}
+	Let $Y$ be another solution of \eqref{eq:dolean_equation}. This means that $Y$ is a continuous, adapted process, that $Y G_{j} \in \mathcal{L}^{2}, Y\left[F+\frac{1}{2} \sum_{j=1}^{d} G_{j}^{2}\right] \in \mathcal{L}^{1}$ and that \eqref{eq:expression_Z} holds with $Z$ replaced by $Y$. Then $Y(0) \exp \{-X(0)\}=z_{0}$, and Itô formula and Eq. \eqref{eq:Z^-1} imply d $(Y(t) \exp \{-X(t)\}=0$. Being continuous processes we obtain that $Y(t) \exp \{-X(t)\}=z_{0}$ for every $t \geq 0$ a.s., so that $Y$ and $Z$ are indistinguishable.
+\end{proof}
+
+
+%To introduce Novikov condition, let us take now $z_{0}=1$ and $F=-\frac{1}{2} \sum_{j=1}^{d} G_{j}^{2}$.  From Eqs. \eqref{def:X} and \eqref{def:Z} we get
+%\begin{equation}\label{exp: z_in_Novikov_condition}
+%	Z(t)=\exp \sum_{j=1}^{d}\left\{\int_{0}^{t} G_{j}(s) \diff W_{j}(s)-\frac{1}{2} \int_{0}^{t} G_{j}(s)^{2} \diff s\right\}
+%\end{equation}
+%
+%\begin{theorem}\label{thm:Novikov Condition}
+%	If $G_{j} \in \mathcal{L}^{2}, j=1, \ldots, d,$ are real processes such that \[ \mathbb{E}\left[\exp \left\{\frac{1}{2} \sum_{j} \int_{0}^{T} G_{j}(t)^{2} \diff t\right\}\right]<+\infty, \quad \forall T \in[0,+\infty) \]
+%	then Z, defined by \eqref{exp: z_in_Novikov_condition}, is a positive real martingale.
+%\end{theorem}
+
+
+We state Girsanov theorem without proof, see Chapter VIII, p.326 in \cite{revuz2013continuous} for detailed discussion. Let $\left(\mathscr{F}_{t}^{0}\right), t \geq 0,$ be a right-continuous filtration with terminal $\sigma$-field $\mathscr{F}_{\infty}^{0}$ and $P$ and $Q$ two probability measures on $\mathscr{F}_{\infty}^{0} .$ We assume that for each $t \geq 0,$ the restriction of $Q$ to $\mathscr{F}_{t}^{0}$ is absolutely continuous with respect to the restriction of $P$ to $\mathscr{F}_{t}^{0}$, which will be denoted by $Q \lhd P$.
+
+\begin{proposition}
+	If $D$ is a strictly positive continuous local martingale, there exists a unique continuous local martingale $L$ such that \[ D_{t}=\exp \left\{L_{t}-\frac{1}{2}\langle L, L\rangle_{t}\right\}=\mathscr{E}(L)_{t} ;\]
+	$ L $ is given by the formula
+	\[ L_{t}=\log D_{0}+\int_{0}^{t} D_{s}^{-1} d D_{s}. \]
+\end{proposition}
+If $P$ and $Q$ are equivalent on each $\mathscr{ F}_{t}^{0},$ we then have $Q=\mathscr{E}(L)_{t} \cdot P$ on $\mathscr{F}_{t}^{0}$ for every $t,$ which we write simply as $Q=\mathscr{E}(L) \cdot P .$
+\begin{theorem}
+	If $Q=\mathscr{E}(L) \cdot P$ and $M$ is a continuous $P$-local martingale, then
+	\[ \widetilde{M}=M-D^{-1} \cdot\langle M, D\rangle=M-\langle M, L\rangle \]
+	is a continuous $Q$-local martingale. Moreover, $P=\mathscr{E}(-\widetilde{L})\cdot Q$
+\end{theorem}
+
+In particular, if we consider the Brownian motion, we should have following result.
+\begin{theorem}\label{thm:Girsanov_we_use}
+	If $Q \lhd P$ and if $B$ is a $\left(\mathscr{F}_{t}^{0}, P\right)$-BM, then $\widetilde{B}=B-\langle B, L\rangle$ is a $\left(\mathscr{F}_{t}^{0}, Q\right)$-BM.
+\end{theorem}
+%\begin{proof}
+%	Firstly note that $ \langle \widetilde{B}, \widetilde{B} \rangle  = \left\langle B, B \right\rangle =t$. Then $\operatorname{exp}\left\{\mathrm{i} \sum_{j} \lambda_{j} \widetilde{B}_{j}(t)+\frac{1}{2}|\lambda|^{2} t\right\}$ is a $\left(\mathscr{F}_{t}^{0}, Q\right)$-martingale by Novikov condition for all
+%	$\lambda \in \mathbb{R}^{d}$. Finally we see  $\widetilde{B}$ is a $\left(\mathscr{F}_{t}^{0}, Q\right)$-BM by Theorem \ref{thm:condition_brownian_motion}.
+%\end{proof}
+%\section{Positivity of $\mathcal{A}(t, s)$}\label{prof:positivity_A(s,t)}
+%
+%	We can find an intuitive property:
+%\begin{equation}\label{eq:expectation_of_sigama}
+%\mathbb{E}_{\mathbb{Q}}\left[\sigma(t) | \bar{\mathcal{ G }}_{t}^{s}\right]=\mathcal{A}(t, s) \mathbb{E}_{\mathbb{Q}}[\sigma(s)]=:\mathcal{A}(t, s)[\eta(s)]
+%\end{equation} Indeed, by \eqref{conclusion:composition_fundamental_solution} and the fact that $\mathcal{A}(t, s)$ is $\bar{\mathcal{ G }}_{t}^{s}$ -measurable, we have $\mathbb{E}_{\mathbb{Q}}\left[\sigma(t) | \bar{\mathcal{ G }}_{t}^{s}\right]=\mathcal{A}(t, s)\left[\mathbb{E}_{\mathbb{Q}}\left[\sigma(s) | \bar{\mathcal{ G }}_{t}^{s}\right]\right]$. By the fact that the noises have independent increments, we have that $\sigma(s)$ is independent from $\bar{\mathcal{ G }}_{t}^{s}$ and $\mathbb{E}_{\mathbb{Q}}\left[\sigma(s) | \bar{\mathcal{ G }}_{t}^{s}\right]=\mathbb{E}_{\mathbb{Q}}[\sigma(s)]=\eta(s) .$ This gives \eqref{eq:expectation_of_sigama}.Then we only need to show that $ \mathbb{E}_{\mathbb{Q}}\left[\sigma(t) | \bar{\mathcal{ G }}_{t}^{s}\right]$  is a positive matrix. By spectrum decomposition of positive self-adjoint operators we can further assume that $ \sigma(s;\omega) \equiv \eta(s)  $ is a rank-one projection.
+%
+%Then we prove $ \mathbb{E}_{\mathbb{Q}}\left[\sigma(t) | \bar{\mathcal{ G }}_{t}^{s}\right]$ is positive with setting $ \sigma(s;\omega) \equiv \eta(s) = |\psi_s\rangle\langle\psi_s| $ for some $ \psi_{s} \in \mathcal{H} $.
+%Consider the linear stochastic Schrödinger equation (a vector formulation version):
+%\begin{equation}\label{eq:linear_Stochastic_Schr}
+%\left\{\begin{array}{l}\diff \psi(t)=\left(-\mathrm{i} H(t)-\frac{1}{2} \sum_{j=1}^{d} R_{j}(t)^{*} R_{j}(t)\right) \psi(t) \diff t+\sum_{j=1}^{d} R_{j}(t) \psi(t) \diff W_{j}(t) \\ \psi(s)=\psi_{s}, \quad \psi_{s} \in \mathcal{H}\end{array}\right.
+%\end{equation}
+%
+%Using similar argument in the proof of existence and uniqueness for SDE \eqref{eq:linear_master_SDE}, this SDE \eqref{eq:linear_Stochastic_Schr} admits a continuous strong solution in $ [0, \infty) $ and pathwise uniqueness and uniqueness in law holds. Then by Itô formulae $ |\psi(t)\rangle\langle\psi(t)| $ is the pathwise unique solution of SDE \eqref{eq:linear_master_SDE} when $ m = d , s=0,$ and $ \rho_0 =\eta(s) |\psi_s\rangle\langle\psi_s| $.
+%Let us recall that $ \mathcal{G}:=\bigvee_{t \geq 0} \mathcal{G}_{t}^{0} $ and consider $ \tilde{\sigma}(t) :=\mathbb{E}_{\mathbb{Q}}\left[ |\psi(t)\rangle\langle\psi(t)||\mathcal{G}\right] $. By linearity $ \tilde{\sigma}(t) $ coincides with $ \sigma(t) $ from pathwise uniqueness of SDE \eqref{eq:linear_master_SDE} where $ \rho_0 = |\psi_0\rangle\langle\psi_0| $. Conditional expectation preserves positivity and
+%\[
+%  \mathbb{E}_{\mathbb{Q}}\left[\sigma(t) | \bar{\mathcal{ G }}_{t}^{s}\right]
+%  =\mathbb{E}_{\mathbb{Q}}\left[\tilde{\sigma}(t) | \bar{\mathcal{ G }}_{t}^{s}\right]
+%  =\mathbb{E}_{\mathbb{Q}}\left[ \mathbb{E}_{\mathbb{Q}}\left[ |\psi(t)\rangle\langle\psi(t)||\mathcal{G}\right] | \bar{\mathcal{ G }}_{t}^{s}\right]
+%  =\mathbb{E}_{\mathbb{Q}}\left[|\psi(t)\rangle\langle\psi(t)| | \bar{\mathcal{ G }}_{t}^{s}\right]
+%  \]
+%hence $ \mathbb{E}_{\mathbb{Q}}\left[\sigma(t) | \bar{\mathcal{ G }}_{t}^{s}\right] $ is positive so we finish the prove.
+%\begin{remark}
+%	 To prove the completely positivity of $\mathcal{A}(t, s)$, we should show $\mathcal{A}(t, s) \otimes  \operatorname{id}_n $ is positive. If we substitute $ R_{j}(t)$ by $ R_{j}(t)\otimes \operatorname{id}_n$ and $  H(t)  $ by $  H(t)\otimes \operatorname{id}_n  $ in the SDE \eqref{eq:linear_master_SDEfundamental}, then thanks to the linear structure of \eqref{eq:linear_master_SDEfundamental} we get a new SDE with $\mathcal{A}(t, s) \otimes  \operatorname{id}_n $ as its one possible solution. Since the bound condition \eqref{cond:bounded} still holds for the new SDE, we are safe to say $\mathcal{A}(t, s) \otimes  \operatorname{id}_n $ is the unique solution to it in the sense of pathwise or law. Now the proof of completely positivity of $\mathcal{A}(t, s)$ reduces to positivity.
+%\end{remark}

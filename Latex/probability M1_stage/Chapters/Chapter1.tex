@@ -1,0 +1,347 @@
+% !TeX spellcheck = en_US
+\chapter{Preparation(Remove at the end)}
+\section{Questions in reading}
+\subsection{Brownian motion chapter 0}
+\begin{itemize}
+	\item Before (3.1) Proposition.
+	If $\mathscr{F}$ is a sub-$ \sigma $-algebra of $\mathscr{E}^{\gamma}$ we define the completion of. $\mathscr{F}$ in $\mathscr{E}^{\gamma}$ with
+	respect to $\gamma$ as the family of sets $A$ with the following property: for each $\mu \in \gamma$, there is a set $B$ such that $A \Delta B$ is in $\mathscr{F} ^{\gamma}$ and $\mu(A \Delta B)=0$,  This family will be
+	denoted $\tilde{\mathscr{F}}^ {\gamma}$.
+	
+	Q: It should be added that $B \in \mathscr{F}$?
+	
+	\item (4.3) lemma. 
+	There is a one-to-one correspondence between Radon measures $\mu$
+	on $ [0, \infty[ $ and right-continuous functions $A$ of finite variation given by
+	\[
+	A_{t}=\mu([0, t])
+	\]
+	Q: Radon measure is defined as signed ones?
+	\item I want to do the final presentation in a visual way; for example, I can use software Mathematica® to show what Brownian motion\ref{fig:wiener-process} looks like.
+	Therefore I want to know some examples in stochastic process that can be visualized; it will best if a reference is given.
+	Srdjan Stojanovic's book\cite{stojanovic2012computational} seems to be good, but a little bit of out-of-date.
+	\item 
+	Reference on the reason why Brownian motion is so essential. Maybe this has something to do with martingale representation theorem.	
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\linewidth]{"Figures/wiener process"}
+	\caption{Brownian Motion 100 simulations}
+	\label{fig:wiener-process}
+\end{figure}
+
+
+\end{itemize}
+\subsection{Brownian motion chapter 2}
+\begin{itemize}
+	\item
+	In the proof of theorem 2.9, the completion of $ (\mathscr{F}_t) $ is needed? I refer to following proposition \cite{bogachev2007measure} in
+	chapter 2.
+	\begin{proposition}[2.1.11. Proposition]
+		Let $\mu$ be a nonnegative measure on a $\sigma$ -algebra $\mathcal{A}$. Then, for every $\mu$ -measurable function $f$, one can find a set $Y \in \mathcal{A}$ and a function g measurable with respect to $\mathcal{A}$ such that $f(x)=g(x)$ for all $x \in Y$ and $\mu(X \backslash Y)=0$, 
+	\end{proposition}
+ What is the importance of introducing the concept of complete $ \sigma$-Algebra $\mathscr{F} $, just for writing easier proof? That is to say, with this assumption, we can find a modification of given process in an easier way.
+ I find in chapter a partial explanation of this. As a result (of completion), any limit (almost-sure, in the mean, etc.) of adapted processes is an adapted process; a process which is indistinguishable from an adapted process is adapted.
+ 
+ \item In the proof of proposition 2.12, I understand Wiener measure is invariant under all $ \theta_\epsilon $'s since after the transformation we always get another Brownian motion. But I don't understand how do we calculate the following conditional expectation. Later, I see that this is a result of direct calculation.
+ \begin{proof}
+ 	\ldots 
+ 	Let $ \mathscr{B} $ be the $ \sigma $-field of events left invariant by all $ \theta_\epsilon $'s. It is easy to see that
+ 	$ W $ is left invariant by all the $ \theta_\epsilon $'s as well. For any integrable r.v. $ Z  $ on \textbf{W} , we
+ 	consequently have,
+ 	\[ E[Z|\mathscr{B}]=2^{-k}\sum_\epsilon Z\circ \theta_\epsilon \]
+ 	\ldots
+ \end{proof}
+
+\end{itemize}
+\subsection{Brownian motion chapter 4}
+\begin{itemize}
+	\item I don't understand the following application of monotone class theorem. This comes from section 5, chapter 4. I can only show that $ \sigma(\mathscr{E}) \subset L_{\mathscr{P}}^{2}(M) $, but not sure if the former is a dense set.\\
+	The importance of predictable processes comes from the fact that all stochastic integrals are indistinguishable from the stochastic integrals of predictable processes. Indeed, if we call $L_{\rho}^{2}(M)$ the set of equivalent classes of predictable processes of $\mathscr{H}^{2}(M)$, it can be proved that the Hilbert spaces $L^{2}(M)$ and $L_{\mathscr{P}}^{2}(M)$ are isomorphic, or in other words, that every process of $\mathscr{F}^{2}(M)$ is equivalent to a predictable process. We may also observe that, since $\mathscr{E}$ is an algebra and a lattice,the monotone class theorem yields that $\mathscr{E}$ is dense in $L_{\mathscr{P}}^{2}(M)$,  Consequently, had we constructed the stochastic integral by continuity starting with elementary stochastic integrals, then $L_{\mathscr{P}}^{2}(M)$ would have been the class of integrable processes.
+\end{itemize}
+\subsection{Brownian motion chapter 9}
+\begin{itemize}
+	
+	\item Properties of predictable process seems difficult for me. A reference\cite{dellancherie1976proba} is given by the author, but that book is in French and not in good format.
+	\item As usual, the space $C\left(\mathbb{R}_{+}, \mathbb{R}^{d}\right)$ is denoted by $\mathbf{W}$. If $w(s), s \geq 0$, denote the coordinate mappings, we set $\mathscr{B}_{t}=\sigma(w(s), s \leq t)$,  A function $f$ on $\mathbb{R}_{+} \times \mathbf{W}$ taking values in $\mathbb{R}^{r}$ is predictable if it is predictable as a process defined on $\mathbf{W}$ with respect to the filtration $\left( \mathscr{B}_{t}\right)$ .
+	To understand the following proof, original reference\cite{ikeda2014stochastic} is given in the remark but not very helpful. We know $ P(\omega,\cdot)\ll P $, maybe Girsanov's theorem should be used to show that Brownian motion doesn't change. One possible explanation can be: $ \mathscr{B}_{0}$ means $ \mathscr{B}_{0} \times \mathscr{B}(\mathbb{R}^r)$, then $ P_{(X,B)}\left( \omega, dx \otimes dy\right) = P_X(\omega, dx)\otimes P_B(dy)  $, where $ dx $ and $ dy $ are Lesbegue measures of $ \mathbb{R}^d $ and $ \mathbb{R}^r $. I feel that here a change of measure doesn't affect the equality of a stochastic differential equation since we can calculate It\^o integral as a $ L^2(B)_P $ limit of simple processes integral with respect to Brownian motion and convergence in norm is invariant under conditional expectation (we find a sub-sequence converges a.e. to zero since this convergences is in norm), 
+\[ 
+\int f \diff P(\omega,\cdot)=E(f | \mathscr{B}_0)(\omega) \quad E\left( E(f_n | \mathscr{B}_0)\right) =E(f_n) \rightarrow 0
+	 \]
+	In addition,  
+\[
+ \|K\|_{B^T,P}^{2}=E\left[\int_{0}^{\infty} K_{s}^{2} \diff s^T\right]_P < \infty \Rightarrow \|K\|_{B^T, P^\omega}^{2}< \infty \, a.e.
+ \]
+	 Let's draw a diagram,  we denote $ W^d$ all continuous functions $C\left(\mathbb{R}_{+}, \mathbb{R}^{d+r}\right) $, and $ \omega_t= (\omega^d_t,\omega^r_t)$ is the canonical projection.\\
+\begin{tikzcd}[row sep=huge]
+{(\Omega,\mathscr{F}_t,P) } \arrow[r, "{(X,B)}"] \arrow[rd, "{(X_t,B_t)}" description] \arrow[d, "{(X_0,B_t)}"', dashed]   &  {{\left(W^{d+r},\mathscr{B}(W^{d+r}), P_{(X,B)}\right)}} \arrow[d, "\omega_t"]                                                                                 \\
+{{\left(W^{d+r},\mathscr{B}(W^{d+r}), P_X(\omega, dx)\otimes P_B(dy)  \right)}} \arrow[r, "{(\omega^d_0,\omega^r_t)}"', dashed] & {(\mathbb{R}^{d+r},\mathscr{B}(\mathbb{R}^{d+r}))}                              
+\end{tikzcd}\\
+By hypothesis, we have $ E\left[ \cdot | X_0 \equiv \omega\right]_P = E\left[ \cdot | X_0^\prime \equiv \omega\right]_{P^{\prime}} $ for $\omega \in W^{d+r}$ a.e.-$ P $ and a.e.-$ P\prime $ ; if $X_{0} \stackrel{(d)}{=} X_{0}^{\prime}$ how to get $P=P^{\prime}$? Due to $ W^{d+r} $ a Polish space? I feel vaguely this reasoning has a strong connection with the necessity of using the concept regular conditional probability.
+\begin{proposition}[1.4 on page 367]
+		There is uniquenes in law if, for every $x \in \mathbb{R}^{d}$, whenever $(X, B)$ and $\left(X^{\prime}, B^{\prime}\right)$ are two solutions such that $X_{0}=x$ and $X_{0}^{\prime}=x$ a.s., then the laws of $X$ and $X^{\prime}$ are equal.
+	\end{proposition}
+\begin{proof}
+	Let $P$ be the law of $(X, B)$ on the canonical space $C\left(\mathbb{R}_{+}, \mathbb{R}^{d+r}\right)$ . Since this is a Polish space, there is a regular conditional distribution $P(\omega, \cdot)$ for $P$ with respect to $ \mathscr{B}_{0}$,  For almost every $\omega$ the last $r$ coordinate mappings $\beta^{i}$ still form a $\mathrm{BM}^{r}$ under $P(\omega, \cdot)$ and the integral \[ \int_{0}^{t} f(s, \xi .) d \beta_{s}+\int_{0}^{t} g(s, \xi .) d s \]where $\xi$ stands for the vector of the first $d$ coordinate mappings, makes sense. It is clear (see Exercise ( 5.16) Chap. IV\cite{revuz2013continuous}) that, for almost every $\omega$, the pair $(\xi, \beta)$ is under $P(\omega, \cdot)$ a solution to $e(f, g)$ with $\xi_{0}=\xi(\omega), P(\omega, \cdot)$-a.s.. If $\left(X^{\prime}, B^{\prime}\right)$ is another solution we may likewise define $P^{\prime}(\omega, \cdot)$ and the hypothesis implies that $P(\omega, \cdot)=P^{\prime}(\omega, \cdot)$ for $\omega$ in a set of probability 1 for $P$ and $P^{\prime}$,  If $X_{0} \stackrel{(d)}{=} X_{0}^{\prime}$ we get $P=P^{\prime}$ and the proof is complete.
+\end{proof}
+\begin{definition}
+Let $ (\Omega,\mathscr{F},P) $ be a probability space and $  \mathscr { G } $  be a 
+sub $\sigma$-field of $\mathscr{F}$. A system $\{p(\omega, A)\}_{\omega \in \Omega, A \in \mathscr{F}}$ is called a regular conditional probability given $\mathscr{G}$ if it satisfies the following conditions:\\
+ (i) for fixed $\omega, A \longmapsto p(\omega, A)$  is a probability on $(\Omega, \mathscr{F})$ ; \\
+(ii) for fixed $A \in \mathscr{F}, \omega \longmapsto p(\omega, A)$ is $\mathscr{F}$ -measurable; \\
+(iii) for every $A \in \mathscr{F}$ and $B \in \mathscr{G}$$,P(A \cap B)=\int_{B} p(\omega, A) P(d \omega)$ \\
+Clearly property (iii) is equivalent to \\
+(iii)$^\prime$ for every non-negative random variable $X$ and $B \in \mathscr{G}$,
+\[ E(X: B)=\int_{\Omega}\left\{I_{B}(\omega) \int_{\Omega} X\left(\omega^{\prime}\right) p\left(\omega, d \omega^{\prime}\right)\right\} P(d \omega) \]
+ that is, $\int_{\Omega} X\left(\omega^{\prime}\right) p\left(\omega, d \omega^{\prime}\right)$ coincides with $E(X | \mathscr{F})(\omega)$ a.s.
+\end{definition}
+\begin{definition}
+	Let $(\Omega, \mathscr{F})$ be a measurable space. We say that $\mathscr{F}$ is countably determined if there exists a countable subset $\mathscr{F}_{0} \subset \mathscr{F}$ such that whenever any two probabilities agree on $  \mathscr{F}_{0} $ they must coincide.
+\end{definition}
+\begin{corollary}[page 15 \cite{ikeda2014stochastic}]
+	Let $ ( \Omega, \mathscr{F})$ be a standard measurable space and $P$ be a probability on  $(\Omega, \mathscr{F})$. Let $\mathscr{G}$ be a sub $\sigma$-field of $\mathscr{F}$ and $p(\omega, \cdot)$ be a regular conditional probability given $\mathscr{G}$,  Let $\xi(\omega)$ be a mapping from $\Omega$
+	into a measurable space $(S, \mathscr{B})$ such that it is $\mathscr{G} / \mathscr{B}$ -measurable. Suppose further that $\mathscr{B}$ is countably determined and $\{x\} \in \mathscr{B}$ for every $x \in S$ (this is true, for example, if $(S, \mathscr{B})$ is a standard measurable space). Then 
+	\[ p\left(\omega,\left\{\omega^{\prime} ; \xi\left(\omega^{\prime}\right)=\xi(\omega)\right\}\right)=1, \quad a.a.\, \omega \]
+\end{corollary}
+\begin{remark}
+	It is well known that a Polish space (a complete separable metric space) with the topological $\sigma$-field is a standard measurable space and every measurable subset of a standard measurable space with the induced $\sigma$ -field is a standard measurable space.\\
+	If $ X $ is a solution on the space $(\Omega, \mathscr{F}, P)$ with $\left(\mathscr{F}_{t}\right)_{t \ge 0}$, then, setting $P^{\omega}=P\left(\cdot | \mathscr{F}_{0}\right)$ we have, for almost all fixed $\omega$, that $X$ is a solution on the space $\left(\Omega, \mathscr{F}, P^{\omega}\right)$ with $\left(\mathscr{F}_{t}\right)_{t \ge 0}$ such that $X(0)=X(0, \omega)$ (cf. the corollary above).
+\end{remark}
+\end{itemize}
+\subsection{Quantum Channels}
+\begin{itemize}
+	\item Note that by using a basis of Hilbert-Schmidt orthogonal unitaries $\left\{U_{j}\right\}_{j=1, \ldots, d^{2}}$ we can construct an orthonormal basis of maximally entangled states $\left\{\left(U_{j} \otimes \mathbb{1}\right)|\Omega\rangle\right\}$ for $\mathbb{C}^{d} \otimes \mathbb{C}^{d}$ . Here I don't know how to prove the existence of such basis.
+\end{itemize}
+\section{Notes and Ideas}
+\subsection{Brownian motion chapter 0}
+\begin{itemize}
+\item Rewrite and prove proposition (4.5) and (4.6). We deal with real-valued, right-continuous functions $A$ with domain $[0, \infty[.$
+\begin{lemma}[integration by parts]\label{thm: int_by_part}
+If $A$ and $B$ are two functions
+of finite variation, then for any $t\geqq0$, $ \varOmega_t :=[0,t]$,
+\[
+A_{t} B_{t}=\int_{\varOmega_t} A_{s} \diff B_{s}+ B_{s-} \diff A_{s}
+=\int_{\varOmega_t} A_{s-} \diff B_{s}+ B_{s-} \diff A_{s}+\sum_{s \leq t} \Delta A_{s}\Delta B_{s}
+\]
+\end{lemma}
+
+\begin{proof}
+Calculate$\diff A_{s} \otimes\diff B_{s}\left(\varOmega_t\times\varOmega_t\right)$ and in the right side of the equality we use Fubini's theorem for two right triangles, one including diagonal but the other not.
+\end{proof}
+
+\begin{remark}
+	Using the decomposition of right continuous function, $A$ can be written uniquely $A_{t}=A_{t}^{c}+\sum_{s \leq t} \Delta A_{s}=A_{t}^{c}+A_{t}^{d}$, where $A^{c}$ is continuous and of finite variation. $ A_{t}^{c} $ and $ A_{t}^{d} $ are called continuous part and discrete part of $ A_{t} $. In the sense of measures, we have:
+	\[ \diff A_{t}=\diff A_{t}^{c}+\diff A_{t}^{d} \]
+	Then integration by parts lemma\ref{thm: int_by_part} is the same as:
+	\[
+	\begin{aligned}
+	\diff (A_{s} B_{s})^c& = \diff A_{s}B_{s}-\diff \sum_{r \leq s} \Delta (A_{r}B_{r}) \\
+	& = \left( A_{s-}\diff B_{s} +B_{s-} \diff A_{s}+\diff \sum_{r \leq s} \Delta A_{r}\Delta B_{r}\right) -\diff \sum_{r \leq s} \left( A_{r}\Delta  B_{r}+ B_{r-}\Delta A_{r}\right) \\
+	& = A_{s-}\diff B_{s} +B_{s-} \diff A_{s}-\diff \sum_{r \leq s} \left( A_{r-}\Delta  B_{r}+ B_{r-}\Delta A_{r}\right) \\
+	& = A_{s-}\diff B_{s} +B_{s-} \diff A_{s}-A_{s-}\diff B_{s}^{d}-B_{s-}\diff A_{s}^{d} \\
+	& = A_{s-}\diff B_{s}^{c}+B_{s-}\diff A_{s}^{c}
+	\end{aligned}
+	\]
+	So this is in fact the Lebniz's rule.
+\end{remark}
+\begin{lemma}[chain rule]\label{thm: chain_rule}
+	If $F$ is a $C^{1}$ -function and $A$ is of finite variation, then $F(A)$ is
+	of finite variation and
+	\[ 
+	\diff F(A)^c =F^{\prime}\left(A_{s-}\right) \diff A_{s}-F^{\prime}\left(A_{s-}\right) \diff A_{s}^j=F^{\prime}\left(A_{s-}\right) \diff A_{s}^c
+	 \]
+\end{lemma}
+\begin{proof}
+The result is true for $F(x)=x$, and if it is true for $F$, it is true for $x F(x)$,
+	\[ 
+\begin{aligned}
+\diff \left( AF(A)\right) ^c & = A_{s-}\diff F(A_{s})^{c}+F(A_{s-})\diff A_{s}^{c}=A_{s-}F^{\prime}\left(A_{s-}\right)
+\diff A_{s}^c+F(A_{s-})\diff A_{s}^{c} \\
+& =\left( x F(x) \right) ^{\prime}(A_{s-})\diff A_{s}^c
+\end{aligned}
+\]
+consequently the result
+is true for polynomials. The proof is completed by approximating a $ C^1 $-function
+by a sequence of polynomials.
+\end{proof}
+\item A trick of solving measure equation is to separate the discrete and continuous part, as sloving complex equation we consider real and imaginary parts.
+\begin{proposition}[N\textdegree4.7 in \cite{revuz2013continuous}]
+If $A$ is a right continuous function of finite variation, then
+	\[
+	Y_{t}=Y_{0} \prod_{s \leq t}\left(1+\Delta A_{s}\right) \exp \left(A_{t}^{c}-A_{0}^{c}\right)
+	\]
+	is the only locally bounded solution of the equation
+\[ 	Y_{t}=Y_{0}+\int_{0}^{t} Y_{s-} d A_{s} \]
+\begin{proof}
+	We write the integral equation as $ \diff (Y_{t}-Y_{0}) =Y_{t-}\diff A_{t} $, then separate it into two parts,
+	\[
+	\begin{aligned}
+	 Y_{t-}^{-1}\diff (Y_{t}-Y_{0})^{c} = Y_{t-}^{-1}\diff Y_{t}^{c} &=\diff\left(  \log {Y_{0}}\right) ^{c}=\diff A_{t}^{c}  \\
+	  \diff (Y_{t}-Y_{0})^{d} &= \diff Y_{t}^{d}=Y_{t-}\diff A_{t}^{d} 
+	\end{aligned} 
+	 \]
+The second equation says that 
+\[ Y_{t}=Y_{t-}+\Delta Y_{t}=Y_{t-}+Y_{t-}\Delta A_{t}=Y_{-t}( 1+\Delta A_{t}) \]
+If discrete part of $ A_{t} $ is finite(if not we then use dominated convergence theorem), continuous and discrete parts of $ Y_{t} $ are uniquely determined up to a constant $ C $,
+$ Y_{t}=C \prod_{s \leq t}\left(1+\Delta A_{s}\right) \exp \left(A_{t}^{c}-A_{0}^{c}\right) $.  Set $ t=0 $ in the integral equation, $ C(1+\Delta A_{0})=Y_{0}+ C \Delta A_{0}$. Thus $ C=Y_{0} $.
+\end{proof}
+\end{proposition}
+
+\end{itemize}
+
+\subsection{Brownian motion chapter 1}
+\begin{itemize}
+\item The continuity of process $ X $ gives sense to many expressions. Since $ X $ is almost everywhere determined by a Hilbert(the index space) basis and measurable functions are closed under sequential limit operations,
+$  \sup \{ X _ { s } , 0 \leq s \leq t \} = \sup \{ X_ { s } , 0 \leq s \leq t , s \in \mathbb{Q} \} $ is another stochastic process and the same reason applies for$ \lim _{s \downarrow t} X_{s}$.  For $T(\omega)=\inf \left\{t: X_{t}(\omega)>0\right\}$
+, we have $ \left\lbrace T(\omega) \leq s\right\rbrace = \left\{\omega: \sup_{t\leq s, t \in \mathbb{Q}}X_{t}(\omega)\leq0\right\}  $.
+The same trick of considering $ \mathbb{Q} $ instead of $ \mathbb{R} $ gives sense to $ 1_{[-1,1]}\left(X_{s}\right) $ , hence
+ $ \int_{0}^{t} 1_{[-1,1]}\left(X_{s}\right) \diff s$ exits. This map $(\omega, s) \rightarrow 1_{A}\left(X_{s}(\omega)\right)$ is measurable for $ A $ as rays on $ \mathbb{R} $, then as Borel sets.
+ \item A stopping time may be thought of as the first time some physical event occurs. Sets in $ \mathscr{F}_{T} $ must be thought of as events which may occur
+ before time T.
+ 
+ \item (4.7) Definition. A process $X$ is progressively measurable or simply progressive (with respect to the filtration $\left(\mathscr{F}_{t}\right)$ ) if for every t the map $(s, \omega) \rightarrow X_{s}(\omega)$ from $[0, t] \times \Omega$ into $(E, \mathscr{E})$ is $\mathscr{B}([0, t]) \otimes \mathscr{F}_{t}$ -measurable. A subset $\Gamma$ of $\mathbb{R}_{+} \times \Omega$ is progressive if the process $X=1_{\Gamma}$ is progressive.
+ \begin{proposition}
+An adapted process with right or left continuous paths is progressively measurable.
+ \end{proposition}
+\begin{proof}
+	If $ X $ is right continuous, consider the following approximation,
+\[ 	X_{s}^{(N)}=X_{0} I_{[s=0]}+\sum_{k=1}^{2^{N}} X_{k t / 2^{n}} I  _{[(k-1) t / 2^{n}, k t / 2^{n}[}
+(s)
+\]
+\end{proof}
+\begin{remark}
+	Limit of right continuous functions is again right continuous? For monotone functions it is true. In the above approxinamtion, does it matters when I use the interval $ [(k-1) t / 2^{n}, k t / 2^{n}[ $ or $ ](k-1) t / 2^{n}, k t / 2^{n}] $? I think it is the value we take on this interval, i.e., $ X_{k t / 2^{n}} $ or $ X_{(k-1) t / 2^{n}} $ that matters.
+\end{remark}
+\item Draw diagram to show relation between stochastic process and canonical process. \\
+We pointed out that the choice of a path of a process $X$ amounts to the choice of an element of $\mathscr{F}(T, E)$ for appropriate $T$ and $E$,  It is well-known that the set $\mathscr{F}(T, E)$ is the same as the product space $E^{T}$,  If $w \in \mathscr{F}(T, E)$ it corresponds in $E^{T}$ to the product of the points $w(t)$ of $E$,  From now on, we will not distinguish between $\mathscr{F}(T, E)$ and $E^{T}$,  The functions $Y_{t}, t \in T$, taking their values in $E$, defined on $E^{T}$ by $Y_{t}(w)=w(t)$ are called the coordinate mappings. They are random variables, hence form a process indexed by $T$, if $E^{T}$ is endowed with the product $\sigma$ -algebra $\mathscr{E}^{T}$,  This $\sigma$ -algebra is the smallest for which all the functions $Y_{t}$ are measurable and it is the union of the $\sigma$ -algebras generated by the countable sub-families of functions $Y_{t}, t \in T$.  It is also the smallest $\sigma$ -algebra containing the measurable rectangles $\prod_{t \in T} A_{t}$ where $A_{t} \in \mathscr{F}$ for each $t$ and $A_{t}=E$ but for a finite sub-family $\left(t_{1}, \ldots, t_{n}\right)$ of $T$.  Let now $X_{t}, t \in T$, be a process defined on $(\Omega, \mathscr{F}, P)$ with state space $(E, \mathscr{E})$.  The mapping $\phi$ from $\Omega$ into $E^{T}$ defined by
+ $  \phi(\omega)(t)=X_{t}(\omega)  $ 
+is measurable with respect to $\mathscr{F}$ and $\mathscr{E}^{T}$ because $Y_{t} \circ \phi$ is measurable for each $t$.  
+\adjustbox{scale=1.2,center}{%
+\begin{tikzcd}
+{(\Omega,\mathscr{F},P) } \arrow[rr, "\phi"] \arrow[rd, "X_t"', dotted] &                   & {(E^T,\mathscr{E}^T, P\circ \phi^{-1})} \arrow[ld, "Y_t"] \\
+& {(E,\mathscr{E})} &                                                          
+\end{tikzcd}
+}
+Let us call $P_{X}$ the image of $P$ by $\phi$.  Plainly, for any finite subset $\left(t_{1}, \ldots, t_{n}\right)$ of $T$ and sets $A_{i} \in \mathscr{E}$,
+\[ P\left[X_{t_{1}} \in A_{1}, \ldots, X_{t_{n}} \in A_{n}\right]=P_{X}\left[Y_{t_{1}} \in A_{1}, \ldots, Y_{t_{n}} \in A_{n}\right] \] that is, the processes $X$ and $Y$ are versions of each other.
+\item	A clearer definition is from\cite{ikeda2014stochastic} when we only concern the subset $ C(R_t, R^{d})$.
+\begin{definition}
+
+	Let $R^{d}$ be the $d$ -dimensional Euclidean space and let $W^{d}=C([0, \infty), R^{d})$ be the space of all continuous functions $w$ defined on $[0, \infty)$ with values in $R^{d}$.  For $w_{1}, w_{2} \in W^{d}$, let \[ \rho\left(w_{1}, w_{2}\right)=\sum_{k=1}^{\infty} 2^{-k}\left(\max _{0 \leq s k}\left|w_{1}(t)-w_{2}(t)\right| \wedge 1\right) \]
+	where $|\cdot |$ denotes the Euclidean metric in $ R^{d} $. $W^{d}$ is a complete separable metric space under this metric $\rho$.  Let $\mathscr{B}\left(W^{d}\right)$ be the topological $\sigma$-field on $W^{d}$ and $\mathscr{B}_{t}\left(W^{d}\right)$ be the sub- $\sigma$-field of $\mathscr{B}\left(W^{d}\right)$
+	generated by $w(s), 0 \leq s \leq t$. In other words, $\mathscr{B}_{t}\left(W^{d}\right)$ is the inverse $\sigma$ - field $\rho_{t}^{-1}\left[ \mathscr{B}\left(W^{d}\right)\right]$ of $\mathscr{B}\left(W^{d}\right)$ under the mapping $\rho_{t}: W^{d} \longrightarrow W^{d}$ defined by $\left(\rho_{t} w\right)(s)=w(t \wedge s)$.
+\end{definition}
+
+\end{itemize}
+
+\subsection{Brownian motion chapter 2}
+\begin{itemize}
+\item Martingale property of Brownian motion.
+\begin{proposition}
+	Let $ B $ be a standard linear $ BM $; then the following processes
+	are martingales with respect to $ \sigma(B_{s}, s\leq t) $:\\
+	i) $B_{t}$ itself, ii) $B_{t}^{2}-t$,  iii) $M_{t}^{\theta}=\exp \left(\theta B_{t}-\frac{\theta^{2}}{2} t\right)$ for $\theta \in \mathbb{R}$
+\end{proposition}
+\begin{proof}
+	i) Brown motion has Markov property then calculate the condition expectation.
+	ii) easy. 
+	iii) Consider 	
+	\[X_{t} = \exp \left[\theta B_{t}-\frac{\theta^{2}}{2} t\right],  t \geqslant 0 \qquad
+	X_{t}^{s}=\exp \left[\theta\left(B_{t}-B_{s}\right)-\frac{\theta^{2}}{2}(t-s)\right], t \geqslant s \]
+	 we use $ X_{t}=X_{s}X_{t}^{s}$ and $\mathbb{E} X_{t}^{s}=1$.
+\end{proof}
+\item Discrete version of the stochastic integral.
+Let $ (X_{n}), n = 0, 1, ...  $be a (sub)martingale with respect to a
+discrete filtration$  (\mathscr{F_{n}})  $and $ H_n , n = 1, 2, ...  $, a positive bounded process such that
+$ H_n \in  \mathscr{F_{n}}, n > 1 $; the process Y defined by
+\[ Y_{0}=X_{0}, Y_{n}=Y_{n-1}+H_{n}\left(X_{n}-X_{n-1}\right)\]
+is a (sub)martingale. This is special form of integral, denoted by $ H\cdot X $, we understand as following.
+Define $ X_t = X_{\lfloor t\rfloor} $ as a right continuous process and $ X_t = 0, t<0 $, $ H_n = 1, n \leq 0 $, we get an analog of Stieltjes integral:
+\[ Y_s = (H \cdot X )_s=\int_{t \leq s} H_t \diff X_t \]
+Take $ H_n = 1_{[n\leq T]} $, it is well understand that $( H\cdot T)_n =X_{n\wedge T} =: X^T_n $.
+If  $ H_n = 1_{[n\leq T]}-1_{[n\leq S]} $, then
+$(H \cdot X)_{n}-X_{0}=X_{T}-X_{S}$, which says that we should be careful when using the previous result and linearity of integral at the same time since we in fact change the definition of $ H_0 $ by accident.
+
+\item Give a proof to an exercise.
+\begin{proposition}[exo in prop 2.7]
+	$\forall a \in \mathbb{R},\left\{X_{t} \vee a\right\}, \,t \in I$, where $I$ is a compact subinterval, is uniformly bounded.
+\end{proposition}
+\begin{proof}
+	Use Doob's $ L^p $ inequality, let $ p=1,\, \lambda\rightarrow 0 $, replace $ X_t $ by $ \left\{X_{t} \vee a\right\} $,
+	\[ \lambda^{p} P\left[X^{*} \geq \lambda\right] \leq \sup _{t} E\left[\left|X_{t}\right|^{p}\right] \]
+	where $ X^* = \sup_t \lvert X_t \rvert $.
+\end{proof}
+\item Conditional expectation is $ L^1 - $continuous. Uniformly integrable for martingale implies $ L^1 - $bounded, hence convergence theorem says that an a.e. limit $ X_\infty $ exits. And then this convergence is in $ L^1 $.
+\item An important example of not uniformly integrable martingale is exp$(B_t -\frac{t}{2}) $ since $ B_t $ takes negative value for arbitrarily times(by Law of iterated logarithm).
+\[ P \left[\varlimsup_{t\downarrow 0} \frac{B_t}{(2t \log_2(1/t))^{1/2}}=1\right] =1 \]
+As a martingale, we know the limit exists a fortiori  and it takes on negative values for arbitrarily large times, then this martingale converges to zero a.s. as t goes to infinity. (I don't understand actually.)
+\end{itemize}
+\subsection{Brownian motion chapter 4}
+\begin{itemize}
+	\item There is a basic trick to prove that product of two local martingales is again a local martingale. Use the unique decomposition and don't forget to do some calculation about the increasing process when necessary.
+	\begin{proposition}[Due to Cherny\cite{Cherny2006}]
+		Let $X$ and $Y$ be independent continuous $\left(\mathcal{F}_{t}\right)$ -local martingales. Then $X Y$ is an $\left(\mathcal{F}_{t}\right)$ -local martingale. 
+	\end{proposition} 
+\begin{proof}
+	Let us first assume that $X$ and $Y$ are bounded. Then, for any $t$ and any sequence $\left(\Delta^{n}\right)$ of partitions of $[0, t]$ whose diameters tend to $0$, we have
+	
+	\[ 
+	\begin{aligned}
+	&\mathrm{E}\left(\sum_{t_{i} \in \Delta^{n}}\left(X_{t_{i+1}}-X_{t_{i}}\right)\left(Y_{t_{i+1}}-Y_{t_{i}}\right)\right)^{2} \\ &=\sum_{t_{i} \in \Delta^{n}} \mathrm{E}\left(X_{t_{i+1}}-X_{t_{i}}\right)^{2} \mathrm{E}\left(Y_{t_{i+1}}-Y_{t_{i}}\right)^{2} \\
+	&\leq \max _{t_{i} \in \Delta^{n}} \mathrm{E}\left(X_{t_{i+1}}-X_{t_{i}}\right)^{2} \cdot \sum_{t_{i} \in \Delta^{n}}  \mathrm{E}\left(Y_{t_{i+1}}-Y_{t_{i}}\right)^{2} \\
+	&=\max _{t_{i} \in \Delta^{n}}\left(\mathrm{E} X_{t_{i+1}}^{2}-\mathrm{E} X_{t_{i}}^{2}\right) \cdot\left(\mathrm{E} Y_{t}^{2}-\mathrm{E} Y_{0}^{2}\right)
+	\end{aligned}
+	 \]
+	The latter quantity tends to 0 as $n \rightarrow \infty$ since the function $s \mapsto \mathrm{E} X_{s}^{2}$ is continuous in $s$.  Consequently, $\langle X, Y\rangle= 0$, which implies that $X Y$ is an $\left(\mathcal{F}_{t}\right)$- local martingale.
+	Consider now the general case. Set $\widetilde{X}_{t}=X_{t}-X_{0}, \widetilde{Y}_{t}=Y_{t}-Y_{0}$.  Then \[ X_{t} Y_{t}=X_{0} Y_{0}+X_{0} \widetilde{Y}_{t}+\widetilde{X}_{t} Y_{0}+\widetilde{X}_{t} \widetilde{Y}_{t} \]
+	For $n \in \mathbb{N}$, set $\tau_{n}=\inf \left\{t:\left|\tilde{X}_{t}\right| \geq n\right\}, \sigma_{n}=\inf \left\{t:\left|\tilde{Y}_{t}\right| \geq n\right\}$.  Then the stopped processes $\tilde{X}^{\tau_{n}}=\left(\tilde{X}_{t \wedge \tau_{n}}\right)$ and $\tilde{Y}^{\sigma_{n}}=\left(\tilde{Y}_{t \wedge \sigma_{n}}\right)$ are independent $\left(\mathcal{F}_{t}\right)$-local martingales. Being bounded, they are $\left(\mathcal{F}_{t}\right)$ -martingales. Clearly, $X_{0} \tilde{Y}^{\sigma_{n}}$
+	and $\tilde{X}^{\tau_{n}} Y_{0}$ are $\left(\mathcal{F}_{t}\right)$ -martingales. By the reasoning above, $X^{\tau_{n}} Y^{\sigma_{n}}$ is an $\left(\mathcal{F}_{t}\right)$local martingale. Being bounded, it is an $\left(\mathcal{F}_{t}\right)$ -martingale. Consequently, for any $n \in \mathbb{N},(X Y)^{\tau_{n} \wedge \sigma_{n}}$ is an $\left(\mathcal{F}_{t}\right)$ -martingale. As $\tau_{n} \wedge \sigma_{n} \underset{n \rightarrow \infty}{\longrightarrow} \infty$, we get the desired statement.
+	
+\end{proof}
+\item 
+The proof strategy of It\^o's formula is the same as two lemmas \ref{thm: int_by_part} and \ref{thm: chain_rule} mentioned above.
+\begin{proposition}[Integration by parts formula]
+	If $X$ and $Y$ are two continuous semi-martingales, then
+	\[ X_{t} Y_{t}=X_{0} Y_{0}+\int_{0}^{t} X_{s} d Y_{s}+\int_{0}^{t} Y_{s} d X_{s}+\langle X, Y\rangle_{t} \] In particular,
+	\[ X_{t}^{2}=X_{0}^{2}+2 \int_{0}^{t} X_{s} d X_{s}+\langle X, X\rangle_{t} \]
+\end{proposition}
+\begin{proof}
+	It is enough to prove the particular case which implies the general one by polarization. If $\Delta$ is a subdivision of $[0, t]$, we have \[ \sum_{i}\left(X_{t_{i+1}}-X_{t_{i}}\right)^{2}=X_{t}^{2}-X_{0}^{2}-2 \sum_{i} X_{t_{i}}\left(X_{t_{i}+1}-X_{t_{i}}\right) \] letting $|\Delta|$ tend to zero and using, on one hand the definition of $\langle X, X\rangle$, on the other hand use the ``Riemann Sums" interpretation of It\^o integral, we get the desired result.
+\end{proof}
+\begin{remark}
+	For a continuous semi-martingale $ X $, we use following notation for its unique decomposition,
+	\[ X = X^m + X^a \]
+	where $ X^m $ is a continuous local martingale and  $ X^a $ is a continuous adapted process with finite variation. Don't be confused by another notation $ X^T $, the stopped process, where capital letter $ T $ denotes a stopping time.
+	We use differential sign $ \diff $, the same as above, in the measure sense.
+	The above theorem can be reformulated as Leibniz's rule,
+	\[ 
+	\begin{aligned}
+	(X\,Y -X_0 Y_0)^m &= X\cdot Y^m +Y\cdot X^m\\
+	(X\,Y -X_0 Y_0)^a &= X\cdot Y^a +Y\cdot X^a +\left\langle X,Y \right\rangle 
+	\end{aligned}
+	\]
+\end{remark}
+\begin{theorem}[Itô's formula]
+	 Let $X=\left(X^{1}, \ldots, X^{d}\right)$ be a continuous vector semimartingale and $F \in C^{2}\left(\mathbb{R}^{d}, \mathbb{R}\right) ;$ then, $F(X)$ is a continuous semimartingale and
+	\[ F\left(X_{t}\right)=F\left(X_{0}\right)+\sum_{i} \int_{0}^{t} \frac{\partial F}{\partial x_{i}}\left(X_{s}\right) d X_{s}^{i}+\frac{1}{2} \sum_{i, j} \int_{0}^{t} \frac{\partial^{2} F}{\partial x_{i} \partial x_{j}}\left(X_{s}\right) d\left\langle X^{i}, X^{j}\right\rangle_{s} \]
+\begin{proof}
+	This formula can be reformulated as following, two chain rules, 
+	\[ 
+	\begin{aligned}
+\left( F(X)-F(X_0)\right)^m &= \partial_i F(X)\cdot (X^i)^m \\
+\left( F(X)-F(X_0)\right)^a &=\ \partial_i F(X)\cdot (X^i)^a + \frac{1}{2} \partial_i \partial_j F(X)\cdot \left\langle X^{i}, X^{j}\right\rangle
+	\end{aligned}
+	 \]
+	If $F$ is a function for which the result is true, then for any $i$, the result is true for $G\left(x_{1}, \ldots, x_{d}\right)=x_{i} F\left(x_{1}, \ldots, x_{d}\right) ;$ this is a straightforward consequence of the Leibniz's rule and the fact that $ \left\langle X,Y \right\rangle = \left\langle X^m,Y^m \right\rangle $. The result is thus true for polynomial functions. By stopping, it is enough to prove the result when $X$ takes its values in a compact set $K$ of $\mathbb{R}^{d}$.  But on $K$, any $F$ in $C^{2}\left(\mathbb{R}^{d}, \mathbb{R}\right)$ is the limit in $C^{2}(K, \mathbb{R})$ of polynomial functions. By the ordinary and stochastic dominated convergence theorems, the theorem is established.
+\end{proof}
+\end{theorem}
+\end{itemize}
+\subsection{Brownian motion chapter 8}
+\begin{itemize}
+	\item Since I skipped several chapters I don't fully understand the following basic ideas but maybe it is not necessary.
+	The class of semi-martingales is invariant under many operations such as composition with $C^{2}$ -functions or more generally differences of convex functions. We have also mentioned the invariance under time changes. It is also invariant under an absolutely continuous change of probability measures. This is the content of Girsanov's theorem: If $Q$ is a probability measure on $(\Omega, \mathscr{F})$ which is absolutely continuous with respect to $P$, then every semimartingale with respect to $P$ is a semi-martingale with respect to $Q$.  
+\end{itemize}
+\subsection{Brownian motion chapter 9}
+\begin{itemize}
+	\item Proof concerning predictable process seems difficult for me.
+\end{itemize}
