@@ -2,6 +2,12 @@
 
 This is a collection of codes that are not complicated enough to become a standalone project.
 
+## docs
+
+Some HTML pages, view through links:
+- [Hyperbolic group presenattion](https://jingmatrix.github.io/Code/HyperbolicGroup/index.html)
+- [A snake game in genus 2 surface](https://jingmatrix.github.io/Code/h2snake/index.html)
+
 ## Shell
 
 This is the interesting part.
