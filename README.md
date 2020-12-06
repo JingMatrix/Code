@@ -5,7 +5,8 @@ This is a collection of codes that are not complicated enough to become a standa
 ## docs
 
 Some HTML pages, view through links:
-- [Hyperbolic group presenattion](https://jingmatrix.github.io/Code/HyperbolicGroup/index.html)
+
+- [Hyperbolic group presentation](https://jingmatrix.github.io/Code/HyperbolicGroup/index.html)
 - [A snake game in genus 2 surface](https://jingmatrix.github.io/Code/h2snake/index.html)
 
 ## Shell
@@ -26,7 +27,7 @@ I refer to the folder `Shell/toc`.
 
 This will be my everlasting small project. It happens that we download PDF or DJVU ebooks from websites like `libegen` without embedded table of contents, also named as bookmarks and outlines. I then start to add bookmarks for them, finished books are shared by [Google Drive](https://drive.google.com/drive/folders/1O279emuW9Z1LGmQ94fbRYfjZoxT8bpwU?usp=sharing).
 
-There are much more details to discuss, if interested please go to [Shell/toc](Shell/toc). 
+There are much more details to discuss, if interested please go to [Shell/toc](Shell/toc).
 
 ## Mathematica
 
