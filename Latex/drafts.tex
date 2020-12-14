@@ -1,4 +1,3 @@
-% !TeX spellcheck = en_US
 \documentclass[]{article}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -10,8 +9,7 @@
 \newtheorem{prop}{Question}
 \theoremstyle{remark}
 \newtheorem*{sol}{My Solution}
-%opening
-\title{Drafts for sharing }
+\title{Drafts for sharing}
 \author{Jianyu MA}
 
 \begin{document}
@@ -19,23 +17,19 @@
 \maketitle
 
 
-\section{Files from Teachers}
-\subsection{Topology}
-\begin{itemize}
-	\item In feuille 2.5 Exo 1, we should assume $ X $ is a Hausdorff space since this condition is used twice in the provided solution.
-\end{itemize}
+\section{Course Notes}
 \section{TIM discussion}
 \begin{itemize}
-	\item Define $ v_{1}(t) :=\varphi(t) + \int_{0}^{t} \psi(x) \mathrm{d} x
-	$ and $ v_{2}(t) :=\varphi(t) + \int_{t}^{0} \psi(x) \mathrm{d} x
-	$, then $ u(x,y) = v_{1}(x+y) + v_{2}(x-y) $. We have $ \partial_{x^2}{v_{1}(x+y)} = \partial_{y^2}{v_{1}(x+y)} = v_{1}''(x+y)$ and $ \partial_{y^2}{v_{2}(x-y)} = \partial_{y}(-\partial_{y}v_{2}'(x-y))=v_{2}''(x-y)= \partial_{x^2}{v_{2}(x-y)}$
+	\item Define $ v_1(t) :=\varphi(t) + \int_0^{t} \psi(x) \mathrm{d} x
+	$ and $ v_2(t) :=\varphi(t) + \int_{t}^{0} \psi(x) \mathrm{d} x
+	$, then $ u(x,y) = v_1(x+y) + v_2(x-y) $. We have $ \partial_{x^2}{v_1(x+y)} = \partial_{y^2}{v_1(x+y)} = v_1''(x+y)$ and $ \partial_{y^2}{v_2(x-y)} = \partial_{y}(-\partial_{y}v_2'(x-y))=v_2''(x-y)= \partial_{x^2}{v_2(x-y)}$
 	\item $ AC = AC = 4,\angle BAC = \frac{2\pi}{3}, CD\perp AB, AF=? $
 
-	$ AH = 1, DH = \sqrt{3}, DH \parallel FG \text{, so } FH = \frac{EG}{EH} DH = \dfrac{2}{3} \sqrt{3}, AF = \sqrt{FG^2 + AG^2}=\dfrac{4}{\sqrt{3}}. $
+	$ AH = 1, DH = \sqrt 3, DH \parallel FG \text{, so } FH = \frac{EG}{EH} DH = \dfrac{2}{3} \sqrt 3, AF = \sqrt{FG^2 + AG^2}=\dfrac{4}{\sqrt 3}. $
 \end{itemize}
 \section{Facebook discussion}
 \begin{prop}
-	 If $ A= (a_{ij}) $, then \[ \operatorname{Tr}\left(A^{k}\right)=\sum_{i_{1}, i_{2}, \ldots, i_{k}=1}^{n} a_{i_{1} i_{2}} a_{i_{2} i_{3}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}. \]
+	 If $ A= (a_{ij}) $, then \[ \operatorname{Tr}\left(A^{k}\right)=\sum_{i_1, i_2, \ldots, i_{k}=1}^{n} a_{i_1 i_2} a_{i_2 i_3} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_1}. \]
 \end{prop}
 \begin{sol}
 	This prove use a tricky mathematical induction. Keep in mind we have $ (AB)_{ij} =\sum_{k=1}^{n} a_{i k} b_{k j} $.
@@ -51,11 +45,11 @@
 		\begin{align*}
 			\operatorname{Tr}(B) = & \operatorname{Tr}(A^{k_0 -1})\\
 			&=\operatorname{Tr}\left( \frac{\partial\operatorname{Tr}(A^{k_0})}{\partial A } \right)\\
-			&=\operatorname{Tr}\left( \frac{\partial}{\partial A } \sum_{i_{1}, i_{2}, \ldots, i_{k}=1}^{n} a_{i_{1} i_{2}} a_{i_{2} i_{3}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}\right)\\
-			&=\operatorname{Tr} \left( \sum_{i_{3}, i_{4}, \ldots, i_{k}=1}^{n} a_{j i_3}a_{i_{3} i_{4}} a_{i_{4} i_{5}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}\right) _{ij}\\
-			&= \sum_{i=j=1}^{n}\left( \sum_{i_{3}, i_{4}, \ldots, i_{k}=1}^{n} a_{j i_3}a_{i_{3} i_{4}} a_{i_{4} i_{5}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}\right) _{ij}\\
-			&=\sum_{j,i_{3}, i_{4}, \ldots, i_{k}=1}^{n} a_{j i_3}a_{i_{3} i_{4}} a_{i_{4} i_{5}} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_{1}}\\
-			&= \sum_{i_{1}, i_{2}, \ldots, i_{k-1}=1}^{n} a_{i_{1} i_{2}} a_{i_{2} i_{3}} \ldots a_{i_{k-2} i_{k-1}} a_{i_{k-1} i_{1}}.
+			&=\operatorname{Tr}\left( \frac{\partial}{\partial A } \sum_{i_1, i_2, \ldots, i_{k}=1}^{n} a_{i_1 i_2} a_{i_2 i_3} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_1}\right)\\
+			&=\operatorname{Tr} \left( \sum_{i_3, i_4, \ldots, i_{k}=1}^{n} a_{j i_3}a_{i_3 i_4} a_{i_4 i_5} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_1}\right) _{ij}\\
+			&= \sum_{i=j=1}^{n}\left( \sum_{i_3, i_4, \ldots, i_{k}=1}^{n} a_{j i_3}a_{i_3 i_4} a_{i_4 i_5} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_1}\right) _{ij}\\
+			&=\sum_{j,i_3, i_4, \ldots, i_{k}=1}^{n} a_{j i_3}a_{i_3 i_4} a_{i_4 i_5} \ldots a_{i_{k-1} i_{k}} a_{i_{k} i_1}\\
+			&= \sum_{i_1, i_2, \ldots, i_{k-1}=1}^{n} a_{i_1 i_2} a_{i_2 i_3} \ldots a_{i_{k-2} i_{k-1}} a_{i_{k-1} i_1}.
 		\end{align*}
 		\item Any $ k\in \mathbb{N} $ is small than a $ k_0 = 2^{n_0} $, repeat the second step we see that this proposition is true for $ k $.
 	\end{enumerate}
