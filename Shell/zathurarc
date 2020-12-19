@@ -1,0 +1,28 @@
+# Zathura configuration file
+# See man `man zathurarc'
+
+# Open document in fit-width mode by default
+set adjust-open width
+
+# zathurarc-appearance
+
+set font "monospace 15"
+
+set recolor true
+set default-bg rgba(0,0,0,0.6)
+set recolor-lightcolor rgba(0,0,0,0)
+
+# map
+
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+
+map c exec 'zsh -c "goldendict $(xclip -o)"'
+map [fullscreen] c exec 'zsh -c "goldendict $(xclip -o)"'
+
+# windows
+
+set window-title-basename true
+set statusbar-home-tilde true
+set guioptions ""
