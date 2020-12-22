@@ -1,0 +1,13 @@
+/* this css file should be used with Orchifirefox theme: https://github.com/vinceliuice/Orchis-theme */
+#tabbrowser-tabs {
+	display: none !important;
+}
+
+#nav-bar-customization-target {
+	margin-left: 20px;
+}
+
+menubar > menu {
+	margin-left: 20px;
+	color: black !important;
+}
