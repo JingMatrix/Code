@@ -29,6 +29,15 @@ This will be my everlasting small project. It happens that we download PDF or DJ
 
 There are much more details to discuss, if interested please go to [Shell/toc](Shell/toc).
 
+### Backup plugin install state
+
+`Shell/*.plugin` files are directory structure output by `tree` command, they indicates what kind of plugins I installed on my computer. To update state, use:
+
+```bash
+cd Shell
+./updatePluginState.sh
+```
+
 ## Mathematica
 
 I sometimes do mathematical experiments and presentations with Wolfram Mathematica.

@@ -1,0 +1,19 @@
+/home/jing/.vim
+├── pack
+│   ├── plugin
+│   │   └── start
+│   ├── project
+│   │   ├── opt
+│   │   └── start
+│   ├── syntax
+│   │   ├── opt
+│   │   └── start
+│   └── theme
+│       └── start
+├── spell
+│   ├── fr.utf-8.spl
+│   └── fr.utf-8.sug
+└── UltiSnips
+    └── markdown.snippets
+
+13 directories, 3 files

@@ -1,0 +1,10 @@
+/home/jing/.local/share/gnome-shell
+├── application_state
+└── extensions
+    ├── clipboard-indicator@tudmotu.com
+    ├── gtktitlebar@velitasali.github.io
+    ├── hidetopbar@mathieu.bidon.ca
+    ├── openweather-extension@jenslody.de
+    └── pop-shell@system76.com
+
+6 directories, 1 file
