@@ -3,6 +3,7 @@ filetype plugin indent on
 
 " vimtex
 let g:vimtex_compiler_method='tectonic'
+let g:vimtex_compiler_tectonic={ 'build_dir' : '/tmp/latex/'}
 
 set mouse=v
 set showcmd
