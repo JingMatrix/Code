@@ -26,6 +26,8 @@ let g:airline_theme='lucius'
 augroup notable
 	autocmd!
 	autocmd BufWritePost *otes/*.md 1,7s/\v^modified:\ "\zs.*\ze"$/\=system('date -Is | head -c -1')
+	autocmd InsertLeave *otes/*.md silent !ibus engine xkb:us::eng
+	autocmd InsertEnter *otes/*.md silent !ibus engine libpinyin
 augroup end
 
 set conceallevel=2
