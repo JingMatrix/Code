@@ -12,7 +12,7 @@ curl -s -X POST https://api.mathpix.com/v3/latex \
 	-H "app_id: $app_id" \
 	-H "app_key: $app_key" \
 	-H 'Content-Type: application/json' \
-	-o .json --data @- <<Config
+	-o /tmp/mathpix.json --data @- <<Config
 { 
 	"src": "data:image/jpeg;base64,'$image'", 
 	"ocr": ["math", "text"],
@@ -28,5 +28,5 @@ curl -s -X POST https://api.mathpix.com/v3/latex \
 	 }
 }
 Config
-jq '.text' .json  -r | xclip -in -selection clipboard
-jq '.' .json
+jq '.text' /tmp/mathpix.json  -r | xclip -in -selection clipboard
+jq '.' /tmp/mathpix.json
