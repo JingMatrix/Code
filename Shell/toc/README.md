@@ -8,6 +8,7 @@ Therefore basic strategy should be, by order doing the following:
 
 1. Try to find an ebook version with outline embedded firstly.
 2. Find a well formarted outline. Either 
+	- you use `pdftotext -layout` to dump pages of pdf; and `djvutxt` for DJVU
 	- you can copy and select from the book or
 	- you find them on online book websites which usually contains outlines in the item introduction part.
 3. Use `pdfgrep` for example: 
