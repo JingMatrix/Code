@@ -10,7 +10,11 @@ Therefore basic strategy should be, by order doing the following:
 2. Find a well formarted outline. Either 
 	- you can copy and select from the book or
 	- you find them on online book websites which usually contains outlines in the item introduction part.
-3. Perform OCR manually, painful and not effcient.
+3. Use `pdfgrep` for example: 
+```sh
+pdfgrep --page-range=7-449 -n -P '\n\K(§|Chapter)' ~/Mathematics/Geometry\ and\ Topology/Complex\ Geometry/Complex\ Analytic\ and\ Differential\ Geometry.pdf > tocDemaillyCADG
+```
+4. Perform OCR manually, painful and not effcient.
 
 For good format outline files, take `tocHatcher` as an example.
 
