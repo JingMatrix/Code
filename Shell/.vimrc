@@ -2,7 +2,7 @@ set nocompatible
 
 " vimtex
 let g:vimtex_compiler_method='tectonic'
-let g:vimtex_compiler_tectonic = {'build_dir' : '/tmp/latex/'}
+let g:vimtex_compiler_tectonic={'build_dir' : '/var/tmp/latex'}
 set conceallevel=2
 hi Conceal NONE
 let g:vimtex_view_method='zathura'
@@ -14,7 +14,7 @@ augroup coc
 augroup end
 
 " mkdx plugin
-let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
+let g:mkdx#settings={ 'highlight': { 'enable': 1 },
 			\ 'enter': { 'shift': 1 },
 			\ 'links': { 'external': { 'enable': 1 } },
 			\ 'fold': { 'enable': 1 } }
