@@ -1,8 +1,10 @@
+set background=dark
 set nocompatible
 
 " vimtex
 let g:vimtex_compiler_method='tectonic'
-let g:vimtex_compiler_tectonic={'build_dir' : '/var/tmp/latex'}
+let g:vimtex_compiler_tectonic={'build_dir' : '/var/tmp/latex', 'executable': '~/.cargo/bin/tectonic'}
+
 set conceallevel=2
 hi Conceal NONE
 let g:vimtex_view_method='zathura'
@@ -51,3 +53,4 @@ augroup END
 
 set undodir=/var/tmp/vim
 set undofile
+set textwidth=0

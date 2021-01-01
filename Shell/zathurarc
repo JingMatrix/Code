@@ -26,3 +26,5 @@ map [fullscreen] c exec 'zsh -c "goldendict $(xclip -o)"'
 set window-title-basename true
 set statusbar-home-tilde true
 set guioptions ""
+set window-width 1920 
+set window-height 1080 

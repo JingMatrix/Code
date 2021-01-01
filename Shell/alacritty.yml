@@ -1,0 +1,29 @@
+import:
+  - /home/jing/Documents/Project/alacritty-theme/themes/pencil_dark.yaml  
+env:
+  TERM: screen-256color
+window:
+  decorations: none
+  padding:
+    x: 13
+    y: 13
+  startup_mode: Maximized
+shell:
+  program: /usr/bin/tmux
+  args:
+    - -u # force UTF-8 in tmux
+    # - "-2"
+key_bindings:
+  - { key: RControl, mods: Control, action: PasteSelection }
+background_opacity: 0.7
+font:
+  normal:
+    family: MesloLGS NF
+    style: regular
+  bold:
+    family: MesloLGS NF
+    style: bold
+  italic:
+    family: MesloLGS NF
+    style: italic
+  size: 19
