@@ -54,3 +54,4 @@ augroup END
 set undodir=/var/tmp/vim
 set undofile
 set textwidth=0
+highlight Comment cterm=italic gui=italic
