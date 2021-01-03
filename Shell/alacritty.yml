@@ -1,3 +1,5 @@
+env:
+  EDITOR: vim
 window:
   decorations: none
   padding:
@@ -11,6 +13,8 @@ shell:
     - "-2"
 key_bindings:
   - { key: RControl, mods: Control, action: PasteSelection }
+  - { key: RAlt, mods: Alt, action: Paste }
+  - { key: 127, chars: "\x02" }
 background_opacity: 0.7
 font:
   normal:
@@ -34,7 +38,7 @@ colors:
     red: "0xcc0000"
     green: "0x4e9a06"
     yellow: "0xc4a000"
-    blue: "0x3465a4"
+    blue: "0x7d43fd"
     magenta: "0x75507b"
     cyan: "0x06989a"
     white: "0xd3d7cf"
