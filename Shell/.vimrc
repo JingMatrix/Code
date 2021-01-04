@@ -28,8 +28,8 @@ let g:airline_theme='lucius'
 augroup notable
 	autocmd!
 	autocmd BufWritePre *otes/*.md 1,7s/\v^modified:\ "\zs.*\ze"$/\=system('date -Is | head -c -1')
-	autocmd InsertEnter *otes/*.md silent !ibus engine libpinyin
-	autocmd InsertLeave *otes/*.md silent !ibus engine xkb:us::eng
+	autocmd InsertEnter *otes/*.md silent !ibus engine libpinyin &
+	autocmd InsertLeave *otes/*.md silent !ibus engine xkb:us::eng &
 augroup end
 
 " native function
@@ -46,12 +46,16 @@ set shiftwidth=2
 
 set number relativenumber
 augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+	autocmd!
+	autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 set undodir=/var/tmp/vim
 set undofile
+augroup rmundo
+	autocmd!
+	autocmd VimEnter /tmp/* set noundofile
+augroup END
 set textwidth=0
 highlight Comment cterm=italic gui=italic
