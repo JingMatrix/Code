@@ -24,6 +24,13 @@ let g:mkdx#settings={ 'highlight': { 'enable': 1 },
 
 let g:airline_theme='lucius'
 
+" formater
+let g:shfmt_fmt_on_save = 1
+augroup formatter
+	autocmd!
+	autocmd FileType sh,zsh,bash nmap <leader>p :Shfmt<enter>
+augroup END
+
 " writing dairy
 augroup notable
 	autocmd!
@@ -48,9 +55,9 @@ set shiftwidth=2
 
 set number relativenumber
 augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+	autocmd!
+	autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 set undodir=/var/tmp/vim

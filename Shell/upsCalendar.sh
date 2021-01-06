@@ -9,8 +9,7 @@
 # optional you can set startdate manually as environment variable
 # set zoom=1 to open zoon link possiblly
 set -e
-if ! [[ -n $startdate ]]
-then
+if ! [[ -n $startdate ]]; then
 	startdate=$(date -I)
 fi
 enddate=$(date -d ${startdate}' '${1:-"2days"} -I)
@@ -44,28 +43,21 @@ zoomlink=(
 echo "Course from $startdate to $enddate"
 echo "DATE\tTIME\tInformation\n"
 curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "start=$startdate&end=$enddate&resType=103&calView=month&federationIds%5B%5D=IMAR9CMA&federationIds%5B%5D=IMARACMA&colourScheme=3" >/tmp/cour.json | jq -r 'sort_by(.start) | .[] | [.start, .description, .eventCategory] | @tsv' |
-	while IFS=$'\t' read -r time description eventCategory
-	do
-		if  echo $eventCategory | sed -n '/control/I{q1}'
-		then
+	while IFS=$'\t' read -r time description eventCategory; do
+		if echo $eventCategory | sed -n '/control/I{q1}'; then
 			echo -n '\033[0m'
 		else
 			echo -n '\033[1;33m'
 		fi
-		b=$(<<< $description | sed 's/.*Course \([0-9]\).*/\1/p' -n)
-		if [[ -n $b ]]
-		then
+		b=$(<<<$description | sed 's/.*Course \([0-9]\).*/\1/p' -n)
+		if [[ -n $b ]]; then
 			# limit to only courses you follow
-			if [[ $b < 4 || $b == 5 ]]
-			then
+			if [[ $b < 4 || $b == 5 ]]; then
 				echo -n $(date -d $time +"%a\t%H:%M\t")
 				echo $course[$b]
 			fi
-			if [[ $zoom == 1 &&  $(date -I) == $(date -I -d $time) ]]
-				# check zoom link
-			then
-				if [[ $b == 2 ]]
-				then
+			if [[ $zoom == 1 && $(date -I) == $(date -I -d $time) ]]; then # check zoom link
+				if [[ $b == 2 ]]; then
 					tmp1=${b}$(date +%a)
 					xdg-open $zoomlink[$tmp1]
 				else
@@ -73,17 +65,14 @@ curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "s
 				fi
 			fi
 		else
-			s=$(<<< $description | sed 's/.*seminar \([0-9]\).*/\1/p' -n)
-			if [[ $s == 1 ]]
-			then
+			s=$(<<<$description | sed 's/.*seminar \([0-9]\).*/\1/p' -n)
+			if [[ $s == 1 ]]; then
 				echo -n $(date -d $time +"%a\t%H:%M\t")
 				echo $seminar[$s]
-				if [[ $zoom == 1 && $(date -I) == $(date -I -d $time) ]]
-				then
+				if [[ $zoom == 1 && $(date -I) == $(date -I -d $time) ]]; then
 					tmp2=${s}seminar
 					xdg-open $zoomlink[$tmp2]
 				fi
 			fi
 		fi
 	done
-
