@@ -1,9 +1,8 @@
-#!/bin/zsh 
+#!/bin/zsh
 # use mathpix api for math ocr
 set -e
-if xclip -selection clipboard -t image/png -o > /tmp/equa.png
-then
-	image=$( base64 -i /tmp/equa.png | tr -d \\n)
+if xclip -selection clipboard -t image/png -o >/tmp/equa.png; then
+	image=$(base64 -i /tmp/equa.png | tr -d \\n)
 else
 	echo "Make sure that there is an image in CLIPBOARD"
 	exit 1
@@ -28,5 +27,5 @@ curl -s -X POST https://api.mathpix.com/v3/latex \
 	 }
 }
 Config
-jq '.text' /tmp/mathpix.json  -r | xclip -in -selection clipboard
+jq '.text' /tmp/mathpix.json -r | xclip -in -selection clipboard
 jq '.' /tmp/mathpix.json

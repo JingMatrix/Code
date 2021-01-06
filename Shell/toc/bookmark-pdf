@@ -1,12 +1,12 @@
 #!/bin/zsh
 
-pdf=`basename -s .pdf $1`
+pdf=$(basename -s .pdf $1)
 bkFile="$2"
 pdf_data="$pdf""_data.txt"
 EXTRACT_FILE=booky_bookmarks_extract
 
 echo "Converting $bkFile to pdftk compatible format"
-python3 pdftkformat.py < "$bkFile" > "$EXTRACT_FILE"
+python3 pdftkformat.py <"$bkFile" >"$EXTRACT_FILE"
 
 echo "Dumping pdf meta data..."
 pdftk "$1" dump_data_utf8 output "$pdf_data"
