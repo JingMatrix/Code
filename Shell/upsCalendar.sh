@@ -8,7 +8,7 @@
 # ./upsCalendar.sh "1week"
 # optional you can set startdate manually as environment variable
 # set zoom=1 to open zoon link possiblly
-set -e
+# set -e
 if ! [[ -n $startdate ]]; then
 	startdate=$(date -I)
 fi
@@ -52,16 +52,16 @@ curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "s
 		b=$(<<<$description | sed 's/.*Course \([0-9]\).*/\1/p' -n)
 		if [[ -n $b ]]; then
 			# limit to only courses you follow
-			if [[ $b < 4 || $b == 5 ]]; then
+			if [[ $b < 3 || $b == 5 ]]; then
 				echo -n $(date -d $time +"%a\t%H:%M\t")
 				echo $course[$b]
-			fi
-			if [[ $zoom == 1 && $(date -I) == $(date -I -d $time) ]]; then # check zoom link
-				if [[ $b == 2 ]]; then
-					tmp1=${b}$(date +%a)
-					xdg-open $zoomlink[$tmp1]
-				else
-					xdg-open $zoomlink[$b]
+				if [[ $zoom == 1 && $(date -I) == $(date -I -d $time) ]]; then # check zoom link
+					if [[ $b == 2 ]]; then
+						tmp1=${b}$(date +%a)
+						xdg-open $zoomlink[$tmp1]
+					else
+						xdg-open $zoomlink[$b]
+					fi
 				fi
 			fi
 		else
