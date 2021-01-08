@@ -42,8 +42,11 @@ zoomlink=(
 )
 echo "Course from $startdate to $enddate"
 echo "DATE\tTIME\tInformation\n"
-curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "start=$startdate&end=$enddate&resType=103&calView=month&federationIds%5B%5D=IMAR9CMA&federationIds%5B%5D=IMARACMA&colourScheme=3" >/tmp/cour.json | jq -r 'sort_by(.start) | .[] | [.start, .description, .eventCategory] | @tsv' |
-	while IFS=$'\t' read -r time description eventCategory; do
+curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "start=$startdate&end=$enddate&resType=103&calView=month&federationIds%5B%5D=IMAR9CMA&federationIds%5B%5D=IMARACMA&colourScheme=3" >/tmp/cour.json | jq -r 'sort_by(.start) | .[] | [.start, .end, .description, .eventCategory] | @tsv' |
+	while IFS=$'\t' read -r time endtime description eventCategory; do
+		if [[ $(date +%s) > $(date -d $endtime +%s) ]]; then
+			continue
+		fi
 		if echo $eventCategory | sed -n '/control/I{q1}'; then
 			echo -n '\033[0m'
 		else
