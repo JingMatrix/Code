@@ -2,18 +2,35 @@
 ├── pack
 │   ├── plugin
 │   │   └── start
+│   │       ├── vim-commentary
+│   │       ├── vim-fugitive
+│   │       ├── vim-sensible
+│   │       ├── vim-surround
+│   │       └── vim-unimpaired
 │   ├── project
 │   │   ├── opt
+│   │   │   └── coc.nvim
 │   │   └── start
+│   │       ├── fzf
+│   │       ├── fzf.vim
+│   │       ├── ultisnips
+│   │       └── vim-snippets
 │   ├── syntax
 │   │   ├── opt
 │   │   └── start
-│   └── theme
-│       └── start
+│   │       ├── mkdx
+│   │       ├── vim-prettier
+│   │       ├── vim-shfmt
+│   │       └── vimtex
+│   ├── theme
+│   │   └── start
+│   │       ├── vim-airline
+│   │       └── vim-airline-themes
+│   └── update.sh
 ├── spell
 │   ├── fr.utf-8.spl
 │   └── fr.utf-8.sug
 └── UltiSnips
     └── markdown.snippets
 
-13 directories, 3 files
+29 directories, 4 files

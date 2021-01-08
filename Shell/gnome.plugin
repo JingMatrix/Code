@@ -1,10 +1,9 @@
 /home/jing/.local/share/gnome-shell
 ├── application_state
-└── extensions
-    ├── clipboard-indicator@tudmotu.com
-    ├── gtktitlebar@velitasali.github.io
-    ├── hidetopbar@mathieu.bidon.ca
-    ├── openweather-extension@jenslody.de
-    └── pop-shell@system76.com
+├── extensions
+│   ├── clipboard-indicator@tudmotu.com
+│   └── hidetopbar@mathieu.bidon.ca
+├── extension-updates
+└── gnome-overrides-migrated
 
-6 directories, 1 file
+4 directories, 2 files
