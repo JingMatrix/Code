@@ -7,8 +7,8 @@
 # for example, you can use:
 # ./upsCalendar.sh "1week"
 # optional you can set startdate manually as environment variable
-# set zoom=1 to open zoon link possiblly
-# set -e
+# set zoom=1 to open zoon link possibly
+set -e
 if ! [[ -n $startdate ]]; then
 	startdate=$(date -I)
 fi
@@ -43,7 +43,7 @@ zoomlink=(
 echo "Course from $startdate to $enddate"
 echo "DATE\tTIME\tInformation\n"
 curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "start=$startdate&end=$enddate&resType=103&calView=month&federationIds%5B%5D=IMAR9CMA&federationIds%5B%5D=IMARACMA&colourScheme=3" >/tmp/cour.json | jq -r 'sort_by(.start) | .[] | [.start, .end, .description, .eventCategory] | @tsv' |
-	while IFS=$'\t' read -r time endtime description eventCategory; do
+	while IFS=$'\t' read -r starttime endtime description eventCategory; do
 		if [[ $(date +%s) > $(date -d $endtime +%s) ]]; then
 			continue
 		fi
@@ -56,9 +56,9 @@ curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "s
 		if [[ -n $b ]]; then
 			# limit to only courses you follow
 			if [[ $b < 3 || $b == 5 ]]; then
-				echo -n $(date -d $time +"%a\t%H:%M\t")
+				echo -n $(date -d $starttime +"%a\t%H:%M\t")
 				echo $course[$b]
-				if [[ $zoom == 1 && $(date -I) == $(date -I -d $time) ]]; then # check zoom link
+				if [[ $zoom == 1 && $(date -I) == $(date -I -d $starttime) ]]; then # check zoom link
 					if [[ $b == 2 ]]; then
 						tmp1=${b}$(date +%a)
 						xdg-open $zoomlink[$tmp1]
@@ -70,9 +70,9 @@ curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "s
 		else
 			s=$(<<<$description | sed 's/.*seminar \([0-9]\).*/\1/p' -n)
 			if [[ $s == 1 ]]; then
-				echo -n $(date -d $time +"%a\t%H:%M\t")
+				echo -n $(date -d $starttime +"%a\t%H:%M\t")
 				echo $seminar[$s]
-				if [[ $zoom == 1 && $(date -I) == $(date -I -d $time) ]]; then
+				if [[ $zoom == 1 && $(date -I) == $(date -I -d $starttime) ]]; then
 					tmp2=${s}seminar
 					xdg-open $zoomlink[$tmp2]
 				fi
