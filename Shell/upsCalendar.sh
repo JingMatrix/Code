@@ -55,7 +55,7 @@ curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "s
 		b=$(<<<$description | sed 's/.*Course \([0-9]\).*/\1/p' -n)
 		if [[ -n $b ]]; then
 			# limit to only courses you follow
-			if [[ $b < 3 || $b == 5 ]]; then
+			if [[ $b < 3 ]]; then
 				echo -n $(date -d $starttime +"%a\t%H:%M\t")
 				echo $course[$b]
 				if [[ $zoom == 1 && $(date -I) == $(date -I -d $starttime) ]]; then # check zoom link
