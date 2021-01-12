@@ -36,7 +36,7 @@ zoomlink=(
 	# Reading seminar
 	[1seminar]="zoommtg://univ-tlse3-fr.zoom.us/join?action=join&confno=81923444202&pwd=d2lRVU9nYy9jNTM1dUE3VEJpSTJOZz09"
 	# Holomorphic dynamics
-	[1]="zoommtg://univ-tlse3-fr.zoom.us/join?action=join&confno=81363610874&pwd=T1VnWTl3b0NCK1UyUHNUWXZ6ZEVadz09"
+	[1]="zoommtg://univ-tlse3-fr.zoom.us/join?action=join&confno=85185205169?&pwd=bHJSM203N3FOb2pqZHZqekJDKzFlZz09"
 	# Learning
 	[5]="zoommtg://zoom.us/join?action=join&confno=94751387445&pwd=aTFkTVcyeUxCcktRSTZwSDlEVTcxdz09"
 )
