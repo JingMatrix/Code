@@ -53,7 +53,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
-set number relativenumber
+set relativenumber
 augroup numbertoggle
 	autocmd!
 	autocmd BufEnter,FocusGained,InsertLeave * set relativenumber

@@ -14,7 +14,7 @@ if ! [[ -n $startdate ]]; then
 fi
 enddate=$(date -d ${startdate}' '${1:-"2days"} -I)
 course=(
-	"Holomorphic dynamics in dimension one : some advanced topics. (F. Bertheloot and P.Roesch)"
+	"Holomorphic dynamics in dimension one : some advanced topics. (F. Berteloot and P.Roesch)"
 	"Topics in Differential Complex Geometry (E. Legendre)"
 	"Hamilton-Jacobi equations for biology (S. Mirrahimi)"
 	"Stability analysis of ODE's or PDE's periodic solutions. Theoretical and numerical aspects. (P. Noble)"
