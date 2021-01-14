@@ -22,15 +22,14 @@
 │   │       ├── vim-prettier
 │   │       ├── vim-shfmt
 │   │       └── vimtex
-│   ├── theme
-│   │   └── start
-│   │       ├── vim-airline
-│   │       └── vim-airline-themes
-│   └── update.sh
+│   └── theme
+│       └── start
+│           ├── vim-airline
+│           └── vim-airline-themes
 ├── spell
 │   ├── fr.utf-8.spl
 │   └── fr.utf-8.sug
 └── UltiSnips
     └── markdown.snippets
 
-29 directories, 4 files
+29 directories, 3 files
