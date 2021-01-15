@@ -11,7 +11,7 @@ curl \
 	-F formulaire_action_args='dG/ndLrLo+gvGPVxR6SbFiaudrCtOraBqEzenxaYNIHb7oNgJV0IPGgbrzP1qbgSWzK9UdgrWLeplTcb15eIdbz+99Op7ltU7esE/YfJ' \
 	-F formidable_afficher_apres=valeurs \
 	-F mechantrobot='' \
-	-F date_1=$(date -d '1 day' +%d/%m/%Y) \
+	-F date_1=$(date -d ${1:-"1 day"} +%d/%m/%Y) \
 	-F 'checkbox_2[]=choix1' \
 	-F 'checkbox_1[]=7' \
 	-F 'checkbox_2[]=choix2' \
