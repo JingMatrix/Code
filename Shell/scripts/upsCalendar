@@ -47,33 +47,34 @@ curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "s
 		if [[ $(date +%s) > $(date -d $endtime +%s) ]]; then
 			continue
 		fi
+		# Color control events as yellow, and white otherwise
 		if echo $eventCategory | sed -n '/control/I{q1}'; then
 			echo -n '\033[0m'
 		else
 			echo -n '\033[1;33m'
 		fi
-		b=$(<<<$description | sed 's/.*Course \([0-9]\).*/\1/p' -n)
-		if [[ -n $b ]]; then
+		course_num=$(<<<$description | sed 's/.*Course \([0-9]\).*/\1/p' -n)
+		if [[ -n $course_num ]]; then
 			# limit to only courses you follow
-			if [[ $b < 3 ]]; then
+			if [[ $course_num < 3 ]]; then
 				echo -n $(date -d $starttime +"%a\t%H:%M\t")
-				echo $course[$b]
+				echo $course[$course_num]
 				if [[ $zoom == 1 && $(date -I) == $(date -I -d $starttime) ]]; then # check zoom link
-					if [[ $b == 2 ]]; then
-						tmp1=${b}$(date +%a)
+					if [[ $course_num == 2 ]]; then
+						tmp1=${course_num}$(date +%a)
 						xdg-open $zoomlink[$tmp1]
 					else
-						xdg-open $zoomlink[$b]
+						xdg-open $zoomlink[$course_num]
 					fi
 				fi
 			fi
 		else
-			s=$(<<<$description | sed 's/.*seminar \([0-9]\).*/\1/p' -n)
-			if [[ $s == 1 ]]; then
+			seminar_num=$(<<<$description | sed 's/.*seminar \([0-9]\).*/\1/p' -n)
+			if [[ $seminar_num == 1 ]]; then
 				echo -n $(date -d $starttime +"%a\t%H:%M\t")
-				echo $seminar[$s]
+				echo $seminar[$seminar_num]
 				if [[ $zoom == 1 && $(date -I) == $(date -I -d $starttime) ]]; then
-					tmp2=${s}seminar
+					tmp2=${seminar_num}seminar
 					xdg-open $zoomlink[$tmp2]
 				fi
 			fi
