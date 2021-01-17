@@ -35,8 +35,8 @@ augroup END
 augroup notable
 	autocmd!
 	autocmd BufWritePre *otes/*.md 1,7s/\v^modified:\ "\zs.*\ze"$/\=system('date -Is | head -c -1')
-	autocmd InsertEnter *otes/*.md silent !ibus engine libpinyin &
-	autocmd InsertLeave *otes/*.md silent !ibus engine xkb:us::eng &
+	autocmd InsertEnter *otes/*.md silent !ibus engine libpinyin &>/dev/null
+	autocmd InsertLeave *otes/*.md silent !ibus engine xkb:us::eng &>/dev/null
 	" we can achieve this by press shift
 	" autocmd InsertEnter,InsertLeave *otes/*.md silent !xdotool key shift &
 augroup end
