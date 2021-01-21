@@ -39,8 +39,8 @@ async function main(keyword) {
 	show_result();
 	user_interface();
 	// Load one more page to save some time
-	loadpage += 1;
-	search(keyword, loadpage);
+	// loadpage += 1;
+	// search(keyword, loadpage);
 }
 
 async function search(kw, page = loadpage) {
