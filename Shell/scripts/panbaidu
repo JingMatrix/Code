@@ -6,5 +6,5 @@ url=https://www.feizhupan.com
 curl -G \
 	--data-urlencode "keyword=$1" \
 	$url/search |
-	grep -o "=(function(.*));" >/tmp/list.js
-node <<<"let data" </tmp/list.js <$jsfile
+	grep -o "__NUXT__=(function(.*));" >/tmp/script
+echo -n "let " | </tmp/script <$jsfile >/tmp/list.mjs && node /tmp/list.mjs
