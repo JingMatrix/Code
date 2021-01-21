@@ -1,4 +1,17 @@
 // Usage: node 52pansou.mjs [search keyword]
+//
+// Possible api for now
+// https://www.feizhupan.com
+// https://www.iizhi.cn
+//
+// Encryted api, it hides share url behind $api/detail/url?id=
+//
+// But always return -1 for now
+// https://www.luomapan.com/
+// https://www.dashengpan.com/
+// https://www.dalipan.com/
+// https://www.xiaomapan.com/
+//
 import { createInterface } from "readline";
 import { get } from "https";
 
