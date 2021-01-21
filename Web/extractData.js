@@ -1,4 +1,5 @@
 import { createInterface } from "readline";
+import { get } from "https";
 
 const rl = createInterface({
 	input: process.stdin,
@@ -27,7 +28,34 @@ function print_content(result) {
 }
 
 function get_url(index) {
-	console.log(results[index].res.id);
+	// console.log(results[index].res);
+	const info = results[index].res;
+	if (info.haspwd) {
+		console.log("Password to this share link is:\t" + info.pwd);
+	} else {
+		console.log("This share link has no password");
+	}
+	console.log("Finding share url...");
+	let url = "https://www.feizhupan.com/api/detail?id=" + info.id;
+	let req = get(url, function (res) {
+		let data = "",
+			json_data;
+
+		res.on("data", function (stream) {
+			data += stream;
+		});
+		res.on("end", function () {
+			json_data = JSON.parse(data);
+
+			// will output a Javascript object
+			console.log(json_data.url);
+			rl.prompt();
+		});
+	});
+
+	req.on("error", function (e) {
+		console.log(e.message);
+	});
 }
 
 const print_step = 3;
@@ -73,11 +101,11 @@ rl.on("line", (line) => {
 					`n:\tNext ${print_step} result\np:\tPrevious ${print_step} result\nNumber:\tInfo for that entry`
 				);
 		}
+		rl.prompt();
 	} else {
 		index = +line;
 		get_url(index);
 	}
-	rl.prompt();
 }).on("close", () => {
 	console.log("Have a nice day");
 	process.exit(0);
