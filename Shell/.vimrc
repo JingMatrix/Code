@@ -9,20 +9,17 @@ set conceallevel=2
 hi Conceal NONE
 let g:vimtex_view_method='zathura'
 
-" CoC plugin
-augroup coc
-	autocmd!
-	autocmd VimEnter *Documents/Project/* packadd coc.nvim
-augroup end
-
 " mkdx plugin
 let g:mkdx#settings={ 'highlight': { 'enable': 1 },
-			\ 'enter': { 'shift': 1 },
+			\ 'enter': {'enable': 0 },
 			\ 'links': { 'external': { 'enable': 1 } },
-			\ 'fold': { 'enable': 1 } }
+			\ 'fold': { 'enable': 1 },
+			\ 'tab': { 'enable': 0 } }
 
 
 let g:airline_theme='lucius'
+let g:UltiSnipsExpandTrigger="<m-tab>"
+let g:coc_node_path='/home/jing/.nvm/versions/node/v14.15.1/bin/node'
 
 " formater
 let g:shfmt_fmt_on_save = 1
@@ -68,3 +65,7 @@ augroup rmundo
 augroup END
 set textwidth=0
 highlight Comment cterm=italic gui=italic
+
+set path+=..
+hi Pmenu ctermbg=NONE ctermfg=white
+hi PmenuSel ctermfg=yellow

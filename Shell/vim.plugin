@@ -1,4 +1,5 @@
 /home/jing/.vim
+├── coc-settings.json
 ├── pack
 │   ├── plugin
 │   │   └── start
@@ -9,8 +10,8 @@
 │   │       └── vim-unimpaired
 │   ├── project
 │   │   ├── opt
-│   │   │   └── coc.nvim
 │   │   └── start
+│   │       ├── coc.nvim
 │   │       ├── fzf
 │   │       ├── fzf.vim
 │   │       ├── ultisnips
@@ -32,4 +33,4 @@
 └── UltiSnips
     └── markdown.snippets
 
-29 directories, 3 files
+29 directories, 4 files
