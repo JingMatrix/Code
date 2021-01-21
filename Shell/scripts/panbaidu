@@ -1,0 +1,10 @@
+#!/bin/zsh
+# This script should come with file exctractData.js.
+# And you should set file path variable `jsfile` manualy
+jsfile="$HOME/Documents/Code/Web/extractData.js"
+url=https://www.feizhupan.com
+curl -G \
+	--data-urlencode "keyword=$1" \
+	$url/search |
+	grep -o "=(function(.*));" >/tmp/list.js
+node <<<"let data" </tmp/list.js <$jsfile
