@@ -7,4 +7,4 @@ curl -G \
 	--data-urlencode "keyword=$1" \
 	$url/search |
 	grep -o "__NUXT__=(function(.*));" >/tmp/script
-echo -n "let " | </tmp/script <$jsfile >/tmp/list.mjs && node /tmp/list.mjs
+echo -n "const api='$url/api';\nlet " | </tmp/script <$jsfile >/tmp/list.mjs && node /tmp/list.mjs

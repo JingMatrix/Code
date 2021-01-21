@@ -36,7 +36,7 @@ function get_url(index) {
 		console.log("This share link has no password");
 	}
 	console.log("Finding share url...");
-	let url = "https://www.feizhupan.com/api/detail?id=" + info.id;
+	let url = api + "/detail?id=" + info.id;
 	let req = get(url, function (res) {
 		let data = "",
 			json_data;
