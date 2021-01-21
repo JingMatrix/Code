@@ -1,6 +1,7 @@
 // Usage: node 52pansou.mjs [search keyword]
 //
 // Possible api for now
+//
 // https://www.feizhupan.com
 // https://www.iizhi.cn
 //
@@ -17,6 +18,7 @@ import { get } from "https";
 
 let file = {};
 let results = [];
+let loadpage = 1;
 const print_step = 3;
 const api = "https://www.feizhupan.com/api/";
 const rl = createInterface({
@@ -30,14 +32,21 @@ if (!process.argv[2]) {
 }
 
 // main enter point, start user interface
-search(process.argv[2]);
+main(process.argv[2]);
 
-async function search(kw) {
-	let url = api + "search?kw=" + kw;
-	let lists = await get_json(encodeURI(url));
-	results = lists.resources.filter(unique_filter);
+async function main(keyword) {
+	await search(keyword, loadpage);
 	show_result();
 	user_interface();
+	// Load one more page to save some time
+	loadpage += 1;
+	search(keyword, loadpage);
+}
+
+async function search(kw, page = loadpage) {
+	let url = api + "search?kw=" + kw + "&page=" + page;
+	let lists = await get_json(encodeURI(url));
+	results = results.concat(lists.resources.filter(unique_filter));
 }
 
 function unique_filter(entry) {
@@ -59,16 +68,15 @@ function print_content(result) {
 }
 
 async function print_url(index) {
-	// console.log(results[index].res);
 	const info = results[index].res;
-	if (info.haspwd) {
-		console.log("Password to this share link is:\t" + info.pwd);
-	} else {
-		console.log("This share link has no password");
-	}
 	console.log("Finding share url...");
 	let url = api + "detail?id=" + info.id;
 	let detail = await get_json(url);
+	if (detail.haspwd) {
+		console.log("Password to this share link is:\t" + detail.pwd);
+	} else {
+		console.log("This share link has no password");
+	}
 	console.log(detail.url);
 	rl.prompt();
 }
@@ -113,8 +121,11 @@ function user_interface() {
 					if (index < results.length) {
 						show_result(index);
 					} else {
-						console.log("try p command");
+						console.log("Loading more result... Try again later");
+						loadpage += 1;
+						search(process.argv[2], loadpage);
 						index = results.length;
+						index -= print_step;
 					}
 					break;
 				case "p":
