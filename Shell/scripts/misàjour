@@ -1,0 +1,24 @@
+#! /bin/zsh
+set -e
+
+# update plugin install state
+BASEDIR=$(dirname "$0")
+tree -L 4 ~/.vim >$BASEDIR/../vim.plugin
+tree -L 2 ~/.local/share/gnome-shell >$BASEDIR/../gnome.plugin
+
+# pull updates from remote repos
+for d in ~/.vim/pack/*/*/* ~/.oh-my-zsh/custom/plugins/* ~/Documents/Project/*; do
+	(
+		cd "$d"
+		pwd && [[ -d .git ]] && git pull --rebase
+	)
+done
+
+# clean redundant files in zathura history
+zathura_history=$HOME/.local/share/zathura/history
+sed -n -E "s/^\[(.*)\]$/\1/p" $zathura_history | while read file; do
+	if ! [[ -e $file ]]; then
+		sed -i "s#\[$file\]#TOREMOVE#" $zathura_history
+	fi
+done
+sed -i "/TOREMOVE/,/^$/d" $zathura_history
