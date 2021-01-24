@@ -6,7 +6,7 @@ source $ZSH/oh-my-zsh.sh
 
 export LANG=fr_FR.UTF-8
 
-alias zshconfig="vim ~/.sensitive/.zshrc"
+alias zshconfig="vim $HOME/Documents/Code/Shell/.zshrc"
 alias pasteimg="xclip -selection clipboard -t image/png -o > /tmp/clip.png"
 alias ocrchi="pasteimg && tesseract  /tmp/clip.png - -l chi_sim 2> /dev/null"
 alias ocren="pasteimg && tesseract  /tmp/clip.png - -l eng 2> /dev/null"
@@ -18,7 +18,7 @@ alias sd="ddgr -n 5"
 alias b="buku --suggest"
 alias gcl="git clone --recursive --shallow-submodules --depth 1"
 alias pd="pandoc --wrap=none"
-alias w="nnn -T t -P p $HOME/Documents/Notes/notes"
+alias w="nnn -T t -P n $HOME/Documents/Notes/notes"
 
 export MUTTBOX=gmail
 export BROWSER=w3m
@@ -51,7 +51,7 @@ fi
 export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|epub|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
 export NNN_BMS="m:~/Mathematics;a:~/Mathematics/Textbook_Archive;c:~/Documents/Code;p:~/Documents/Project;"
 export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_PLUG="p:preview-tui;f:fzcd;j:autojump"
+export NNN_PLUG="n:preview-note;f:fzcd;j:autojump"
 source "$HOME/Documents/Project/nnn/misc/quitcd/quitcd.bash_zsh"
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_DEFAULT_OPTS="--ansi"

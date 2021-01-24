@@ -1,0 +1,43 @@
+#!/usr/bin/env sh
+fifo_pager() {
+	cmd="$1"
+	shift
+
+	# We use a FIFO to access $PAGER PID in jobs control
+	tmpfifopath="${TMPDIR:-/tmp}/nnn-preview-tui-fifo.$$"
+	mkfifo "$tmpfifopath" || return
+
+	cat <"$tmpfifopath" &
+
+	(
+		exec >"$tmpfifopath"
+		"$cmd" "$@" &
+	)
+
+	rm "$tmpfifopath"
+}
+
+preview_file() {
+	fifo_pager bat --style=plain --paging=never --decorations=always --color=always \
+		"$1" 2>/dev/null
+}
+
+if [ "$PREVIEW_MODE" ]; then
+	if [ ! -r "$NNN_FIFO" ]; then
+		echo "No FIFO available! (\$NNN_FIFO='$NNN_FIFO')" >&2
+		read -r
+		exit 1
+	fi
+
+	preview_file "$1"
+
+	# use cat instead of 'exec <' to avoid issues with dash shell
+	# shellcheck disable=SC2002
+	cat "$NNN_FIFO" |
+		while read -r selection; do
+			preview_file "$selection"
+		done
+	exit 0
+fi
+
+tmux split-window -e "NNN_FIFO=$NNN_FIFO" -e "PREVIEW_MODE=1" -dh "$0" "$1"
