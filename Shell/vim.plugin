@@ -15,7 +15,6 @@
 │   │       ├── fzf
 │   │       ├── fzf.vim
 │   │       ├── ultisnips
-│   │       ├── vim-easymotion
 │   │       └── vim-snippets
 │   ├── syntax
 │   │   ├── opt
@@ -34,4 +33,4 @@
 └── UltiSnips
     └── markdown.snippets
 
-30 directories, 4 files
+29 directories, 4 files

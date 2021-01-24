@@ -28,4 +28,4 @@ set statusbar-home-tilde true
 set guioptions ""
 set window-width 1920
 set window-height 1080
-set selection-notification false
+# set selection-notification false

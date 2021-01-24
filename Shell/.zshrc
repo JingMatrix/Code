@@ -1,5 +1,5 @@
 plugins=(git nvm zsh_reload vi-mode pip)
-plugins+=(yarn-autocompletions tldr nnn)
+plugins+=(yarn-autocompletions tldr)
 plugins+=(z.lua)
 plugins+=(zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
@@ -52,7 +52,6 @@ export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|epub|gz|jar|lha
 export NNN_BMS="m:~/Mathematics;a:~/Mathematics/Textbook_Archive;c:~/Documents/Code;p:~/Documents/Project;"
 export NNN_FIFO="/tmp/nnn.fifo"
 export NNN_PLUG="n:preview-note;f:fzcd;j:autojump"
-source "$HOME/Documents/Project/nnn/misc/quitcd/quitcd.bash_zsh"
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_DEFAULT_OPTS="--ansi"
 

@@ -10,7 +10,7 @@ tree -L 2 ~/.local/share/gnome-shell >$BASEDIR/../gnome.plugin
 for d in ~/.vim/pack/*/*/* ~/.oh-my-zsh/custom/plugins/* ~/Documents/Project/*; do
 	(
 		cd "$d"
-		pwd && [[ -d .git ]] && git pull --rebase
+		[[ -d .git ]] && pwd && git pull --rebase
 	)
 done
 
