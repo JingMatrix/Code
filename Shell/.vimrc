@@ -22,7 +22,6 @@ let g:UltiSnipsExpandTrigger="<m-tab>"
 let g:coc_node_path='/home/jing/.nvm/versions/node/v14.15.1/bin/node'
 
 " formater
-let g:shfmt_fmt_on_save = 1
 augroup formatter
 	autocmd!
 	autocmd FileType sh,zsh,bash nmap <leader>p :Shfmt<enter>
@@ -69,3 +68,8 @@ highlight Comment cterm=italic gui=italic
 set path+=..
 hi Pmenu ctermbg=NONE ctermfg=white
 hi PmenuSel ctermfg=yellow
+
+let g:netrw_preview=1
+let g:netrw_liststyle = 3
+let g:netrw_winsize   = 30
+nmap - :Explore<enter>
