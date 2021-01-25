@@ -49,9 +49,12 @@ zoomlink=(
 # 	fi
 # fi
 echo "\rCourse from $startdate to $enddate"
-echo "DATE\tTIME\tInformation\n"
-curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "start=$startdate&end=$enddate&resType=103&calView=month&federationIds%5B%5D=IMAR9CMA&federationIds%5B%5D=IMARACMA&colourScheme=3" >/tmp/cour.json | jq -r 'sort_by(.start) | .[] | [.start, .end, .description, .eventCategory] | @tsv' |
-	while IFS=$'\t' read -r starttime endtime description eventCategory; do
+echo "DATE\tTIME\tSites\t\tInformation\n"
+curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "start=$startdate&end=$enddate&resType=103&calView=month&federationIds%5B%5D=IMAR9CMA&federationIds%5B%5D=IMARACMA&colourScheme=3" >/tmp/cour.json | jq -r 'sort_by(.start) | .[] | [.start, .description, .eventCategory, .end] | @tsv' |
+	while IFS=$'\t' read -r starttime description eventCategory endtime; do
+		if [[ $eventCategory = "CONGES" ]]; then
+			continue
+		fi
 		if [[ $(date +%s) > $(date -d $endtime +%s) ]]; then
 			continue
 		fi
@@ -66,6 +69,7 @@ curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "s
 			# limit to only courses you follow
 			if [[ $course_num < 3 ]]; then
 				echo -n $(date -d $starttime +"%a\t%H:%M\t")
+				echo -n ${description[7, 12]} "\t\t"
 				echo $course[$course_num]
 				if [[ $zoom == 1 && $(date -I) == $(date -I -d $starttime) ]]; then # check zoom link
 					if [[ $course_num == 2 ]]; then
@@ -80,6 +84,7 @@ curl -s 'https://edt.univ-tlse3.fr/calendar2/Home/GetCalendarData' --data-raw "s
 			seminar_num=$(<<<$description | sed 's/.*seminar \([0-9]\).*/\1/p' -n)
 			if [[ $seminar_num == 1 ]]; then
 				echo -n $(date -d $starttime +"%a\t%H:%M\t")
+				echo -n "Amphi Schwartz\t"
 				echo $seminar[$seminar_num]
 				if [[ $zoom == 1 && $(date -I) == $(date -I -d $starttime) ]]; then
 					tmp2=${seminar_num}seminar
