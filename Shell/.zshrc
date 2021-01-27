@@ -13,8 +13,8 @@ alias ocren="pasteimg && tesseract  /tmp/clip.png - -l eng 2> /dev/null"
 alias ocrfr="pasteimg && tesseract  /tmp/clip.png - -l fra &> /dev/null"
 alias ocrmath="app_id=$app_id app_key=$app_key ~/Documents/Code/Shell/mathpix"
 alias vim="vim --servername VIM"
-alias sg="googler -n 5"
-alias sd="ddgr -n 5"
+alias sg="TERM=xterm googler -n 5"
+alias sd="TERM=xterm ddgr -n 5"
 alias b="buku --suggest"
 alias gcl="git clone --recursive --shallow-submodules --depth 1"
 alias pd="pandoc --wrap=none"
@@ -41,10 +41,7 @@ bindkey "^K" kill-line
 bindkey "^H" backward-kill-word
 bindkey "^Xx" keep-buffer
 
-if [[ -z $POEM ]]; then
-	fortune -e tang300 song100 chinese
-	export POEM=1
-fi
+fortune -e tang300 song100 chinese
 
 # nnn config
 

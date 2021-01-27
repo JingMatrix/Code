@@ -2,8 +2,10 @@
 ├── application_state
 ├── extensions
 │   ├── clipboard-indicator@tudmotu.com
+│   ├── gsconnect@andyholmes.github.io
 │   └── hidetopbar@mathieu.bidon.ca
 ├── extension-updates
-└── gnome-overrides-migrated
+├── gnome-overrides-migrated
+└── notifications
 
-4 directories, 2 files
+5 directories, 3 files
