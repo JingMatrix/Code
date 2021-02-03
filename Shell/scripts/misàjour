@@ -1,6 +1,12 @@
 #! /bin/zsh
 set -e
 
+# clean epub-download-rs files
+if [[ -d ~/cache.leveldb ]]; then
+	rm $HOME/epub -rf
+	rm $HOME/cache.leveldb -rf
+fi
+
 # update plugin install state
 BASEDIR=$(dirname "$0")
 tree -L 4 ~/.vim >$BASEDIR/../vim.plugin
