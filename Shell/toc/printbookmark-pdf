@@ -1,0 +1,3 @@
+#! zsh
+set -e
+pdftk $1 dump_data_utf8 | sed -n '/PageNumber/s/Bo.*: /,/p;/itle/s/Bo.*Title: //p' >$2
