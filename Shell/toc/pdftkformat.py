@@ -1,4 +1,6 @@
+#! python3
 import sys
+
 
 TAB = '\t'
 shift = 0
@@ -10,7 +12,11 @@ for line in sys.stdin:
     line = line.strip()
     commaIndex = line.rfind(',')
     title = line[:commaIndex]
-    pageNo = int(line[commaIndex + 1:].strip())
+    try:
+        pageNo = int(line[commaIndex + 1:].strip())
+    except ValueError:
+        print("Page number error at line:" + line, file=sys.stderr)
+        continue
     print("BookmarkBegin")
     print("BookmarkTitle:", title.strip())
     print("BookmarkLevel:", level)
