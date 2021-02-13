@@ -15,7 +15,8 @@ for line in sys.stdin:
     try:
         pageNo = int(line[commaIndex + 1:].strip())
     except ValueError:
-        print("Page number error at line:" + line, file=sys.stderr)
+        if line == '':
+            print("Page number error at line:" + line, file=sys.stderr)
         continue
     print("BookmarkBegin")
     print("BookmarkTitle:", title.strip())
