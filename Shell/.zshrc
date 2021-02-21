@@ -1,5 +1,4 @@
 plugins=(git nvm zsh_reload vi-mode pip)
-plugins+=(tldr)
 plugins+=(z.lua)
 plugins+=(zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
