@@ -1,0 +1,23 @@
+#!zsh
+# dependency
+#  - epub-download: https://github.com/banjiaojuhao/epub-download-rs
+#
+curl -s -X POST 'http://www.ferebook.com/keys/get_ebook_list_search.asmx/getSearchList' \
+	-H 'Accept: application/json, text/javascript, */*; q=0.01' \
+	-H 'Content-Type: application/json' \
+	-H 'X-Requested-With: XMLHttpRequest' \
+	-d "{skey:\"$1\"}" \
+	>/tmp/epubee.json
+
+download_book() {
+	url=$(curl -s "http://reader.epubee.com/mobile/?rq=$BID" >/tmp/epubee.html | grep -oE 'books/mobile/\w\w/[^&]+')
+	if [[ -z $url ]]; then
+		bat -p /tmp/epubee.html
+	else
+		echo http://reader.epubee.com/$url/ | epub-download 2>&/dev/null
+	fi
+}
+
+# Now I only need to add a UI for user to select books to download
+# BID=$(jq -r '.d | .[1] | .BID' /tmp/epubee.json)
+# download_book
