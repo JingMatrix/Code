@@ -1,26 +1,14 @@
 #! /bin/zsh
 set -e
 
-# clean epub-download-rs files
-if [[ -d ~/cache.leveldb ]]; then
-	rm $HOME/epub -rf
-	rm $HOME/cache.leveldb -rf
-fi
-
 # update plugin install state
 BASEDIR=$(dirname "$0")
+echo "Updating plugin installed state"
 tree -L 4 ~/.vim >$BASEDIR/../vim.plugin
 tree -L 2 ~/.local/share/gnome-shell >$BASEDIR/../gnome.plugin
 
-# pull updates from remote repos
-for d in ~/.vim/pack/*/*/* ~/.oh-my-zsh/custom/plugins/* ~/Documents/Project/*; do
-	(
-		cd "$d"
-		[[ -d .git ]] && pwd && git pull --rebase
-	)
-done
-
-# clean redundant files in zathura history
+# clean invalid files item in zathura history
+echo "Remove invalid zathura history"
 zathura_history=$HOME/.local/share/zathura/history
 sed -n -E "s/^\[(.*)\]$/\1/p" $zathura_history | while read file; do
 	if ! [[ -e $file ]]; then
@@ -28,3 +16,12 @@ sed -n -E "s/^\[(.*)\]$/\1/p" $zathura_history | while read file; do
 	fi
 done
 sed -i "/TOREMOVE/,/^$/d" $zathura_history
+
+# pull updates from remote repos
+echo "Updating local git repository"
+for d in ~/.vim/pack/*/*/* ~/.oh-my-zsh/custom/plugins/* ~/Documents/Project/*; do
+	(
+		cd "$d"
+		[[ -d .git ]] && echo "\t\tEnter directory $d" && git pull --rebase
+	)
+done
