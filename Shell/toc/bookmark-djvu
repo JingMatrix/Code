@@ -149,10 +149,10 @@ sub simple_format_to_djvused_outline {
     binmode $input_handle, ':encoding(UTF-8)';
     (my $out_fh, my $out_filename) = tempfile (UNLINK => 1);
     binmode $out_fh, ':encoding(UTF-8)';
-
+# use one tab for child indent
     my $regexp = qr/
        ^
-       (?<indent>(\ {4})*)
+       (?<indent>(\t)*)
        (?<title>.+?)
        (\s|;|,)+
        (?<page>-?[0-9]+)
@@ -182,7 +182,7 @@ sub simple_format_to_djvused_outline {
 	if ($line !~ $regexp) {
 	    die "error: line $line_number is broken:\n$line\n";
 	}
-	$indent_depth = length ($+{indent}) / 4;
+	$indent_depth = length ($+{indent});
 
 	my $title = $+{title};
 	my $page = $+{page} + $offset;
