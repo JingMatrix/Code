@@ -136,7 +136,7 @@ Chapter 6. Borel, Baire and Souslin sets,1
 		Exercises,54
 Chapter 7. Measures on topological spaces,67
 	7.1.  Borel, Baire and Radon measures,67
-	7.2.  τ -additive measures,73
+	7.2.  τ-additive measures,73
 	7.3.  Extensions of measures,78
 	7.4.  Measures on Souslin spaces,85
 	7.5.  Perfect measures,86
@@ -181,10 +181,10 @@ Chapter 8. Weak convergence of measure,175
 	8.10. Supplements and exercises,217
 		Weak compactness,217
 		Prohorov spaces,219
-		TheWeak sequential completeness of spaces of measures,226
+		The Weak sequential completeness of spaces of measures,226
 		The A-topology,226
 		Continuous mappings of spaces of measures,227
-		separability of spaces of measures,230
+		Separability of spaces of measures,230
 		Young measures,231
 		Metrics on spaces of measures,232
 		Uniformly distributed sequences,237
