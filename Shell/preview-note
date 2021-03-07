@@ -1,25 +1,6 @@
 #!/usr/bin/env sh
-fifo_pager() {
-	cmd="$1"
-	shift
-
-	# We use a FIFO to access $PAGER PID in jobs control
-	tmpfifopath="${TMPDIR:-/tmp}/nnn-preview-tui-fifo.$$"
-	mkfifo "$tmpfifopath" || return
-
-	cat <"$tmpfifopath" &
-
-	(
-		exec >"$tmpfifopath"
-		"$cmd" "$@" &
-	)
-
-	rm "$tmpfifopath"
-}
-
 preview_file() {
-	fifo_pager bat --style=plain --paging=never --decorations=always --color=always \
-		"$1" 2>/dev/null
+	bat --style=plain --paging=never --decorations=always --color=always "$1" 2>/dev/null
 }
 
 if [ "$PREVIEW_MODE" ]; then
