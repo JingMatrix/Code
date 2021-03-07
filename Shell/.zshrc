@@ -3,24 +3,23 @@ plugins+=(z.lua)
 plugins+=(zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
-export LANG=fr_FR.UTF-8
-
 alias zshconfig="vim $HOME/Documents/Code/Shell/.zshrc"
 alias pasteimg="xclip -selection clipboard -t image/png -o > /tmp/clip.png"
 alias ocrchi="pasteimg && tesseract  /tmp/clip.png - -l chi_sim 2> /dev/null"
 alias ocren="pasteimg && tesseract  /tmp/clip.png - -l eng 2> /dev/null"
 alias ocrfr="pasteimg && tesseract  /tmp/clip.png - -l fra &> /dev/null"
 alias ocrmath="app_id=$app_id app_key=$app_key ~/Documents/Code/Shell/mathpix"
-alias vim="vim --servername VIM"
 alias sg="TERM=xterm googler -n 5"
 alias sd="TERM=xterm ddgr -n 5"
 alias b="buku --suggest"
 alias gcl="git clone --recursive --shallow-submodules --depth 1"
 alias pd="pandoc --wrap=none"
-alias w="nnn -T t -P n $HOME/Documents/Notes/notes"
+alias w="nnn -a -T t -P n $HOME/Documents/Notes/notes"
 
-export MUTTBOX=gmail
-export BROWSER=w3m
+function v {
+	vim --servername $RANDOM $@
+}
+
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 export GOPATH="$HOME/.local/go"
@@ -41,15 +40,6 @@ bindkey "^H" backward-kill-word
 bindkey "^Xx" keep-buffer
 
 fortune -e tang300 song100 chinese
-
-# nnn config
-
-export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|epub|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
-export NNN_BMS="m:~/Mathematics;a:~/Mathematics/Textbook_Archive;c:~/Documents/Code;p:~/Documents/Project;"
-export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_PLUG="n:preview-note;f:fzcd;j:autojump"
-export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
-export FZF_DEFAULT_OPTS="--ansi"
 
 # zsh-highlight
 

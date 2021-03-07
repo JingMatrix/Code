@@ -2,8 +2,11 @@ set background=dark
 set nocompatible
 
 " vimtex
-let g:vimtex_compiler_method='tectonic'
-let g:vimtex_compiler_tectonic={'build_dir' : '/var/tmp/latex', 'executable': '~/.cargo/bin/tectonic'}
+let g:vimtex_compiler_method='latexmk'
+let g:vimtex_compiler_latexmk={'build_dir' : '/var/tmp/latex'}
+let g:vimtex_quickfix_autojump=1
+let g:vimtex_quickfix_method='pplatex'
+
 
 set conceallevel=2
 hi Conceal NONE
@@ -25,6 +28,7 @@ let g:coc_node_path='/home/jing/.nvm/versions/node/v14.15.1/bin/node'
 augroup formatter
 	autocmd!
 	autocmd FileType sh,zsh,bash nmap <leader>p :Shfmt<enter>
+	autocmd FileType tex,bib nmap <leader>p :silent !latexindent -w -s -c=/tmp/ %<enter>:redraw!<enter>
 augroup END
 
 " writing dairy
@@ -58,6 +62,7 @@ augroup END
 
 set undodir=/var/tmp/vim
 set undofile
+set directory=/var/tmp/vim/swap//
 augroup rmundo
 	autocmd!
 	autocmd VimEnter /tmp/* set noundofile
