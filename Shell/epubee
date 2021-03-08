@@ -1,6 +1,6 @@
 #!zsh
 # dependency
-#  - epub-download: https://github.com/banjiaojuhao/epub-download-rs
+#  - ./scripts/epubee-download
 #
 set -e
 curl -s -X POST 'http://www.ferebook.com/keys/get_ebook_list_search.asmx/getSearchList' \
@@ -14,6 +14,7 @@ curl -s -X POST 'http://www.ferebook.com/keys/get_ebook_list_search.asmx/getSear
 # GqPFOb5Wz5Cj7pJGRFYmXk4dUE6UXlcXL0YE4cC3pLv6jL8tA9yRgQ==
 # 8c60af99e78b946c57eca793cb7341ac
 # This is difficult to decrypt, maybe related to SQL database, binary to Base64 and md5
+# http://reader.epubee.com/mobile/?rq=GqPFOb5Wz5Cj7pJGRFYmXk4dUE6UXlcXL0YE4cC3pLv6jL8tA9yRgQ==
 download_book() {
 	# curl -s "http://reader.epubee.com/mobile/?rq=$BID" >/tmp/epubee.html
 	# url=$(grep -oE 'books/mobile/\w\w/[^&]+' /tmp/epubee.html)
