@@ -1,58 +1,96 @@
 #! zsh
-hash=$(grep -oP '[0-9a-f]{32}' <<<$1)
-[[ $hash ]] || exit
-rootdir=/tmp/epub/$hash
+# If provide hash from reader.epubee.com, then download that e-book, otherwise parse a given file
 
-function parseHtml {
-	tmp=$(mktemp /tmp/epubHTML.XXXXXX)
-	cp $1 $tmp
-	head -n1 $tmp | grep -q '^<?xml' || echo '<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">' >$1
-	sed -E '1d;/<\/head>/q;/javascript|webreader3.css|^<meta/d' $tmp >>$1
-	echo "<body>" >>$1
-	pup 'div.readercontent-inner' <$tmp | sed '1d;$d' >>$1
-	echo "</body>" >>$1
-	rm $tmp
-	prettier -w $1
+tidy_config=$(dirname $0)/../../Web/tidy.config
+
+function htmlparser {
+	readerhtml="=['\"]\/books\/mobile\/|^<meta |<\/div><\/div><\/div>"
+	readercontainer='^<div class="readercontent"><div class="readercontent-inner">'
+	if grep -q $readercontainer $1; then
+		sed <$1 -n -E "/$readerhtml/d;1,/<\/head>/p;/$readercontainer/,\$p" |
+			sed -E "s#$readercontainer#<body><div>#;s#^</body>#</div></body>#" |
+			fixepub
+	else
+		echo >&2 "No epubee reader fingerprint found"
+		fixepub <$1
+	fi
 }
 
-if [[ -d $rootdir && -f $rootdir/mimetype ]]; then
-	echo Use cached files
+function fixepub {
+	if [[ -f $tidy_config ]]; then
+		tidy -config $tidy_config -o |
+			sed '3s#""#"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"#'
+		# fix doctype
+	else
+		echo $tidy_config not exists
+	fi
+}
+
+function parsefile {
+	cd $rootdir-bak
+	for html in OEBPS/**html; do
+		htmlparser $rootdir-bak/$html >$rootdir/$html
+	done
+	if [[ -f OEBPS/toc.ncx ]]; then
+		sed -i '/ content="bookid"/d' $rootdir/OEBPS/toc.ncx
+	fi
+}
+
+epubhash=$(grep -oP '[0-9a-f]{32}' <<<$1)
+if [[ -z $epubhash ]]; then
+	# parse given file in argument
+	echo parse html file $1
+	htmlparser $1
+	exit
 else
-	mkdir -p $rootdir/
-	mkdir -p $rootdir/OEBPS
-	mkdir -p $rootdir/META-INF
-	cd $rootdir/
-	echo -n 'application/epub+zip' >mimetype
-	echo -n '<?xml version="1.0" encoding="UTF-8" ?>
+	# download files from epubee.com
+	rootdir=/tmp/epub/$epubhash
+	if [[ -d $rootdir-bak ]]; then
+		echo -n "Use cached download files, parser them again?\t"
+		if read -q; then
+			parsefile
+		fi
+	else
+		mkdir -p $rootdir/
+		mkdir -p $rootdir/OEBPS
+		mkdir -p $rootdir/META-INF
+		cd $rootdir/
+		echo -n 'application/epub+zip' >mimetype
+		echo -n '<?xml version="1.0" encoding="UTF-8" ?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
   <rootfiles>
     <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
   </rootfiles>
 </container>' >META-INF/container.xml
-	cd $rootdir/OEBPS
-	root=http://reader.epubee.com/books/mobile/$hash[0,2]/$hash
-	aria2c $root/content.opf
-	grep -oP 'item href="\K[^"]+' content.opf | while read -r file; do
-		aria2c $root/$file
-	done
-	for html in $rootdir/OEBPS/**html; do
-		parseHtml $html
-	done
+		cd $rootdir/OEBPS
+		root=http://reader.epubee.com/books/mobile/$epubhash[0,2]/$epubhash
+		aria2c $root/content.opf
+		grep -oP 'item href="\K[^"]+' content.opf | while read -r file; do
+			dir=$(dirname $file)
+			[[ -d $dir ]] || mkdir -p $dir
+			aria2c $root/$file -d $dir
+		done
+		cp $rootdir $rootdir-bak -r
+	fi
 fi
 
+# parse htmls only if haven't
+[[ ! -f $rootdir.json ]] && parsefile
+
 # pack epub file and start edit if not well format
-filename="/tmp/$(grep -oP '<dc:title>\K[^<]+' $rootdir/OEBPS/content.opf).epub"
-[[ -f $rootdir.epub ]] && rm $rootdir.epub
 epubcheck $rootdir --mode exp --save --json $rootdir.json
-error=$(jq '.messages | .[] |(.locations | .[] | ["'$rootdir'/\(.path)", "  column: \(.column)", "line: \(.line)"] | @tsv), .message, "\n"' $rootdir.json -r)
+# filename="/tmp/$(grep -oP '<dc:title>\K[^<]+' $rootdir/OEBPS/content.opf).epub"
+filename="/tmp/$(jq '.publication | .title' $rootdir.json -r).epub"
+jq '.messages | .[] | .message' $rootdir.json -r
+jq '.messages | .[] | .message, (.locations | .[] | [.path, .line, .column] | @tsv)' $rootdir.json -r >$rootdir.error
+
 if [[ -f $rootdir.epub ]]; then
 	mv $rootdir.epub $filename
 else
 	echo -n "Edit with vim?\t"
-	read -q && <<<$error && tmux split-window -bh "vim $(jq '.messages | .[] | .locations | .[] |"'$rootdir'/\(.path)"' $rootdir.json -r | uniq | tr "\n" " ")"
+	read -q && tmux split-window -b "vim $(jq '.messages | .[] | .locations | .[] |"'$rootdir'/\(.path)"' $rootdir.json -r | uniq | tr "\n" " ")" && less $rootdir.error
+	echo -n "\nChange to html directory?\t"
+	read -q && cd $rootdir/OEBPS && $SHELL
 	echo -n "\nThen edit with sigil?\t"
-	read -q && <<<$error && zip -rX $filename $rootdir/* && sigil $filename
-
+	read -q && cd $rootdir && zip -rX $filename * && (sigil $filename &) && less $rootdir.error
 fi
