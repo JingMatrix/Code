@@ -9,14 +9,14 @@ function htmlparser {
 	if grep -q $readercontainer $1; then
 		sed <$1 -n -E "/$readerhtml/d;1,/<\/head>/p;/$readercontainer/,\$p" |
 			sed -E "s#$readercontainer#<body><div>#;s#^</body>#</div></body>#" |
-			fixepub
+			fixhtml
 	else
 		echo >&2 "No epubee reader fingerprint found"
-		fixepub <$1
+		fixhtml <$1
 	fi
 }
 
-function fixepub {
+function fixhtml {
 	if [[ -f $tidy_config ]]; then
 		tidy -config $tidy_config -o |
 			sed '3s#""#"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"#'
@@ -26,29 +26,64 @@ function fixepub {
 	fi
 }
 
-function parsefile {
+function parseepubee {
 	cd $rootdir-bak
+	# parse html files
 	for html in OEBPS/**html; do
 		htmlparser $rootdir-bak/$html >$rootdir/$html
 	done
+	# parse toc.ncx
 	if [[ -f OEBPS/toc.ncx ]]; then
 		sed -i '/ content="bookid"/d' $rootdir/OEBPS/toc.ncx
 	fi
+	# parse opf
+}
+
+function packepub {
+	cd $1
+	zip -rX $2 *
+	(sigil $2 &)
+}
+
+function checkepub {
+	epubcheck $rootdir --mode exp --save --json $rootdir.json
+	jq '.messages | .[] | .message' $rootdir.json -r
+	jq '.messages | .[] | .message, (.locations | .[] | [.path, .line, .column] | @tsv)' $rootdir.json -r >$rootdir.error
+	errorfilelist=$(jq '.messages | .[] | .locations | .[] | .path' $rootdir.json -r | uniq | tr "\n" " ")
+	filename="/tmp/$(jq '.publication | .title' $rootdir.json -r).epub"
+	if [[ -f $rootdir.epub ]]; then
+		mv $rootdir.epub $filename
+	else
+		repairepub
+	fi
+}
+
+function repairepub {
+	echo -n "Edit with vim?\t"
+	# loop when edit with vim
+	while read -q; do
+		[[ -f $rootdir.json ]] || checkepub
+		cd $rootdir
+		tmux split-window -b "vim $errorfilelist"
+		less $rootdir.error
+		echo -n "\nRun epubcheck again?\t"
+		rm $rootdir.json
+	done
+
+	echo -n "Change to html directory?\t"
+	read -q && cd $rootdir/OEBPS && $SHELL
+	echo -n "Pack epub directly?\t"
+	read -q && packepub $rootdir $filename && less $rootdir.error
 }
 
 epubhash=$(grep -oP '[0-9a-f]{32}' <<<$1)
-if [[ -z $epubhash ]]; then
-	# parse given file in argument
-	echo parse html file $1
-	htmlparser $1
-	exit
-else
+if [[ $epubhash && -z $2 ]]; then
 	# download files from epubee.com
 	rootdir=/tmp/epub/$epubhash
 	if [[ -d $rootdir-bak ]]; then
 		echo -n "Use cached download files, parser them again?\t"
 		if read -q; then
-			parsefile
+			parseepubee
 		fi
 	else
 		mkdir -p $rootdir/
@@ -72,25 +107,26 @@ else
 		done
 		cp $rootdir $rootdir-bak -r
 	fi
-fi
+	# parse htmls only if haven't
+	[[ ! -f $rootdir.json ]] && parseepubee
 
-# parse htmls only if haven't
-[[ ! -f $rootdir.json ]] && parsefile
+	# pack epub file and start edit if not well format
 
-# pack epub file and start edit if not well format
-epubcheck $rootdir --mode exp --save --json $rootdir.json
-# filename="/tmp/$(grep -oP '<dc:title>\K[^<]+' $rootdir/OEBPS/content.opf).epub"
-filename="/tmp/$(jq '.publication | .title' $rootdir.json -r).epub"
-jq '.messages | .[] | .message' $rootdir.json -r
-jq '.messages | .[] | .message, (.locations | .[] | [.path, .line, .column] | @tsv)' $rootdir.json -r >$rootdir.error
-
-if [[ -f $rootdir.epub ]]; then
-	mv $rootdir.epub $filename
+	filename="/tmp/$(grep -oP '<dc:title>\K[^<]+' $rootdir/OEBPS/content.opf).epub"
+	[[ -f $rootdir.error ]] && echo -n "Skip epubcheck? Directly pack epub\t"
+	if read -q; then
+		packepub $rootdir $filename
+	else
+		checkepub
+	fi
 else
-	echo -n "Edit with vim?\t"
-	read -q && tmux split-window -b "vim $(jq '.messages | .[] | .locations | .[] |"'$rootdir'/\(.path)"' $rootdir.json -r | uniq | tr "\n" " ")" && less $rootdir.error
-	echo -n "\nChange to html directory?\t"
-	read -q && cd $rootdir/OEBPS && $SHELL
-	echo -n "\nThen edit with sigil?\t"
-	read -q && cd $rootdir && zip -rX $filename * && (sigil $filename &) && less $rootdir.error
+	if [[ -f $1 ]]; then
+		# parse given file in argument
+		echo parse html file $1
+		htmlparser $1
+	elif [[ -d $1 ]]; then
+		# pack directory as epub
+		[[ -z $2 ]] && 2="/tmp/$(basename $1).epub"
+		packepub $1 $2
+	fi
 fi
