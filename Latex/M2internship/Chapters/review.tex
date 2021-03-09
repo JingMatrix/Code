@@ -16,7 +16,7 @@ In this chapter, I shall review in order papers: \cite{ohta2012barycenters}, \ci
 		                     & =\Vert x \Vert^2 + 1
 	\end{align*}
 
-	Hence a barycenter of $\mu$ in $X$ should minimize its length. For a vector in $X$ to attain minimum length, if restricting to the first $n$ coordinate components, $X$ cannot have nonzero components except the last one (minimum length axes). Otherwise we can keep other not considered coordinate components unchanged but vanish first $n-1$ coordinate components to get a strictly shorter vector in $X$. This indicates that no such $X$ could exist.
+	Hence a barycenter of $\mu$ in $X$ should minimize its length. For a vector $x$ in $X$ to attain minimum length, if restricting to the first $n$ coordinate components, $x$ cannot have nonzero components except the last one (minimum length axes), i.e., $x_i =0$ for $i<n$. Otherwise we can keep other not considered coordinate components, $x_j$ for $j>n$,  unchanged but vanish first $n-1$ coordinate components to get a strictly shorter vector in $X$. This indicates that no such barycenter $x$ could exist in $X$.
 \end{proof}
 
 \begin{rmk}
@@ -24,19 +24,20 @@ In this chapter, I shall review in order papers: \cite{ohta2012barycenters}, \ci
 		\item Hilbert space is not locally compact, as unit closed ball in infinite dimensional normed space is not sequential compact. Recall that the last claim can be proved using \href{https://en.wikipedia.org/wiki/Riesz%27s_lemma}{Wikipedia: Riesz's lemma}.
 		\item % $X$ is the unit sphere of $\ell^2$ with a different inner product: \[\langle x, y \rangle:=\sum_{i \in \mathbb{N}^*}\frac{x_i}{c_i}\cdot \frac{y_i}{c_i}.\]
 		      We see that $X$ is homeomorphic to the unit sphere in $\ell^2$. From previous point, $X$ is then not compact. However, this conclusion is almost trivial as we don't have barycenter for $\mu$ in $X$.
-		\item $X$ is in fact not locally compact as a subspace of $\ell^2$, as proved in \cite{bessaga1975selected} Chapter IV §2 that unit sphere in $\ell^2$ is homeomorphic to $\ell^2$.
-		\item $X$ with metric inherited form $\ell^2$ is apparently not a length space. To explore more of this example, we should start to consider induced intrinsic metric $\hat{d}$ on $X$ by inherited metric from $\ell^2$.
-		\item $X$ is not locally compact with respect to the induced intrinsic metric topology. By compatibility of induced length structure with the topology of base space $X$ (see Exercise 2.1.5 in \cite{burago2001course}), open set in original topology is again open in the induced intrinsic metric topology. Cover an otherwise compact set of $X$ in new topology by open sets in original topology, we get a contradiction.
-		      % \item Unit sphere in $\ell^2$ is geodesic with respect to induced intrinsic metric. By Theorem 2.4.16 in \cite{burago2001course}, we only need to show that midpoint in $X$ always exits, i.e., $\forall x,y \in X$, $\exists z \in X$ such that $d(x,z)=d(y,z)=\frac{1}{2}d(x,y)$. For such two points $x$ and $y$, $z$ can be selected from the intersection of $X$ and the hypersurface passing the origin in $\ell^2$ that evenly separates $x$ and $y$.
-		\item % $X$ is geodesic with respect to induced intrinsic metric $\hat{d}$.
-		      Induced length structure in $X$. %Recall that shortest paths are closed under point-wise convergence (Proposition 2.5.17 in \cite{burago2001course}, proved by lower semi-continuity of length function).
-		      We show that distance in $X$ is approximate by curves with finite coordinate components. To begin with, any two points in $X$ with finite coordinate components can be connected by a shortest path. Then pass a point to have infinite coordinate components and later do the same for another point.
+		\item $X$ is in fact not locally compact as a subspace of $\ell^2$, as proved in \cite{bessaga1975selected} Chapter IV §2 Theorem 2.1, that unit sphere in $\ell^2$ is homeomorphic to $\ell^2$.
+		\item $X$ with metric inherited form $\ell^2$ is apparently not a length space. To explore more of this example, we should start to consider induced length metric $\hat{d}$ on $X$ by inherited metric from $\ell^2$.
+		\item $X$ is not locally compact with respect to the induced length metric topology. By compatibility of induced length structure with the topology of base space $X$ (see Exercise 2.1.5 in \cite{burago2001course}), open set in original topology is again open in the induced length metric topology. Cover an otherwise compact set of $X$ in new topology by open sets in original topology, we get a contradiction.
+		      % \item Unit sphere in $\ell^2$ is geodesic with respect to induced length metric. By Theorem 2.4.16 in \cite{burago2001course}, we only need to show that midpoint in $X$ always exists, i.e., $\forall x,y \in X$, $\exists z \in X$ such that $d(x,z)=d(y,z)=\frac{1}{2}d(x,y)$. For such two points $x$ and $y$, $z$ can be selected from the intersection of $X$ and the hypersurface passing the origin in $\ell^2$ that evenly separates $x$ and $y$.
+		      % \item  $X$ is geodesic with respect to induced length metric $\hat{d}$.
+		      % Induced length structure in $X$. 
+		      %Recall that shortest paths are closed under point-wise convergence (Proposition 2.5.17 in \cite{burago2001course}, proved by lower semi-continuity of length function).
+		      % We show that distance in $X$ is approximate by curves with finite coordinate components. To begin with, any two points in $X$ with finite coordinate components can be connected by a shortest path. Then pass a point to have infinite coordinate components and later do the same for another point.
 		      % We use the fact that points with finite coordinate components are dense in $\ell^2$ and so are they in $X$.
 		\item A geodesic space $(E, \hat{d})$ always admits midpoint $z$ of two points $x$ and $y$ in $E$ as the barycenter of $\mu : = \frac{1}{2} (\delta_x + \delta_y)$, since $z$ attain equality in following general inequality:
 		      \[
 			      \hat{d}(x,y)^2 \leq \left(\hat{d}(x,z) + \hat{d}(z,y)\right)^2 \leq 2\left(\hat{d}(x,z)^2+ \hat{d}(z,y)^2\right)
 		      \]
-		\item An interesting question could be: consider $X$ with induced intrinsic metric $\hat{d}$, does the barycenter of $\mu$ exist?
+		\item An interesting question could be: consider $X$ with induced length metric $\hat{d}$, does the barycenter of $\mu$ exist?
 		      Basically, we need to answer whether $\hat{d}(e,-e)$ is realized by a rectifiable curve in $X$.
 
 		      Assume now we have $L_{d}(\gamma)=\hat{d}(e,-e)$.
@@ -46,11 +47,11 @@ In this chapter, I shall review in order papers: \cite{ohta2012barycenters}, \ci
 		      % 		            \[
 		      % 		      	      \hat{d}(e,-e)^2 \leq \left(\hat{d}(e,z) + \hat{d}(z,-e)\right)^2 \leq 2\left(\hat{d}(e,z)^2+ \hat{d}(z,-e)^2\right)
 		      % 		            \]
-		      The restricted induced intrinsic metric $\hat{d}_n(e,-e)$ depends on $n$ as we are considering minimal geodesics in $n-1$ dimensional ellipse. Actually, set $k=\sqrt{1-c_n^2}$ as the eccentricity, we have
+		      The restricted induced length metric $\hat{d}_n(e,-e)$ depends on $n$ as we are considering minimal geodesics in $n-1$ dimensional ellipse. Actually, set $k=\sqrt{1-c_n^2}$ as the eccentricity, we have
 		      \[
 			      \hat{d}_n(e,-e)= 2\int _{0}^{\tfrac {\pi }{2}}{\sqrt {1-k^{2}\sin ^{2}\theta }}\diff \theta = 2\int _{0}^{1}{\frac {\sqrt {1-k^{2}t^{2}}}{\sqrt {1-t^{2}}}}\diff t
 		      \]
-		      This is a decreasing function in $n$.	To apply the same idea in the proof of previous proposition, we should decompose distance $d$ of $\ell^2$ into two parts, involving first $n$ coordinate components or not, $d^2=d_n^2+d_r^2$, i.e., $\Vert \cdot \Vert^2 = \Vert \cdot \Vert_n^2 + \Vert \cdot \Vert_r^2$ with $d_n=\Vert \cdot \Vert_n$ the distance in $\mathbb{R} ^n $ . For $\Delta=[\delta_0=0,\delta_1, \ldots, \delta_m=1]$ all possible finite partition of $\gamma$, we have:
+		      This is a decreasing function in $n$.	To apply the same idea in the proof of previous proposition, we should decompose distance $d$ of $\ell^2$ into two parts, involving first $n$ coordinate components or not, $d^2=d_n^2+d_r^2$, i.e., $\Vert \cdot \Vert^2 = \Vert \cdot \Vert_n^2 + \Vert \cdot \Vert_r^2$ with $d_n=\Vert \cdot \Vert_n$ the distance in $\mathbb{R} ^n $. For $\Delta=[\delta_0=0,\delta_1, \ldots, \delta_m=1]$ all possible finite partition of $\gamma$, we have:
 		      \[
 			      \hat{d}(e,-e)=\sup_{\Delta} \sum_{i=1}^{m} \Vert\gamma(\delta_{i-1}) - \gamma(\delta_{i})\Vert
 		      \]
@@ -68,19 +69,56 @@ In this chapter, I shall review in order papers: \cite{ohta2012barycenters}, \ci
 		      Finally $\eta := (0,0,\ldots, c_n c_{\gamma(\cdot)},\gamma_{n+1},\ldots)$ will violate \ref{energy_variation_in_X} since energy variation coincide with arc-length variation in complete Riemannian manifold and we have $\int_{[0,1]} c_n c_{\gamma(\cdot)} \diff \lambda < L_d(\tilde{\gamma}^n)$.
 
 		      This problem should be more related to Hilbert Riemannian manifold, we put it aside for now.
-		\item Use theory from Hilbert Riemannian manifold, as Example 5.1 in \cite{grossman1965hilbert} (I suspect this is the origin of our example), we can actually show that $e$ and $-e$ cannot be connected by minimal geodesic.
+		\item As Example 5.1 in \cite{grossman1965hilbert} (I suspect this is the origin of our example), we can actually show that $e$ and $-e$ cannot be connected by minimal geodesic.
+
+		      Hilbert Riemannian maindfold  theory is needed to use this term smooth (the original author used it).
+		      % we can safely replace it with rectifiable in this example.
+
 		      Define \( T: X \rightarrow X \) by \( T x = y \), where
 		      \[
 			      y _ { 1 } = x _ { 1 } , y _ { 2 } = 0 , y _ { i } = \frac{c_i}{c_{i-1}} x_{i-1} \text { for } i \geq 3 . \]
 
-		      Then \( T \) is a smooth map with only \( e \) and \(- e \) as fixed points. It is easily seen that any smooth curve from \( e\) to \( -e \) is taken by \( T \) into another such curve which is strictly shorter than the original ($c_i$ is decreasing). Therefore, there can be no minimal geodesic from \( e \) to \( -e . \)
+		      Then \( T \) is a smooth map with only \( e \) and \(- e \) as fixed points. Any smooth curve from \( e\) to \( -e \) is taken by \( T \) into another such curve which is strictly shorter than the original, since length structure is induced from $\ell^2$ norm and $T$ is strictly decreasing with respect to $\ell^2$ norm as $c_i$ is a decreasing sequence. Therefore, there is no minimal geodesic from \( e \) to \( -e . \)
+
+		      There I should discuss two different length metric appeared, one is induced from $\ell^2$ norm and the other one is smooth Riemannian length structure. Are they two coincided (on common admissible curves)? Two ways to think about this relation
+		      \begin{enumerate}
+			      \item Apply Theorem 2.4.3 in \cite{burago2001course}, we then need to show Riemannian length structure is lower semi-continuous with respect to $\ell^2$ metric.
+			      \item Consider $X$ as a Hilbert submainifold of $\ell^2$, the norm for tangent space is the restriction of canonical norm of $\ell^2$.
+		      \end{enumerate}
+
+		\item Now there is another way to show that $X$ with metric from $\ell^2$ is not locally compact. $X$ is complete and there is rectifiable curve connecting $e$ and $-e$, by Exercise 2.5.25 in \cite{burago2001course} there is shortest path connecting $e$ and $-e$ if $X$ is locally compact. This proposition is proofed by showing that balls of induced length metric are pre-compact in the topology of original topology.
+
+		\item We have answered partially the existence of barycenter of $\mu$ in $X$ with induced length metric. However, the barycenter of two points might exist without bothering minimal geodesics. nor bothering midpoints.
 
 
 	\end{enumerate}
 \end{rmk}
+\begin{lem}[Lemma 3.2]
+	If \( ( X , d ) \) is a proper metric space, then any \( \mu \in \mathcal { P } _ { 2 } ( X ) \) has a barycenter.
+\end{lem}
 
+\begin{proof}
+	Fix \( z _ { 0 } \in X \) and take \( r > 1 \) large enough to satisfy
+	\[ \mu \left( B \left( z _ { 0 } , r \right) \right) \geq \frac { 1 } { 2 } , \quad \int _ { X \backslash B \left( z _ { 0 } , r \right) } d \left( z _ { 0 } , x \right) ^ { 2 } d \mu ( x ) \leq 1 \]
+	Then we have
+	\[ \int _ { X } d \left( z _ { 0 } , x \right) ^ { 2 } d \mu ( x ) \leq r ^ { 2 } \cdot \mu \left( B \left( z _ { 0 } , r \right) \right) + 1 \leq r ^ { 2 } + 1 \]
+	while for every \( w \in X \backslash B \left( z _ { 0 } , 3 r \right) \)
+	\[ \int _ { X } d ( w , x ) ^ { 2 } d \mu ( x ) \geq \int _ { B \left( z _ { 0 } , r \right) } d ( w , x ) ^ { 2 } d \mu ( x ) > ( 2 r ) ^ { 2 } \cdot \mu \left( B \left( z _ { 0 } , r \right) \right) \geq 2 r ^ { 2 } \]
+	holds. Therefore it is sufficient to consider the infimum of
+	\[ w \longmapsto \int _ { X } d ( w , x ) ^ { 2 } d \mu ( x ) \]
+	only for \( w \in B \left( z _ { 0 } , 3 r \right) , \) and it is achieved at some point due to the compactness of the closure of \( B \left( z _ { 0 } , 3 r \right) . \)
+\end{proof}
+
+\begin{rmk}[Counter-examples]
+	\begin{enumerate}
+		\item Locally compact length space is not sufficient, consider unit disk without origin and uniform measure on it.
+		\item Complete metric space is not sufficient, consider last example.
+		\item Complete length space is sufficient? That is the interest of last remark.
+	\end{enumerate}
+\end{rmk}
 \begin{rmk}[Exmaple 2.1 c]
-	This example is in contradiction with \href{https://en.wikipedia.org/wiki/Hadamard_space}{Wikipedia: Hadamard space}. The author claims Hilbert space is of non-negative curvature, while Wikipedia says ``a normed space is an Hadamard space if and only if it is a Hilbert space".
+	% This example is in contradiction with \href{https://en.wikipedia.org/wiki/Hadamard_space}{Wikipedia: Hadamard space}. The author claims Hilbert space is of non-negative curvature, while Wikipedia says ``a normed space is an Hadamard space if and only if it is a Hilbert space".
+	Hilbert space satisfies equality in triangle comparison with Eculidean space, hence can be regarded ``flat".
 \end{rmk}
 
 Then we discuss the infinitesimal structure of an Alexandrov space \( ( X , d ) . \)
@@ -117,12 +155,12 @@ Then we discuss the infinitesimal structure of an Alexandrov space \( ( X , d ) 
 \end{proof}
 
 \begin{rmk}[Lemma4.5, Lang and Schroeder's inequality]
-	When passing from finite support measures to general ones, the author should use Wasserstein metric $W_p$ convergence. Otherwise, he cannot justify convergence of distance function. Here we use the fact that finite supported measures is a dense subspace of $\mathscr{W}_2(X)$ if $X$ is Polish space, recalled in this report as Theorem \ref{topology_Wasserstein}.
+	When passing from finit support measures to general ones, the author should use Wasserstein metric $W_p$ convergence but not only weak convergence. Otherwise, he cannot justify convergence of integrals of distance function $d_{C_z}$. Here we use the fact that finite supported measures is a dense subspace of Wasserstein space $\mathscr{W}_2(X)$ if $X$ is a Polish space (see \cite{villani2008optimal} Theorem 6.18), recalled in this report as Theorem \ref{topology_Wasserstein}.
 \end{rmk}
-\section{Exi. and con. of Wasserstein barycenters}
+\section{Existence and consistency of Wasserstein...}
 By Theorem \ref{topology_Wasserstein}, if $X$ is a Polish space, then so is $\mathscr{W}_p(X)$. If assume further $X$ is a locally compact length space, then $\mathscr{W}_p(X)$ is a strictly intrinsic length space (see Corollary 7.22 in \cite{villani2008optimal}, recalled in this report as Theorem \ref{geodesic_Wasserstein_space}) with respect to $W_p(X)$. That is the case in this paper, we assume in this section that $X$ is geodesic locally compact space. Now $\mathscr{W}_p(X)$ is a Polish geodesic space, however it is not necessarily a locally compact space.
 
 We use following notation convention:
 \begin{itemize}
-	\item \( \hat{\mu} \), random probability measure in 
+	\item \( \hat{\mu} \), random probability measure in
 \end{itemize}
