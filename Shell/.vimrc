@@ -7,6 +7,10 @@ let g:vimtex_compiler_latexmk={'build_dir' : '/var/tmp/latex'}
 let g:vimtex_quickfix_autojump=1
 let g:vimtex_quickfix_method='pplatex'
 
+" project rooter
+let g:rooter_targets = '*.tex,*.vue,*.js'
+let g:rooter_patterns = ['>Latex', '.git', 'package.json']
+let g:rooter_change_directory_for_non_project_files = 'current'
 
 set conceallevel=2
 hi Conceal NONE
@@ -25,10 +29,11 @@ let g:UltiSnipsExpandTrigger="<m-tab>"
 let g:coc_node_path='/home/jing/.nvm/versions/node/v14.15.1/bin/node'
 
 " formater
+let g:shfmt_fmt_on_save=1
 augroup formatter
 	autocmd!
 	autocmd FileType sh,zsh,bash nmap <leader>p :Shfmt<enter>
-	autocmd FileType tex,bib nmap <leader>p :silent !latexindent -w -s -c=/tmp/ %<enter>:redraw!<enter>
+	autocmd FileType tex,bib nmap <leader>p :%!latexindent -c=/tmp/<enter>
 augroup END
 
 " writing dairy
@@ -79,4 +84,4 @@ let g:netrw_liststyle = 3
 let g:netrw_winsize   = 30
 nmap - :Explore<enter>
 
-set autochdir
+set foldmethod=marker
