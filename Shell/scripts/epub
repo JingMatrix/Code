@@ -1,7 +1,6 @@
 #! zsh
 # If provide hash from reader.epubee.com, then download that e-book, otherwise parse a given file
-
-tidy_config=$(dirname $0)/../../Web/tidy.config
+basedir=$(dirname $0)
 
 function htmlparser {
 	readerhtml="=['\"]\/books\/mobile\/|^<meta |<\/div><\/div><\/div>"
@@ -17,27 +16,33 @@ function htmlparser {
 }
 
 function fixhtml {
+	# read from stdin and output to stdout
+	# try to first load local config files
+	local tidy_config=$basedir/../../Web/tidy.config
 	if [[ -f $tidy_config ]]; then
-		tidy -config $tidy_config -o |
-			sed '3s#""#"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"#'
-		# fix doctype
+		local args="-config $tidy_config"
 	else
-		echo $tidy_config not exists
+		echo "No config file $tidy_config found, using default config"
+		local args=" --output-xhtml yes --add-meta-charset yes --add-xml-decl yes --doctype '-//W3C//DTD --XHTML --1.1//EN' --output-xhtml yes --clean yes --drop-proprietary-attributes yes --logical-emphasis yes --alt-text image --coerce-endtags yes --enclose-block-text yes --enclose-text yes --decorate-inferred-ul yes --indent yes --quiet yes"
 	fi
+	tidy $args |
+		sed '3s#""#"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"#'
+	# fix doctype
 }
 
 function parseepubee {
+	# parse files in directory $1, assume opf locates in OEBPS/
 	# parse opf
-	opffile=$rootdir/OEBPS/content.opf
+	local opffile=$1/OEBPS/content.opf
 	if [[ -f $opffile ]]; then
-		cd $rootdir/OEBPS
-		filename="/tmp/$(grep -oP '<dc:title>\K[^<]+' $opffile).epub"
+		cd $1/OEBPS
+		local filename="/tmp/$(grep -oP '<dc:title>\K[^<]+' $opffile).epub"
 		local tmp=$(head $opffile | grep -oP 'version="\K\w\.0">')
 		local epubver=$tmp[0,3]
 		echo Current epub version is $epubver
 		if [[ $epubver == "2.0" ]]; then
 			# a common error in epubcheck
-			sed -iE 's#properties="[^"]+"##' $opffile
+			sed -i -E 's# properties="[^"]+"##' $opffile
 		fi
 		echo "Validating content.opf file"
 		epubcheck --mode opf -v $epubver $opffile
@@ -48,14 +53,15 @@ function parseepubee {
 	fi
 	# parse html files
 	echo "\nParsing [x]html files..."
-	cd $rootdir-bak
+	cd ${1}-bak
 	for html in OEBPS/**html; do
-		htmlparser $rootdir-bak/$html >$rootdir/$html
+		htmlparser ${1}-bak/$html >$1/$html
 	done
 	# parse toc.ncx
 	if [[ -f OEBPS/toc.ncx ]]; then
-		sed -i '/ content="bookid"/d' $rootdir/OEBPS/toc.ncx
+		sed -i '/ content="bookid"/d' $1/OEBPS/toc.ncx
 	fi
+	# parse css
 }
 
 function packepub {
@@ -65,88 +71,115 @@ function packepub {
 }
 
 function checkepub {
-	echo "\nStart epubcheck over directory $rootdir"
-	epubcheck $rootdir --mode exp --save --json $rootdir.json
-	jq '.messages | .[] | .message' $rootdir.json -r
-	jq '.messages | .[] | .message, (.locations | .[] | [.path, .line, .column] | @tsv)' $rootdir.json -r >$rootdir.error
-	jq '.messages | .[] | .locations | .[] | .path' $rootdir.json -r >/tmp/errorfilelist
-	filename="/tmp/$(jq '.publication | .title' $rootdir.json -r).epub"
-	if [[ -f $rootdir.epub ]]; then
-		mv $rootdir.epub $filename
+	# run epubcheck over directory $1
+	# report stored as $1.json
+	# human readable report stored as $1.error
+	# problematical files stored as /tmp/errorfilelist
+	echo "\nStart epubcheck over directory $1"
+	epubcheck $1 --mode exp --save --json $1.json
+	jq '.messages | .[] | .message' $1.json -r
+	jq '.messages | .[] | .message, (.locations | .[] | [.path, .line, .column] | @tsv)' $1.json -r >$1.error
+	jq '.messages | .[] | .locations | .[] | .path' $1.json -r >/tmp/errorfilelist
+	local filename="/tmp/$(jq '.publication | .title' $1.json -r).epub"
+	if [[ -f $1.epub ]]; then
+		mv $1.epub $filename
 	else
-		repairepub
+		repairepub $1
 	fi
 }
 
 function repairepub {
-	echo -n "Edit with vim?\t"
-	# loop when edit with vim
-	while read -q; do
-		[[ -f $rootdir.json ]] || checkepub
-		cd $rootdir
-		local -a filelist
-		while read -r file; do
-			if [[ -f $file ]]; then
-				filelist+=($file)
-			fi
-		done </tmp/errorfilelist
-		tmux split-window -b "vim $filelist"
-		less $rootdir.error
-		echo -n "\nRun epubcheck again?\t"
-		rm $rootdir.json
-	done
+	# repair epub directory $1 using report from checkepub
+	# Edit with vim
+	if [[ -f /tmp/errorfilelist ]]; then
+		echo -n "Edit with vim?\t"
+		# loop when edit with vim
+		while read -q; do
+			[[ -f $1.json ]] || checkepub $1
+			cd $1
+			local -a filelist
+			while read -r file; do
+				if [[ -f $file ]]; then
+					filelist+=($file)
+				fi
+			done </tmp/errorfilelist
+			tmux split-window -b "vim $filelist"
+			less $1.error
+			echo -n "\nRun epubcheck again?\t"
+			rm $1.json
+		done
+	else
+		echo "No error report at /tmp/errorfilelist found"
+	fi
 
-	echo -n "Change to html directory?\t"
-	read -q && cd $rootdir/OEBPS && $SHELL
-	echo -n "Pack epub directly?\t"
-	read -q && packepub $rootdir $filename && less $rootdir.error
-}
-
-epubhash=$(grep -oP '[0-9a-f]{32}' <<<$1)
-if [[ $epubhash && -z $2 ]]; then
-	# download files from epubee.com
-	rootdir=/tmp/epub/$epubhash
-	if [[ -d $rootdir-bak ]]; then
-		echo -n "Use cached download files, parser them again?\t"
+	# Other methods
+	if [[ -f $1.json ]]; then
+		echo -n "Change to html directory?\t"
+		read -q && cd $1/OEBPS && $SHELL
+		echo -n "Pack epub directly?\t"
 		if read -q; then
-			echo "\nStart parsing cached files"
-			parseepubee
+			local filename="/tmp/$(jq '.publication | .title' $1.json -r).epub"
+			packepub $1 $filename && less $1.error
 		fi
 	else
-		mkdir -p $rootdir/
-		mkdir -p $rootdir/OEBPS
-		mkdir -p $rootdir/META-INF
-		cd $rootdir/
-		echo -n 'application/epub+zip' >mimetype
-		echo -n '<?xml version="1.0" encoding="UTF-8" ?>
+		echo "No epubcheck report $1.error found"
+	fi
+}
+
+function downloadepubee {
+	# download epub by hash $1 from reader.epubee.com
+	# download is aria2c
+	# backup orginal downloaded files in /tmp/epub/$1-bak
+	local rootdir=/tmp/epub/$1
+	mkdir -p $rootdir/
+	mkdir -p $rootdir/OEBPS
+	mkdir -p $rootdir/META-INF
+	cd $rootdir/
+	echo -n 'application/epub+zip' >mimetype
+	echo -n '<?xml version="1.0" encoding="UTF-8" ?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
   <rootfiles>
     <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
   </rootfiles>
 </container>' >META-INF/container.xml
-		cd $rootdir/OEBPS
-		root=http://reader.epubee.com/books/mobile/$epubhash[0,2]/$epubhash
-		aria2c $root/content.opf
-		grep -oP 'item href="\K[^"]+' content.opf | while read -r file; do
-			dir=$(dirname $file)
-			[[ -d $dir ]] || mkdir -p $dir
-			aria2c $root/$file -d $dir
-		done
-		cp $rootdir $rootdir-bak -r
-		parseepubee
-	fi
+	cd $rootdir/OEBPS
+	local root=http://reader.epubee.com/books/mobile/${1:0:2}/$1
+	aria2c $root/content.opf
+	grep -oP 'item href="\K[^"]+' content.opf | while read -r file; do
+		dir=$(dirname $file)
+		[[ -d $dir ]] || mkdir -p $dir
+		aria2c $root/$file -d $dir
+	done
+	cp $rootdir $rootdir-bak -r
+	parseepubee $rootdir
+}
 
-	# pack epub file and start edit if not well format
-
-	if [[ ! -f $rootdir.error ]]; then
-		echo -n "Skip epubcheck? Directly pack epub\t"
+# first try to find 32bit hash from $1
+epubhash=$(grep -oP '[0-9a-f]{32}' <<<$1)
+if [[ $epubhash && -z $2 ]]; then
+	local rootdir=/tmp/epub/$1
+	if [[ -d $rootdir-bak ]]; then
+		echo -n "Use cached download files, parser them again?\t"
 		if read -q; then
-			packepub $rootdir $filename
-		else
-			checkepub
+			echo "\nStart parsing cached files"
+			parseepubee $rootdir
 		fi
 	else
-		checkepub
+		downloadepubee $epubhash
+		# run epubcheck if not yet
+		# pack epub file and start edit if not well format
+		if [[ ! -f $rootdir.error ]]; then
+			echo -n "Skip epubcheck? Directly pack epub\t"
+			if read -q; then
+				local opffile=$1/OEBPS/content.opf
+				local filename="/tmp/$(grep -oP '<dc:title>\K[^<]+' $opffile).epub"
+				packepub $rootdir $filename
+			else
+				checkepub $rootdir
+			fi
+		else
+			checkepub $rootdir
+		fi
 	fi
 else
 	if [[ -f $1 ]]; then
