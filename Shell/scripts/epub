@@ -43,6 +43,11 @@ function parseepubee {
 		if [[ $epubver == "2.0" ]]; then
 			# a common error in epubcheck
 			sed -i -E 's# properties="[^"]+"##' $opffile
+			# another possible error caused by toc.ncx in epub2.0
+			# parse toc.ncx
+			if [[ -f OEBPS/toc.ncx ]]; then
+				sed -i '/ content="bookid"/d' $1/OEBPS/toc.ncx
+			fi
 		fi
 		echo "Validating content.opf file"
 		epubcheck --mode opf -v $epubver $opffile
@@ -57,10 +62,6 @@ function parseepubee {
 	for html in OEBPS/**html; do
 		htmlparser ${1}-bak/$html >$1/$html
 	done
-	# parse toc.ncx
-	if [[ -f OEBPS/toc.ncx ]]; then
-		sed -i '/ content="bookid"/d' $1/OEBPS/toc.ncx
-	fi
 	# parse css
 }
 
