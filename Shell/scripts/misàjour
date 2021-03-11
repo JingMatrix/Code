@@ -1,5 +1,4 @@
 #! /bin/zsh
-set -e
 
 # update plugin install state
 BASEDIR=$(dirname "$0")
@@ -22,6 +21,9 @@ echo "Updating local git repository"
 for d in ~/.vim/pack/*/*/* ~/.oh-my-zsh/custom/plugins/* ~/Documents/Project/*; do
 	(
 		cd "$d"
-		[[ -d .git ]] && echo "\t\tEnter directory $d" && git pull --rebase
+		if [[ -d .git ]]; then
+			echo "\t\tEnter directory $d"
+			git pull --rebase
+		fi
 	)
 done
