@@ -1,16 +1,36 @@
 set background=dark
 set nocompatible
 
+augroup math_index
+	autocmd!
+	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/optimal_transport.index
+	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/measure_theory.index
+	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/topology.index
+	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/riemannian_geometry.index
+augroup end
+
 " vimtex
 let g:vimtex_compiler_method='latexmk'
 let g:vimtex_compiler_latexmk={'build_dir' : '/var/tmp/latex'}
 let g:vimtex_quickfix_autojump=1
 let g:vimtex_quickfix_method='pplatex'
+let g:vimtex_fold_enabled=1
+let g:vimtex_fold_types={
+			\ 'sections' : {
+			\ 'sections' : [ 'subsection', 'subsubsection'],
+			\ },
+			\ 'envs' : {
+			\ 'blacklist': ['enumerate', 'itemize', 'rmk'],
+			\ }
+			\ }
+set fillchars=fold:\ 
 
 " project rooter
 let g:rooter_targets = '*.tex,*.vue,*.js'
 let g:rooter_patterns = ['>Latex', '.git', 'package.json']
 let g:rooter_change_directory_for_non_project_files = 'current'
+
+" languagetool
 
 set conceallevel=2
 hi Conceal NONE
@@ -25,14 +45,17 @@ let g:mkdx#settings={ 'highlight': { 'enable': 1 },
 
 
 let g:airline_theme='lucius'
-let g:UltiSnipsExpandTrigger="<m-tab>"
+" this setting for UltiSnipsExpandTrigger is in fact not used at all
+" just to make coc.nvim able to work
+let g:UltiSnipsExpandTrigger="<m-Tab>"
+let g:prettier#exec_cmd_path="/home/jing/.nvm/versions/node/v14.15.1/bin/prettier"
 let g:coc_node_path='/home/jing/.nvm/versions/node/v14.15.1/bin/node'
 
 " formater
 let g:shfmt_fmt_on_save=1
 augroup formatter
 	autocmd!
-	autocmd FileType sh,zsh,bash nmap <leader>p :Shfmt<enter>
+	autocmd FileType sh,zsh,bash nmap <leader>p :%!shfmt -p<enter>
 	autocmd FileType tex,bib nmap <leader>p :%!latexindent -c=/tmp/<enter>
 augroup END
 
@@ -80,8 +103,8 @@ hi Pmenu ctermbg=NONE ctermfg=white
 hi PmenuSel ctermfg=yellow
 
 let g:netrw_preview=1
-let g:netrw_liststyle = 3
-let g:netrw_winsize   = 30
+let g:netrw_liststyle=3
+let g:netrw_winsize=30
 nmap - :Explore<enter>
 
 set foldmethod=marker
