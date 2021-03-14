@@ -1,11 +1,10 @@
-/home/jing/.vim
+/home/jing/.local/share/nvim/site
 ├── coc-settings.json
 ├── pack
 │   ├── plugin
 │   │   └── start
 │   │       ├── vim-commentary
 │   │       ├── vim-fugitive
-│   │       ├── vim-sensible
 │   │       ├── vim-surround
 │   │       └── vim-unimpaired
 │   ├── project
@@ -34,4 +33,4 @@
 └── UltiSnips
     └── markdown.snippets
 
-29 directories, 5 files
+28 directories, 5 files

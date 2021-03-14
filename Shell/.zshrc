@@ -16,10 +16,6 @@ alias gcl="git clone --recursive --shallow-submodules --depth 1"
 alias pd="pandoc --wrap=none"
 alias w="nnn -a -T t -P n $HOME/Documents/Notes/notes"
 
-function v {
-	vim --servername $RANDOM $@
-}
-
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 export GOPATH="$HOME/.local/go"

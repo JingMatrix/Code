@@ -1,5 +1,5 @@
 env:
-  EDITOR: vim
+  EDITOR: nvim
   NNN_ARCHIVE: "\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|epub|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
   NNN_BMS: "m:~/Mathematics;a:~/Mathematics/Textbook_Archive;c:~/Documents/Code;p:~/Documents/Project;"
   NNN_PLUG: "n:preview-note;f:fzcd;j:autojump"

@@ -1,5 +1,4 @@
 set background=dark
-set nocompatible
 
 augroup math_index
 	autocmd!
@@ -30,8 +29,6 @@ let g:rooter_targets = '*.tex,*.vue,*.js'
 let g:rooter_patterns = ['>Latex', '.git', 'package.json']
 let g:rooter_change_directory_for_non_project_files = 'current'
 
-" languagetool
-
 set conceallevel=2
 hi Conceal NONE
 let g:vimtex_view_method='zathura'
@@ -48,8 +45,8 @@ let g:airline_theme='lucius'
 " this setting for UltiSnipsExpandTrigger is in fact not used at all
 " just to make coc.nvim able to work
 let g:UltiSnipsExpandTrigger="<m-Tab>"
-let g:prettier#exec_cmd_path="/home/jing/.nvm/versions/node/v14.15.1/bin/prettier"
-let g:coc_node_path='/home/jing/.nvm/versions/node/v14.15.1/bin/node'
+let g:prettier#exec_cmd_path="/home/jing/.nvm/versions/node/v14.16.0/bin/prettier"
+let g:coc_node_path='/home/jing/.nvm/versions/node/v14.16.0/bin/node'
 
 " formater
 let g:shfmt_fmt_on_save=1
@@ -90,7 +87,7 @@ augroup END
 
 set undodir=/var/tmp/vim
 set undofile
-set directory=/var/tmp/vim/swap//
+set directory=/var/tmp/vim/swap
 augroup rmundo
 	autocmd!
 	autocmd VimEnter /tmp/* set noundofile

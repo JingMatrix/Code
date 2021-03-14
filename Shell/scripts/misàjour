@@ -3,7 +3,7 @@
 # update plugin install state
 BASEDIR=$(dirname "$0")
 echo "Updating plugin installed state"
-tree -L 4 ~/.vim >$BASEDIR/../vim.plugin
+tree -L 4 ~/.local/share/nvim/site >$BASEDIR/../vim.plugin
 tree -L 2 ~/.local/share/gnome-shell >$BASEDIR/../gnome.plugin
 
 # clean invalid files item in zathura history
@@ -18,7 +18,7 @@ sed -i "/TOREMOVE/,/^$/d" $zathura_history
 
 # pull updates from remote repos
 echo "Updating local git repository"
-for d in ~/.vim/pack/*/*/* ~/.oh-my-zsh/custom/plugins/* ~/Documents/Project/*; do
+for d in ~/.local/share/nvim/site/pack/*/*/* ~/.oh-my-zsh/custom/plugins/* ~/Documents/Project/*; do
 	(
 		cd "$d"
 		if [[ -d .git ]]; then
