@@ -3,7 +3,7 @@ s/é/é/g
 s/ﬁ/fi/g
 s/ő/ö/g
 s/ö/ö/g
-s/ﬀ/fi/g
+s/ﬀ/ff/g
 s/ü/ü/g
 s/ř/ř/g
 s/ı́/í/g
@@ -11,16 +11,19 @@ s/Š/Š/g
 s/ﬂ/fi/g
 s/á/á/g
 # remove possible control character
-s/[]//g
+s/[]//g
 # useless preposition at the beginning
 s/^by //g
 s/^on //g
 s/^in //g
 s/^for //g
 s/^of //g
+s/^a //g
 # for better display
-s/\s*\bI*Rn\b\s*/ ℝⁿ /g
-s/\s*\bI*Rd\b\s*/ ℝᵈ /g
+s/\s*\bI*Rn\b\s*/ℝⁿ/g
+s/\s*\bI*Rd\b\s*/ℝᵈ/g
+s/\s*\bI*R\b\s*/ℝ/g
+s/\s*\bI*IE\b\s*/𝔼/g
 s/\s*\bLp\b\s*/ Lₚ /g
 s/\s*\bL1\b\s*/ L₁ /g
 s/\s*\bL0\b\s*/ L₀ /g
@@ -34,4 +37,8 @@ s/\s$//g
 # remove invalid lines
 /\b[0-9]+\b$/d
 /Index/d
-/^\w{0,3}$/d
+/^.{0,5}$/d
+/:/d
+/^\W/d
+/II/d
+/\([^\)]*$/d

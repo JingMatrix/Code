@@ -1,13 +1,5 @@
 set background=dark
 
-augroup math_index
-	autocmd!
-	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/optimal_transport.index
-	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/measure_theory.index
-	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/topology.index
-	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/riemannian_geometry.index
-augroup end
-
 " vimtex
 let g:vimtex_compiler_method='latexmk'
 let g:vimtex_compiler_latexmk={'build_dir' : '/var/tmp/latex'}
@@ -22,12 +14,17 @@ let g:vimtex_fold_types={
 			\ 'blacklist': ['enumerate', 'itemize', 'rmk'],
 			\ }
 			\ }
+augroup math_expression
+	autocmd!
+	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/math.index
+augroup end
+
 set fillchars=fold:\ 
 
 " project rooter
 let g:rooter_targets = '*.tex,*.vue,*.js'
 let g:rooter_patterns = ['>Latex', '.git', 'package.json']
-let g:rooter_change_directory_for_non_project_files = 'current'
+let g:rooter_change_directory_for_non_project_files='current'
 
 set conceallevel=2
 hi Conceal NONE
@@ -45,8 +42,9 @@ let g:airline_theme='lucius'
 " this setting for UltiSnipsExpandTrigger is in fact not used at all
 " just to make coc.nvim able to work
 let g:UltiSnipsExpandTrigger="<m-Tab>"
-let g:prettier#exec_cmd_path="/home/jing/.nvm/versions/node/v14.16.0/bin/prettier"
-let g:coc_node_path='/home/jing/.nvm/versions/node/v14.16.0/bin/node'
+if stridx($PATH, 'node') == -1
+	let $PATH=$PATH . ":/home/jing/.nvm/versions/node/v14.16.0/bin"
+endif
 
 " formater
 let g:shfmt_fmt_on_save=1

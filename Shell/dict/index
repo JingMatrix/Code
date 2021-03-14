@@ -1,0 +1,10 @@
+#! zsh
+tmp=$(mktemp -d)
+pdftotext -nopgbrk -raw -f 1087 ~/Mathematics/Analysis/MeasureTheory.pdf $tmp/measure_theory.index
+pdftotext -nopgbrk -raw -f 508 ~/Mathematics/Geometry\ and\ Topology/Riemannian\ Geometry/Riemannian\ Geometry_Petersen.pdf $tmp/riemannian_geometry.index
+pdftotext -nopgbrk -raw -f 989 -l 992 ~/Mathematics/Textbook_Archive/Optimal\ transport,\ old\ and\ new.pdf $tmp/optimal_transport.index
+djvutxt --page=260-264 ~/Mathematics/Geometry\ and\ Topology/Algebraic\ Topology/Topology\ II.djvu >$tmp/topology.index
+
+sed -i -E -f index.sed $tmp/*.index
+sort -f -u $tmp/*.index >math.index
+rm $tmp -rf
