@@ -1,5 +1,4 @@
 /home/jing/.local/share/nvim/site
-├── coc-settings.json
 ├── pack
 │   ├── plugin
 │   │   └── start
@@ -20,7 +19,6 @@
 │   │   ├── opt
 │   │   └── start
 │   │       ├── mkdx
-│   │       ├── vim-prettier
 │   │       └── vimtex
 │   └── theme
 │       └── start
@@ -33,4 +31,4 @@
 └── UltiSnips
     └── markdown.snippets
 
-28 directories, 5 files
+27 directories, 4 files

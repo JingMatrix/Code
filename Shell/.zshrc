@@ -21,7 +21,7 @@ export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 export GOPATH="$HOME/.local/go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/Documents/Code/Shell/scripts"
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export PAGER="nvimpager"
 
 # keybinding
 function keep-buffer {

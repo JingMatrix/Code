@@ -1,4 +1,4 @@
-set background=dark
+set inccommand=nosplit
 
 " vimtex
 let g:vimtex_compiler_method='latexmk'
@@ -52,6 +52,8 @@ augroup formatter
 	autocmd!
 	autocmd FileType sh,zsh,bash nmap <leader>p :%!shfmt -p<enter>
 	autocmd FileType tex,bib nmap <leader>p :%!latexindent -c=/tmp/<enter>
+	autocmd FileType javascript,html,vue,markdown,css,scss nmap <leader>p :%!prettier --parser=<C-R>=&ft<enter><enter>
+	autocmd FileType json,jsonc nmap <leader>p :%!jq '.'<enter>
 augroup END
 
 " writing dairy
@@ -90,10 +92,9 @@ augroup rmundo
 	autocmd!
 	autocmd VimEnter /tmp/* set noundofile
 augroup END
-set textwidth=0
+
 highlight Comment cterm=italic gui=italic
 
-set path+=..
 hi Pmenu ctermbg=NONE ctermfg=white
 hi PmenuSel ctermfg=yellow
 
