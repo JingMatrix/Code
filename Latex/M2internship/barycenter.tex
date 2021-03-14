@@ -1,6 +1,15 @@
 \documentclass{report}
 
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+}
+
 \usepackage{amsthm, amsmath, amsfonts, mathrsfs, amssymb}
+\usepackage{cleveref}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{coro}[thm]{Corollary}
@@ -13,13 +22,6 @@
 \usepackage{biblatex}
 \addbibresource{Bibliography.bib}
 
-\usepackage{hyperref}
-\hypersetup{
-	colorlinks=true,
-	linkcolor=blue,
-	filecolor=magenta,
-	urlcolor=cyan,
-}
 
 \newcommand{\diff}{\operatorname{d}}
 
@@ -56,12 +58,13 @@
 
 \chapter{Alexandrov spaces}
 \section{Curvature bounded above}
-\subsection{Hilbert spaces}
 \section{Curvature bounded below}
+\section{Hilbert spaces}
 
 \chapter{Hilbert Riemannian manifold}
 
-\part{Barycenters in Wasserstein Spaces}
+\part{Barycenters in Measure Spaces}
+\input{Chapters/wasserstein-barycenter.tex}
 
 \printbibliography
 \end{document}

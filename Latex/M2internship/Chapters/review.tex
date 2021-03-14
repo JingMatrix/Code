@@ -29,7 +29,7 @@ In this chapter, I shall review in order papers: \cite{ohta2012barycenters}, \ci
 		\item $X$ is not locally compact with respect to the induced length metric topology. By compatibility of induced length structure with the topology of base space $X$ (see Exercise 2.1.5 in \cite{burago2001course}), open set in original topology is again open in the induced length metric topology. Cover an otherwise compact set of $X$ in new topology by open sets in original topology, we get a contradiction.
 		      % \item Unit sphere in $\ell^2$ is geodesic with respect to induced length metric. By Theorem 2.4.16 in \cite{burago2001course}, we only need to show that midpoint in $X$ always exists, i.e., $\forall x,y \in X$, $\exists z \in X$ such that $d(x,z)=d(y,z)=\frac{1}{2}d(x,y)$. For such two points $x$ and $y$, $z$ can be selected from the intersection of $X$ and the hypersurface passing the origin in $\ell^2$ that evenly separates $x$ and $y$.
 		      % \item  $X$ is geodesic with respect to induced length metric $\hat{d}$.
-		      % Induced length structure in $X$. 
+		      % Induced length structure in $X$.
 		      %Recall that shortest paths are closed under point-wise convergence (Proposition 2.5.17 in \cite{burago2001course}, proved by lower semi-continuity of length function).
 		      % We show that distance in $X$ is approximate by curves with finite coordinate components. To begin with, any two points in $X$ with finite coordinate components can be connected by a shortest path. Then pass a point to have infinite coordinate components and later do the same for another point.
 		      % We use the fact that points with finite coordinate components are dense in $\ell^2$ and so are they in $X$.
@@ -41,7 +41,7 @@ In this chapter, I shall review in order papers: \cite{ohta2012barycenters}, \ci
 		      Basically, we need to answer whether $\hat{d}(e,-e)$ is realized by a rectifiable curve in $X$.
 
 		      Assume now we have $L_{d}(\gamma)=\hat{d}(e,-e)$.
-		      Restricting to the first $n$ coordinate components, barycenters always exist and are exactly endponits of shortest axes. Existence is a priori guaranteed by compactness of finite dimensional ellipse.
+		      Restricting to the first $n$ coordinate components, barycenters always exist and are exactly endpoints of shortest axes. Existence is a priori guaranteed by compactness of finite dimensional ellipse.
 		      % And those two endponits attain equality in following inequality:
 
 		      % 		            \[
@@ -61,24 +61,24 @@ In this chapter, I shall review in order papers: \cite{ohta2012barycenters}, \ci
 			      \label{energy_variation_in_X}
 			      \gamma = \operatorname{arg} \inf_{\eta} \sup_{\Delta} \sum_{i=1}^{m} \Vert\eta(\delta_{i-1})- \eta(\delta_{i})\Vert^2
 		      \end{equation}
-		      Then this formula \ref{energy_variation_in_X} will contradict our assumption. Write $\gamma$ in coordinate as $(\gamma_1, \gamma_2\ldots\gamma_n\ldots)$, to keep $\gamma_k$ for $ k > n$ unchanged. Up to choose a bigger integer $n$ we can assume $ \exists t \in [0,1]$, such that $\gamma_n(t) \neq 0$. Consider $\tilde{\gamma}^n = (\gamma_1, \gamma_2 \ldots \gamma_n)$ a function with $\tilde\gamma^n(t)$ in $E_{\gamma(t)}$ where
+		      Then \cref{energy_variation_in_X} will contradict our assumption. Write $\gamma$ in coordinate as $(\gamma_1, \gamma_2\ldots\gamma_n\ldots)$, to keep $\gamma_k$ for $ k > n$ unchanged. Up to choose a bigger integer $n$ we can assume $ \exists t \in [0,1]$, such that $\gamma_n(t) \neq 0$. Consider $\tilde{\gamma}^n = (\gamma_1, \gamma_2 \ldots \gamma_n)$ a function with $\tilde\gamma^n(t)$ in $E_{\gamma(t)}$ where
 		      \begin{align*}
 			      E_{\gamma(t)} : & = \left\{ (x_1,x_2 \ldots x_n) \in \mathbb{R}^n \mid \sum_{i=1}^n \frac{x_i^2}{ c_i^2} = c_{\gamma(t)}^2\right\} \\
 			      c_{\gamma(t)}:  & =\sqrt{ 1- \sum_{i > n} \frac{\gamma_j(t)^2}{c_j^2}} \geq 0
 		      \end{align*}
-		      Finally $\eta := (0,0,\ldots, c_n c_{\gamma(\cdot)},\gamma_{n+1},\ldots)$ will violate \ref{energy_variation_in_X} since energy variation coincide with arc-length variation in complete Riemannian manifold and we have $\int_{[0,1]} c_n c_{\gamma(\cdot)} \diff \lambda < L_d(\tilde{\gamma}^n)$.
+		      Finally $\eta := (0,0,\ldots, c_n c_{\gamma(\cdot)},\gamma_{n+1},\ldots)$ will violate \cref{energy_variation_in_X} since energy variation coincide with arc-length variation in complete Riemannian manifold and we have $\int_{[0,1]} c_n c_{\gamma(\cdot)} \diff \lambda < L_d(\tilde{\gamma}^n)$.
 
 		      This problem should be more related to Hilbert Riemannian manifold, we put it aside for now.
 		\item As Example 5.1 in \cite{grossman1965hilbert} (I suspect this is the origin of our example), we can actually show that $e$ and $-e$ cannot be connected by minimal geodesic.
 
-		      Hilbert Riemannian maindfold  theory is needed to use this term smooth (the original author used it).
+		      Hilbert Riemannian manifold  theory is needed to use this term smooth (the original author used it).
 		      % we can safely replace it with rectifiable in this example.
 
 		      Define \( T: X \rightarrow X \) by \( T x = y \), where
 		      \[
 			      y _ { 1 } = x _ { 1 } , y _ { 2 } = 0 , y _ { i } = \frac{c_i}{c_{i-1}} x_{i-1} \text { for } i \geq 3 . \]
 
-		      Then \( T \) is a smooth map with only \( e \) and \(- e \) as fixed points. Any smooth curve from \( e\) to \( -e \) is taken by \( T \) into another such curve which is strictly shorter than the original, since length structure is induced from $\ell^2$ norm and $T$ is strictly decreasing with respect to $\ell^2$ norm as $c_i$ is a decreasing sequence. Therefore, there is no minimal geodesic from \( e \) to \( -e . \)
+		      Then \( T \) is a smooth map with only \( e \) and \(- e \) as fixed points. Any smooth curve from \( e\) to \( -e \) is taken by \( T \) into another such curve which is strictly shorter than the original. To justify it, firstly notice that length structure is defined as arc-length integral, and the tangent map $T^\prime := (1,0,{c_3}/{c_2}, \ldots)$ is (almost) strictly decreasing (though with $\ell^\infty$ norm 1) as $c_i$ is a decreasing sequence. Therefore, there is no minimal geodesic from \( e \) to \( -e \).
 
 		      There I should discuss two different length metric appeared, one is induced from $\ell^2$ norm and the other one is smooth Riemannian length structure. Are they two coincided (on common admissible curves)? Two ways to think about this relation
 		      \begin{enumerate}
@@ -88,7 +88,7 @@ In this chapter, I shall review in order papers: \cite{ohta2012barycenters}, \ci
 
 		\item Now there is another way to show that $X$ with metric from $\ell^2$ is not locally compact. $X$ is complete and there is rectifiable curve connecting $e$ and $-e$, by Exercise 2.5.25 in \cite{burago2001course} there is shortest path connecting $e$ and $-e$ if $X$ is locally compact. This proposition is proofed by showing that balls of induced length metric are pre-compact in the topology of original topology.
 
-		\item We have answered partially the existence of barycenter of $\mu$ in $X$ with induced length metric. However, the barycenter of two points might exist without bothering minimal geodesics. nor bothering midpoints.
+		\item We have answered partially the existence of barycenter of $\mu$ in $X$ with induced length metric. Notice that barycenter of $ \mu: = 1/2 {\delta_x + \delta_y } $ for $x$ and $y$ in a length space is always the midpoints between them. Denote $\Gamma{u,v}$ the set of admissible paths join two points $u$ and $v$ in $X$
 
 
 	\end{enumerate}
@@ -116,12 +116,12 @@ In this chapter, I shall review in order papers: \cite{ohta2012barycenters}, \ci
 		\item Complete length space is sufficient? That is the interest of last remark.
 	\end{enumerate}
 \end{rmk}
-\begin{rmk}[Exmaple 2.1 c]
+\begin{rmk}[Example 2.1 c]
 	% This example is in contradiction with \href{https://en.wikipedia.org/wiki/Hadamard_space}{Wikipedia: Hadamard space}. The author claims Hilbert space is of non-negative curvature, while Wikipedia says ``a normed space is an Hadamard space if and only if it is a Hilbert space".
-	Hilbert space satisfies equality in triangle comparison with Eculidean space, hence can be regarded ``flat".
+	Hilbert space satisfies equality in triangle comparison with Euclidean space, hence can be regarded ``flat".
 \end{rmk}
 
-Then we discuss the infinitesimal structure of an Alexandrov space \( ( X , d ) . \)
+Then we discuss the infinitesimal structure of an Alexandrov space \( ( X , d )\).
 
 \begin{defn}[space of directions]
 	Fix \( z \in X \) and let \( \hat { \Sigma } _ { z } \) be the set of all unit speed geodesics emanating from \( z \). For \( \gamma , \eta \in \hat { \Sigma } _ { z } , \) by virtue of the curvature bound, the limit
@@ -147,20 +147,13 @@ Then we discuss the infinitesimal structure of an Alexandrov space \( ( X , d ) 
 \end{thm}
 
 \begin{proof}
-	This is a calculation of angle between $\gamma^\prime(0)$ and $\eta^\prime(0)$ with a specific selected converging process. To apply angle definition in \ref{angle_def}, normalsize $\gamma$ and $\eta$ as $\gamma\left(\vert\gamma^\prime(0)\vert \cdot\right)$ and $\eta\left(\vert\eta^\prime(0)\vert \cdot\right)$
+	This is a calculation of angle between $\gamma^\prime(0)$ and $\eta^\prime(0)$ with a specific selected converging process. To apply angle definition in \cref{angle_def}, normalize $\gamma$ and $\eta$ as $\gamma\left(\vert\gamma^\prime(0)\vert \cdot\right)$ and $\eta\left(\vert\eta^\prime(0)\vert \cdot\right)$
 	\[
 		\cos\angle _ { z } ( \gamma , \eta ): = \left( \lim _ { s , t \downarrow 0 } \frac { s ^ { 2 } + t ^ { 2 } - d _ { X }\left( \gamma (\vert \gamma^\prime(0)\vert s ) , \eta (\vert \eta^\prime(0)\vert  t ) \right) ^ { 2 } } { 2 s t } \right)
 	\]
 	To get desired formula, put $ x := \vert  \gamma^\prime(0)\vert s =\vert \eta^\prime(0)\vert t $ and pass $x \downarrow 0$.
 \end{proof}
 
-\begin{rmk}[Lemma4.5, Lang and Schroeder's inequality]
-	When passing from finit support measures to general ones, the author should use Wasserstein metric $W_p$ convergence but not only weak convergence. Otherwise, he cannot justify convergence of integrals of distance function $d_{C_z}$. Here we use the fact that finite supported measures is a dense subspace of Wasserstein space $\mathscr{W}_2(X)$ if $X$ is a Polish space (see \cite{villani2008optimal} Theorem 6.18), recalled in this report as Theorem \ref{topology_Wasserstein}.
+\begin{rmk}[Lemma 4.5, Lang and Schroeder's inequality]
+	When passing from finite support measures to general ones, the author should use Wasserstein metric $W_p$ convergence but not only weak convergence. Otherwise, he cannot justify convergence of integrals of distance function $d_{C_z}$. Here we use the fact that finite supported measures is a dense subspace of Wasserstein space $\mathcal{W}_2(X)$ if $X$ is a Polish space (see \cite{villani2008optimal} Theorem 6.18), recalled in this report as \cref{topology_Wasserstein}.
 \end{rmk}
-\section{Existence and consistency of Wasserstein...}
-By Theorem \ref{topology_Wasserstein}, if $X$ is a Polish space, then so is $\mathscr{W}_p(X)$. If assume further $X$ is a locally compact length space, then $\mathscr{W}_p(X)$ is a strictly intrinsic length space (see Corollary 7.22 in \cite{villani2008optimal}, recalled in this report as Theorem \ref{geodesic_Wasserstein_space}) with respect to $W_p(X)$. That is the case in this paper, we assume in this section that $X$ is geodesic locally compact space. Now $\mathscr{W}_p(X)$ is a Polish geodesic space, however it is not necessarily a locally compact space.
-
-We use following notation convention:
-\begin{itemize}
-	\item \( \hat{\mu} \), random probability measure in
-\end{itemize}
