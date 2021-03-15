@@ -13,6 +13,7 @@ alias sg="TERM=xterm googler -n 5"
 alias sd="TERM=xterm ddgr -n 5"
 alias b="buku --suggest"
 alias gcl="git clone --recursive --shallow-submodules --depth 1"
+alias glols="PAGER=less git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat"
 alias pd="pandoc --wrap=none"
 alias w="nnn -a -T t -P n $HOME/Documents/Notes/notes"
 
