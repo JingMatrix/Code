@@ -21,17 +21,36 @@ augroup end
 set fillchars=fold:\ 
 
 " completion
+set omnifunc=syntaxcomplete#Complete
 let g:deoplete#enable_at_startup=1
 
 " project rooter
-let g:rooter_cd_cmd = 'lcd'
-let g:rooter_targets = '*.tex,*.vue,*.js'
-let g:rooter_patterns = ['>Latex', '.git', 'package.json']
+let g:rooter_cd_cmd='lcd'
+let g:rooter_targets='*.tex,*.vue,*.js'
+let g:rooter_patterns=['>Latex', '.git', 'package.json']
 let g:rooter_change_directory_for_non_project_files='current'
 
 set conceallevel=2
 hi Conceal NONE
 let g:vimtex_view_method='zathura'
+
+" linter
+let g:ale_linters_explicit=0
+let g:ale_lint_on_enter=0
+let g:ale_lint_on_save=0
+let g:ale_lint_on_filetype_changed=0
+let g:ale_lint_on_insert_leave=0
+let g:ale_linters={
+			\ 'vim': ['vimls'],
+			\ 'javascript': ['tsserver', 'eslint'],
+			\ 'text': ['writegood', 'languagetool', 'proselint'],
+			\	'tex': ['proselint', 'lacheck'],
+			\	'mail': ['proselint', 'languagetool']
+			\}
+let g:ale_fixers={
+			\ 'javascript': ['eslint', 'prettier'],
+			\ 'text': ['textlint'],
+			\}
 
 " mkdx plugin
 let g:mkdx#settings={ 'highlight': { 'enable': 1 },
@@ -42,8 +61,7 @@ let g:mkdx#settings={ 'highlight': { 'enable': 1 },
 
 
 let g:airline_theme='lucius'
-let g:UltiSnipsExpandTrigger="<c-Space>"
-if stridx($PATH, 'node') == -1
+if stridx($PATH, 'node')==-1
 	let $PATH=$PATH . ":/home/jing/.nvm/versions/node/v14.16.0/bin"
 endif
 
