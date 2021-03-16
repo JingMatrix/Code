@@ -5,6 +5,7 @@ pdftotext -nopgbrk -raw -f 508 ~/Mathematics/Geometry\ and\ Topology/Riemannian\
 pdftotext -nopgbrk -raw -f 989 -l 992 ~/Mathematics/Textbook_Archive/Optimal\ transport,\ old\ and\ new.pdf $tmp/optimal_transport.index
 djvutxt --page=260-264 ~/Mathematics/Geometry\ and\ Topology/Algebraic\ Topology/Topology\ II.djvu >$tmp/topology.index
 
-sed -i -E -f index.sed $tmp/*.index
-sort -f -u $tmp/*.index >math.index
+sed -i -E -f .index.sed $tmp/*.index
+sort -f -u $tmp/*.index >.dict
+sed -i -E '/^.{0,4}$/d' .dict
 rm $tmp -rf

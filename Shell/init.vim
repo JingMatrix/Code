@@ -16,15 +16,15 @@ let g:vimtex_fold_types={
 			\ }
 augroup math_expression
 	autocmd!
-	autocmd FileType tex set dictionary+=/home/jing/Documents/Code/Shell/dict/math.index
+	autocmd FileType tex setl dictionary+=../.dict | setl iskeyword+=-
 augroup end
 set fillchars=fold:\ 
 
 " completion
 set omnifunc=syntaxcomplete#Complete
-let g:deoplete#enable_at_startup=1
 
 " project rooter
+set autochdir
 let g:rooter_cd_cmd='lcd'
 let g:rooter_targets='*.tex,*.vue,*.js'
 let g:rooter_patterns=['>Latex', '.git', 'package.json']
@@ -35,21 +35,11 @@ hi Conceal NONE
 let g:vimtex_view_method='zathura'
 
 " linter
-let g:ale_linters_explicit=0
-let g:ale_lint_on_enter=0
-let g:ale_lint_on_save=0
-let g:ale_lint_on_filetype_changed=0
-let g:ale_lint_on_insert_leave=0
 let g:ale_linters={
 			\ 'vim': ['vimls'],
-			\ 'javascript': ['tsserver', 'eslint'],
 			\ 'text': ['writegood', 'languagetool', 'proselint'],
-			\	'tex': ['proselint', 'lacheck'],
+			\	'tex': ['proselint', 'texlab'],
 			\	'mail': ['proselint', 'languagetool']
-			\}
-let g:ale_fixers={
-			\ 'javascript': ['eslint', 'prettier'],
-			\ 'text': ['textlint'],
 			\}
 
 " mkdx plugin

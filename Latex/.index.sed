@@ -10,6 +10,11 @@ s/ı́/í/g
 s/Š/Š/g
 s/ﬂ/fi/g
 s/á/á/g
+s/ﬃ/ffi/g
+s/ó/ó/g
+s/’/'/g
+s/ń/ń/g
+s/incar\w/incaré/
 # remove possible control character
 s/[]//g
 # useless preposition at the beginning
@@ -42,3 +47,11 @@ s/\s$//g
 /^\W/d
 /II/d
 /\([^\)]*$/d
+# word convention
+s/semi-?/semi-/g
+# parenthess
+s/\(([a-zA-Z']+)\)/\1/g
+s/^([^\(]+)\)$/\1/
+# vim keywords
+/[∗.]/d
+s/ /\n/g

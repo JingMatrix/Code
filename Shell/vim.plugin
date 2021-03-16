@@ -8,15 +8,15 @@
     │       └── vim-unimpaired
     ├── project
     │   ├── opt
+    │   │   ├── ale
     │   │   ├── coc.nvim
     │   │   └── gen_tags.vim
     │   └── start
-    │       ├── deoplete-dictionary
-    │       ├── deoplete.nvim
     │       ├── fzf
     │       ├── fzf.vim
     │       ├── ultisnips
-    │       └── vim-rooter
+    │       ├── vim-rooter
+    │       └── vim-snippets
     ├── syntax
     │   ├── opt
     │   └── start
