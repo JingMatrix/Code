@@ -1,13 +1,13 @@
 %! TEX root = ../barycenter.tex
 \chapter{Introduction and preparation}
 \section{Definition of barycenter}
-To begin with, recall in physics we define barycenter (or written as barycentre), i.e.,  center inertial mass, as a geometric point where we can image gravity acts at. In the case of a system of particles $\boldsymbol{P}_\nu$, $\nu = 1, \ldots , N$, each with mass $m_\nu$ that are located in space with coordinates $\boldsymbol{r}_\nu$, $\nu = 1, \ldots , N$, the coordinate of the center of mass $C$ satisfies condition:
+To begin with, recall that in physics we define baryceter, i.e.,  center of inertial mass, as a geometric point where we can image gravity acts at. In the case of a system of particles $\boldsymbol{P}_\nu$, $\nu = 1, \ldots , N$, each with mass $m_\nu$ that are located in space with coordinates $\boldsymbol{r}_\nu$, $\nu = 1, \ldots , N$, the coordinate of the center of mass $C$ satisfies condition:
 \[
 	\sum _{\nu=1}^{N} m_{\nu}\boldsymbol {r}_{\nu} -	\sum _{\nu=1}^{N}m_{\nu}\boldsymbol {r}_C = \sum _{\nu=1}^{N}m_{\nu}(\boldsymbol {r} _{\nu}-\boldsymbol {r}_C )=\boldsymbol {0}.
 \]
 Then set \( M := \sum _ { \nu = 1 } ^ { N } m _ { \nu } \), we should have
 \[
-	\boldsymbol { r } _ { C } = \left( \sum _ { \nu = 1 } ^ { N } m _ { \nu } \boldsymbol { r } _ { \nu } \right) / M .
+	\boldsymbol { r }_ { C } = \left( \sum_ { \nu = 1 } ^ { N } m_ { \nu } \boldsymbol { r }_ { \nu } \right) / M .
 \]
 We can characterize barycenter as the unique solution of minimizing problem
 \begin{equation}
@@ -16,14 +16,42 @@ We can characterize barycenter as the unique solution of minimizing problem
 \end{equation}
 as norm is calculated as inner product on Euclidean space.
 
-To generalize \autoref{barycenter_def}, there are two core concepts to keep: metric distance and measure integral.
+To generalize \cref{barycenter_def}, notice that norm is not essential here but metric is. We can regard system of particles as finite points supported measure. For a space of measures over metric space $(E,d)$, we firstly define a metric, i.e., Wasserstein metric $W_p$ on this space; then we define barycenter as the projection to the closed subspace consisting of Dirac measures, which can be canonically identified as $E$. A barycenter $x \in E$ of measure $\mu$ on $E$ satisfies
+\[
+	W_p(\delta_x, \mu) = \min_{z \in E} \int_{X} d(z, y)^p \diff \mu(y) = \min_{z \in E} W_p(\delta_z, \mu)= W_p(E, \mu).
+\]
 
 \section{Geometry and probability background}
 We should introduce necessary concepts and recall classic results to help our discussion; for the sake of instruction, we present some classic proofs.
+
 \subsection{Metric geometry}
+\begin{defn}
+	\label{defn:length_structure}
+	Let \( ( X , d ) \) be a metric space and \( \gamma \) be a path in \( X \), i.e., a continuous map \( \gamma: [ a , b ] \rightarrow X \). Consider a partition \( Y \) of \( [ a , b ] )\), that is, a finite collection of points \( Y = \left\{ y _ { 0 } , \ldots , y _ { N } \right\} \) such that \( a = y _ { 0 } \leq y _ { 1 } \leq y _ { 2 } \leq \ldots \leq y _ { N } = b \). The supremum of the sums 
+	\[
+		\Sigma ( Y ) = \sum _ { i = 1 } ^ { N } d \left( \gamma \left( y _ { i - 1 } \right) , \gamma \left( y _ { i } \right) \right) 
+	\]
+	over all the partitions $Y$ is called the length of $\gamma$ (with respect to the metric $d$ ) and denoted $L_d (\gamma)$. A curve is said to be rectifiable if its length is finite.
+\end{defn}
+
+Once we are disposal with a length structure. For two points \( x , y \in X \) we set the associated distance \( d ( x , y ) \) between them to be the infimum of lengths of admissible paths connecting these points:
+\[
+	d _ { L } ( x , y ) = \inf \{ L ( \gamma ) ; \gamma: [ a , b ] \rightarrow X , \gamma \in A , \gamma ( a ) = x , \gamma ( b ) = y \}.
+\]
+
+\begin{defn}
+	\label{defn:length_space}
+	A metric space $(X,d)$ is a length space if the distance $\hat{d}$ induced from length $L_d$ coindcides with $d$. We also call it an intrinsic metric space.
+\end{defn}
+
+\begin{prop}
+	A locally compact complete length space is proper, i.e., closed balls are compact.
+\end{prop}
+
+
 \subsection{Measure theory}
 
-Let \( X \) be a metric space and \( \mathscr { M } ( X ) \) the space of all measures defined on \( \mathscr { B } _ { X } . \) An element \( \mu \in \mathscr { H } ( X ) \) is a nonnegative, countably additive set function defined on \( \mathscr { B } _ { X } \) with the property \( \mu ( X ) = 1 . \quad C ( X ) \) stands for the space of all bounded real valued continuous functions on \( X \).  We shall now topologize the space \( \mathscr { M } ( X ) \) by defining a base of open neighborhoods for any point \( \mu . \) Consider the family of sets of the form
+Let \( X \) be a metric space and \( \mathscr { M } ( X ) \) the space of all measures defined on \( \mathscr { B } _ { X } . \) An element \( \mu \in \mathscr { H } ( X ) \) is a nonnegative, countably additive set function defined on \( \mathscr { B } _ { X } \) with the property \( \mu ( X ) = 1 . \quad C ( X ) \) stands for the space of all bounded real valued continuous functions on \( X \). We shall now topologize the space \( \mathscr { M } ( X ) \) by defining a base of open neighborhoods for any point \( \mu . \) Consider the family of sets of the form
 \( V _ { \mu } \left( f _ { 1 } , f _ { 2 } , \ldots , f _ { k } ; \varepsilon _ { 1 } , \ldots , \varepsilon _ { k } \right) \)
 \[ \left\{\nu \in \mathscr { M } ( X ) \, \mid  \left| \int f _ { i } d v - \int f _ { i } d \mu \right| < \varepsilon _ { i } , \quad i = 1,2 , \ldots , k \right\} \]
 
@@ -91,6 +119,13 @@ For each point \( x \in X \) we shall denote by \( p _ { x } \) the measure dege
 
 \begin{thm}[Prokhorov's theorem]
 	If \( \mathcal { X } \) is a Polish space, then a set \( \mathcal { P } \subset P ( \mathcal { X } ) \) is pre-compact for the weak topology if and only if it is tight, i.e. for any \( \varepsilon > 0 \) there is a compact set \( K _ { \varepsilon } \) such that \( \mu \left[ \mathcal { X } \backslash K _ { \varepsilon } \right] \leq \varepsilon \) for all \( \mu \in \mathcal { P } \).
+\end{thm}
+
+Later we need to have a measurable selection of barycenter when given measure varies. We refer to Theorem 6.9.6 in \cite{Bogachev2007} for following statement, proof is given as Theorem 35.43 in \cite{kechris1995}.
+
+\begin{thm}
+	\label{thm:measurale_selection}
+Let \( X \) and \( Y \) be Polish spaces and let \( \Gamma \in \mathcal { B } ( X \times Y ) \). Suppose, additionally, that the set \( \Gamma _ { x }: = \{ y \in Y: ( x , y ) \in \Gamma \} \) is nonempty and \( \sigma \)-compact for all \( x \in X \). Then \( \Gamma \) contains the graph of some Borel mapping \( f: X \rightarrow Y\).
 \end{thm}
 
 \section{Optimal transportation}
@@ -235,3 +270,4 @@ For topology property of Wasserstein space, we refer to Theorem 6.18 in \cite{vi
 			\end{enumerate}
 	\end{itemize}
 \end{rmk}
+

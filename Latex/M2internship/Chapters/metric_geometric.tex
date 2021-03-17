@@ -1,0 +1,122 @@
+%! TEX root = ../barycenter.tex
+\chapter{Proper metric space}
+
+Recall that a metric space is said to be proper is every bounded closed set is compact. A proper metric space is complete and separabale, bacause every compact metric space is so and a proper metric space is a countable union of compact closed balls. With this assumption we can easily get the existence of barycenter.
+
+\begin{lem}
+	\label{lem:existence_proper_space}
+	If \( ( X , d ) \) is a proper metric space, then any \( \mu \in \mathcal { P } _ { 2 } ( X ) \) has a barycenter.
+\end{lem}
+
+\begin{proof}
+	Fix \( z _ { 0 } \in X \) and take \( r > 1 \) large enough to satisfy
+	\[ \mu \left( B \left( z _ { 0 } , r \right) \right) \geq \frac { 1 } { 2 } , \quad \int _ { X \backslash B \left( z _ { 0 } , r \right) } d \left( z _ { 0 } , x \right) ^ { 2 } d \mu ( x ) \leq 1 \]
+	Then we have
+	\[ \int _ { X } d \left( z _ { 0 } , x \right) ^ { 2 } d \mu ( x ) \leq r ^ { 2 } \cdot \mu \left( B \left( z _ { 0 } , r \right) \right) + 1 \leq r ^ { 2 } + 1 \]
+	while for every \( w \in X \backslash B \left( z _ { 0 } , 3 r \right) \)
+	\[ \int _ { X } d ( w , x ) ^ { 2 } d \mu ( x ) \geq \int _ { B \left( z _ { 0 } , r \right) } d ( w , x ) ^ { 2 } d \mu ( x ) > ( 2 r ) ^ { 2 } \cdot \mu \left( B \left( z _ { 0 } , r \right) \right) \geq 2 r ^ { 2 } \]
+	holds. Therefore it is sufficient to consider the infimum of
+	\[ w \longmapsto \int _ { X } d ( w , x ) ^ { 2 } d \mu ( x ) \]
+	only for \( w \in B \left( z _ { 0 } , 3 r \right) , \) and it is achieved at some point due to the compactness of the closure of \( B \left( z _ { 0 } , 3 r \right) . \)
+\end{proof}
+
+Recall that loaclly compact complete length space are proper. To see that properness is a suitable assumption, we discuss several counter examples for the existence of barycenter.
+
+Every Riemannian manifold is an intrinsic metric space. An example of locally compact, seperable and complete but not proper metric space is the real line with metric $d(x,y)=\min(|x-y|,1)$. Interesting examples would be space of measures over metric space with some assumptions, we should study them in later chapters.
+% It is not a good idea here to contruce a pathological metric that is not intrinsic for illustrating purpose.
+
+By the contrary, we study length space $(X,d)$ in following discussion.
+
+\begin{prop}
+	For two points in a length space $(X,d)$, the barycenter of $\mu:=\frac{\delta_x + \delta_y}{2}$ must be a midpoint between $x$ and $y$. That is to say, a barycenter $z$ satisfies $d(x,z)=d(z,y)=\frac{d(x,y)}{2}$.
+\end{prop}
+
+\begin{proof}
+	There are two parts to prove.
+
+	If a midpoint $z$ for $x$ and $y$ exits, it will attain minimum of following inequlity and hence is a barycenter
+	\[
+		d(x,y)^2 \leq \left(d(x,z) + d(z,y)\right)^2 \leq 2\left(d(x,z)^2+ d(z,y)^2\right).
+	\]
+
+	Now assume the barycenter $z$ of $\mu:=\frac{\delta_x + \delta_y}{2}$ exists, denote $\Gamma$ the set of all rectifiable curves $\gamma: [0,1] \rightarrow X$ from $x$ to $y$ with arc-length proportional parametrization. Denote $L\gamma$ for the length of rectifiable curve $\gamma$, in our case we have $L(\gamma_{[x, \gamma_\frac{1}{2}]}) = L(\gamma_{[\gamma_\frac{1}{2}, y]})$ for $\gamma \in \Gamma$,
+	\[
+		d(x,z)^2 + d(z,y)^2 \leq {L(\gamma_{[x, \gamma_\frac{1}{2}]})}^2 + {L(\gamma_{[\gamma_\frac{1}{2}, y]})}^2=\frac{1}{2} {L(\gamma)}^2.
+	\]
+	Take inf over all $\gamma$ on the right hand side, we finally get $d(x,z)^2 + d(z,y)^2 \leq \frac{1}{2}d(x,y)^2$. This is equivalent to that $z$ is the midpoint of $x$ and $y$.
+\end{proof}
+
+\begin{rmk}[Counter-examples]
+	\begin{enumerate}
+		% \item Locally compact separable complete metric space is not sufficient for the existence of barycenter. For the example we gave above, $\mathbb{R}$ with metric $d(x,y)=\min (|x-y|,1)$, consider a 
+		\item Locally compact length space is not sufficient for the existence of barycenter, consider unit disk without origin and uniform measure on it.
+		      % \item Complete length space is not sufficient. That is the interest of last remark.
+		      % \item A geodesic space $(E, \hat{d})$ always admits midpoint $z$ of two points $x$ and $y$ in $E$ as the barycenter of $\mu : = \frac{1}{2} (\delta_x + \delta_y)$, since $z$ attain equality in following general inequality:
+		      % \item We have answered partially the existence of barycenter of $\mu$ in $X$ with induced length metric. Notice that barycenter of $ \mu: = 1/2 {\delta_x + \delta_y } $ for $x$ and $y$ in a length space is always the midpoints between them. Denote $\Gamma{u,v}$ the set of admissible paths join two points $u$ and $v$ in $X$
+		\item Complete length space is not sufficient for the existence of barycenter. As we saw in previous propsoition, if barycenters always exists then midpoint always exists. However, in complete length space this is the same as claiming shortest path always exists, see Theorem 2.4.16 in \cite{burago2001course}. We know in addition that there exists complete but not geodesic manifold in infinite dimension.
+	\end{enumerate}
+\end{rmk}
+
+\begin{lem}
+	In infinite dimension, there exists a complete but not geodesic Rimannian Hilbert manifold.
+\end{lem}
+
+One such example is the infinite dimensional ellipse in Hilbert space $\ell^2$, let $c_n$ be a strictly decreasing sequence with a positive lower bound, define
+\[
+	X = \left\{ \left( x _ { 1 } , x _ { 2 } , \ldots \right) \in \ell^2 \mid \sum _ { n \in \mathbb { N } } \frac { x _ { n } ^ { 2 } } { c _ { n } ^ { 2 } } = 1 \right\}.
+\]
+This example could be found as Example 5.1 in \cite{grossman1965hilbert}.
+
+\begin{proof}
+
+	Take point $e=(c_1, 0,0,\ldots)$ and $-e=(-c_1, 0,0,\ldots)$. And we can actually show that $e$ and $-e$ cannot be connected by minimizing geodesic. Hilbert Riemannian manifold  theory is needed to justify the term smooth.
+	% we can safely replace it with rectifiable in this example.
+
+	Define \( T: X \rightarrow X \) by \( T x = y \), where
+	\[
+		y _ { 1 } = x _ { 1 } , y _ { 2 } = 0 , y _ { i } = \frac{c_i}{c_{i-1}} x_{i-1} \text { for } i \geq 3 . \]
+
+	We aim to show that any smooth curve from \( e\) to \( -e \) is taken by \( T \) into another such curve which is strictly shorter than the original.
+
+	To justify it, notice that length structure is defined as arc-length integral, for a smooth curve $\gamma: [0,1] \rightarrow X$ with arc-length proportional parametrization,
+	\[
+		L(\gamma) := \int_{0}^{1} \Vert \gamma^\prime \Vert \diff \lambda \geq \int_{0}^{1} \Vert T^\prime(\gamma^\prime) \gamma^\prime \Vert \diff \lambda =: L(T\gamma)
+	\]
+
+	Because the tangent map $T^\prime := (1,0,{c_3}/{c_2}, \ldots)$ has $\ell^\infty$ norm 1 as $c_i$ is a strictly decreasing sequence. Since $\gamma^\prime$ is continous, we remain to show that at least in an open interval we have strict inequality $\Vert \gamma^\prime \Vert > \Vert T^\prime(\gamma^\prime) \gamma^\prime \Vert$. Otherwise, $\gamma^\prime$ has only first coordinate on every open interval. In this case intergrate $\gamma^\prime$ we should get $\gamma \in \{ e, -e\}$, this is a contradiction.
+\end{proof}
+
+We can in fact prove a non-smooth version for this example, hence get rid of Riemmanian Hilbert manifold theory.
+
+\begin{lem}
+	In previous example, if consider $X$ with induced intrinsic metric from $(\ell^2, d)$, where $d$ is the standard metric on $\ell^2$, then there is again no geodesic between two endpoints $e$ and $-e$.
+\end{lem}
+
+\begin{proof}
+	All curves in this proof are from $e$ to $-e$ and take arc-length parametrization on $[0,1]$.
+	% Assume now we have $L_{d}(\tilde\gamma)=\hat{d}(e,-e)$, that is to say $\tilde\gamma$ is a minimizing geodesic, i.e., shortest path between $e$ and $-e$.
+
+	We claim that arc-length variation has the same solution as energy variation:
+	\begin{equation}
+		\label{energy_variation_in_X}
+		\arg \min_{\gamma} L\gamma := \arg \min_{\gamma} \int \Vert \gamma^\prime \Vert \diff \lambda = \arg \min_{\gamma} \int \Vert \gamma^\prime \Vert ^2 \diff \lambda
+	\end{equation}
+	This comes from Cauchy-Schwatz inequlity and the fact that $\Vert \gamma \Vert$ is a constant for shortest path.
+
+	We decompose the norm $\Vert \cdot \Vert$ of $\ell^2$ into two parts, involving first $n$ coordinate components or not, $\Vert \cdot \Vert^2 = \Vert \cdot \Vert_n^2 + \Vert \cdot \Vert_r^2$ with $\Vert \cdot \Vert_n$ the norm in $\mathbb{R} ^n $. This helps us decomposite energe variation into two independent parts. Write $\gamma$ in coordinate as $(\gamma_1, \gamma_2, \ldots, \gamma_n, \ldots)$, we modify $\gamma$ leaving $\gamma_k$ for $ k > n$ unchanged. Up to choosing a bigger integer $n$ we can assume $ \exists t \in [0,1]$, such that $\gamma_n(t) \neq 0$. The first $n$ coordinate components $\gamma^n := (\gamma_1, \gamma_2 \ldots \gamma_n)$ of $\gamma$ is a function with $\gamma^n(t)$ in $E_{\gamma(t)}$ where
+	\begin{align*}
+		E_{\gamma(t)} : & = \left\{ (x_1,x_2 \ldots x_n) \in \mathbb{R}^n \mid \sum_{i=1}^n \frac{x_i^2}{ c_i^2} = c_{\gamma(t)}^2\right\} \\
+		c_{\gamma(t)}:  & =\sqrt{ 1- \sum_{i > n} \frac{\gamma_j(t)^2}{c_j^2}} \geq 0
+	\end{align*}
+	Then the curve $\eta := (0,0,\ldots, c_n c_{\gamma(\cdot)},\gamma_{n+1},\ldots)$ will have lower energy variation in \cref{energy_variation_in_X} than $\gamma$ since energy variation coincides with arc-length variation on $E_\gamma(t)$ and we have $L_d(\eta^n)< L_d({\gamma}^n)$.
+\end{proof}
+
+\begin{rmk}
+	% Continue the discussion of example in the review part of \cite{ohta2012barycenters}.
+	Here we should discuss two different length metrics appeared, one is induced from $\ell^2$ norm and the other one is smooth Riemannian length structure. Are they two coincided (on common admissible curves)? Two ways to think about this relation
+	\begin{enumerate}
+		\item Apply Theorem 2.4.3 in \cite{burago2001course}, we then need to show Riemannian length structure is lower semi-continuous with respect to $\ell^2$ metric.
+		\item Consider $X$ as a Hilbert submainifold of $\ell^2$, the norm for tangent space is the restriction of canonical norm of $\ell^2$.
+		      % \item Now there is another way to show that $X$ with metric from $\ell^2$ is not locally compact. $X$ is complete and there is rectifiable curve connecting $e$ and $-e$, by Exercise 2.5.25 in \cite{burago2001course} there is shortest path connecting $e$ and $-e$ if $X$ is locally compact. This proposition is proofed by showing that balls of induced length metric are pre-compact in the topology of original topology.
+	\end{enumerate}
+\end{rmk}

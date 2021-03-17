@@ -1,5 +1,5 @@
 %! TEX root = ../barycenter.tex
-\chapter{Wasserstein space}
+\chapter{Wasserstein space over proper space}
 
 Paper review for \emph{Existence and consistency of Wasserstein barycenters}\cite{le2017existence}.
 
@@ -9,7 +9,7 @@ By \cref{topology_Wasserstein}, if $(E,d)$ is a Polish space, then so is $\mathc
 
 To take care of notation, we use following convention; we will recall them when necessary,
 \begin{itemize}
-	\item $x$ and $y$, points in Polish space $(E,d)$.
+	\item $x$ and $y$, ponts in Polish space $(E,d)$.
 	\item $\mu$ and $\nu$, Borel probability measures on $(E,d)$ with finite $p$-moment, i.e., elements in $\mathcal{W}_p(X)$.
 	\item $X$ and $Y$, random variables in $(E, d)$, i.e., Borel measurable functions with value in $E$.
 	\item $\mathbb{P}$, Borel measures on Wasserstein space $\mathcal{W}_p(E)$.
@@ -27,12 +27,12 @@ To take care of notation, we use following convention; we will recall them when 
 
 \end{itemize}
 
-Compactness is crucial for the existence of barycenter. Bad news is that Wasserstein space is not locally compact unless the base space is compact (see Remark 7.1.9 in \cite{Ambrosio2005}). Good news is that weak convergence behaves well with Wasserstein metric and we can get weak compactness more easily.
+Compactness is crucial for the existence of barycenter. Bad news is that Wasserstein space is not locally compact unless the base space is compact (see Remark 7.1.9 in\cite{Ambrosio2005}). Good news is that weak convergence behaves well with Wasserstein metric and we can get weak compactness more easily.
 
-Properness of base space gives properness of Wasserstein space for weak convergence topology.
+Properness of base space gives properness of Wasserstein space for weak convergence topology. We remark that a proper metric space is Polish.
 
 \begin{prop}
-	For a proper Polish space $(E,d)$, every bounded set in $\mathcal{W}(E)$ is tight, hence pre-compact in weak convergence topology.
+	For a proper space $(E,d)$, every bounded set in $\mathcal{W}(E)$ is tight, hence pre-compact in weak convergence topology.
 \end{prop}
 \begin{proof}
 	By Markov inequality, $\mu(E\backslash B(x,r)) \leq W_p(\mu, \delta_x)^p/r^p$, measure of closed ball (compact by assumption) of sufficient large radius can be arbitrarily close to $1$.
@@ -43,11 +43,16 @@ This simple proposition is enough to build existence of barycenter.
 
 By abuse of language, we drop $\delta$ symbol in following discussion when there is no ambiguity.
 \begin{thm}
-	Let $(E,d)$ be a proper Polish space. Assume $\mathbb{P}_n$ is a sequence with barycenter $\mu_n$ and $\mathbb{P}_n \rightarrow \mathbb{P}$ with respect to Wasserstein metric. Then $\mu_n$ is tight and any weak limit $\mu$ of $\mu_n$ will be a barycenter of $\mathbb{P}$.
+	Let $(E,d)$ be a proper space. Assume $\mathbb{P}_n \in \mathcal{W}_p(\mathcal{W}_p(E))$ is a sequence with barycenter $\mu_n$ and $\mathbb{P}_n \rightarrow \mathbb{P}$ with respect to Wasserstein metric. Then $\mu_n$ is tight and any weak limit $\mu$ of $\mu_n$ will be a barycenter of $\mathbb{P}$.
 \end{thm}
 
 \begin{proof}
 	Existence of $\mu$ as a weak limit comes from boundness of $\mu_n$.
+	To show that barycenters of bounded set is bounded, by abuse of notation, for a $x$ in $E$,
+	\[
+		W_p(\mu_n, x) \leq W_p(\mu_n, \mathbb{P}_n)  + W_p(\mathbb{P}_n, x) \leq 2 W_p(\mathbb{P}_n , x),
+	\]
+	we used definition of barycenter in the first inequality. And the last item is bounded as $\mathbb{P}_n$ is a converging sequence.
 
 	By continuity of Wasserstein distance, we have
 	\[
@@ -79,39 +84,57 @@ That is say, what we need in addition is the convergence of Wasserstein distance
 	Take $\hat{\mu}$ a random probability measure with law $\mathbb{P}$, by lower semi-continuity of Wasserstein metric with respect to weak convergence we have
 	\begin{align*}
 		\mathbb{E}W_p(\mu, \hat{\mu}) & =W_p(\mu, \mathbb{P})=\lim_{n \rightarrow \infty} W_p(\mu_n, \mathbb{P}) \\
-		                              & = \mathbb{E}\lim_{n \rightarrow \infty} W_p(\mu_n, \hat{\mu})           \\
+		                              & \geq \mathbb{E}\liminf_{n \rightarrow \infty} W_p(\mu_n, \hat{\mu})           \\
 		                              & \geq \mathbb{E}W_p(\mu, \hat{\mu}).
 	\end{align*}
+	The first inequality comes from Fatou's lemma. Now these two inequalities are in fact equalities. An subsequence of $\mu_n$ will satisfy this equality as well. Hence we can prove by contradiction that $\liminf$ above can be safely substitued by $\lim$.
 	Therefore, we have almost everywhere that $\lim_{n \rightarrow \infty} W_p(\mu_n, \hat{\mu})=W_p(\mu, \hat{\mu})$.
 \end{proof}
 
 As finite support measure is dense in Wasserstein space, the final goal should be the existence of barycenter for finite support measure in $\mathcal{W}_p(E)$.
 
 \begin{thm}
-	Let $(E,d)$ be a locally compact Polish space. Then barycenter of finite support measure on $\mathcal{W}_p(E)$ always exists.
+	Let $(E,d)$ be a proper space. Then barycenter of finite support measure on $\mathcal{W}_p(E)$ always exists.
 \end{thm}
 
-This is a standard convex optimization problem as $\mathcal{W}_p(E)$ is a convex space and distance function is convex.
+This is a standard convex optimization problem as $\mathcal{W}_p(E)$ is a convex space (with linear convex structure) and distance function is convex.
 
 \begin{proof}
 	Let $\lambda_i$ be $n$ given positive coefficients with sum $1$, $\mu_i$ be $n$ given measures on $(E,d)$. We aims to find solution for optimization problem
 	\[
 		\min_{\nu} \sum_{i=1}^{n}\lambda_i W_p(\nu, \mu_i)^p.
 	\]
-	For a given $\nu$, let $(X, X_0, X_1,\ldots,X_n)$ be a choice of random variable with value in $E^{n+1}$ such that $(X,X_i)$ is an optimal coupling for $\nu$ and $\mu_i$. We thus have $\mathbb{E}d(X,X_i)^p = W_p(\nu, \mu_i)^p$.
+	For a given $\nu$, let $(X, X_1,\ldots,X_n)$ be a choice of random variable with value in $E^{n+1}$ such that $(X,X_i)$ is an optimal coupling for $\nu$ and $\mu_i$. We thus have $\mathbb{E}d(X,X_i)^p = W_p(\nu, \mu_i)^p$.
 
-	Define $f(x_1, x_2, \ldots, x_n):=\min_{x \in E} \sum_{i=1}^{n} \lambda_i d(x, x_i)^p$, we use ``min" as $E$ is locally compact then minimum always exists. Denote $\Gamma$ the set of all possible choice of $(X_1, \ldots, X_n)$, we have
+	Denote $\boldsymbol{x}=(x_1, x_2, \ldots, x_n) \in E^n$ and define $f(\boldsymbol{x})= W_p(\eta, E)^p$, where $\eta = \sum_{i=1}^{n} \lambda_i \delta_{x_i}$. We use ``min'' in this definition as barycenter of measures in $E$ always exists. Denote $\Gamma$ the set of all possible choice of $(X_1, \ldots, X_n)$, we have
 	\begin{align*}
 		\sum_{i=1}^{n}\lambda_i W_p(\nu, \mu_i)^p &= \mathbb{E} \sum_{i=1}^{n}\lambda_i d(X,X_i)^p \\
 																						&\geq \mathbb{E} f(X_1, \ldots, X_n)\\
-																						&\geq \min_{\Gamma}\mathbb{E} f(X_1, \ldots, X_n)
+																						&\geq \inf{\Gamma}\mathbb{E} f(X_1, \ldots, X_n)
 	\end{align*}
-	These two inequality can be in fact equality, as
-	\begin{itemize}
-		\item For the first inequality, we need that the existence of a measurable function $T(x_1, x_2, \ldots, x_n):= \arg \min_{x \in E} \sum_{i=1}^{n} \lambda_i d(x, x_i)^p$. This is guaranteed by measurable selection theorem.
-		\item For the second one, as $f$ is continuous on $E^n$. The existence of solution to this minimization problem on $\Gamma$ then reduces to a multi-marginal optimal transportation problem with cost funtion $f$.
-	\end{itemize}
-To be concrete, let $\boldsymbol \gamma$ be a solution to the (generalizes) optimal transportation problem of marginal distribution $(\mu_1, \ldots, \mu_n)$ with respect to cost funtion $f$. Then $\mu:= T_{\#}\boldsymbol \gamma$ will be solution to our optimization problem, i.e., barycenter of $\sum_{i=1}^{n}\lambda_i \delta_{\mu_i}$.
+	These two inequalities can be in fact equalities.
+
+		For the second one, the existence of solution to this minimization problem on $\Gamma$ is a multi-marginal optimal transportation problem with cost funtion $f$. 
+
+		What we need to show in addition is that $f$ is indeed lower semi-continous. This comes from lower semi-continuity of Wasserstein distance with respect to weak convergence. Set $\eta:= \sum_i^{n}\lambda_i \delta_{x_i} \in \mathcal{W}_p(E)$, observe that sequence convergence of $\boldsymbol{x}$ in $E^n$ corresponds to weak convergence of $\eta$. And we see that $f(\boldsymbol{x}) = W_p(\eta, E)^p=W_p(\eta, y)^p$ for some barycenter $y$ of $\eta$ in $E$. Let $\eta_j$ be a sequence of measures of such form in $\mathcal{W}_p$ converging weakly to $\eta$, i.e., $\eta_j \Rightarrow \eta$, and let $y_j$ be a barycenter of $\eta_j$.
+
+		If we can have $y_j \rightarrow y$ up to a subsequence for some $y$, then 
+		\[
+			\liminf W_p(\eta_j, E) = \liminf W_p(\eta_j, y_j) = \liminf W_p(\eta_j, y) \geq W_p(\eta, y).
+		\]
+
+	As $E$ is proper, our primary aim is to show that $y_i$ is bounded in $E$. Recall that bounded set in Wasserstein space is weakly compact and weakly convergence of Dirac measures has the same topology as base space. Hence we only need to show that $y_i$ is bounded is the Wasserstein space $\mathcal{W}_p(E)$. This comes from that $\eta_j$ is bounded and barycenters of bounded set is bounded as we proved before.
+
+	For the first inequality, we need to show the existence of a measurable function $T(\boldsymbol{x}) \in \arg \min_{x \in E} \sum_{i=1}^{n} \lambda_i d(x, x_i)^p$. This is guaranteed by measurable selection theorem. The set 
+	\[
+		\{
+			(y,\boldsymbol{x}) \in E^{n+1}\mid \sum_{i=1}^{n} \lambda_i d(y,x_i)^p - f(\boldsymbol{x}) = 0
+	\}
+	\]
+	is measurable as lower semi-continous function $f$ is a limit of continous function hence Borel measurable. Since $E$ is proper, any closed subset of $E$ is $\sigma$-compact. We conculde the existence of measurable seletion function $T$ by \cref{thm:measurale_selection}.
+
+For our proof, to be concrete, let $\boldsymbol \gamma$ be a solution to the (generalizes) optimal transportation problem of marginal distribution $(\mu_1, \ldots, \mu_n)$ with respect to cost funtion $f$. Then $\mu:= T_{\#}\boldsymbol \gamma$ will be solution to our optimization problem, i.e., barycenter of $\sum_{i=1}^{n}\lambda_i \delta_{\mu_i}$.
 
 \end{proof}
+
 
