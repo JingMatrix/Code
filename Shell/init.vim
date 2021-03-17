@@ -8,15 +8,15 @@ let g:vimtex_quickfix_method='pplatex'
 let g:vimtex_fold_enabled=1
 let g:vimtex_fold_types={
 			\ 'sections' : {
-			\ 'sections' : [ 'subsection', 'subsubsection'],
+			\ 'sections' : ['section', 'subsection', 'subsubsection'],
 			\ },
 			\ 'envs' : {
-			\ 'blacklist': ['enumerate', 'itemize', 'rmk'],
+			\ 'blacklist': ['item'],
 			\ }
 			\ }
 augroup math_expression
 	autocmd!
-	autocmd FileType tex setl dictionary+=../.dict | setl iskeyword+=-
+	autocmd FileType tex setl dictionary+=../.dict | setl iskeyword+=- | setl complete=.,t,k
 augroup end
 set fillchars=fold:\ 
 
@@ -26,7 +26,6 @@ set omnifunc=syntaxcomplete#Complete
 " project rooter
 set autochdir
 let g:rooter_cd_cmd='lcd'
-let g:rooter_targets='*.tex,*.vue,*.js'
 let g:rooter_patterns=['>Latex', '.git', 'package.json']
 let g:rooter_change_directory_for_non_project_files='current'
 
@@ -58,10 +57,10 @@ endif
 " formater
 augroup formatter
 	autocmd!
-	autocmd FileType sh,zsh,bash nmap <buffer> <loaclleader>f :%!shfmt -p<enter>
-	autocmd FileType tex,bib nmap <buffer> <loaclleader>f :%!latexindent -c=/tmp/<enter>
-	autocmd FileType javascript,html,vue,markdown,css,scss nmap <buffer> <loaclleader>f :%!prettier --parser=<C-R>=&ft<enter><enter>
-	autocmd FileType json,jsonc nmap <buffer> <loaclleader>f :%!jq '.'<enter>
+	autocmd FileType sh,zsh,bash nmap <buffer> <localleader>f :%!shfmt -p<enter>
+	autocmd FileType tex,bib nmap <buffer> <localleader>f :%!latexindent -c=/tmp/<enter>
+	autocmd FileType javascript,html,vue,markdown,css,scss nmap <buffer> <localleader>f :%!prettier --parser=<C-R>=&ft<enter><enter>
+	autocmd FileType json,jsonc nmap <buffer> <localleader>f :%!jq '.'<enter>
 augroup END
 
 " writing dairy

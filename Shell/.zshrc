@@ -23,6 +23,7 @@ export GOPATH="$HOME/.local/go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/Documents/Code/Shell/scripts"
 export PAGER="nvimpager"
+export MUTTBOX="gmail"
 
 # keybinding
 function keep-buffer {

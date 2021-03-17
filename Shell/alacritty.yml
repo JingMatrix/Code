@@ -5,7 +5,6 @@ env:
   NNN_PLUG: "n:preview-note;f:fzcd;j:autojump"
   FZF_DEFAULT_COMMAND: 'fd --type file --follow --hidden --exclude .git'
   FZF_DEFAULT_OPTS: "--ansi"
-  MUTTBOX: gmail
   BROWSER: w3m
   LANG: fr_FR.UTF-8
 window:
