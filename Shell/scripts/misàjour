@@ -4,7 +4,7 @@
 BASEDIR=$(dirname "$0")
 echo "Updating plugin installed state"
 tree -L 4 ~/.local/share/nvim/site >$BASEDIR/../vim.plugin
-tree -L 2 ~/.local/share/gnome-shell >$BASEDIR/../gnome.plugin
+tree -L 1 ~/.local/share/gnome-shell/extensions >$BASEDIR/../gnome.plugin
 
 # clean invalid files item in zathura history
 echo "Remove invalid zathura history"
