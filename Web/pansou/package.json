@@ -1,0 +1,17 @@
+{
+  "name": "pansou",
+  "version": "1.0.0",
+  "description": "Cli for 52pansou",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Baiduyun"
+  ],
+  "author": "Jing Matrix",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.21.1"
+  }
+}
