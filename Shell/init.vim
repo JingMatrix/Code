@@ -59,7 +59,7 @@ augroup formatter
 	autocmd!
 	autocmd FileType sh,zsh,bash nmap <buffer> <localleader>f :%!shfmt -p<enter>
 	autocmd FileType tex,bib nmap <buffer> <localleader>f :%!latexindent -c=/tmp/<enter>
-	autocmd FileType javascript,html,vue,markdown,css,scss nmap <buffer> <localleader>f :%!prettier --parser=<C-R>=&ft<enter><enter>
+	autocmd FileType javascript,html,vue,markdown,css,scss nmap <buffer> <localleader>f :silent %!prettier --stdin-filepath %<CR>
 	autocmd FileType json,jsonc nmap <buffer> <localleader>f :%!jq '.'<enter>
 augroup END
 
