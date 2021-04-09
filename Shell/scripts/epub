@@ -1,5 +1,5 @@
 #! zsh
-# If provide hash from reader.epubee.com, then download that e-book, otherwise parse a given file
+# If provide hash from reader.obook.vip, then download that e-book, otherwise parse a given file
 basedir=$(dirname $0)
 
 function htmlparser {
@@ -131,7 +131,7 @@ function repairepub {
 }
 
 function downloadepubee {
-	# download epub by hash $1 from reader.epubee.com
+	# download epub by hash $1 from reader.obook.vip
 	# download is aria2c
 	# backup orginal downloaded files in /tmp/epub/$1-bak
 	local rootdir=/tmp/epub/$1
@@ -147,7 +147,7 @@ function downloadepubee {
   </rootfiles>
 </container>' >META-INF/container.xml
 	cd $rootdir/OEBPS
-	local root=http://reader.epubee.com/books/mobile/${1:0:2}/$1
+	local root=http://reader.obook.vip/books/mobile/${1:0:2}/$1
 	aria2c $root/content.opf
 	grep -oP 'item href="\K[^"]+' content.opf | while read -r file; do
 		dir=$(dirname $file)
