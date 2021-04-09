@@ -14,10 +14,6 @@ set recolor-lightcolor rgba(0,0,0,0)
 
 # map
 
-unmap f
-map f toggle_fullscreen
-map [fullscreen] f toggle_fullscreen
-
 map c exec 'zsh -c "goldendict $(xclip -o)"'
 map [fullscreen] c exec 'zsh -c "goldendict $(xclip -o)"'
 
