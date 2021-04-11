@@ -67,6 +67,9 @@ function parseepubee {
 
 function packepub {
 	cd $1
+	if [[ -f $2 ]]; then
+		rm $2 -f
+	fi
 	zip -rX $2 *
 	(sigil $2 &)
 }
