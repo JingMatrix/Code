@@ -1,0 +1,135 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{lmodern}
+\usepackage{multirow}
+\usepackage{romannum}
+
+\newcommand{\diff}{\operatorname{d}}
+\title{PhD Application Presentation for IMT}
+\author{Jianyu MA}
+\date{\today}
+\setbeamercovered{transparent}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\section{Academical curriculum vitae}
+
+\begin{frame}
+	\frametitle{About Jianyu MA}
+	\begin{table}
+		\begin{tabular}{c | c }
+			Institution                   & Internship Topic                       \\
+			\hline
+			Wuhan University BS           & \multirow{2}{8em}{Stochastic calculus} \\
+			UPS Toulouse \Romannum{3}  M1                                          \\
+			\pause
+			UPS Toulouse \Romannum{3}  M2 & Optimal transport                      \\
+		\end{tabular}
+	\end{table}
+	\setbeamercovered{invisible}
+	\pause
+	\begin{description}
+		\item[Research interest] Measure theory and Riemannian geometry \pause
+		\item[Currently reading] Optimal transportation and convex analysis \pause
+		\item[Why choose IMT] Common research interest with advisor J.Bertrand and enjoyable environment in Toulouse
+	\end{description}
+\end{frame}
+
+\section{Master Internship}
+\begin{frame}
+	\frametitle{Research topic}
+	Existence and uniquness for \alert{barycenter} of probability measure
+\end{frame}
+
+\section{Definition of barycenter}
+\begin{frame}
+	\frametitle{Heuristic definition}
+	In mechanics, for a system of particles $m_\nu$ with coordinates $\boldsymbol{r}_\nu$, the barycenter $C$ has coordinate
+	\[
+		\boldsymbol{r}_C = \sum_ { \nu } \frac{m_{\nu}}{M} \boldsymbol { r }_ { \nu } =\arg \min_{\boldsymbol{r}} \sum_{\nu} \frac{m_\nu}{M} \Vert \boldsymbol{r}_{\nu} - \boldsymbol{r}\Vert^2
+	\]
+	where $ M := \sum _ { \nu } m _ { \nu } $.
+
+	\pause
+	\begin{definition}
+		A barycenter $x \in E$ of probability measure $\mu$ on a metric space $(E,d)$ is
+		\[
+			x \in \arg\min_{z \in E} \int_{E} d^2(z,y) \diff \mu(y)
+		\]
+	\end{definition}
+\end{frame}
+
+\subsection{Examples ad my work}
+\begin{frame}
+	\frametitle{Examples revealing geometric structure}
+	\setbeamercovered{invisible}
+	\begin{example}
+		For $x,y \in E$, consider meausre $\frac{1}{2}(\delta_x + \delta_y)$, barycenter $z$ is exactly the midpoint if exists
+		\[
+			d(x, z) = d(z, y) = \frac{1}{2} d(x,y).
+		\]
+	\end{example}
+	\pause
+	\begin{block}{Remark}
+		\begin{itemize}
+			\item Points on equator are midpoints for north and south poles of a sphere.
+
+			      Hence, barycenter is not unique on the sphere. This is because sphere has positive curvature.
+			      \pause
+			\item Existence of midpoint is equivalent to existence of shortest path in complete intrinsic metric space.
+			      Hence, barycenter fails to always exist on infinite dimensional ellipse with decreasing axes.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\subsection{Internship overview}
+\begin{frame}
+	\setbeamercovered{transparent}
+	\frametitle{Overview on internship topic \textit{barycenter}}
+	Aim to find connection between geometric or meausre-theoretic structures and properties of barycenter, such as existence and uniqueness.
+	\pause
+	\begin{block}{Promising prospect and motivation}
+		This topic relates deeply to fruitful fields where we can borrow inspirations:
+		\begin{itemize}
+			\item Measure theory and metric geometry for geometric implication
+			      \pause
+			\item Optimal transportation for study on abstract space of measures
+		\end{itemize}
+	\end{block}
+	\pause
+	\begin{block}{Main difficulties}
+		\begin{itemize}
+			\item Firm mastery of calculation on Remiannian manifolds
+			      \pause
+			\item Detailed investigation of results from convex analysis and optimal transportation
+			      \pause
+			\item No linear structure, functional analysis not applicable
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\section{PhD proposal}
+\begin{frame}
+	\frametitle{PhD research topic}
+	Barycenter and Central Limit Theorem (abbr. as CLT)
+\end{frame}
+
+\subsection{Introduction to PhD proposal}
+\begin{frame}
+	\frametitle{Barycenter and CLT}
+	Barycneter has application in statistics, serving as an estimation of mean.
+
+	It is consistent w.r.t. convergence of measures. We already have \textit{law of large numbers} for barycenter, and aim to study \textit{CLT} for this convergence. \pause
+	\setbeamercovered{transparent}
+	\begin{block}{Related works}
+		\begin{itemize}
+			\item On Remannian manifold, CLT holds under complicated conditions, likely relating to cut locus. Aim: \alert{Clarify this realtion}. \pause
+			\item On Wasserstein space of measures, by reducing to classical CLT, we can have CLT for some special measures. Aim: \alert{Find general condition}. \pause
+			\item A CLT holds for the singular space open book. Aim: \alert{Investigate it and provide more interesting examples}.
+		\end{itemize}
+	\end{block}
+\end{frame}
+\end{document}

@@ -16,7 +16,8 @@ We can characterize barycenter as the unique solution of minimizing problem
 \end{equation}
 as norm is calculated as inner product on Euclidean space.
 
-To generalize \cref{barycenter_def}, notice that norm is not essential here but metric is. We can regard system of particles as finite points supported measure. For a space of measures over metric space $(E,d)$, we firstly define a metric, i.e., Wasserstein metric $W_p$ on this space; then we define barycenter as the projection to the closed subspace consisting of Dirac measures, which can be canonically identified as $E$. A barycenter $x \in E$ of measure $\mu$ on $E$ satisfies
+To generalize \cref{barycenter_def}, notice that norm is not essential here but metric is. We can regard system of particles as finite points supported measure. For a space of measures over metric space $(E,d)$, we firstly define a metric, i.e., Wasserstein metric $W_p$ on this space; then we define barycenter as the projection to the closed subspace consisting of Dirac measures, which can be canonically identified as $E$.
+A barycenter $x \in E$ of measure $\mu$ on $E$ satisfies
 \[
 	W_p(\delta_x, \mu) = \min_{z \in E} \int_{X} d(z, y)^p \diff \mu(y) = \min_{z \in E} W_p(\delta_z, \mu)= W_p(E, \mu).
 \]
@@ -27,9 +28,9 @@ We should introduce necessary concepts and recall classic results to help our di
 \subsection{Metric geometry}
 \begin{defn}
 	\label{defn:length_structure}
-	Let \( ( X , d ) \) be a metric space and \( \gamma \) be a path in \( X \), i.e., a continuous map \( \gamma: [ a , b ] \rightarrow X \). Consider a partition \( Y \) of \( [ a , b ] )\), that is, a finite collection of points \( Y = \left\{ y _ { 0 } , \ldots , y _ { N } \right\} \) such that \( a = y _ { 0 } \leq y _ { 1 } \leq y _ { 2 } \leq \ldots \leq y _ { N } = b \). The supremum of the sums 
+	Let \( ( X , d ) \) be a metric space and \( \gamma \) be a path in \( X \), i.e., a continuous map \( \gamma: [ a , b ] \rightarrow X \). Consider a partition \( Y \) of \( [ a , b ] )\), that is, a finite collection of points \( Y = \left\{ y _ { 0 } , \ldots , y _ { N } \right\} \) such that \( a = y _ { 0 } \leq y _ { 1 } \leq y _ { 2 } \leq \ldots \leq y _ { N } = b \). The supremum of the sums
 	\[
-		\Sigma ( Y ) = \sum _ { i = 1 } ^ { N } d \left( \gamma \left( y _ { i - 1 } \right) , \gamma \left( y _ { i } \right) \right) 
+		\Sigma ( Y ) = \sum _ { i = 1 } ^ { N } d \left( \gamma \left( y _ { i - 1 } \right) , \gamma \left( y _ { i } \right) \right)
 	\]
 	over all the partitions $Y$ is called the length of $\gamma$ (with respect to the metric $d$ ) and denoted $L_d (\gamma)$. A curve is said to be rectifiable if its length is finite.
 \end{defn}
@@ -93,7 +94,7 @@ For each point \( x \in X \) we shall denote by \( p _ { x } \) the measure dege
 \end{lem}
 
 \begin{proof}
-	Let \( \left\{ x _ { n } \right\} \) be a sequence of points in \( X \) such that \( p _ { x _ { n } } \Rightarrow q \) Suppose \( \left\{ x _ { n } \right\} \) does not have any convergent subsequence. Then the set \( S = \left\{ x _ { 1 } , x _ { 2 } , \ldots \right\} \) is closed and thus is any subset \( C \) of \( S . \) Since \( p _ { x _ { n } } \Rightarrow q \) we have by Theorem \cref{thm:weak_convergence}, \( q ( C ) \geqslant \overline { \lim } p _ { x _ { n } } ( C ) \) for \( C \subseteq S \). It follows that for every infinite subset \( S _ { 1 } \subseteq S , q \left( S _ { 1 } \right) = 1 \). This is a contradiction since \( q \) is a measure.
+	Let \( \left\{ x _ { n } \right\} \) be a sequence of points in \( X \) such that \( p _ { x _ { n } } \Rightarrow q \). Suppose \( \left\{ x _ { n } \right\} \) does not have any convergent subsequence. Then the set \( S = \left\{ x _ { 1 } , x _ { 2 } , \ldots \right\} \) is closed and thus is any subset \( C \) of \( S . \) Since \( p _ { x _ { n } } \Rightarrow q \) we have by Theorem \cref{thm:weak_convergence}, \( q ( C ) \geqslant \overline { \lim } p _ { x _ { n } } ( C ) \) for \( C \subseteq S \). It follows that for every infinite subset \( S _ { 1 } \subseteq S , q \left( S _ { 1 } \right) = 1 \). This is a contradiction since \( q \) is a measure.
 
 	Thus there is a subsequence \( \left\{ x _ { n _ { k } } \right\} , x _ { n _ { k } } \rightarrow x . \) By \cref{dirac_measure_weak_homeomorphic}, \( q = p _ { x } \). Hence \( D \) is sequentially closed.
 \end{proof}
@@ -125,7 +126,7 @@ Later we need to have a measurable selection of barycenter when given measure va
 
 \begin{thm}
 	\label{thm:measurale_selection}
-Let \( X \) and \( Y \) be Polish spaces and let \( \Gamma \in \mathcal { B } ( X \times Y ) \). Suppose, additionally, that the set \( \Gamma _ { x }: = \{ y \in Y: ( x , y ) \in \Gamma \} \) is nonempty and \( \sigma \)-compact for all \( x \in X \). Then \( \Gamma \) contains the graph of some Borel mapping \( f: X \rightarrow Y\).
+	Let \( X \) and \( Y \) be Polish spaces and let \( \Gamma \in \mathcal { B } ( X \times Y ) \). Suppose, additionally, that the set \( \Gamma _ { x }: = \{ y \in Y: ( x , y ) \in \Gamma \} \) is nonempty and \( \sigma \)-compact for all \( x \in X \). Then \( \Gamma \) contains the graph of some Borel mapping \( f: X \rightarrow Y\).
 \end{thm}
 
 \section{Optimal transportation}
@@ -162,7 +163,7 @@ The proof relies on basic variational arguments involving the topology of weak c
 \end{lem}
 
 \begin{proof}
- Replacing \( c \) by \( c - h , \) we may assume that \( c \) is a nonnegative lower semi-continuous function. Then \( c \) can be written as the point-wise limit of a non-decreasing family \( \left( c _ { \ell } \right) _ { \ell \in \mathbb { N } } \) of continuous real-valued functions. By monotone convergence,
+	Replacing \( c \) by \( c - h , \) we may assume that \( c \) is a nonnegative lower semi-continuous function. Then \( c \) can be written as the point-wise limit of a non-decreasing family \( \left( c _ { \ell } \right) _ { \ell \in \mathbb { N } } \) of continuous real-valued functions. By monotone convergence,
 	\[ \int c d \pi = \lim _ { \ell \rightarrow \infty } \int c _ { \ell } d \pi = \lim _ { \ell \rightarrow \infty } \lim _ { k \rightarrow \infty } \int c _ { \ell } d \pi _ { k } \leq \liminf _ { k \rightarrow \infty } \int c d \pi _ { k } \]
 \end{proof}
 \begin{lem}[Tightness of transference plans]
@@ -170,7 +171,7 @@ The proof relies on basic variational arguments involving the topology of weak c
 \end{lem}
 
 \begin{proof}
- Let \( \mu \in \mathcal { P } , \nu \in \mathcal { Q } , \) and \( \pi \in \Pi ( \mu , \nu ) . \) By assumption, for any \( \varepsilon > 0 \) there is a compact set \( K _ { \varepsilon } \subset \mathcal { X } , \) independent of the choice of \( \mu \) in \( \mathcal { P } \), such that \( \mu \left[ \mathcal { X } \backslash K _ { \varepsilon } \right] \leq \varepsilon ; \) and similarly there is a compact set \( L _ { \varepsilon } \subset \mathcal { Y } , \) independent of the choice of \( \nu \) in \( \mathcal { Q } , \) such that \( \nu \left[ \mathcal { Y } \backslash L _ { \varepsilon } \right] \leq \varepsilon . \) Then for any coupling \( ( X , Y ) \) of \( ( \mu , \nu ) \)
+	Let \( \mu \in \mathcal { P } , \nu \in \mathcal { Q } , \) and \( \pi \in \Pi ( \mu , \nu ) . \) By assumption, for any \( \varepsilon > 0 \) there is a compact set \( K _ { \varepsilon } \subset \mathcal { X } , \) independent of the choice of \( \mu \) in \( \mathcal { P } \), such that \( \mu \left[ \mathcal { X } \backslash K _ { \varepsilon } \right] \leq \varepsilon ; \) and similarly there is a compact set \( L _ { \varepsilon } \subset \mathcal { Y } , \) independent of the choice of \( \nu \) in \( \mathcal { Q } , \) such that \( \nu \left[ \mathcal { Y } \backslash L _ { \varepsilon } \right] \leq \varepsilon . \) Then for any coupling \( ( X , Y ) \) of \( ( \mu , \nu ) \)
 	\[ \mathbb { P } \left[ ( X , Y ) \notin K _ { \varepsilon } \times L _ { \varepsilon } \right] \leq \mathbb { P } \left[ X \notin K _ { \varepsilon } \right] + \mathbb { P } \left[ Y \notin L _ { \varepsilon } \right] \leq 2 \varepsilon. \]
 
 	The desired result follows since this bound is independent of the coupling, and \( K _ { \varepsilon } \times L _ { \varepsilon } \) is compact in \( \mathcal { X } \times \mathcal { Y }  \).
@@ -250,24 +251,61 @@ For topology property of Wasserstein space, we refer to Theorem 6.18 in \cite{vi
 	and nonempty.
 \end{thm}
 
-
-
 \begin{rmk} [Similarity between Wasserstein distance and length structure]
 	% This comparison may be used in the discussion of geometric properties of Wasserstein space.
 	Following comparison seems mysterious and interesting.
 	\begin{itemize}
 		\item Wasserstein distance
-			\begin{enumerate}
-				\item lower semi-continuous with respect to weak convergence
-				\item definition involves infimum
-				\item isometric embedding between base space and Wasserstein space
-			\end{enumerate}
+		      \begin{enumerate}
+			      \item lower semi-continuous with respect to weak convergence
+			      \item definition involves infimum
+			      \item isometric embedding between base space and Wasserstein space
+		      \end{enumerate}
 		\item Length structure
-			\begin{enumerate}
-				\item lower semi-continuous with repect to point-wise converge of curves
-				\item definition involves infimum
-				\item isometric embedding between base space and space of geodesics
-			\end{enumerate}
+		      \begin{enumerate}
+			      \item lower semi-continuous with repect to point-wise converge of curves
+			      \item definition involves infimum
+			      \item isometric embedding between base space and space of geodesics
+		      \end{enumerate}
 	\end{itemize}
 \end{rmk}
+
+\section{Convex analysis}
+
+\subsection{Functional analysis}
+
+\begin{thm}[Hahn-Banach Theorem]
+	Given two disjoint, nonempty, convex sets $A$ and $B$ in a topological vector space $X$. If \( A \) is compact, \( B \) is closed, and \( X \) is locally convex, then there exist \( \Lambda \in X ^ { * } , \gamma _ { 1 } \in R , \gamma _ { 2 } \in R , \) such that
+	\[
+		\operatorname { Re } \Lambda x < \gamma _ { 1 } < \gamma _ { 2 } < \operatorname { Re } \Lambda y
+	\]
+\end{thm}
+
+\begin{thm}[Banach-Alaoglu Theorem]
+	% If \( V \) is a neighborhood of 0 in a separable topological vector space \( X , \) and if \( \left\{ \Lambda _ { n } \right\} \) is a sequence in \( X ^ { * } \) such that
+	% \[ \left| \Lambda _ { n } x \right| \leq 1 \quad ( x \in V , n = 1,2,3 , \ldots ) \]
+	% then there is a subsequence \( \left\{ \Lambda _ { n _ { i } } \right\} \) and there is a \( \Lambda \in X ^ { * } \) such that
+	% \[ \Lambda x = \lim _ { i \rightarrow \infty } \Lambda _ { n _ { i } } x \quad ( x \in X ) \]
+If \( V \) is a neighborhood of 0 in a topological vector space \( X \) and if
+\[ K = \left\{ \Lambda \in X ^ { * }: | \Lambda x | \leq 1, \forall x \in V \right\} \]
+then $K$ is weak* compact.
+\end{thm}
+
+\begin{rmk}
+	\begin{itemize}
+		\item Weak convergence of measures coincides with weak* topology on the dual space of bounded continous function $C_b(\mathcal{X})$.
+		\item Wasserstein metric toplogy of measures coincides with weak* topology on the (topological) dual space of $(1 + d(x_0, \cdot)^p) C_b(\mathcal{X})$.
+		\item $C_b(\mathbb{R})$ is not separable, we can consider the uncountable set of bounded functions taking value $0$ or $1$ on all integers.
+		\item The reason why Banach-Alaoglu theorem is not applicable is that the space of measures $P(\mathcal{X})$ is not closed in the weak* topolgy. Otherwise, this space will be weak* compact by Banach-Alaoglu theorem. And since weak convergence is metriziable, compactness is equivalent to sequential compactness. Then there is a classic counterexample of ``escape of mass". Consider Dirac measures on integers, this set has no accumulation points as measures on $\mathbb{R}$. Tightness is a control on the property of $P(\mathcal{X})$ being closed in weak* topology of the dual of $C_b(\mathcal{X})$.
+		\item We can apply Hahn-Banach theorem here:
+		      \begin{equation}
+			      \label{hahn_banach_application}
+						\mu \in \overline { \operatorname { Conv } } ( \mathcal { K } ) \Longleftrightarrow \mu(f) \leq \sup _ { \nu \in \mathcal { K } } \int _ { \mathcal{X} } f \diff \nu, \quad \forall f \in C _ { b }( \mathcal{X} ).
+		      \end{equation}
+					For instance we can prove the separability of \( \mathscr { P } ( \mathcal{X} ) \) by choosing \( \mathcal { K }: = \{ \delta _ { x }: x \in D \} \), where \( D \) is a countable dense subset of \( \mathcal{X}\). By \cref{hahn_banach_application} we easily check that \( \operatorname { Conv } (\mathcal { K }) \subset \mathscr { P } ( \mathcal{X} ) \subset \overline { \operatorname { Conv } } (\mathcal { K } \)) and therefore the subset of all the convex combinations with rational coefficients of \( \delta \)-measures concentrated in \( D \) is weakly dense in \( \mathscr { P } ( \mathcal{X} ) \). The same holds for Wasserstein metric topology.
+
+	\end{itemize}
+\end{rmk}
+
+Hence, convex analysis may not help us in the problem of Wasserstein barycenter, as the set of Dirac measures is not convex, not closed in the weak* topology of $C_b(\mathcal{X})$. The main application should optimal transport theory.
 
