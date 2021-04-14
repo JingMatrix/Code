@@ -42,3 +42,6 @@ fortune -e tang300 song100 chinese
 # zsh-highlight
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
+
+# texdoc
+export TEXDOCS={{{}/home/jing/.texlive2020/texmf-config,/home/jing/.texlive2020/texmf-var,/home/jing/texmf,!!/usr/local/share/texmf,/etc/texmf,!!/var/lib/texmf,!!/usr/share/texmf,!!/usr/share/texlive/texmf-dist}/doc//,/usr/share/doc/texlive-doc}

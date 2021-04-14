@@ -17,6 +17,7 @@ let g:vimtex_fold_types={
 augroup math_expression
 	autocmd!
 	autocmd FileType tex setl dictionary+=../.dict | setl iskeyword+=- | setl complete=.,t,k
+	autocmd FileType tex setl keywordprg=texdoc
 augroup end
 set fillchars=fold:\ 
 
