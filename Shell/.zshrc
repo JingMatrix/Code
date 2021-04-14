@@ -43,5 +43,7 @@ fortune -e tang300 song100 chinese
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
 
-# texdoc
-export TEXDOCS={{{}/home/jing/.texlive2020/texmf-config,/home/jing/.texlive2020/texmf-var,/home/jing/texmf,!!/usr/local/share/texmf,/etc/texmf,!!/var/lib/texmf,!!/usr/share/texmf,!!/usr/share/texlive/texmf-dist}/doc//,/usr/share/doc/texlive-doc}
+# texlive install
+export MANPATH="$MANPATH:/usr/local/texlive/2021/texmf-dist/doc/man"
+export INFOPATH="$INFOPATH:/usr/local/texlive/2021/texmf-dist/doc/info"
+export PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH
