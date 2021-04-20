@@ -1,5 +1,6 @@
 set inccommand=nosplit
 nnoremap <esc><esc> :noh<return>
+autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
 " vimtex
 let g:vimtex_compiler_method='latexmk'
