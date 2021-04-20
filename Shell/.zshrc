@@ -17,6 +17,10 @@ alias glols="PAGER=less git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Cre
 alias pd="pandoc --wrap=none"
 alias w="nnn -a -T t -P n $HOME/Documents/Notes/notes"
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ]; then
+	PATH="$HOME/.local/bin:$PATH"
+fi
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 export GOPATH="$HOME/.local/go"
