@@ -1,6 +1,5 @@
 set inccommand=nosplit
 nnoremap <esc><esc> :noh<return>
-autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
 " vimtex
 let g:vimtex_compiler_method='latexmk'
@@ -61,9 +60,9 @@ endif
 " formater
 augroup formatter
 	autocmd!
-	autocmd FileType sh,zsh,bash nmap <buffer> <localleader>f :%!shfmt -p<enter>
+	autocmd FileType sh,zsh,bash nmap <buffer> <localleader>f :%!shfmt -ln bash -filename %<enter>
 	autocmd FileType tex,bib nmap <buffer> <localleader>f :%!latexindent -c=/tmp/<enter>
-	autocmd FileType javascript,html,vue,markdown,css,scss nmap <buffer> <localleader>f :silent %!prettier --stdin-filepath %<CR>
+	autocmd FileType javascript,html,vue,markdown,css,xhtml,scss nmap <buffer> <localleader>f :silent %!prettier --stdin-filepath %<CR>
 	autocmd FileType json,jsonc nmap <buffer> <localleader>f :%!jq '.'<enter>
 augroup END
 

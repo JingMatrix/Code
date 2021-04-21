@@ -82,7 +82,7 @@ function checkepub {
 	echo "\nStart epubcheck over directory $1"
 	epubcheck $1 --mode exp --save --json $1.json
 	jq '.messages | .[] | .message' $1.json -r
-	jq '.messages | .[] | [.severity, (.locations | .[] |.path, .line, .column),.message] | @tsv' $1.json -r >$1.error
+	jq '.messages | .[] | .severity as $SEV | .message as $MSG | .locations | .[] | [$SEV, .path, .line, .column, $MSG] | @tsv' $1.json -r >$1.error
 	jq '.messages | .[] | .locations | .[] | .path' $1.json -r >/tmp/errorfilelist
 	local filename="/tmp/$(jq '.publication | .title' $1.json -r).epub"
 	if [[ -f $1.epub ]]; then
@@ -107,10 +107,10 @@ function repairepub {
 					filelist+=($file)
 				fi
 			done
-			# tmux split-window -b "vim $filelist"
-			# less $1.error
 			echo 'setl errorformat=%WWARNING\	%f\	%l\	%c\	%m,%EERROR\	%f\	%l\	%c\	%m' >/tmp/epub.vim
+			echo "cd $1" >>/tmp/epub.vim
 			echo "cf $1.error" >>/tmp/epub.vim
+			echo "copen" >>/tmp/epub.vim
 			tmux neww "vim -S /tmp/epub.vim $filelist"
 			echo -n "\nRun epubcheck again?\t"
 			rm $1.json
@@ -174,17 +174,11 @@ if [[ $epubhash && -z $2 ]]; then
 	else
 		downloadepubee $epubhash
 	fi
-	# run epubcheck if not yet
-	# pack epub file and start edit if not well format
-	if [[ ! -f $rootdir.error ]]; then
-		echo -n "Skip epubcheck? Directly pack epub\t"
-		if read -q; then
-			local opffile=$rootdir/OEBPS/content.opf
-			local filename="/tmp/$(grep -oP '<dc:title>\K[^<]+' $opffile).epub"
-			packepub $rootdir $filename
-		else
-			checkepub $rootdir
-		fi
+	echo -n "\nSkip epubcheck? Directly pack epub\t"
+	if read -q; then
+		local opffile=$rootdir/OEBPS/content.opf
+		local filename="/tmp/$(grep -oP '<dc:title>\K[^<]+' $opffile).epub"
+		packepub $rootdir $filename
 	else
 		checkepub $rootdir
 	fi
