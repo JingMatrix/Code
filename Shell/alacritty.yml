@@ -19,8 +19,8 @@ shell:
     - -u # force UTF-8 in tmux
     - "-2"
 key_bindings:
-  - { key: RControl, mods: Control, action: PasteSelection }
-  - { key: RAlt, mods: Alt, action: Paste }
+  - { key: RControl, action: PasteSelection }
+  - { key: RAlt, action: Paste }
   - { key: 127, chars: "\x02" }
 background_opacity: 0.7
 font:
