@@ -6,7 +6,12 @@ let g:vimtex_compiler_method='latexmk'
 let g:vimtex_compiler_latexmk={'build_dir' : '/var/tmp/latex'}
 let g:vimtex_quickfix_autojump=1
 let g:vimtex_fold_enabled=1
+let g:vimtex_quickfix_method='pplatex'
 let g:vimtex_quickfix_open_on_warning=0
+let g:vimtex_quickfix_ignore_filters = [
+			\ 'Underfull',
+			\ 'Overfull',
+			\]
 let g:vimtex_fold_types={
 			\ 'sections' : {
 			\ 'sections' : ['section', 'subsection', 'subsubsection'],
