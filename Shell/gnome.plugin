@@ -1,7 +1,4 @@
 /home/jing/.local/share/gnome-shell/extensions
-├── clipboard-indicator@tudmotu.com
-├── drive-menu@gnome-shell-extensions.gcampax.github.com
-├── gsconnect@andyholmes.github.io
-└── hidetopbar@mathieu.bidon.ca
+└── gsconnect@andyholmes.github.io
 
-4 directories, 0 files
+1 directory, 0 files

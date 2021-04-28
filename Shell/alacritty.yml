@@ -1,7 +1,6 @@
 env:
   EDITOR: nvim
-  NNN_ARCHIVE: "\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|epub|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
-  NNN_BMS: "a:~/Mathematics/Textbook_Archive;r:~/Mathematics/Research;c:~/Reading/Computer\ Science\ Documents"
+  NNN_BMS: "a:~/Mathematics/Textbook_Archive;r:~/Mathematics/Research;c:~/Reading/Computer\ Science\ Documents;l:/var/tmp/latex"
   NNN_PLUG: "n:preview-note;f:fzcd;j:autojump"
   FZF_DEFAULT_COMMAND: 'fd --type file --follow --hidden --exclude .git'
   FZF_DEFAULT_OPTS: "--ansi"
@@ -22,7 +21,7 @@ key_bindings:
   - { key: RControl, action: PasteSelection }
   - { key: RAlt, action: Paste }
   - { key: 127, chars: "\x02" }
-background_opacity: 0.7
+background_opacity: 0.6
 font:
   normal:
     family: MesloLGS NF
