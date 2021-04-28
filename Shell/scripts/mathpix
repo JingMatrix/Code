@@ -1,15 +1,17 @@
 #!/bin/zsh
 # use mathpix api for math ocr
 set -e
-if xclip -selection clipboard -t image/png -o >/tmp/equa.png; then
-	image=$(base64 -i /tmp/equa.png | tr -d \\n)
+gnome-screenshot -f /tmp/latex.png -a
+if [[ -f /tmp/latex.png ]]; then
+	image=$(base64 -i /tmp/latex.png | tr -d \\n)
 else
 	echo "Make sure that there is an image in CLIPBOARD"
 	exit 1
 fi
-curl -s -X POST https://api.mathpix.com/v3/latex \
-	-H "app_id: $app_id" \
-	-H "app_key: $app_key" \
+local mathpixrc=($(cat ~/.config/mathpix))
+curl -X POST https://api.mathpix.com/v3/latex \
+	-H "app_id: $mathpixrc[1]" \
+	-H "app_key: $mathpixrc[2]" \
 	-H 'Content-Type: application/json' \
 	-o /tmp/mathpix.json --data @- <<Config
 { 
@@ -27,5 +29,5 @@ curl -s -X POST https://api.mathpix.com/v3/latex \
 	 }
 }
 Config
-jq '.text' /tmp/mathpix.json -r | xclip -in -selection clipboard
+jq '.text' /tmp/mathpix.json -r | wl-copy
 jq '.' /tmp/mathpix.json
