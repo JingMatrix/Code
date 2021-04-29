@@ -59,6 +59,8 @@ fortune -e tang300 song100 chinese
 # zsh-highlight
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[cursor]=bold
 
 # texlive install
 export PATH="$PATH:/usr/local/texlive/2021/bin/x86_64-linux"
