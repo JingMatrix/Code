@@ -1,6 +1,9 @@
 #!/bin/zsh
 # use mathpix api for math ocr
-set -e
+# set -e
+
+/home/jing/Documents/Code/Shell/wifi_login
+
 gnome-screenshot -f /tmp/latex.png -a
 if [[ -f /tmp/latex.png ]]; then
 	image=$(base64 -i /tmp/latex.png | tr -d \\n)
@@ -9,7 +12,7 @@ else
 	exit 1
 fi
 local mathpixrc=($(cat ~/.config/mathpix))
-curl -X POST https://api.mathpix.com/v3/latex \
+curl -f -X POST https://api.mathpix.com/v3/latex \
 	-H "app_id: $mathpixrc[1]" \
 	-H "app_key: $mathpixrc[2]" \
 	-H 'Content-Type: application/json' \
@@ -29,5 +32,10 @@ curl -X POST https://api.mathpix.com/v3/latex \
 	 }
 }
 Config
+
+if [[ $? -eq 1 ]]; then
+	notify-send "Mathpix Failed" "cURL Error"
+	exit
+fi
 jq '.text' /tmp/mathpix.json -r | wl-copy
 jq '.' /tmp/mathpix.json
