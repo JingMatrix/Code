@@ -57,6 +57,18 @@ let g:netrw_liststyle=3
 let g:netrw_winsize=30
 nmap - :Explore<enter>
 
+" fzf-vim
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
 " Add system path if not presented
 if stridx($PATH, 'node') == -1
 	let $PATH .= ':/home/jing/.nvm/versions/node/v14.16.0/bin'
@@ -83,18 +95,10 @@ augroup end
 " use <Shift> key to select; see https://stackoverflow.com/a/4608387/7870953
 set mouse=a
 set showcmd
-set pastetoggle=<F3>
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set inccommand=nosplit
-nnoremap <esc><esc> :noh<return>
-
-augroup numbertoggle
-	autocmd!
-	autocmd InsertLeave * set relativenumber
-	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
 
 set undodir=/var/tmp/vim
 set undofile
@@ -112,6 +116,8 @@ hi PmenuSel ctermfg=yellow
 
 set foldmethod=syntax
 set fillchars=fold:\ 
+
+set modeline
 
 " completion
 set omnifunc=syntaxcomplete#Complete
