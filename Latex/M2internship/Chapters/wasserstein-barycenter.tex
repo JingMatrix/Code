@@ -116,14 +116,20 @@ This is a standard convex optimization problem as $\mathcal{W}_p(E)$ is a convex
 
 		For the second one, the existence of solution to this minimization problem on $\Gamma$ is a multi-marginal optimal transportation problem with cost funtion $f$. 
 
-		Inspired by the proof of existence of optimal plan, we should first show that $\Gamma$ is weakly compact. $\Gamma$ is tight as elements in it have pre-fixed marginal distriutions. $\Gamma$ is weakly closed by stability of optimal plans, which is guaranteed by duality argument. What we need to show in addition is that $f$ is indeed lower semi-continous. This comes from lower semi-continuity of Wasserstein distance with respect to weak convergence. Set $\eta:= \sum_i^{n}\lambda_i \delta_{x_i} \in \mathcal{W}_p(E)$, observe that sequence convergence of $\boldsymbol{x}$ in $E^n$ corresponds to weak convergence of $\eta$. And we see that $f(\boldsymbol{x}) = W_p(\eta, E)^p=W_p(\eta, y)^p$ for some barycenter $y$ of $\eta$ in $E$. Let $\eta_j$ be a sequence of measures of such form in $\mathcal{W}_p$ converging weakly to $\eta$, i.e., $\eta_j \Rightarrow \eta$, and let $y_j$ be a barycenter of $\eta_j$.
+		Inspired by the proof of existence of optimal plan, we should first show that $\Gamma$ is weakly compact. $\Gamma$ is tight as elements in it have pre-fixed marginal distriutions. $\Gamma$ is weakly closed by stability of optimal plans, which is guaranteed by lower semi-continuity of Wasserstein distance with respect to weak convergence.
 
-		If we can have $y_j \rightarrow y$ up to a subsequence for some $y$, then 
+		What we need to show in addition is that $f$ is indeed lower semi-continous. Set $\eta:= \sum_i^{n}\lambda_i \delta_{x_i} \in \mathcal{W}_p(E)$, observe that sequence convergence of $\boldsymbol{x}$ in $E^n$ corresponds to weak convergence of $\eta$. And we see that $f(\boldsymbol{x}) = W_p(\eta, E)^p=W_p(\eta, y)^p = \sum_{1}^{n} \lambda_i d(y, x_i)^p$ for some barycenter $y$ of $\eta$ in $E$. Let $\eta_j$ be a sequence of measures of such form corresponding to $\boldsymbol{x}_j$ and let $y_j$ be a barycenter of $\eta_j$.
+
+		If we can have $y_j \rightarrow y$ up to a subsequence for some $y$, then by continuity of distance fucntion and $\boldsymbol{x}_j \rightarrow \boldsymbol{x}$
 		\[
-			\liminf W_p(\eta_j, E) = \liminf W_p(\eta_j, y_j) = \liminf W_p(\eta_j, y) \geq W_p(\eta, y).
+			\lim W_p(\eta_j, E) = \lim W_p(\eta_j, y_j) =  W_p(\eta, y).
 		\]
 
-	As $E$ is proper, our primary aim is to show that $y_i$ is bounded in $E$. Recall that bounded set in Wasserstein space is weakly pre-compact and weakly convergence of Dirac measures has the same topology as base space. Hence we only need to show that $y_i$ is bounded is the Wasserstein space $\mathcal{W}_p(E)$. This comes from that $\eta_j$ is bounded and barycenters of bounded set is bounded as we proved before.
+		It is necessary that $y$ is a barycenter of $\eta$ as a limit of $y_j$, since for a barycenter $z$ of $\eta$ we can pass to the limit in $W_p(\eta_i, z) \geq W_p(\eta_i, E)$.
+
+	% As $E$ is proper, our primary aim is to show that $y_i$ is bounded in $E$.
+
+	Recall that bounded set in Wasserstein space is weakly pre-compact and weakly convergence of Dirac measures has the same topology as base space. Hence we only need to show that $y_i$ is bounded is the Wasserstein space $\mathcal{W}_p(E)$. This comes from that $\eta_j$ is bounded and barycenters of bounded set is bounded as we proved before.
 
 	For the first inequality, we need to show the existence of a measurable function $T(\boldsymbol{x}) \in \arg \min_{x \in E} \sum_{i=1}^{n} \lambda_i d(x, x_i)^p$. This is guaranteed by measurable selection theorem. The set 
 	\[
@@ -133,10 +139,10 @@ This is a standard convex optimization problem as $\mathcal{W}_p(E)$ is a convex
 	\]
 	is measurable as lower semi-continous function $f$ is a limit of continous function hence Borel measurable. Since $E$ is proper, any closed subset of $E$ is $\sigma$-compact. We conculde the existence of measurable seletion function $T$ by \cref{thm:measurale_selection}.
 
-For our proof, to be concrete, let $\boldsymbol \gamma$ be a solution to the (generalizes) optimal transportation problem of marginal distribution $(\mu_1, \ldots, \mu_n)$ with respect to cost funtion $f$. Then $\mu:= T_{\#}\boldsymbol \gamma$ will be solution to our optimization problem, i.e., barycenter of $\sum_{i=1}^{n}\lambda_i \delta_{\mu_i}$.
+For our proof, to be concrete, let $\boldsymbol \gamma$ be a solution to the second ineuqlity. Then $\mu:= T_{\#}\boldsymbol \gamma$ will be a solution to our optimization problem, i.e., barycenter of $\sum_{i=1}^{n}\lambda_i \delta_{\mu_i}$.
 
 \end{proof}
 
 \begin{rmk}
-	We can argue uniquness of barycenter $\mu:= T_{\#}\boldsymbol \gamma$ by classical Brenier theorem in the case of $\mathbb{R}^n$. We need to use duality argument, see Definition 3.6 in \cite{agueh2011barycenters}.
+	We can argue uniquness of barycenter $\mu:= T_{\#}\boldsymbol \gamma$ by classical Brenier theorem in the case of $\mathbb{R}^n$. We need to use duality argument, see Definition 3.6 in \cite{agueh2011barycenters} and this is done in \cite{kim2015multi}.
 \end{rmk}

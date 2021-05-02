@@ -1,0 +1,226 @@
+%! TEX root = ../barycenter.tex
+\chapter{Wasserstein space over Riemannian manifold}
+
+We copy following results (tex code) from \cite{cordero2001riemannian},
+A Riemannian interpolation inequality à la Borell, Brascamp and Lieb.
+\begin{defn} [$c$-transforms and the subset \( \mathcal { I } ^ { c } ( X , Y ) \) of \( c \)-concave functions]
+	Let \( X \) and \( Y \) be two compact subsets of \( M \). The set \( \mathcal{I} ^ { c } ( X , Y ) \) of \( c \) -concave functions (relative to \( X \) and \( Y \) ) is the set of functions \( \phi \) : \( X \rightarrow \mathbf { R } \cup \{ - \infty \} \) not identically \( - \infty \), for which there exists a function \( \psi : Y \rightarrow \mathbf { R } \cup \{ - \infty \} \) such that
+	\begin{equation}
+		\label{defn:c_transform}
+		\phi ( x ) = \inf _ { y \in Y } c ( x , y ) - \psi ( y ) \quad \forall x \in X.
+	\end{equation}
+	We refer to \( \phi \) as the \( c \)-transform of \( \psi \) and abbreviate \cref{defn:c_transform} by writing \( \phi = \psi ^ { c } \)
+	Similarly, given \( \phi \in I ^ { c } ( X , Y ) \), we define its \( c \) -transform \( \phi ^ { c } \in \mathcal{I} ^ { c } ( Y , X ) \) by
+	\[ \phi ^ { c } ( y ) : = \inf _ { x \in X } c ( x , y ) - \phi ( x ) \quad \forall y \in Y. \]
+\end{defn}
+
+\begin{thm}[Optimal mass transport on manifolds]
+	Let \( M \) be a complete, continuously curved Riemannian manifold. Fix two Borel probability measures \( \mu \ll \) vol and \( v \) on \( M \), and two compact subsets \( X \) and \( Y \subset M \) containing the support of \( \mu \) and \( v \), respectively. Then there exists \( \phi \in \mathcal { I } ^ { c } ( X , Y ) \) such that the map
+	\begin{equation}
+		\label{equa:transform_map}
+		F ( x ) : = \exp _ { x } ( - \nabla \phi ( x ) )
+	\end{equation}
+	pushes \( \mu \) forward to \( v \). This map is uniquely characterized among all maps pushing \( \mu \) forward \( v \) by formula \cref{equa:transform_map} with \( \phi \in \mathcal{I} ^ { c } ( X , Y ) . \) Furthermore \( F \) is the unique minimizer of the quadratic cost \( \int d ^ { 2 } ( x , G ( x ) ) d \mu ( x ) \) among all Borel maps \( G : M \rightarrow M \) pushing \( \mu \) forward to \( v \) (apart from variations on sets of \( \mu \)-measure zero).
+\end{thm}
+
+First recall that a geodesic ball \( B _ { r } ( x ) \) of radius \( r \) around \( x \in M \) is said to be embedded if the exponential map \( \exp _ { x } : \tilde { B } _ { r } ^ { x } ( 0 ) \rightarrow B _ { r } ( x ) \) defines a diffeomorphism from the open ball \( \tilde { B } _ { r } ^ { x } ( 0 ) \subset T _ { x } M \) onto \( B _ { r } ( x ) \subset M \).
+A geodesic ball \( B _ { r } ( x ) \) around \( x \) is a convex embedded ball if it is embedded and geodesically convex---meaning every pair of points \( y , z \in B _ { r } ( x ) \) are joined by a unique geodesic of length less than \( 2 r \), and this geodesic is contained in \( B _ { r } ( x )\).
+Small enough balls are always convex embedded balls.
+
+\begin{defn}[Semi-concavity]
+	\label{defn:semi-concavity}
+	Fix \( \Omega \subset M \) open. A function \( \phi : \Omega \rightarrow \mathbf { R } \) is semi-concave at \( x _ { 0 } \in \Omega \) if there exists a convex embedded ball \( B _ { r } \left( x _ { 0 } \right) \) and a smooth function \( V : B _ { r } \left( x _ { 0 } \right) \rightarrow \mathbf { R } \) such that \( \phi + V \) is geodesically concave throughout \( B _ { r } \left( x _ { 0 } \right) . \) The function \( \phi \) is semi-concave on \( \Omega \) if it is semi-concave at each point of \( \Omega \).
+\end{defn}
+
+\begin{defn}[Hessian]
+	Let \( \phi : \Omega \rightarrow \mathbf { R } \) be semi-concave on an open set \( \Omega \subset M . \) We say that \( \phi \) has \( a \) Hessian \( H \) at \( x \in \Omega \) if \( \phi \) is differentiable at \( x \)
+	and there exists a self-adjoint operator \( H : T _ { x } M \rightarrow T _ { x } M \) satisfying
+	\begin{equation}
+		\label{defn:hessian}
+		\sup _ { v \in \partial \phi \left( \exp _ { x } u \right) } \left| \Pi _ { x , u } v - \nabla \phi ( x ) - H u \right| = o ( | u | )
+	\end{equation}
+	as \( u \rightarrow 0 \) in \( T _ { x } \) M. Here \( \Pi _ { x , u } : T _ { \exp _ { x } u } M \rightarrow T _ { x } M \) denotes parallel translation to \( x \) along \( \gamma ( t ) : = \exp _ { x } ( t u ) . \) The Hessian of \( \phi \) at \( x \) may also be denoted
+	by \( \operatorname { Hess } _ { x } \phi : = H \).
+\end{defn}
+
+This definition coincides with the usual one for smooth functions. A more intuitive understanding of the Hessian follows from the fact that existence of a Hessian \( H \) at \( x \) for \( \phi \) implies a second order Taylor expansion for \( \phi \) around \( x : \) as \( u \rightarrow 0 \in T _ { x } M \),
+\begin{equation}
+	\label{equa:hessian_expan}
+	\phi \left( \exp _ { x } u \right) = \phi ( x ) + \langle \nabla \phi ( x ) , u \rangle + \frac { 1 } { 2 } \langle H u , u \rangle + o \left( | u | ^ { 2 } \right)
+\end{equation}
+
+It is remarkable that the converse also holds true: if \( \psi \) is semi-concave around \( x \) then \cref{defn:hessian} follows from \cref{equa:hessian_expan}.
+
+\begin{prop}[\( c \)-concave functions are semi-concave]
+	\( F i x X \subset \subset M \) open and \( Y \subset M \) compact. A \( c \)-concave function \( \phi \in \mathcal{I} ^ { c } ( \bar { X } , Y ) \) is semi-concave on \( X \) (and hence admits a Hessian \cref{defn:hessian} almost everywhere in \( X \)).
+\end{prop}
+
+\begin{thm}[Aleksandrov-Bangert, \cite{bangert1979analytiche} in German]
+	Let \( \phi : \Omega \rightarrow M \) be semi-concave function on an open set \( \Omega \subset M . \) Then \( \phi \) admits a Hessian almost everywhere on \( \Omega \).
+\end{thm}
+
+From the proof of Lemma 3.11 in \cite[]{cordero2001riemannian}, one can actually choose the local smooth function in \cref{defn:semi-concavity} as square distance function.
+
+\section{Wasserstein barycenters over Riemannian manifolds}
+
+\subsection{Remind of basics in Riemannian geometry}
+
+For \( c ( x , y ) = \frac{ 1 } { 2 } d ^ { 2 } ( x , y ) \), to show \( - D _ { x } c ( x , y ) = \exp _ { x } ^ { - 1 } ( y ) \), we should use exponetial coordinate at $T_yM$.
+By Gauss lemma, we have \( \nabla r = \partial _ { r } \).
+As $d c = r dr$, $\nabla c = r \partial r$ and our conculsion follows from that $ r \partial r $ is of length $r$.
+
+It is instructive to recall proof of Gauss lemma in \cite{Petersen2016}.
+On \( U = \exp _ { p } ( B ( 0 , \varepsilon ) ) \) we define the function \( r ( x ) = \left| \exp _ { p } ^ { - 1 } ( x ) \right| . \)
+That is, \( r \) is simply the Euclidean distance function from the origin on \( B ( 0 , \varepsilon ) \subset T _ { p } M \) in exponential coordinates.
+This function can be continuously extended to \( U \) by defining \( r ( \partial U ) = \varepsilon . \)
+
+We know that \( \nabla r = \partial _ { r } = \frac { 1 } { r } x ^ { i } \partial _ { i } \) in Cartesian coordinates
+on \( T _ { p } M . \)
+We show that this is also the gradient with respect to the general metric \( g . \)
+
+\begin{lem}
+	[The Gauss Lemma]
+	On \( ( U , g ) \) the function \( r \) has gradient \( \nabla r = \partial _ { r } \), where \( \partial _ { r } = D \exp _ { p } \left( \partial _ { r } \right) \).
+\end{lem}
+
+\begin{proof}
+	We select an orthonormal basis for \( T _ { p } M \) and introduce
+	Cartesian coordinates.
+	These coordinates are then also used on \( U \) via the exponential map.
+	Denote these coordinates by \( \left( x ^ { 1 } , \ldots , x ^ { n } \right) \) and the coordinate vector fields by
+	\( \partial _ { 1 } , \ldots , \partial _ { n } . \)
+	Then
+	\begin{align*}
+		r ^ { 2 }        & = \left( x ^ { 1 } \right) ^ { 2 } + \cdots + \left( x ^ { n } \right) ^ { 2 } , \\
+		\partial _ { r } & = \frac { 1 } { r } x ^ { i } \partial _ { i }.
+	\end{align*}
+	For this, take a function $f: M \mapsto \mathbb{R}$, we have $ \frac{\partial f}{\partial x_i}=\frac{\partial f}{\partial r}\cdot \frac{\partial r}{\partial x_i}$.
+	Differentiate $ r ^ { 2 } = \left( x ^ { 1 } \right) ^ { 2 } + \cdots + \left( x ^ { n } \right) ^ { 2 } $, we get $\frac{\partial r}{\partial x_i} = \frac{x_i}{r} $.
+	Apply this equality agian, we can solve $\frac{\partial f}{\partial r}$ from $\frac{\partial f}{\partial x_i}$.
+
+	To show that this is the gradient field for \( r ( x ) \) on \( ( M , g ) \), we must prove that \( d r ( v ) = \)
+	\( g \left( \partial _ { r } , v \right) . \)
+	We already know that
+	\[
+		d r = \frac { 1 } { r } \left( x ^ { 1 } d x ^ { 1 } + \cdots + x ^ { n } d x ^ { n } \right),
+	\]
+	but have no knowledge of $g$, since it is just some abstract metric.
+
+	One can show that \( d r ( v ) = g \left( \partial _ { r } , v \right) \) by using suitable Jacobi fields for \( r \) in place of \( v \). Let us start with \( v = \partial _ { r } . \)
+	The right-hand side is 1 as the integral curves for \( \partial _ { r } \) are unit speed geodesics.
+	The left-hand side can be computed directly and is also $1$.
+	Next, take a rotational field \( J = - x ^ { i } \partial _ { j } + x ^ { j } \partial _ { i } , i , j = 1 , \ldots , n , i < j . \)
+	In dimension $2$ this is simply the angular field \( \partial _ { \theta } \).
+	An immediate calculation shows that the left-hand side vanishes: \( d r ( J ) = 0 \).
+	For the right-hand side we first note that \( J \) really is a Jacobi field as \( L _ { \partial _ { r } } J = \left[ \partial _ { r } , J \right] = 0 . \)
+	Using that \( \nabla _ { \partial _ { r } } \partial _ { r } = 0 \) we obtain
+	\[ \begin{aligned}
+			\partial _ { r } g \left( \partial _ { r } , J \right) & = g \left( \nabla _ { \partial _ { r } } \partial _ { r } , J \right) + g \left( \partial _ { r } , \nabla _ { \partial _ { r } } J \right) \\
+			                                                       & = 0 + g \left( \partial _ { r } , \nabla _ { \partial _ { r } } J \right)                                                                   \\
+			                                                       & = g \left( \partial _ { r } , \nabla _ { J } \partial _ { r } \right)                                                                       \\
+			                                                       & = \frac { 1 } { 2 } D _ { J } g \left( \partial _ { r } , \partial _ { r } \right)                                                          \\
+			                                                       & = 0
+		\end{aligned} \]
+	Thus \( g \left( \partial _ { r } , J \right) \) is constant along geodesics emanating from \( p \).
+	To show that it vanishes first observe that
+	\[ \begin{aligned} \left| g \left( \partial _ { r } , J \right) \right| & \leq \left| \partial _ { r } \right| | J |                                                                               \\
+                                                                     & = | J |                                                                                                                  \\
+                                                                     & \leq \left| x ^ { i } \right| \left| \partial _ { j } \right| + \left| x ^ { j } \right| \left| \partial _ { i } \right| \\
+                                                                     & \leq r ( x ) \left( \left| \partial _ { i } \right| + \left| \partial _ { j } \right| \right)\end{aligned} \]
+	Continuity of \( D \exp _ { p } \) shows that \( \partial _ { i } , \partial _ { j } \) are bounded near \( p .  \)
+	Thus \( \left| g \left( \partial _ { r } , J \right) \right| \rightarrow 0 \) as \( r \rightarrow 0 .  \)
+	This forces \( g \left( \partial _ { r } , J \right) = 0 .\)
+	Finally, observe that any vector \( v \) is a linear combination of \( \partial _ { r } \) and rotational fields.
+	This proves the claim.
+\end{proof}
+
+\subsection{Fix typos and correct statements}
+
+We copy original statement and put reference number directly after it.
+
+\begin{rmk}[Remark 2.2]
+	Inspection of the proof above shows that \( ( M \), vol \( ) \) can be replaced with a \cancel{compact separable} metric space \( ( X , \nu ) \) equipped with a reference Borel measure \( \nu \).
+\end{rmk}
+
+We only need an out regular reference measure. And Borel measure on metric space is regular, see Theorem 7.1.7 \cite{Bogachev2007}.
+
+\begin{prop}[Proposition 2.9 Distortion under Ric \( \geq 0 \)]
+	Suppose the Ricci curvature of \( M \) is everywhere nonnegative, i.e., Ric \( \geq 0 . \) Then, for any \( x \in M \) and \( \lambda \in \cancel{P ( M )} \textcolor{blue}{P_{ac}(M)} \), we have
+	\[ \alpha _ { \lambda } ( x ) \geq 1 \]
+\end{prop}
+
+\begin{proof}[Proof of Prop 2.9]
+	Minimality of \( z \mapsto \int _ { M } c ( x , z ) \diff \lambda ( x ) \) at the barycenter \( \bar { x } \), combined with semi-concavity of \( z \mapsto c ( x , z ) \) and Fatou's lemma yields
+	\[
+		\int _ { M } \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } c ( x , z ) \diff \lambda ( x ) \geq 0
+	\] as a matrix.
+\end{proof}
+
+Locally $c(x,z)=:d^2_x(z)$ near $\bar{x}$ is a geodesically convex function, by linear intergration so is the integral  \( z \mapsto \int _ { M } d^2_x(z) \diff \lambda ( x ) \).
+As convexity implies local Lipschitz, $d^2_x(z)$ is also differentiable near $\bar{x}$ and so is its integral by compactness of $M$.
+Thus we have locally for $\lambda$-almost all $x$ (not in the cut-locus),
+% \textcolor{red}{why differentiability of $d^2_x(z)$ implies smoothness?}
+\begin{equation}
+	\label{equa:convex_distance_inequality}
+	d^2_x \left( \exp _ {\bar{x}} u \right) - d^2_x (\bar{x}) - \langle \nabla d^2_x (\bar{x}) , u \rangle = \frac { 1 } { 2 } \langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z) u , u \rangle + o \left( | u | ^ { 2 } \right) > 0
+\end{equation}
+
+To show positivity of matrix, we take a vector $\nu$ and set $\mu = h \nu$ with $h > 0$ small enough.
+Divide by $h$ in \cref{equa:convex_distance_inequality} and then take integral,
+\[
+	\langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } \int_{M} d^2_x(z) \diff \lambda ( x )\, v , v \rangle + \frac{o (h^2)}{h^2} = \int_{M} \langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z)\, v , v \rangle + \frac{o (h^2)}{h^2} \diff \lambda ( x ).
+\]
+Apply Fatou's lemma, let $f\downarrow 0$,
+\[
+	\langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } \int_{M} d^2_x(z) \diff \lambda ( x )\, v , v \rangle \leq \langle \int_{M} \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z) \diff \lambda(x)\, v, v \rangle.
+\]
+And by minimallity of $\bar{x}$, we know left hand side is non-negative.
+
+This argument is also used in Prop 4.2.
+
+\begin{rmk}[Remark 3.2]
+	... In fact, it holds for any (compact) metric
+	space on which the optimal \cancel{maps} \textcolor{blue}{plans}, \( T _ { \# } \mu = \nu \), exist uniquely for any arbitrary absolutely continuous source measure \( \mu \).
+\end{rmk}
+
+\begin{lem}[Lemma  4.1  a.e. \( x \) and $ \Omega$-a.e. $\mu$ ]
+	Let \( \bar { \mu } \in \cancel{P ( M )} \textcolor{blue}{P_{ac}(M)}\) and for each \( \mu \in P ( M ) \), let \( u _ { \mu } \) be the dual potential (whose gradient is uniquely determined \( \bar { \mu } \) almost everywhere) for the optimal transport problem between \( \bar { \mu } \) and \( \mu . \) Let \( \Omega \) be a Borel probability on \( P ( M ) . \) For volume almost all \( x , x \mapsto u _ { \mu } ( x ) \) is twice differentiable for \( \Omega \) -almost all \( \mu \in P ( M ) . \)
+\end{lem}
+
+\begin{proof}
+	$\forall \mu, x \mapsto \mu_u(x)$ is twice differentiable for $\bar{\mu}$-a.e. $x$. Apply Fubini's theorem then.
+\end{proof}
+
+\begin{proof}[Proof of the 1st order balance]
+	... \\
+	Therefore, the latter function \( f _ { x } \), which is semi-concave is differentiable at \( x : \) due to semi-concavity, there is \( C > 0 \) such that the function \( f _ { x } ( y ) - C \operatorname { dist } ^ { 2 } ( x , y ) \) is locally geodesically concave near \( x \).
+	Minimality at \( x \) implies \( f _ { x } ( y ) - C \operatorname { dist } ^ { 2 } ( x , y ) \geq f _ { x } ( x ) - \) \( C \operatorname { dist } ^ { 2 } ( x , \cancel{x}\, \textcolor{blue}{y} ) \).
+	Since \( y \mapsto f _ { x } ( x ) - C \operatorname { dist } ^ { 2 } ( x , y ) \) has vanishing derivative at \( x \), concavity of \( f _ { x } ( y ) - C \operatorname { dist } ^ { 2 } ( x , y ) \) implies that locally the function \( y \mapsto f _ { x } ( y ) - C \operatorname { dist } ^ { 2 } ( x , y ) \) is also
+	locally bounded from above by the constant \( f _ { x } ( x ) . \) This implies the differentiability of
+	\( f _ { x } \) at \( x \).
+\end{proof}
+
+To simplify, we should prove:
+\begin{lem}
+	For $f, g$ two convex functions near $0$, assume $f(0)=g(0)=g^\prime(0)=0$. If $f \leq g$ and $0$ is a local minimum of $g$, we then have $f \geq 0$ and $f$ is differentiable at $0$.
+\end{lem}
+
+\begin{proof}
+	We need to show that subdifferential $\partial f(0) $ of $f$ is a single point set $ \{ 0 \}$. $\forall u \in \partial f( 0 )$,
+	\[
+		\langle x, u \rangle \leq f(x) - f(0) = f(x) \leq g(x) = g(x) - g(0),
+	\]
+	that is say, $ u \in \partial g(0)$. Hence $ \partial f(0) = \partial g(0) = \{0\}$.
+
+\end{proof}
+
+\begin{proof}[Proof of Theorem 4.6]
+	...\\
+	Note that each \( - D _ { x y } ^ { 2 } c \left( x , T _ { \mu } ( x ) \right) D T _ { \mu } ( x ) = D _ { x x } ^ { 2 } u _ { \mu } ( x ) + D _ { x x } ^ { 2 } c \left( x , T _ { \mu } ( x ) \right) \) is positive semi-definite by the \( c \)-convexity of \( u _ { \mu } \), and hence so is their integral...
+\end{proof}
+
+By definition, we have
+\[
+	\inf_z u_\mu(z) + c(z, T_\mu(x))= u_\mu(x) + c(x, T_\mu(x)) = - u^c ( T_\mu(x)).
+\]
+If consider derivative with respect to first variable, then we have first differential vanish and Hessian semi-positive.
