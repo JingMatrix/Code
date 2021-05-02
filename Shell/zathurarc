@@ -19,8 +19,8 @@ set recolor-lightcolor rgba(0,0,0,0)
 
 map c exec 'zsh -c "goldendict $(wl-paste -p)"'
 map [fullscreen] c exec 'zsh -c "goldendict $(wl-paste -p)"'
-map p exec 'zsh -c "qutebrowser \"$(wl-paste -p)\""'
-map [fullscreen] p exec 'zsh -c "qutebrowser \"$(wl-paste -p)\""'
+map p exec 'zsh -c "qb \"$(wl-paste -p)\""'
+map [fullscreen] p exec 'zsh -c "qb \"$(wl-paste -p)\""'
 map m exec "zsh /home/jing/Documents/Code/Shell/scripts/mathpix"
 
 # appearance

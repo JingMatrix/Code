@@ -31,11 +31,11 @@ function upslogin {
 			--data-raw "auth_user=$ups[1]&auth_pass=$ups[2]&redirurl=&accept=Connexion+%28Authentication%29" \
 			--compressed
 		if [[ $? -eq 0 ]]; then
-			notify-send "Auto WiFi Login Sucess" "Re-run your command later please"
-			break
+			notify-send "Auto WiFi Logins Sucess"
+			exit 0
 		fi
 	done
-	notify-send "Auto WiFi Login Fail" "Open browser for login"
+	notify-send "Auto WiFi Logins Fail" "Open browser for login"
 	/usr/local/bin/qutebrowser https://google.com
 }
 
@@ -43,6 +43,4 @@ if ! wget -q --spider https://google.com; then
 	notify-send "No Internet" "Now try auto login"
 	upslogin
 	exit 1
-else
-	echo You are online
 fi

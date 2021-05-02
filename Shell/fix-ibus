@@ -1,8 +1,12 @@
 #!/bin/sh
 
-ibus restart && exit
-cp -a /home/jing/.cache/ibus /home/jing/.cache/ibus-bak
-ibus exit
-ibus-daemon &
-mv /home/jing/.cache/ibus-bak /home/jing/.cache/ibus
-ibus engine libpinyin
+if ibus restart; then
+	ibus engine libpinyin
+	exit
+else
+	cp -a /home/jing/.cache/ibus /home/jing/.cache/ibus-bak
+	ibus exit
+	ibus-daemon &
+	mv /home/jing/.cache/ibus-bak /home/jing/.cache/ibus
+	ibus engine libpinyin
+fi

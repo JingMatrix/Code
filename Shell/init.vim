@@ -5,6 +5,7 @@ let g:vimtex_quickfix_autojump=1
 let g:vimtex_fold_enabled=1
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_method='pplatex'
+let g:matchup_override_vimtex = 1
 let g:vimtex_quickfix_open_on_warning=0
 let g:vimtex_quickfix_ignore_filters = [
 			\ 'Underfull',
@@ -90,7 +91,7 @@ augroup notable
 	autocmd BufWritePre *otes/*.md 1,7s/\v^modified:\ "\zs.*\ze"$/\=system('date -Is | head -c -1')
 	autocmd InsertEnter *otes/*.md silent !ibus engine libpinyin &>/dev/null
 	autocmd VimEnter,InsertLeave *otes/*.md silent !ibus engine xkb:us::eng &>/dev/null
-augroup end
+augroup END
 
 " use <Shift> key to select; see https://stackoverflow.com/a/4608387/7870953
 set mouse=a
@@ -109,6 +110,7 @@ augroup rmundo
 augroup END
 
 set conceallevel=2
+set concealcursor=nc
 hi Conceal NONE
 hi Comment cterm=italic gui=italic
 hi Pmenu ctermbg=NONE ctermfg=white

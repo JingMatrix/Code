@@ -28,7 +28,6 @@ compdef _ocr ocr
 alias zshconfig="vim $HOME/Documents/Code/Shell/.zshrc"
 alias sg="TERM=xterm googler -n 5"
 alias sd="TERM=xterm ddgr -n 5"
-alias b="buku --suggest"
 alias gcl="git clone --recursive --shallow-submodules --depth 1"
 alias glols="PAGER=less git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat"
 alias pd="pandoc --wrap=none"
@@ -44,15 +43,15 @@ export MUTTBOX="gmail"
 
 # keybinding
 function keep-buffer {
-	xclip <<<$BUFFER
+	wl-copy -p $BUFFER
+	BUFFER=''
 }
 zle -N keep-buffer
 bindkey "^Y" redo
 bindkey "^Z" undo
 bindkey "^F" run-help
-bindkey "^K" kill-line
+bindkey "^K" keep-buffer
 bindkey "^H" backward-kill-word
-bindkey "^Xx" keep-buffer
 
 fortune -e tang300 song100 chinese
 
