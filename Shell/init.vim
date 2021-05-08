@@ -12,6 +12,7 @@ let g:vimtex_quickfix_ignore_filters = [
 			\ 'Overfull',
 			\]
 let g:vimtex_fold_types={
+			\ 'comments' : {'enabled' : 1},
 			\ 'sections' : {
 			\ 'sections' : ['section', 'subsection', 'subsubsection'],
 			\ },
@@ -103,7 +104,6 @@ set inccommand=nosplit
 
 set undodir=/var/tmp/vim
 set undofile
-set directory=/var/tmp/vim/swap
 augroup rmundo
 	autocmd!
 	autocmd VimEnter /tmp/* set noundofile
