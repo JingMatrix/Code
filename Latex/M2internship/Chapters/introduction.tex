@@ -181,6 +181,30 @@ By passing to the limit in the equation for marginals, we see that \( \Pi ( \mu 
 \[ \int c d \pi \leq \liminf _ { k \rightarrow \infty } \int c d \pi _ { k }. \]
 
 Thus $\pi$ is minimizing.
+
+\begin{thm}[Optimality is inherited by restriction]
+	\label{thm:restriction_optimal_plan}
+	Let \( (\mathcal { X } , \mu ) \)
+	and \( ( \mathcal { Y } , \nu ) \) be two Polish spaces, \( a \in L ^ { 1 } ( \mu ) , b \in L ^ { 1 } ( \nu ) \), let \( c : \mathcal { X } \times \mathcal { Y } \rightarrow \)
+	\( \mathbb { R } \cup \{ + \infty \} \) be a measurable cost function such that \( c ( x , y ) \geq a ( x ) + b ( y ) \)
+	for all \( x , y ; \) and let \( C ( \mu , \nu ) \) be the optimal transport cost from \( \mu \) to \( \nu . \)
+	Assume that \( C ( \mu , \nu ) < + \infty \) and let \( \pi \in \Pi ( \mu , \nu ) \) be an optimal transport plan. Let \( \widetilde { \pi } \) be a nonnegative measure on \( \mathcal { X } \times \mathcal { Y } \), such that \( \widetilde { \pi } \leq \pi \)
+	and \( \widetilde { \pi } [ \mathcal { X } \times \mathcal { Y } ] > 0 . \) Then the probability measure
+	\[ \pi ^ { \prime } : = \frac { \widetilde { \pi } } { \widetilde { \pi } [ \mathcal { X } \times \mathcal { Y } ] } \]
+	is an optimal transference plan between its marginals \( \mu ^ { \prime } \) and \( \nu ^ { \prime } \).
+
+	Moreover, if \( \pi \) is the unique optimal transference plan between \( \mu \)
+	and \( \nu \), then also \( \pi ^ { \prime } \) is the unique optimal transference plan between \( \mu ^ { \prime } \)
+	and \( \nu ^ { \prime } \)
+\end{thm}
+
+\begin{rmk}
+If \( ( X , Y ) \) is an optimal coupling of \( ( \mu , \nu ) \), and \( \mathcal { Z } \subset \mathcal { X } \times \mathcal { Y } \)
+is such that \( \mathbb { P } [ ( X , Y ) \in \mathcal { Z } ] > 0 \), then the pair \( ( X , Y ) \), conditioned
+to lie in \( \mathcal { Z } \), is an optimal coupling of \( \left( \mu ^ { \prime } , \nu ^ { \prime } \right) \), where \( \mu ^ { \prime } \) is the law of
+\( X \) conditioned by the event \( " ( X , Y ) \in \mathcal { Z } " \), and \( \nu ^ { \prime } \) is the law of \( Y \)
+conditioned by the same event.
+\end{rmk}
 \subsection{Wasserstein space}
 
 \begin{defn}[Wasserstein distances]
@@ -286,9 +310,9 @@ For topology property of Wasserstein space, we refer to Theorem 6.18 in \cite{vi
 	% \[ \left| \Lambda _ { n } x \right| \leq 1 \quad ( x \in V , n = 1,2,3 , \ldots ) \]
 	% then there is a subsequence \( \left\{ \Lambda _ { n _ { i } } \right\} \) and there is a \( \Lambda \in X ^ { * } \) such that
 	% \[ \Lambda x = \lim _ { i \rightarrow \infty } \Lambda _ { n _ { i } } x \quad ( x \in X ) \]
-If \( V \) is a neighborhood of 0 in a topological vector space \( X \) and if
-\[ K = \left\{ \Lambda \in X ^ { * }: | \Lambda x | \leq 1, \forall x \in V \right\} \]
-then $K$ is weak* compact.
+	If \( V \) is a neighborhood of 0 in a topological vector space \( X \) and if
+	\[ K = \left\{ \Lambda \in X ^ { * }: | \Lambda x | \leq 1, \forall x \in V \right\} \]
+	then $K$ is weak* compact.
 \end{thm}
 
 \begin{rmk}
@@ -300,9 +324,9 @@ then $K$ is weak* compact.
 		\item We can apply Hahn-Banach theorem here:
 		      \begin{equation}
 			      \label{hahn_banach_application}
-						\mu \in \overline { \operatorname { Conv } } ( \mathcal { K } ) \Longleftrightarrow \mu(f) \leq \sup _ { \nu \in \mathcal { K } } \int _ { \mathcal{X} } f \diff \nu, \quad \forall f \in C _ { b }( \mathcal{X} ).
+			      \mu \in \overline { \operatorname { Conv } } ( \mathcal { K } ) \Longleftrightarrow \mu(f) \leq \sup _ { \nu \in \mathcal { K } } \int _ { \mathcal{X} } f \diff \nu, \quad \forall f \in C _ { b }( \mathcal{X} ).
 		      \end{equation}
-					For instance we can prove the separability of \( \mathscr { P } ( \mathcal{X} ) \) by choosing \( \mathcal { K }: = \{ \delta _ { x }: x \in D \} \), where \( D \) is a countable dense subset of \( \mathcal{X}\). By \cref{hahn_banach_application} we easily check that \( \operatorname { Conv } (\mathcal { K }) \subset \mathscr { P } ( \mathcal{X} ) \subset \overline { \operatorname { Conv } } (\mathcal { K } \)) and therefore the subset of all the convex combinations with rational coefficients of \( \delta \)-measures concentrated in \( D \) is weakly dense in \( \mathscr { P } ( \mathcal{X} ) \). The same holds for Wasserstein metric topology.
+		      For instance we can prove the separability of \( \mathscr { P } ( \mathcal{X} ) \) by choosing \( \mathcal { K }: = \{ \delta _ { x }: x \in D \} \), where \( D \) is a countable dense subset of \( \mathcal{X}\). By \cref{hahn_banach_application} we easily check that \( \operatorname { Conv } (\mathcal { K }) \subset \mathscr { P } ( \mathcal{X} ) \subset \overline { \operatorname { Conv } } (\mathcal { K } \)) and therefore the subset of all the convex combinations with rational coefficients of \( \delta \)-measures concentrated in \( D \) is weakly dense in \( \mathscr { P } ( \mathcal{X} ) \). The same holds for Wasserstein metric topology.
 
 	\end{itemize}
 \end{rmk}

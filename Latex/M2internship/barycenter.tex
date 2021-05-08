@@ -8,7 +8,7 @@
 	urlcolor=cyan,
 }
 
-\usepackage{amsthm, amsmath, amsfonts, mathrsfs, amssymb}
+\usepackage{amsthm, amsmath, amsfonts, mathrsfs, amssymb, bbm}
 \usepackage[]{cancel} 
 \usepackage{cleveref}
 \newtheorem{thm}{Theorem}[section]
@@ -17,6 +17,7 @@
 \newtheorem{lem}[thm]{Lemma}
 \theoremstyle{remark}
 \newtheorem{rmk}{Remark}[chapter]
+\newtheorem{example}{Example}[chapter]
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[chapter]
 
@@ -43,10 +44,12 @@
 		% \item Verify example of non-uniqueness in relation of non-branching: four points by M.Bertrand
 		% \item Hilbert manifold geometric properties
 		% \item Counter examples of non-uniqueness and reasons
-		\item Familiar with measure theory of metric space
-		\item Study convex analysis
-		\item Paper review of \cite{KIM2017640}
-		\item Measure theory on Riemannian manifold
+		% \item Familiar with measure theory of metric space
+		% \item Study convex analysis
+		% \item Paper review of \cite{KIM2017640}
+		% \item Formulate a concise proof of main results in \cite{KIM2017640}
+		% \item Measure theory on Riemannian manifold
+		\item Write final report
 	\end{itemize}
 \end{abstract}
 
@@ -58,16 +61,17 @@
 
 \input{Chapters/metric_geometric.tex}
 
-\chapter{Alexandrov spaces}
-\section{Curvature bounded above}
-\section{Curvature bounded below}
-\section{Hilbert spaces}
+% \chapter{Alexandrov spaces}
+% \section{Curvature bounded above}
+% \section{Curvature bounded below}
+% \section{Hilbert spaces}
 
 % \chapter{Hilbert Riemannian manifold}
 
 \part{Barycenters in Measurable Spaces}
 \input{Chapters/wasserstein-barycenter.tex}
 \input{Chapters/manifold.tex}
+
 
 
 
