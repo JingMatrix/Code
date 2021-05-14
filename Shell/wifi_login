@@ -1,4 +1,4 @@
-#! zsh
+#! /bin/zsh
 
 local -a portal=('wifi-gw2-ups.private.univ-tlse3.fr:8003'
 	'pftf01.in.crous-toulouse.fr:8003'
@@ -30,17 +30,25 @@ function upslogin {
 			-H 'sec-fetch-dest: document' \
 			--data-raw "auth_user=$ups[1]&auth_pass=$ups[2]&redirurl=&accept=Connexion+%28Authentication%29" \
 			--compressed
-		if [[ $? -eq 0 ]]; then
-			notify-send "Auto WiFi Logins Sucess"
-			exit 0
+		if [[ $? -eq 0 && testInternet ]]; then
+			notify-send --hint=int:transient:1 "Auto WiFi Logins Sucess"
+		else
+			notify-send --hint=int:transient:1 "Auto WiFi Logins Fail" "Unknow error caused by CROUS"
 		fi
+		exit 0
 	done
-	notify-send "Auto WiFi Logins Fail" "Open browser for login"
-	/usr/local/bin/qutebrowser https://google.com
 }
 
-if ! wget -q --spider https://google.com; then
-	notify-send "No Internet" "Now try auto login"
+function testInternet {
+	wget -q --spider https://google.com
+}
+
+testInternet
+if [[ $? -ne 0 ]]; then
+	notify-send --hint=int:transient:1 "No Internet" "Now try auto login"
 	upslogin
+	# Once failed
+	notify-send --hint=int:transient:1 "Auto WiFi Logins Fail" "Open browser for login"
+	/usr/local/bin/qutebrowser https://google.com
 	exit 1
 fi
