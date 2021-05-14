@@ -198,12 +198,36 @@ Thus $\pi$ is minimizing.
 	and \( \nu ^ { \prime } \)
 \end{thm}
 
+\begin{proof}
+	Assume that \( \pi ^ { \prime } \) is not optimal; then there exists
+	\( \pi ^ { \prime \prime } \) such that
+	\begin{equation}
+	\label{proof:restriction_project}
+\left( \operatorname { proj } _ { \mathcal { X } } \right) _ { \# } \pi ^ { \prime \prime } = \left( \operatorname { proj } _ { \mathcal { X } } \right) _ { \# } \pi ^ { \prime } = \mu ^ { \prime } , \quad \left( \operatorname { proj } _ { \mathcal { Y } } \right) _ { \# } \pi ^ { \prime \prime } = \left( \operatorname { proj } _ { \mathcal { Y } } \right) _ { \# } \pi ^ { \prime } = \nu ^ { \prime }
+\end{equation}
+	yet
+	\begin{equation}
+	\label{proof:restriction_not_optimal}
+\int c ( x , y ) d \pi ^ { \prime \prime } ( x , y ) < \int c ( x , y ) d \pi ^ { \prime } ( x , y )
+\end{equation}
+	Then consider
+	\[ \widehat { \pi } : = ( \pi - \widetilde { \pi } ) + \widetilde { Z } \pi ^ { \prime \prime } \]
+	where \( \widetilde { Z } = \widetilde { \pi } [ \mathcal { X } \times \mathcal { Y } ] > 0 . \) Clearly, \( \widehat { \pi } \) is a nonnegative measure. On the
+	other hand, it can be written as
+	\[ \widehat { \pi } = \pi + \widetilde { Z } \left( \pi ^ { \prime \prime } - \pi ^ { \prime } \right) \]
+	then \cref{proof:restriction_project} shows that \( \widehat { \pi } \) has the same marginals as \( \pi \),
+	while \cref{proof:restriction_not_optimal} implies that it has a lower transport cost than \( \pi \).
+	(Here I use the fact that the total cost is finite.)
+	This contradicts the optimality of \( \pi \). The conclusion
+	is that \( \pi ^ { \prime } \) is in fact optimal.
+\end{proof}
+
 \begin{rmk}
-If \( ( X , Y ) \) is an optimal coupling of \( ( \mu , \nu ) \), and \( \mathcal { Z } \subset \mathcal { X } \times \mathcal { Y } \)
-is such that \( \mathbb { P } [ ( X , Y ) \in \mathcal { Z } ] > 0 \), then the pair \( ( X , Y ) \), conditioned
-to lie in \( \mathcal { Z } \), is an optimal coupling of \( \left( \mu ^ { \prime } , \nu ^ { \prime } \right) \), where \( \mu ^ { \prime } \) is the law of
-\( X \) conditioned by the event \( " ( X , Y ) \in \mathcal { Z } " \), and \( \nu ^ { \prime } \) is the law of \( Y \)
-conditioned by the same event.
+	If \( ( X , Y ) \) is an optimal coupling of \( ( \mu , \nu ) \), and \( \mathcal { Z } \subset \mathcal { X } \times \mathcal { Y } \)
+	is such that \( \mathbb { P } [ ( X , Y ) \in \mathcal { Z } ] > 0 \), then the pair \( ( X , Y ) \), conditioned
+	to lie in \( \mathcal { Z } \), is an optimal coupling of \( \left( \mu ^ { \prime } , \nu ^ { \prime } \right) \), where \( \mu ^ { \prime } \) is the law of
+	\( X \) conditioned by the event \( " ( X , Y ) \in \mathcal { Z } " \), and \( \nu ^ { \prime } \) is the law of \( Y \)
+	conditioned by the same event.
 \end{rmk}
 \subsection{Wasserstein space}
 

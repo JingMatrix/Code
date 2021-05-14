@@ -100,6 +100,7 @@ We copy following results (tex code) from \cite{cordero2001riemannian}.
 \end{defn}
 
 \begin{thm}[Optimal mass transport on manifolds]
+	\label{thm:optimal_transport_manifold}
 	Let \( M \) be a complete, continuously curved Riemannian manifold. Fix two Borel probability measures \( \mu \ll \) vol and \( v \) on \( M \), and two compact subsets \( X \) and \( Y \subset M \) containing the support of \( \mu \) and \( v \), respectively. Then there exists \( \phi \in \mathcal { I } ^ { c } ( X , Y ) \) such that the map
 	\begin{equation}
 		\label{equa:transform_map}
@@ -121,7 +122,7 @@ with \( \phi \in \mathcal { I } ^ { c } ( X , Y ) \), one sees every \( ( x , y 
 with equality when \( \phi ( x ) = \inf _ { y ^ { \prime } \in Y } c \left( x , y ^ { \prime } \right) - \phi ^ { c } \left( y ^ { \prime } \right) = c ( x , y ) - \phi ^ { c } ( y ) . \)
 
 \begin{lem}
-	[Elementary properties of \( c \) -concave functions]
+	[Elementary properties of \( c \)-concave functions]
 	\label{lem:minimizer_differentiable}
 	Fix \( x \subset \subset M \) open and \( Y \subset M \) compact. For \( \phi \in I ^ { c } ( \bar { X } , Y ) \) define \( F ( x ) : = \)
 	\( \exp _ { x } ( - \nabla \phi ( x ) ) \).
@@ -160,6 +161,8 @@ Small enough balls are always convex embedded balls.
 	\label{defn:semi-concavity}
 	Fix \( \Omega \subset M \) open. A function \( \phi : \Omega \rightarrow \mathbf { R } \) is semi-concave at \( x _ { 0 } \in \Omega \) if there exists a convex embedded ball \( B _ { r } \left( x _ { 0 } \right) \) and a smooth function \( V : B _ { r } \left( x _ { 0 } \right) \rightarrow \mathbf { R } \) such that \( \phi + V \) is geodesically concave throughout \( B _ { r } \left( x _ { 0 } \right) . \) The function \( \phi \) is semi-concave on \( \Omega \) if it is semi-concave at each point of \( \Omega \).
 \end{defn}
+
+From the proof of Lemma 3.11 in \cite{cordero2001riemannian}, one can actually choose the local smooth function in \cref{defn:semi-concavity} as square distance function.
 
 \begin{defn}[Hessian]
 	Let \( \phi : \Omega \rightarrow \mathbf { R } \) be semi-concave on an open set \( \Omega \subset M . \) We say that \( \phi \) has \( a \) Hessian \( H \) at \( x \in \Omega \) if \( \phi \) is differentiable at \( x \)
@@ -201,10 +204,10 @@ with quadratic modulus is invariant by $C^2$ diffeomorphism, so it suffices to p
 	\begin{enumerate}
 		\item \( y : = F ( x ) \notin \operatorname { cut } ( x ) \) and setting \( H : = \operatorname { Hess } _ { x } d _ { y } ^ { 2 } / 2 \), one has \( H - \operatorname { Hess } _ { x } \phi \) \( \geq 0 \)
 		\item Introduce \( Y : = d \left( \exp _ { x } \right) _ { - \nabla \phi ( x ) } \) and define \( d F _ { x } : T _ { x } M \longrightarrow T _ { y } M \) by
-\( d F _ { x } : = Y \left( H - \operatorname { Hess } _ { x } \phi \right) \). Then as \( u \rightarrow 0 \) in \( T _ { x } M \),
-\begin{equation} 
-	\sup _ {\substack {\exp _ { y } v \in \partial ^ { c } \phi \left( \exp _ { x } u \right) \\ | v | = d \left( y , \exp _ { y } v \right)} } \left| v - d F _ { x } ( u ) \right| = o ( | u | ) 
-\end{equation}
+		      \( d F _ { x } : = Y \left( H - \operatorname { Hess } _ { x } \phi \right) \). Then as \( u \rightarrow 0 \) in \( T _ { x } M \),
+		      \begin{equation}
+			      \sup _ {\substack {\exp _ { y } v \in \partial ^ { c } \phi \left( \exp _ { x } u \right) \\ | v | = d \left( y , \exp _ { y } v \right)} } \left| v - d F _ { x } ( u ) \right| = o ( | u | )
+		      \end{equation}
 
 	\end{enumerate}
 \end{prop}
@@ -229,7 +232,25 @@ We only copy proof for the first conclusion, see Proposition 4.1 in \cite{corder
 	existence and non-negativity of its Hessian: Hess\(_{ x } h = H - \) Hess\(_ { x } \phi \geq 0\).
 \end{proof}
 
-From the proof of Lemma 3.11 in \cite{cordero2001riemannian}, one can actually choose the local smooth function in \cref{defn:semi-concavity} as square distance function.
+\begin{thm}
+	[Jacobian identity a.e.]
+	\label{thm:jacobian_identity}
+	Let \( \mu \ll \) Vol and \( \nu \ll \) Vol be
+	two compactly supported Borel probability measures and denote their
+	\( L ^ { 1 } ( M, \text{Vol}) \) densities by \( f \) and \( g \), respectively.
+	Fix domains \( \mathcal{X} \subset \subset M \) and \( \mathcal{Y} \subset \subset M \) containing the support of \( \mu \) and \( v \), respectively.
+	Suppose \( \phi \in \mathcal{I} ^ { c } ( \bar { \mathcal{X} } , \bar { \mathcal{Y} } ) \) induces \( F : \mathcal{X} \longrightarrow \bar { \mathcal{Y} } \) defined by \( F ( x ) : = \exp _ { x } ( - \nabla \phi ( x ) ) \)
+	which pushes \( \mu \) forward to $\nu$.
+	Then there exists a Borel set \( K \subset \mathcal{X} \) of full
+	measure for \( \mu \) such that
+	\begin{enumerate}
+		\item $\phi$ admits a Hessian \( \operatorname { Hess } _ { x } \phi \) at each \( x \in K \), and hence \( F ( x ) \notin \operatorname { cut } ( x ) \).
+		\item For \( x \in K \), setting \( Y : = d \left( \exp _ { x } \right) _ { - \nabla \phi ( x ) } \) and \( H : = \operatorname { Hess } _ { x } d _ { F ( x ) } ^ { 2 } / 2 \), one
+		      has
+		      \[ f ( x ) = g ( F ( x ) ) \operatorname { det } \left[ Y \left( H - \operatorname { Hess } _ { x } \phi \right) \right] \neq 0 \]
+	\end{enumerate}
+\end{thm}
+
 \section{Paper review}
 
 This is review of \cite{KIM2017640},
@@ -526,15 +547,55 @@ then we have first differential vanishes and Hessian semi-positive.
 % $\bar{\mu}$ is absolutely continous with respect to volume measure on $M$.
 For $n$ points $x_i \in M, i=1,2,\ldots,n$, we define a function on $M^n$,
 \[
-	f(x_1, x_2, \ldots, x_n) := \min_{z} \sum_{i=1}^n \lambda_i c(z, x_i)^2 =: \frac{1}{2}W^2(\sum_{i=1}^n \lambda_i \delta_{x_i}, M).
+	f(x_1, x_2, \ldots, x_n) := \min_{w} \sum_{i=1}^n \lambda_i c(w, x_i) =: \frac{1}{2}W^2(\sum_{i=1}^n \lambda_i \delta_{x_i}, M).
 \]
-Note that $f_i / \lambda_i $ is a $c$-concave function with a global Lipschitz constant bounded by diameter of $M$.
-This conclusion relies heavily on compactness of manifold $M$.
+We define $f_i$ as function on $M$ through $f$ by fixing $x_j$ for $j \neq i$.
+Consider function $g_i(w) := -\sum_{j\neq i}^n \lambda_j c(w, x_j) / \lambda_i$,
+then by definition $f_i /\lambda_i$ is the $c$-conjugate of $g_i$.
+Locally barycenters are contained in a compact set, a union of $n$ closed balls.
+This implies that locally $f_i / \lambda_i $ is a $c$-concave function,
+so it is semi-convex and it has hessian on $M$ almost everywhere with respect to the volume measure.
 
+% with a global Lipschitz constant bounded by diameter of $M$.
+% This conclusion relies heavily on compactness of manifold $M$.
 % \end{lem}
-Denote by $B$ a measurable selection of barycenter of $n$-points supported measures on $M$,
+The $c$-conjugation inequality
+$ c(w, x_i) \leq g_i(w) + f_i / \lambda_i (x_i)$ 
+becomes equality when $z$ is a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$,
+\begin{equation}
+	\label{equa:g_i_conjugate}
+	c(z, x_i) = g_i(z) + \frac{1}{\lambda_i} f_i(x_i).
+\end{equation}
+If in addition, $f_i / \lambda_i$ has hessian at $x_i$,
+then \cref{equa:g_i_conjugate} is differentiable at $x_i$,
+$z$ is not in the cut-locus of $x_i$;
+$x_i$ is then not in the cut-locus of $z$,
+so \cref{equa:g_i_conjugate} is also differentiable at $z$.
+Differentiate \cref{equa:g_i_conjugate} with respect to $x_i$ and $z$ and use the minimallity property,
+we get
+\begin{align*}
+	z &= \exp_{x_i}( - \frac{1}{\lambda_i} \nabla f_i),\\
+	x_i &= \exp_{z}( - \nabla g_i).
+\end{align*}
+
+We have in general that the $c$-conjugate of $f_i / \lambda_i$ satisfies
+$(f_i / \lambda_i)^c = g_i^{cc} \geq g_i$,
+and thus $c(w, x_i) \leq g_i(w) + f_i/\lambda_i (x_i) \leq (f_i / \lambda_i)^c(w) + f_i/\lambda_i (x_i)$.
+This long inequality implies that any $w$ in the equality
+$c(x_i, w) = f_i / \lambda_i (x_i) + (f_i / \lambda_i)^c(w)$ must be a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$.
+Moreover, we have following equality holds whenever one of gradients exits,
+\[\exp(-\nabla g_i) = \exp(-\nabla (f_i / \lambda_i)^c) = \exp^{-1}(-\nabla f_i / \lambda_i).\]
+Note cut-locus are excluded from consideration in above equality,
+and as a corollary $\nabla g_i = \nabla (f_i / \lambda_i)^c$.
+Therefore, two locally Lipschitz function $g_i$ and $f_i /\lambda_i$ coincide almost everywhere.
+If follows $g_i=f_i /\lambda_i$ on $M$.
+
+Denote by $B$ a measurable selection of barycenter of
+$n$-points supported measure $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$ on $M$,
+that is to say,
+% then from previous discussion we have
 \[
-	B(\boldsymbol{x}) \in \arg \min_{x \in M} \sum_{i=1}^{n} \lambda_i d(x, x_i)^p.
+	B(\boldsymbol{x}) \in \arg \min_{w \in M} \sum_{i=1}^{n} \lambda_i d(w, x_i)^2.
 \]
 % Let $T_i$ be the unique optimal transfer map from $\bar{\mu}$ to $\mu_i$,
 % and define $\gamma := (T_1, T_2, \ldots, T_n)_{\#} \bar{\mu}$ to be the push-forward measure of $\bar{\mu}$ on $M^n$.
@@ -544,14 +605,15 @@ Denote by $B$ a measurable selection of barycenter of $n$-points supported measu
 % Both map $B$ and $f$ are $\gamma$-a.e. differentiable.
 % The map $B(T_1, T_2, \ldots, T_n)$ is $\bar{\mu}$-a.e. the identity map on $M$.
 
-We have following barycenter formula holds almost everywhere for volume measure,
+We have following \textbf{barycenter formula} holds almost everywhere for volume measure,
+more exactly, where hessian of $f_i$ exists,
 % if $\mu_i$ is absolutey continous
 \begin{equation}
 	\label{formula_barycenter}
-	B = \exp (- \frac{1}{\lambda_i} \nabla_i f),
+	B = \exp (- \frac{1}{\lambda_i} \nabla_i f).
 \end{equation}
-where $\nabla_i f$ means partial gradient of $f$,
-i.e., $\nabla_i f = \nabla f_i$ if we define $f_i$ as function on $M$ through $f$ by fixing $x_j$ for $j \neq i$.
+% where $\nabla_i f$ means partial gradient of $f$,
+% i.e., $\nabla_i f = \nabla f_i$ if
 
 % \begin{proof}
 % We intend to apply discussion of conditional probability in \cref{discussion_conditional_prob} for the case
@@ -572,13 +634,16 @@ i.e., $\nabla_i f = \nabla f_i$ if we define $f_i$ as function on $M$ through $f
 		      and advance $\| \nabla_i f / \lambda_i \| $.
 		\item In the case of Euclidean space, $\nabla_i (f/\lambda_i)(x_i)$ reduces to
 		      $x_i - \sum_{j=1}^n \lambda_j x_j$.
-		% \item $\exp(-\nabla f_i / \lambda_i )$ is the optimal transfer map from $\mu_i$ to $\bar{\mu}$.
-		\item The $c$-conjugate function of $f_i / \lambda_i$ is $ (f_i / \lambda_i )^c(z) = -\sum_{j\neq i}^n \lambda_j c(z, x_j) / \lambda_i$.
-		\item In the case of Eculidean space, $\nabla (f_i / \lambda_i)^c (z)$ reduces to
+		      % \item $\exp(-\nabla f_i / \lambda_i )$ is the optimal transfer map from $\mu_i$ to $\bar{\mu}$.
+		% \item Set $g(z) := -\sum_{j\neq i}^n \lambda_j c(z, x_j) / \lambda_i$,
+		% 	then $f_i / \lambda_i = g^c$ and $ (f_i / \lambda_i )^c \geq g$.
+		\item In the case of Eculidean space, $\nabla (f_i / \lambda_i)^c (z) = \nabla g_i(z) $ reduces to
 
 		      $(z - \sum_{j=1}^n \lambda_j x_j) / \lambda_i -(z-x_i)$.
 	\end{itemize}
 \end{rmk}
+
+% Aim: try to estimate location of barycenter
 
 % \textcolor{red}{We have to fix $i$ and assume discrete measure for others,
 % 	since first order balance holds in the case of Euclidean space only
@@ -603,362 +668,37 @@ i.e., $\nabla_i f = \nabla f_i$ if we define $f_i$ as function on $M$ through $f
 % from the definition of \( g ( z ) \), we have \( \left. \nabla _ { w } \right| _ { w = z } c( y , w ) = - \nabla _ { z } g ( z ) \) or, equivalently,
 % \( y = \exp _ { z } \nabla g ( z ) . \)
 % Therefore, \( \exp _ { z } \nabla g ( z ) \) is the only point with the desired property.
-
-Now we aim to prove that \( \exp(- \nabla (f_i /\lambda_i)^c) \) is a Lipschitz function with Lipschitz constant depending only on $M$ and $\lambda_i$.
-As $M$ is compact, though tangent bundle $TM$ is not compact, local Lipschitz plus bounded diameter of $M$ implies global Lipschitz of $\exp$.
-Function $(f_i /\lambda_i)^c$ has hessian upper bound as a $c$-concave function,
-and has hessian lower bound as a negative linear combination of square distance function.
+% The good news of $g_i$ is that
+% we don't need to argue its properties through abstract $c$-concave function.
+The function $g_i = f_i / \lambda_i $ is by definition just a sum of squared distance functions.
+Now we aim to find out when \( \exp(- \nabla g_i ) = \exp(- \nabla (f_i / \lambda_i)^c) \) is a Lipschitz function.
+% with Lipschitz constant depending only on $M$ and $\lambda_i$.
+% As $M$ is compact, though tangent bundle $TM$ is not compact, local Lipschitz plus bounded diameter of $M$ implies global Lipschitz of $\exp$.
+% Function $g_i$ has hessian upper bound by \cref{prop:differentiate_optimal_transport},
+% here we treat it as an infimal convolution over a fixed sigleton set $\{x_i\}$.
+% Note that from $ \nabla g_i = \nabla (f_i / \lambda_i)^c$,
+% $g_i$ and $(f_i / \lambda_i)^c$ have the same hessian.
+Function $(f_i / \lambda_i)^c$ has hessian upper bound as a $c$-conjugate function;
+function $g_i$ has hessian lower bound as a negative linear combination of square distance function.
 We then have
 \begin{equation}
 	\label{equa:hessian_bound_f}
-	-\frac{1-\lambda_i}{\lambda_i} H \leq \nabla^2 \left(\frac{f_i}{\lambda_i}\right)^c \leq H,
+	-\frac{1-\lambda_i}{\lambda_i} H \leq \nabla^2 (f_i / \lambda_i)^c \leq H,
 \end{equation}
-where we denote by $H$ the hessian of square distance funtion.
-Recall that $H$ is bounded from above.
+where we denote by $H$ a possible bound from above for the hessian of square distance funtion.
+% Recall that $H$ is bounded from above.
 % Squared distance function $c$ has bounded Hessian from above.
 % Hence $ \| \nabla^2 g \|$ is bounded from above by taking the second derivative of definition and also applying minimallity of cost at barycenter.
 
-\section{Absolutely continuity of barycenter}
-
-We discuss in the context of proof of \cref{thm:barycenter_finite_support_measure}.
-
-\subsection{Barycenter of finite supported measure}
-
-Consider a measure $\sum_{i}^{n} \lambda_{i} \delta_{\mu_i}$ on $P(M)$ for $M$ a compact Riemannian manifold.
-Assume from now on $ \lambda_1 \neq 0$ and $\mu_1$ absolutely continous.
-
-The barycenter $\bar{\mu}$ of measure $\sum_{i}^{n} \lambda_{i} \delta_{\mu_i}$ is unique,
-because this meause gives mass to element in $P_{ac}(M)$.
-
-If we \textcolor{cyan}{assume $\bar{\mu}$ is absolutely continous},
-then there is only one element in the set $\Gamma$ by uniqueness of optimal plans.
-We can get every $\mu_i$ from $\mu_1$ if first push $\mu_1$ to $\bar{\mu}$ through $T_1^{-1}$ then push $\bar{\mu}$ to $\mu_i$ through $T_i$. Hence,
-\[B \circ (T_1, T_2, \ldots, T_n) \circ T_1^{-1} = T_1^{-1}\]
-is the unique transfer map from $\mu_1$ to $\bar{\mu}$. That is to say, $\bar{\mu}$-a.e., $B \circ (T_1, T_2, \ldots, T_n) $ is the identity map.
-This is already included in \cref{lem:inverse_barycenter}.
-
-\subsubsection{One measure absolutely continous and others Dirac}
-Here we \textcolor{cyan}{assume $\mu_i = \delta_{x_i}, i \geq 2$ are Dirac measures}.
-
-As an inverse to $\exp(-\nabla f_1/\lambda_1)$,
-\(\exp(-\nabla(f_1/\lambda_1)^c)\) pushes $\bar{\mu}$ to $\mu_1$.
-% because $br$ pushes $\mu_1$ to $\bar{\mu}$ by construction of $\bar{\mu}$.
-Denote by $C$ the Lipschitz constant of map \(\exp(-\nabla(f_1/\lambda_1)^c)\).
-If we have $ \text{Vol}(E) < \delta \implies \mu_1(E) < \epsilon$,
-then by $\text{Vol}(br^{-1}(E)) < C^n \text{Vol}(E)$
-we have $\text{Vol}(E) < \delta / C^n \implies \bar{\mu}(E)=\mu_1(br^{-1}(E)) < \epsilon$.
-Thus $\bar{\mu}$ is absolutely continous.
-
-% \begin{rmk}
-% 	Once after we prove that $\bar{\mu}$ is indeed absolutely continous.
-% 	$\nabla g$ is invertable and $br(x_1) = \exp_{x_1} \nabla g^c(x_1)$.
-% 	It is not surprised that
-% 	\[
-		% g^c(x_1) = -c(x_1 ,z) - \frac{1}{\lambda_1} \sum_{i=2}^{n} \lambda_i\, c(x_i, z) = 
-		% - \frac{1}{2 \lambda_1} W^2( \sum_{i=1}^n \lambda_i \delta_{x_i}, M),
-		% - f_1/\lambda_i.
-	% \]
-	% we can then take derivative with respect to $x_1$.
-% \end{rmk}
-
-\subsubsection{To a more general case by conditional probability}
-% \label{discussion_conditional_prob}
-To attack general case when \textcolor{cyan}{$\mu_i, i \geq 2$ are not assumed Dirac measures},
-we should consider conditonal measures of optimal multi-marginal transfer plan $\gamma$:
-\[
-	\diff \gamma(x_1, x^\prime)= \gamma(\diff x_1 \mid x^\prime)\, \diff \pi(x^\prime) ,
-\]
-where $\pi$ is the projection of $\gamma$ from $x = (x_1, x^\prime)$ to $x^\prime$,
-by abuse of language we also denote by it the push-forward measure from $\gamma$.
-For $\pi$-a.e $x^\prime$., $\gamma(\cdot \mid x^\prime)$ is a probability measure
-concentrated on $M \times \{x^\prime\}$.
-
-One has from definition of conditional measures that
-\[
-	\bar{\mu} = B_{\#} \gamma = \int_{M^{n-1}} B_{\#} \gamma(\cdot \mid x^\prime)\, \diff \pi(x^\prime).
-\]
-
-
-If we have that for $\gamma$-a.e. $x^\prime$,
-$B_{\#} \gamma(\cdot \mid x^\prime)$
-is absolutely continous,
-then $\bar{\mu}(E)=0$ for volume measure zero set $E$ by integration above.
-% \[
-% 	\bar{\mu}(E)
-% =\int_{M^{n-1}}
-% \frac{ \mu_1( br^{-1}(E) \cap A_{x^\prime} )}{\mu_1(A_{x^\prime})}
-% \diff \pi(x^\prime)
-% =\int_{M^{n-1}}
-% \bar{\mu}^{x^\prime}(E)
-% \diff \pi(x^\prime)
-% \leq \int_{M^{n-1}} C\,\mu_1^{\prime}(E) \diff \pi(x^\prime) \leq C\, \mu_1(E).
-% = 0.
-% \]
-
-Generally speaking, computation of $\gamma(\cdot \mid x^\prime)$ is only possible when
+Hence, we need two properties to have Lipschitzness of $\exp(-\nabla (f_i / \lambda_i)^c)$:
 \begin{itemize}
-	\item $\pi$ is has countable support.
-	      This is equivalent to that $\mu_i, i \geq 2$ has countable support.
-	      Fix any $x^\prime$ in the support of $\pi$, by direct verification
-	      \[
-		      \gamma(\cdot \mid x^\prime) =
-		      \frac{
-			      \mathbbm{1}_{M \times \{x^\prime\}}
-			      \gamma
-		      }{\pi(x^\prime)}.
-	      \]
-	\item $\gamma$ is absolutely continous with density function $f: M^n \rightarrow \mathbb{R} $.
-	      \[
-		      \gamma(\diff x_1 \mid x^\prime) =
-		      \frac{
-			      f(x_1, x^\prime) \diff \text{Vol}(x_1)
-			      % \diff \gamma (x_1, x^\prime)
-		      }
-		      {\int_{M} f(x_1, x^\prime) \diff \text{Vol}(x_1)
-		      }
-	      \]
-	      where we set the right hand side zero if it is undeterminated
-	      and we remove this $x^\prime$ from consideration.
+	\item $ \exp $ is Lipschitz on the domain we are interested in.
+	      % This would be the case when we are in the support of a compact supported function.
+	      For example, in a compact domain.
+	\item The hessian of square distance function has upper bound $H$.
+	      This is the case when we have lower bound of sectional curvature.
 \end{itemize}
-Note in both cases,
-$\gamma(\cdot \mid x^\prime)$
-has absolutely continous push-forward measure
-$\mu_1^{x^\prime} := \text{proj}^1_{\#}\gamma(\cdot \mid x^\prime)$
-to the first coordinate.
-But only in the first case that
-measure $\gamma(\cdot \mid x^\prime) \leq \pi(x^\prime) \, \gamma$ is controled by $\gamma$.
-Or we hope $f$ has positive lower bound,
-for example \textcolor{cyan}{continous and strictly positive}, like volume measure.
-In the case $\mu_1=\text{Vol}$? Every point in $\text{spt}\mu_1$ runs over all $\times_i \text{spt}\mu_i$.
 
-\textcolor{red}{Unfortunately, this control is required to apply conditioning optimal plan.}
-One may consider the case when at least one marginal is discrete,
-but no absolutely continuity can be derived without barycenter push-forward.
+We always take the second condition in following discussion.
+As we actually only consider measures with compact support, the first assumption is fullfilled as well.
 
-It is true that we have $\gamma$ is an optimal plan for all its marginals
-% \[
-% 	B_{\#} \gamma              = \bar{\mu} \text{ and }
-% 	\text{proj}^1_{\#} \gamma  = \mu_1,
-% \]
-and conditioning of (multi-marginal) optimal plan is still optimal from \cref{thm:restriction_optimal_plan}.
-Hence, $\gamma(\cdot \mid x^\prime)$ is an optimal plan of its marginals.
-% \textcolor{cyan}{in the case of discrete measure}.
-Apply previous discussion, we get absolutely continous measure
-\[
-	\exp(-\frac{1}{\lambda_1}\nabla f_1)_{\#}  \mu_1^{x^\prime}=
-	B_{\#}\gamma(\cdot, x^\prime) =
-	\bar{\mu}^{x^\prime},
-\]
-where $\bar{\mu}^{x^\prime}$ is a barycenter measure.
-
-Since conditioning of optimal maps are still optimal,
-barycenter formula \cref{formula_barycenter} still holds.
-We define $T_1 := \exp(-\nabla (f_1/\lambda_1)^c)$ to be the optimal transfer map from $\bar{\mu}^{x^\prime}$ to $\mu_1^{x^\prime}$,
-\begin{align*}
-	\bar{\mu} = B_{\#} \gamma & =
-	\int_{M^{n-1}}\bar{\mu}^{x^\prime} \, \diff \pi(x^\prime)                         \\
-	                          & = \int_{M^{n-1}}
-	\det D T_1  \circ T_1^{-1}\, \gamma(\cdot \mid x^\prime) \diff \pi(x^\prime)      \\
-	                          & = \det D T_1  \circ T_1^{-1}\, \gamma                 \\
-	                          & = \exp (- \frac{1}{\lambda_1} \nabla_1 f)_{\#} \gamma
-														.
-\end{align*}
-% One possible \textbf{investigation}: Conditional optimal plan, not just the simple case of restriction.
-% Hence, the push-forward measure
-% $\bar{\mu}^{x^\prime} = br_{\#} \diff \mu_1^{x^\prime}$ is absolutely continous as well.
-% We thus have
-% \[
-% 	B_{\#} \diff \gamma = \int_{M^{n-1}} f(\cdot, x^\prime)  \diff \pi(x^\prime) \, \diff \text{Vol}(\cdot).
-% \]
-% Moreover, the previous integral is in fact a finite sum.
-% For a measurable set $E \subset \text{spt}(\bar{\mu})$ with volume measure $0$,
-
-% So $\bar{\mu} = B_{\#} \diff \gamma$ is absolutely continous with respect to $\mu_1$.
-% \begin{rmk}
-% 	\textcolor{red}{NEED further investigation}, maybe one can use \cref{formula_barycenter}.
-
-% 	We may guess that	the density of $\bar{\mu}$,
-% 	$\int_{M^{n-1}} f(\cdot, x^\prime)  \diff \pi(x^\prime)$
-% 	is dominated by density of $\mu_1$ up to a constant coefficient.
-% 	% Lipschitz constant of \( \exp _ { z } \nabla g ( z ) \).
-% \end{rmk}
-
-\subsubsection{To a more general case by consistency of barycenter}
-
-Now we consider measure $\mathbb{P} = \lambda_1 \delta_{\mu_1} + \lambda_2 \delta_{\mu_2}$
-without assuming $\mu_2$ discrete.
-Note here it is for simplicity that we only consider the case $n=2$.
-Approxiamte $\mu_2$ in Wasserstein metric by a sequence of measures $\mu_2^{m}$,
-then $\mathbb{P}_m := \lambda_1 \delta_{\mu_1} + \lambda_2 \delta_{\mu_2^m}$ converges to $\mathbb{P}$
-in $P(P(M))$.
-
-By the consistency of barycenters, the unique barycenter $\bar{\mu}_m$ of $\mathbb{P}_m$
-converges in Wasserstein metric (or just weakly) to the unique barycenter $\bar{\mu}$ of $\mathbb{P}$.
-Recall that there is no duality between $L^{\infty}(\bar{\mu})$ (possible non-separable) and $L^1 (\bar{\mu})$
-in functional analysis even when $M$ is compact with Lebesgue measure.
-According to Proposition 4.4.2 in \cite{Bogachev2007} below, we need to show that $\bar{\mu}$ is a linear functional on $L^{\infty}(\bar{\mu})$.
-\begin{prop}
-	Let \( \mu \) be a finite nonnegative measure.
-	A continuous linear function \( \Psi \) on \( L ^ { \infty } ( \mu ) \) has the form
-	\( \Psi ( f ) = \int _ { X } f g d \mu \)
-	, where \( g \in L ^ { 1 } ( \mu ) \),
-	precisely when the set function \( A \mapsto \Psi \left( I _ { A } \right) \) is countably additive.
-\end{prop}
-
-We define $\Psi(f):= \int_M f \diff \bar{\mu} = \lim_m \int_M f \diff \bar{\mu}_m$ for $f$ continous.
-Extend $\Psi$ to be a continous linear functional on $L^{\infty}(\bar{\mu})$ by Hahn-Banach theorem.
-Do we still have $\Psi(I_A) = \bar{\mu}(A)$?
-
-A related discussion is available on
-\href{https://math.stackexchange.com/questions/574130/does-weak-convergence-with-uniformly-bounded-densities-imply-absolute-continuity/574888#574888}{math Stack Exchange}.
-Think about this example carefully.
-Let $\lambda$ be the arglength measure and $\phi_n \ge 0$ a continuous function on $\mathbb T$ with $\int_{\mathbb T} \phi_n\, d\lambda = 1$ and $\phi_n(x) = 0$ if $|x-1| \ge \frac 1n$. Then for each continuous function $f\colon \mathbb T \to \mathbb R$ we have $\int_{\mathbb T} f\phi_n d\lambda \to f(1)$, that is $\phi_n \lambda \to \delta_1$ weakly. But $\delta_1$ is not $\lambda$-continuous.
-
-A digression, generally for question if density of $\bar{\mu}_m$ converges to density of $\bar{\mu}$,
-we possibly need asymptotically equicontinuous in \cite{Sweeting1986Converse}.
-
-We don't need to find out density explicitly.
-Instead, let prove the absolutely continuity by showing that
-for any $\epsilon > 0$ there is a $\delta > 0$ such that
-\begin{equation}
-	\label{equa:absolutely_continous}
-	\forall E \subset M \, \text{measurable, } \text{Vol}(E) < \delta
-	\implies \bar{\mu}(E) < \epsilon
-\end{equation}
-In our situation, a \textcolor{red}{uniform $\delta$} can be chosen for all $\bar{\mu}_m$
-because of a discrete situation of previous conditioning optimal plan calculation.
-See the now ``trivial'' \cref{formula_barycenter},
-we can use it to conclude uniform Lipschitz constant for $m$.
-
-Recall for open set $E \subset M$, $\bar{\mu}(E) \leq \liminf \bar{\mu}_m(E)$,
-as indicator function of open set is lower semi-continuous.
-Hence \cref{equa:absolutely_continous} holds for all open sets.
-Es Borel measure is outer regular, for general measurable $E$ with $\text{Vol}(E) < \frac{\delta}{2}$
-select an open set $E^\prime$ such that
-$ E \subset E^\prime$ and $ \text{Vol}(E^\prime) < \delta$,
-then $\bar{\mu}(E) \leq \bar{\mu}(E^\prime) < \epsilon$.
-
-Previous argument works for general $\lambda_1 \delta_{\mu_1} + \lambda_2 \mathbb{P}$ for any $\mathbb{P} \in P(P(M))$
-if we approxiamte $\mathbb{P}$ by finite supported measures.
-To sum up, we should be able to single out a part of $\mathbb{P}$ in the form $\lambda_1 \delta_{\mu_1}$
-with lower bound on $\lambda_1$ and dominated $\mu_1$.
-One way to do so is to assume $\mu_1$ has bounded density.
-\begin{defn}
-	[The set $ \mathcal { A } _ { L }$]
-	For \( 0 < L < \infty \), let \( \mathcal { A } _ { L } \) be the set of Borel probability
-	measures on \( M \), absolutely continuous with respect to volume, whose densities have \( L ^ { \infty } \)
-	norm less than or equal to \( L\).
-\end{defn}
-
-Note that, since the bound on the \( L ^ { \infty } \) norm is preserved under weak-* convergence,
-\( \mathcal { A } _ { L } \) is a weakly-* closed, and thus Borel measurable, subset of \( P ( M ) \).
-
-If $\mu_1 \in \mathcal{A}_L$, then by duality between $L^p(\bar{\mu})$ and $L^q(\bar{\mu})$
-and that they are separable spaces,
-we have that $\bar{\mu}$ has density in $L^p(\bar{\mu})$ for
-$p < \infty$ with a upper norm bound depending only on constat $L$ (, $\lambda_1$ and $M$).
-We pass $p$ to infity to get $\bar{\mu} \in \mathcal{A}_L$.
-Hence, our conclusion holds for any $\mathbb{P}$ that is not atomless on $\mathcal{A}_L$.
-
-Finally, if we are given $\mathbb{P}$ with only assumption that $\mathbb{P}(\mathcal{A}_L(M)) > 0$,
-we need more control on the density function of $\bar{\mu}_m$
-to ``remove'' the dependency of its upper bound on a singled-out coefficient $\lambda_1$.
-One hope is that $\lambda_1$ is replaced by $\mathbb{P}(\mathcal{A}_L(M))$.
-
-\subsection{Calculate density function}
-
-Every measure $\mu$ on $M$ in following discussion is absolutely continous.
-We use the convention that denote by $g$ the density function for absolutely measure $\mu$.
-One principle of differential geometry is to differentiate everything we could.
-
-% If we only apply general bound on $c$-concave function
-Recall change of variable (Theorem 4.2 in \cite{cordero2001riemannian}) and notations in \cref{prop:differentiate_optimal_transport},
-\[
-	\bar{g} = g_i \circ T_i \det D T_i :
-	= g_i \circ T_i \det[Y(H-\text{Hess} u_i]
-\]
-where $T_i = \exp(-\nabla u_i)$ is the unique optimal maps from $\bar{\mu}$ to $\mu_i$.
-
-For general $c$-concave function $\mu_i$, we have only upper hessian bound.
-And this is not enough to get an estimation on the absolute value of Jacobian determinants.
-% For instance, in Euclidean space, $DT_i = (\lambda_i -1)/\lambda_i \leq \text{Id}$.
-
-We differentiate the equality $B(T_1(x), \ldots, T_n(x))=x$ for $\bar{\mu}$-a.e. $x$,
-\begin{align*}
-	\text{Id} =\sum_{i=1}^n \partial_i B\, DT_i
-&=\sum_{i=1}^n D \exp(-\frac{1}{\lambda_i}\nabla f_i) \, D \exp(-\nabla u_i)\\
-&=\sum_{i=1}^n D \exp^{-1}(-\nabla \left( \frac{f_i}{\lambda_i}\right)^c) \, D \exp(-\nabla u_i)\\
-&=\sum_{i=1}^n(H-\text{Hess}(f_i / \lambda_i)^c)^{-1}\,Y_i^{-1}\,
-Y_i\,(H-\text{Hess} u_i)\\
-&=\sum_{i=1}^n(H-\text{Hess}(f_i / \lambda_i)^c)^{-1}\,
-(H-\text{Hess}u_i) .
-\end{align*}
-
-Then by Minkowski's determinant inequality, we get
-\begin{align*}
-	1 &\geq \sum_{i=1}^{n} \det [H-\text{Hess}(f_i/\lambda_i)^c]^{-1/n}\,\det[H-\text{Hess}u_i]^{1/n}\\
-		&=\sum_{i=1}^n \det[\partial_i B]^{1/n}\,\det[DT_i]^{1/n}
-\end{align*}
-Recall that we know $(f_i / \lambda_i)^c$ has hessian bound from both sides, see \cref{equa:hessian_bound_f}.
-From it we get $\det[\partial_i B]^{1/n} \geq \min \{1, \lambda_i / (1 - \lambda_i)\} > \lambda_i$,
-where $C > 0$ depends only on hessian bound of square distance function and Lipschitz constant of exponential map.
-
-Combine these two inequalities, and we then apply Jensen inequlity
-\[
-	\bar{g} \leq 
-	\left[ \sum_{i=1}^n \frac{\det[\partial_i B]^{1/n}}
-	{g_i^{1/n} \circ T_i}\right]^{-n}
-	< \left[ \sum_{i=1}^n \frac{C \, \lambda_i}
-	{g_i^{1/n} \circ T_i}\right]^{-n}
-	\leq C^{-n} \sum_{i=1}^n \lambda_i g_i \circ T_i.
-\]
-With this estimation in hand,
-one shows easily that if measure $\mathbb{P} \in P(P(M))$ on $P(M)$ give mass to closed set $\mathcal{A}_L$,
-then it has a unique absolutely continous barycenter.
-
-\subsubsection{Jacobian determinant inequality for the Wasserstein barycenter}
-
-This is done by Kim and Pass.
-\begin{defn}[Volume distortion]
-	Let \( \lambda \) be a Borel probability measure on \( M \) with a
-	unique barycenter \( \bar { x } \) (that is, such that \( B C ( \lambda ) \) is a singleton). We define the generalized,
-	or barycentric, volume distortion coefficients at \( y \notin \operatorname { cut } ( \bar { x } ) \)
-
-	\[ \alpha _ { \lambda } ( y ) : = \frac { \operatorname { det } \left[ - \left. D _ { y z } ^ { 2 } \right| _ { z = \bar { x } } c ( y , z ) \right] } { \operatorname { det } \left[ \left. \int _ { M } D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } c ( x , z ) d \lambda ( x ) \right] } \]
-	where \( D _ { z z } ^ { 2 } c ( x , z ) \) denotes the Hessian of the function \( z \mapsto c ( x , z ) \), and the determinants
-	are computed in exponential local coordinates at \( \bar { x } \) and \( y . \)
-\end{defn}
-
-\begin{thm}
-	[Jacobian determinant inequality for the Wasserstein barycenter]
-	Assume that the Wasserstein barycenter \( \bar { \mu } \) of the measure \( \Omega \) on \( P ( M ) \) is absolutely continuous.
-	Letting \( T _ { \mu } \) denote the optimal map from \( \bar { \mu } \) to \( \mu \), consider the measure on \( M \) given by
-	\[ \lambda _ { x } : = \int _ { P ( M ) } \delta _ { T _ { \mu } ( x ) } d \Omega ( \mu ) \]
-	which is defined with respect to a.e. $x$.
-	Then, for \( \bar { \mu } \)-a.e. \(x\),
-	\[ 1 \geq \int _ { P ( M ) } \alpha _ { \lambda _ { x } } ^ { 1 / n } \left( T _ { \mu } ( x ) \right) \operatorname { det } ^ { 1 / n } D T _ { \mu } ( x ) d \Omega ( \mu ) \]
-\end{thm}
-
-% \subsubsection{Use local coordinate}
-% Need to work on it.
-
-\subsubsection{Use Skorohod representation}
-\textcolor{red}{This is not possible!}
-One may consider to construct absolutely continous random variables.
-For example, to use the Skorohod representation (see section 8.5 in \cite{Bogachev2007}),
-\begin{defn}
-	We shall say that a topological space \( X \) has the strong
-	Skorohod property for Radon measures if to every Radon probability measure
-	\( \mu \) on \( X \),
-	one can associate a Borel mapping \( \xi _ { \mu } : [ 0,1 ] \rightarrow X \) such that \( \mu \) is
-	the image of Lebesgue measure under the mapping \( \xi _ { \mu } \) and \( \xi _ { \mu _ { n } } ( t ) \rightarrow \xi _ { \mu } ( t ) \) a.e.
-	whenever the measures \( \mu _ { n } \) converge weakly to \( \mu . \)
-\end{defn}
-
-However, even if $\mu$ is absolutely continous respect to Lebesgue measure on $\mathbb{R}$,
-we don't have necessarily that $\xi_{\mu}$ is a absolutely continous function.
-In fact, the Housdorff dimension of the image of $\xi_{\mu}$ is not likely to be greater than 2.
-See \cite{Besicov1937Sets} for discussions on $\delta$-Lipschitz curves,
-their Housdorff dimensions are bounded by $2-\delta$.
-
-% \subsection{Control on density function}
