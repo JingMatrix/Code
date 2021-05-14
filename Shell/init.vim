@@ -29,9 +29,9 @@ augroup end
 
 " project rooter
 set autochdir
-let g:rooter_cd_cmd='lcd'
-let g:rooter_patterns=['>Latex', '.git', 'package.json']
-let g:rooter_change_directory_for_non_project_files='current'
+" let g:rooter_cd_cmd='lcd'
+" let g:rooter_patterns=['>Latex', '.git', 'package.json']
+" let g:rooter_change_directory_for_non_project_files='current'
 
 " linter
 let g:ale_linters={
@@ -71,6 +71,9 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+" sudo edit
+let g:suda_smart_edit = 1
+
 " Add system path if not presented
 if stridx($PATH, 'node') == -1
 	let $PATH .= ':/home/jing/.nvm/versions/node/v14.16.0/bin'
@@ -90,8 +93,18 @@ augroup END
 augroup notable
 	autocmd!
 	autocmd BufWritePre *otes/*.md 1,7s/\v^modified:\ "\zs.*\ze"$/\=system('date -Is | head -c -1')
-	autocmd InsertEnter *otes/*.md silent !ibus engine libpinyin &>/dev/null
-	autocmd VimEnter,InsertLeave *otes/*.md silent !ibus engine xkb:us::eng &>/dev/null
+	autocmd InsertEnter *otes/*.md silent !fcitx5-remote -c &>/dev/null
+	autocmd VimEnter,InsertLeave *otes/*.md silent !fcitx5-remote -o &>/dev/null
+augroup END
+
+" input Chinese
+augroup chinese
+	autocmd!
+	" for tg
+	autocmd InsertEnter /tmp/tmp*.txt silent !fcitx5-remote -c &>/dev/null
+	autocmd VimEnter,InsertLeave /tmp/tmp*.txt silent !fcitx5-remote -o &>/dev/null
+	" for mutt
+	autocmd VimEnter,InsertLeave /var/tmp/mutt-Matrix-* silent !fcitx5-remote -o &>/dev/null
 augroup END
 
 " use <Shift> key to select; see https://stackoverflow.com/a/4608387/7870953
