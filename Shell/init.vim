@@ -5,11 +5,12 @@ let g:vimtex_quickfix_autojump=1
 let g:vimtex_fold_enabled=1
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_method='pplatex'
-let g:matchup_override_vimtex = 1
+let g:matchup_override_vimtex=1
 let g:vimtex_quickfix_open_on_warning=0
-let g:vimtex_quickfix_ignore_filters = [
+let g:vimtex_quickfix_ignore_filters=[
 			\ 'Underfull',
 			\ 'Overfull',
+			\ 'Fandol',
 			\]
 let g:vimtex_fold_types={
 			\ 'comments' : {'enabled' : 1},
@@ -22,6 +23,8 @@ let g:vimtex_fold_types={
 			\ }
 augroup math_edit
 	autocmd!
+	" Fix latex log jump for project files
+	autocmd BufEnter *Code/Latex/*/*/*.tex setl noautochdir | silent! lcd %:p:h:h
 	autocmd FileType tex setl dictionary+=../.dict | setl iskeyword+=- | setl complete=.,t,k
 	autocmd FileType tex setl keywordprg=texdoc
 	autocmd FileType tex nmap <localleader>ld <Plug>(vimtex-doc-package)
@@ -72,12 +75,11 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " sudo edit
-let g:suda_smart_edit = 1
+let g:suda_smart_edit=1
 
 " Add system path if not presented
-if stridx($PATH, 'node') == -1
-	let $PATH .= ':/home/jing/.nvm/versions/node/v14.16.0/bin'
-	let $PATH .= ':/usr/local/texlive/2021/bin/x86_64-linux'
+if stridx($PATH, 'node')== -1
+	let $PATH .=':/home/jing/.nvm/versions/node/v14.16.0/bin'
 endif
 
 " formater
@@ -94,7 +96,7 @@ augroup notable
 	autocmd!
 	autocmd BufWritePre *otes/*.md 1,7s/\v^modified:\ "\zs.*\ze"$/\=system('date -Is | head -c -1')
 	autocmd InsertEnter *otes/*.md silent !fcitx5-remote -c &>/dev/null
-	autocmd VimEnter,InsertLeave *otes/*.md silent !fcitx5-remote -o &>/dev/null
+	autocmd BufEnter,InsertLeave *otes/*.md silent !fcitx5-remote -o &>/dev/null
 augroup END
 
 " input Chinese
@@ -102,9 +104,9 @@ augroup chinese
 	autocmd!
 	" for tg
 	autocmd InsertEnter /tmp/tmp*.txt silent !fcitx5-remote -c &>/dev/null
-	autocmd VimEnter,InsertLeave /tmp/tmp*.txt silent !fcitx5-remote -o &>/dev/null
+	autocmd BufEnter,InsertLeave /tmp/tmp*.txt silent !fcitx5-remote -o &>/dev/null
 	" for mutt
-	autocmd VimEnter,InsertLeave /var/tmp/mutt-Matrix-* silent !fcitx5-remote -o &>/dev/null
+	autocmd BufEnter,InsertLeave /var/tmp/mutt-Matrix-* silent !fcitx5-remote -o &>/dev/null
 augroup END
 
 " use <Shift> key to select; see https://stackoverflow.com/a/4608387/7870953

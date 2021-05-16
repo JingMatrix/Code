@@ -1,6 +1,7 @@
 /home/jing/.local/share/nvim/site/pack
 ├── plugin
 │   └── start
+│       ├── suda.vim
 │       ├── vim-commentary
 │       ├── vim-fugitive
 │       ├── vim-repeat
@@ -11,13 +12,13 @@
 │   ├── opt
 │   │   ├── ale
 │   │   ├── coc.nvim
-│   │   └── gen_tags.vim
+│   │   ├── gen_tags.vim
+│   │   └── vim-rooter
 │   └── start
 │       ├── fzf
 │       ├── fzf.vim
 │       ├── ultisnips
 │       ├── vim-matchup
-│       ├── vim-rooter
 │       └── vim-snippets
 ├── syntax
 │   ├── opt
@@ -29,4 +30,4 @@
         ├── vim-airline
         └── vim-airline-themes
 
-29 directories, 0 files
+30 directories, 0 files
