@@ -183,10 +183,6 @@ This definition coincides with the usual one for smooth functions. A more intuit
 
 It is remarkable that the converse also holds true: if \( \psi \) is semi-concave around \( x \) then \cref{defn:hessian} follows from \cref{equa:hessian_expan}.
 
-\begin{prop}[\( c \)-concave functions are semi-concave]
-	\( F i x X \subset \subset M \) open and \( Y \subset M \) compact. A \( c \)-concave function \( \phi \in \mathcal{I} ^ { c } ( \bar { X } , Y ) \) is semi-concave on \( X \) (and hence admits a Hessian \cref{defn:hessian} almost everywhere in \( X \)).
-\end{prop}
-
 \begin{thm}[Aleksandrov-Bangert, \cite{bangert1979analytiche} in German]
 	Let \( \phi : \Omega \rightarrow M \) be semi-concave function on an open set \( \Omega \subset M . \) Then \( \phi \) admits a Hessian almost everywhere on \( \Omega \).
 \end{thm}
@@ -195,10 +191,14 @@ This theorem is also proved as Theorem 14.1 in \cite{villani2008optimal}.
 The notion of local semiconvexity
 with quadratic modulus is invariant by $C^2$ diffeomorphism, so it suffices to prove for $\mathbb{R}^n$.
 
+\begin{prop}[\( c \)-concave functions are semi-concave]
+	\( F i x X \subset \subset M \) open and \( Y \subset M \) compact. A \( c \)-concave function \( \phi \in \mathcal{I} ^ { c } ( \bar { X } , Y ) \) is semi-concave on \( X \) (and hence admits a Hessian \cref{defn:hessian} almost everywhere in \( X \)).
+\end{prop}
 
 \begin{prop} [Differentiating optimal transport]
 	\label{prop:differentiate_optimal_transport}
-	Fix \( X \subset \subset M \) be openand \( Y \subset M \) compact. Let \( \phi \in I ^ { c } ( \bar { X } , Y ) \) and set \( F ( z ) : = \exp _ { z } ( - \nabla \phi ( z ) ) . \)
+	Fix \( X \subset \subset M \) be open and \( Y \subset M \) compact.
+	Let \( \phi \in I ^ { c } ( \bar { X } , Y ) \) and set \( F ( z ) : = \exp _ { z } ( - \nabla \phi ( z ) ) . \)
 	Fix a point \( x \in X \) where \( \phi \) admits a Hessian \cref{defn:hessian}.
 	Then:
 	\begin{enumerate}
@@ -484,27 +484,6 @@ then we have first differential vanishes and Hessian semi-positive.
 % 	c \left( x _ { 1 } , x _ { 2 } , \ldots , x _ { m } \right) = \inf _ { y \in M } \sum _ { i = 1 } ^ { m } \frac { d ^ { 2 } } { 2 } \left( x _ { i } , y \right)
 % \end{equation}
 
-% \begin{lem}
-% 	Fix \( \left( x _ { 1 } , \ldots , x _ { m } \right)\).
-% 	Then any \( y \) which minimizes \( y \mapsto \sum _ { i = 1 } ^ { m } d ^ { 2 } \left( x _ { i } , y \right) \) is not in the cut locus of \( x _ { i } \) for any \( i . \)
-% \end{lem}
-
-% \begin{proof}
-% 	Choose a point \( y \) in the cut locus of \( x _ { i } \) for some \( i \);
-% 	we will show that \( y \) cannot minimize \( y \mapsto \sum _ { i = 1 } ^ { m } d ^ { 2 } \left( x _ { i } , y \right) . \)
-% 	By Lemma 3.12 in \cite{cordero2001riemannian}, we can find a constant \( K \) such that, for all \( u \in T _ { y } M \), and \( j = 1,2 , \ldots m \), we have
-% 	\[ \frac { d ^ { 2 } \left( x _ { j } , \exp _ { y } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { y } ( - u ) \right) - 2 d ^ { 2 } \left( x _ { j } , y \right) } { | u | ^ { 2 } } \leq K \]
-% 	On the other hand, by Proposition \( 2.5 \) in the same paper, we can find some non
-% 	zero \( u \in T _ { y } M \) such that
-% 	\[ \frac { d ^ { 2 } \left( x _ { i } , \exp _ { y } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { y } ( - u ) \right) - 2 d ^ { 2 } \left( x _ { i } , y \right) } { | u | ^ { 2 } } \leq - m K \]
-% 	Therefore, we have
-% 	\[ \begin{aligned} \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) & = \sum _ { j \neq i } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) + d ^ { 2 } \left( x _ { i } , y \right) \\ & \geq \frac { - ( m - 1 ) K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } \sum _ { j \neq i } ^ { m } \left( d ^ { 2 } \left( x _ { j } , \exp _ { y } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { y } ( - u ) \right) \right) \\ & + \frac { m K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } d ^ { 2 } \left( x _ { i } , \exp _ { y } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { y } ( - u ) \right) \\ & > \frac { 1 } { 2 } \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , \exp _ { y } u \right) + \frac { 1 } { 2 } \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , \exp _ { y } ( - u ) \right) \end{aligned} \]
-% 	Therefore, either
-% 	\[ \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , \exp _ { y } u \right) < \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) \]
-% 	or
-% 	\[ \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , \exp _ { y } - u \right) < \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) \]
-% 	in either case, \( y \) cannot minimize \( \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) \)
-% \end{proof}
 
 % \begin{lem}
 % 	The cost function \( c \) is everywhere superdifferentiable with respect to \( x _ { 1 } \).
@@ -556,39 +535,58 @@ Locally barycenters are contained in a compact set, a union of $n$ closed balls.
 This implies that locally $f_i / \lambda_i $ is a $c$-concave function,
 so it is semi-convex and it has hessian on $M$ almost everywhere with respect to the volume measure.
 
+\begin{lem}
+	Fix \( \left( x _ { 1 } , \ldots , x _ { m } \right)\).
+	Then any \( y \) which minimizes \( y \mapsto \sum _ { i = 1 } ^ { m } d ^ { 2 } \left( x _ { i } , y \right) \) is not in the cut locus of \( x _ { i } \) for any \( i . \)
+\end{lem}
+
+\begin{proof}
+	Choose a point \( y \) in the cut locus of \( x _ { i } \) for some \( i \);
+	we will show that \( y \) cannot minimize \( y \mapsto \sum _ { i = 1 } ^ { m } d ^ { 2 } \left( x _ { i } , y \right) . \)
+	By Lemma 3.12 in \cite{cordero2001riemannian}, we can find a constant \( K \) such that, for all \( u \in T _ { y } M \), and \( j = 1,2 , \ldots m \), we have
+	\[
+	\frac { d ^ { 2 } \left( x _ { j } , \exp _ { y } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { y } ( - u ) \right) - 2 d ^ { 2 } \left( x _ { j } , y \right) } { | u | ^ { 2 } } \leq K
+\]
+	On the other hand, by Proposition \( 2.5 \) in the same paper, we can find some non
+	zero \( u \in T _ { y } M \) such that
+	\[ 
+	\frac { d ^ { 2 } \left( x _ { i } , \exp _ { y } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { y } ( - u ) \right) - 2 d ^ { 2 } \left( x _ { i } , y \right) } { | u | ^ { 2 } } \leq - m K
+\]
+	Therefore, we have
+	 \begin{align*}
+	\sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) & = \sum _ { j \neq i } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) + d ^ { 2 } \left( x _ { i } , y \right) \\ & \geq \frac { - ( m - 1 ) K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } \sum _ { j \neq i } ^ { m } \left( d ^ { 2 } \left( x _ { j } , \exp _ { y } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { y } ( - u ) \right) \right) \\ & + \frac { m K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } d ^ { 2 } \left( x _ { i } , \exp _ { y } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { y } ( - u ) \right) \\ & > \frac { 1 } { 2 } \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , \exp _ { y } u \right) + \frac { 1 } { 2 } \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , \exp _ { y } ( - u ) \right) 
+\end{align*}
+	Therefore, either
+	\[ \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , \exp _ { y } u \right) < \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) \]
+	or
+	\[ \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , \exp _ { y } - u \right) < \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) \]
+	in either case, \( y \) cannot minimize \( \sum _ { j = 1 } ^ { m } d ^ { 2 } \left( x _ { j } , y \right) \)
+\end{proof}
+
 % with a global Lipschitz constant bounded by diameter of $M$.
 % This conclusion relies heavily on compactness of manifold $M$.
 % \end{lem}
 The $c$-conjugation inequality
-$ c(w, x_i) \leq g_i(w) + f_i / \lambda_i (x_i)$ 
+$ c(w, x_i) \geq g_i(w) + f_i / \lambda_i (x_i)$
 becomes equality when $z$ is a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$,
 \begin{equation}
 	\label{equa:g_i_conjugate}
 	c(z, x_i) = g_i(z) + \frac{1}{\lambda_i} f_i(x_i).
 \end{equation}
+The lemma above tells that $g_i$ is differentiable at $z$.
+Since $z$ is not in the cut-locus of $x_i$,
+$x_i$ is then not in the cut-locus of $z$.
 If in addition, $f_i / \lambda_i$ has hessian at $x_i$,
-then \cref{equa:g_i_conjugate} is differentiable at $x_i$,
-$z$ is not in the cut-locus of $x_i$;
-$x_i$ is then not in the cut-locus of $z$,
-so \cref{equa:g_i_conjugate} is also differentiable at $z$.
+then both hand side of \cref{equa:g_i_conjugate} are differentiable at $x_i$ and $z$.
+% So \cref{equa:g_i_conjugate} is also differentiable at $z$.
 Differentiate \cref{equa:g_i_conjugate} with respect to $x_i$ and $z$ and use the minimallity property,
 we get
 \begin{align*}
-	z &= \exp_{x_i}( - \frac{1}{\lambda_i} \nabla f_i),\\
-	x_i &= \exp_{z}( - \nabla g_i).
+	z   & = \exp_{x_i}( - \frac{1}{\lambda_i} \nabla f_i), \\
+	% \textcolor{red}{WRONG!}
+	x_i & = \exp_{z}( - \nabla g_i).
 \end{align*}
 
-We have in general that the $c$-conjugate of $f_i / \lambda_i$ satisfies
-$(f_i / \lambda_i)^c = g_i^{cc} \geq g_i$,
-and thus $c(w, x_i) \leq g_i(w) + f_i/\lambda_i (x_i) \leq (f_i / \lambda_i)^c(w) + f_i/\lambda_i (x_i)$.
-This long inequality implies that any $w$ in the equality
-$c(x_i, w) = f_i / \lambda_i (x_i) + (f_i / \lambda_i)^c(w)$ must be a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$.
-Moreover, we have following equality holds whenever one of gradients exits,
-\[\exp(-\nabla g_i) = \exp(-\nabla (f_i / \lambda_i)^c) = \exp^{-1}(-\nabla f_i / \lambda_i).\]
-Note cut-locus are excluded from consideration in above equality,
-and as a corollary $\nabla g_i = \nabla (f_i / \lambda_i)^c$.
-Therefore, two locally Lipschitz function $g_i$ and $f_i /\lambda_i$ coincide almost everywhere.
-If follows $g_i=f_i /\lambda_i$ on $M$.
 
 Denote by $B$ a measurable selection of barycenter of
 $n$-points supported measure $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$ on $M$,
@@ -612,8 +610,8 @@ more exactly, where hessian of $f_i$ exists,
 	\label{formula_barycenter}
 	B = \exp (- \frac{1}{\lambda_i} \nabla_i f).
 \end{equation}
-% where $\nabla_i f$ means partial gradient of $f$,
-% i.e., $\nabla_i f = \nabla f_i$ if
+where $\nabla_i f$ means partial gradient of $f$,
+i.e., $\nabla_i f (x_1, x_2, \ldots, x_n)  = \nabla f_i (x_i)$.
 
 % \begin{proof}
 % We intend to apply discussion of conditional probability in \cref{discussion_conditional_prob} for the case
@@ -635,8 +633,8 @@ more exactly, where hessian of $f_i$ exists,
 		\item In the case of Euclidean space, $\nabla_i (f/\lambda_i)(x_i)$ reduces to
 		      $x_i - \sum_{j=1}^n \lambda_j x_j$.
 		      % \item $\exp(-\nabla f_i / \lambda_i )$ is the optimal transfer map from $\mu_i$ to $\bar{\mu}$.
-		% \item Set $g(z) := -\sum_{j\neq i}^n \lambda_j c(z, x_j) / \lambda_i$,
-		% 	then $f_i / \lambda_i = g^c$ and $ (f_i / \lambda_i )^c \geq g$.
+		      % \item Set $g(z) := -\sum_{j\neq i}^n \lambda_j c(z, x_j) / \lambda_i$,
+		      % 	then $f_i / \lambda_i = g^c$ and $ (f_i / \lambda_i )^c \geq g$.
 		\item In the case of Eculidean space, $\nabla (f_i / \lambda_i)^c (z) = \nabla g_i(z) $ reduces to
 
 		      $(z - \sum_{j=1}^n \lambda_j x_j) / \lambda_i -(z-x_i)$.
@@ -670,35 +668,3 @@ more exactly, where hessian of $f_i$ exists,
 % Therefore, \( \exp _ { z } \nabla g ( z ) \) is the only point with the desired property.
 % The good news of $g_i$ is that
 % we don't need to argue its properties through abstract $c$-concave function.
-The function $g_i = f_i / \lambda_i $ is by definition just a sum of squared distance functions.
-Now we aim to find out when \( \exp(- \nabla g_i ) = \exp(- \nabla (f_i / \lambda_i)^c) \) is a Lipschitz function.
-% with Lipschitz constant depending only on $M$ and $\lambda_i$.
-% As $M$ is compact, though tangent bundle $TM$ is not compact, local Lipschitz plus bounded diameter of $M$ implies global Lipschitz of $\exp$.
-% Function $g_i$ has hessian upper bound by \cref{prop:differentiate_optimal_transport},
-% here we treat it as an infimal convolution over a fixed sigleton set $\{x_i\}$.
-% Note that from $ \nabla g_i = \nabla (f_i / \lambda_i)^c$,
-% $g_i$ and $(f_i / \lambda_i)^c$ have the same hessian.
-Function $(f_i / \lambda_i)^c$ has hessian upper bound as a $c$-conjugate function;
-function $g_i$ has hessian lower bound as a negative linear combination of square distance function.
-We then have
-\begin{equation}
-	\label{equa:hessian_bound_f}
-	-\frac{1-\lambda_i}{\lambda_i} H \leq \nabla^2 (f_i / \lambda_i)^c \leq H,
-\end{equation}
-where we denote by $H$ a possible bound from above for the hessian of square distance funtion.
-% Recall that $H$ is bounded from above.
-% Squared distance function $c$ has bounded Hessian from above.
-% Hence $ \| \nabla^2 g \|$ is bounded from above by taking the second derivative of definition and also applying minimallity of cost at barycenter.
-
-Hence, we need two properties to have Lipschitzness of $\exp(-\nabla (f_i / \lambda_i)^c)$:
-\begin{itemize}
-	\item $ \exp $ is Lipschitz on the domain we are interested in.
-	      % This would be the case when we are in the support of a compact supported function.
-	      For example, in a compact domain.
-	\item The hessian of square distance function has upper bound $H$.
-	      This is the case when we have lower bound of sectional curvature.
-\end{itemize}
-
-We always take the second condition in following discussion.
-As we actually only consider measures with compact support, the first assumption is fullfilled as well.
-
