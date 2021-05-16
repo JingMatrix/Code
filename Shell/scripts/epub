@@ -59,7 +59,7 @@ function parseepubee {
 	# parse html files
 	echo "\nParsing [x]html files..."
 	cd ${1}-bak
-	for html in OEBPS/**html; do
+	for html in OEBPS/**/*html; do
 		htmlparser ${1}-bak/$html >$1/$html
 	done
 	# parse css
