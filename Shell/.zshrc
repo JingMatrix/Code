@@ -29,7 +29,7 @@ alias zshconfig="vim $HOME/Documents/Code/Shell/.zshrc"
 alias sg="TERM=xterm googler -n 5"
 alias sd="TERM=xterm ddgr -n 5"
 alias gcl="git clone --recursive --shallow-submodules --depth 1"
-alias w="nnn -a -T t -P n $HOME/Documents/Notes/notes"
+alias notable="nnn -a -T t -P n $HOME/Documents/Notes/notes"
 
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
@@ -58,6 +58,3 @@ fortune -e tang300 song100 chinese
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[cursor]=bold
-
-# texlive install
-export PATH="$PATH:/usr/local/texlive/2021/bin/x86_64-linux"

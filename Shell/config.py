@@ -16,7 +16,6 @@ config.bind('<Ctrl+r>', 'config-cycle colors.webpage.darkmode.enabled ;; restart
 config.bind('zo', 'set-cmd-text :open file:///home/jing/')
 
 c.zoom.default = '150%'
-c.zoom.text_only = True
 c.aliases['mpv'] = 'spawn --userscript view_in_mpv'
 c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt',
         'https://easylist.to/easylist/easyprivacy.txt',
@@ -28,6 +27,7 @@ c.downloads.remove_finished = 3000
 c.fileselect.handler = 'external'
 c.fileselect.single_file.command = ['alacritty','-e','nnn','-n','-p','{}']
 c.fileselect.multiple_files.command = ['alacritty','-e','nnn','-n','-p','{}']
+c.fileselect.folder.command = ['alacritty','-e','nnn','-n','-p','{}']
 
 c.window.hide_decoration = True
 
@@ -36,7 +36,7 @@ c.fonts.web.family.standard = 'Manjari'
 c.fonts.web.size.default = 17
 c.input.insert_mode.auto_load = True
 
-c.qt.force_platform = 'wayland'
+# c.qt.force_platform = 'wayland'
 c.tabs.show = 'switching'
 c.statusbar.show = 'in-mode'
 c.url.start_pages = 'https://play.google.com/books/ebooks'
