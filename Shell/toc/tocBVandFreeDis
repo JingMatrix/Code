@@ -37,7 +37,7 @@ Functions of bounded variation,116
 	3.11 One-dimensional restrictions of В V functions,193
 	3.12 A brief historical note on В V functions,204
 	3.13 Exercises,208
-	4 Special functions of bounded variation,211
+Special functions of bounded variation,211
 	4.1 The space SB V,212
 	4.2 Proof of the closure and compactness theorems,217
 	4.3 Poincare inequality in SB V,225
@@ -53,19 +53,19 @@ Functions of bounded variation,116
 	4.6.7 Brittle fracture,250
 	4.6.8 Structured deformations,251
 	4.7 Exercises,251
-	5 Semicontinuity in В V,254
+Semicontinuity in В V,254
 	5.1 Isotropic functional in В V,255
 	5.2 Convex volume energies,264
 	5.3 Surface energies for partitions,269
 	5.4 Lower semicontinuous functionals in 55 V,281
 	5.5 Functionals with linear growth in В V,298
 	5.6 Exercises,316
-	6 The Mumford-Shah functional,319
+The Mumford-Shah functional,319
 	6.1 Weak and strong solutions,320
 	6.2 Regularity theory: the state of the art,323
 	6.3 Local and global minimisers,325
 	6.4 Variational approximation and discrete models,331
-	7 Minimisers of free discontinuity problems,337
+Minimisers of free discontinuity problems,337
 	7.1 Limit behaviour of sequences in SB V,339
 	7.2 The density lower bound,347
 	7.3 First variation of the area and mean curvature,354
@@ -74,7 +74,7 @@ Functions of bounded variation,116
 	7.6 Regularity of solutions of the Neumann problem,370
 	7.7 Equations of mean curvature type,376
 	7.8 Exercises,379
-	8 Regularity of the free discontinuity set,381
+Regularity of the free discontinuity set,381
 	8.1 Limit behaviour of sequences of quasi-minimisers,383
 	8.2 Lipschitz approximation,391
 	8.3 Flatness improvement,402
