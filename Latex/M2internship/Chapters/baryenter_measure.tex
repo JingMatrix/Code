@@ -84,12 +84,6 @@ Assume from now on \textcolor{cyan}{$ \lambda_1 \neq 0$ and
 The barycenter $\bar{\mu}$ of measure $\sum_{i}^{n} \lambda_{i} \delta_{\mu_i}$ is unique,
 because this meause gives mass to element in $P_{ac}(M)$.
 
-In the case that \textcolor{cyan}{$\bar{\mu}$ is absolutely continous},
-there is only one element in the set $\Gamma$ by uniqueness of optimal plans.
-We can get every $\mu_i$ from $\mu_1$ if first push $\mu_1$ to $\bar{\mu}$ through $T_1^{-1}$ then push $\bar{\mu}$ to $\mu_i$ through $T_i$. Hence,
-\[B \circ (T_1, T_2, \ldots, T_n) \circ T_1^{-1} = T_1^{-1}\]
-is the unique transfer map from $\mu_1$ to $\bar{\mu}$. That is to say, $\bar{\mu}$-a.e., $B \circ (T_1, T_2, \ldots, T_n) $ is the identity map.
-This is already included in \cref{lem:inverse_barycenter}.
 
 \subsubsection{One measure absolutely continous and others Dirac}
 We firstly consider the case when \textcolor{cyan}{$\mu_i = \delta_{x_i}, i \geq 2$ are Dirac measures}.
@@ -99,13 +93,6 @@ As a consequence, $\exp(-\nabla f_1 / \lambda_1)$ pushes $\mu_1$ to $\bar{\mu}$.
 As a left inverse to $\exp(-\nabla f_1/\lambda_1)$,
 \(\exp(-\nabla g_1)\) pushes $\bar{\mu}$ to $\mu_1$.
 
-We have in general that the $c$-conjugate of $f_1 / \lambda_1$ satisfies
-$(f_1 / \lambda_1)^c = g_1^{cc} \geq g_1$,
-and thus $c(w, x_1) \geq (f_1 / \lambda_1)^c(w) + f_1/\lambda_1 (x_1) \geq g_1(w) + f_1/\lambda_1 (x_1)$.
-When $w$ is barycenter for some $x_1$,
-we have $g_1(w) = (f_1 / \lambda_1)^c(w)$.
-Hence, from the definition of $\bar{\mu}$ we have
-$g_1 = (f_1 /\lambda_1)^c$ for $\bar{\mu}$ alomost everywhere.
 % This long inequality implies that any $w$ in the equality
 % $c(x_i, w) = f_i / \lambda_i (x_i) + (f_i / \lambda_i)^c(w)$ must be a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$.
 % Moreover, we have following equality holds whenever one of gradients exits,
@@ -115,20 +102,23 @@ $g_1 = (f_1 /\lambda_1)^c$ for $\bar{\mu}$ alomost everywhere.
 % Therefore, two locally Lipschitz function $g_i$ and $f_i /\lambda_i$ coincide almost everywhere.
 % If follows $g_i=f_i /\lambda_i$ on $M$.
 
-We discuss following in the sense of $\bar{\mu}$ almost everywhere. The function $g_1 = (f_1 / \lambda_1)^c $ is by definition just a sum of squared distance functions.
-Now we aim to find out when \( \exp(- \nabla g_1 ) = \exp(- \nabla (f_1 / \lambda_1)^c) \) is a Lipschitz function.
+% We discuss following in the sense of $\bar{\mu}$ almost everywhere.
+The support of measure $\bar{\mu}$ is contained in the image of $\exp(-\nabla f_1 / \lambda_1)$.
+The function $g_1$ is by definition just a sum of squared distance functions.
+Now we aim to find out when $ \exp(- \nabla g_1 )$ is a Lipschitz function.
 % with Lipschitz constant depending only on $M$ and $\lambda_1$.
 % As $M$ is compact, though tangent bundle $TM$ is not compact, local Lipschitz plus bounded diameter of $M$ implies global Lipschitz of $\exp$.
 % Function $g_1$ has hessian upper bound by \cref{prop:differentiate_optimal_transport},
 % here we treat it as an infimal convolution over a fixed sigleton set $\{x_1\}$.
 % Note that from $ \nabla g_1 = \nabla (f_1 / \lambda_1)^c$,
 % $g_1$ and $(f_1 / \lambda_1)^c$ have the same hessian.
-Function $(f_1 / \lambda_1)^c$ has hessian upper bound as a $c$-conjugate function;
+Assume squared distance function has upper bound,
+then  $g_1$ has hessian upper bound as a $c$-conjugate function;
 function $g_1$ has hessian lower bound as a negative linear combination of square distance function.
 We then have
 \begin{equation}
 	\label{equa:hessian_bound_f}
-	-\frac{1-\lambda_1}{\lambda_1} H \leq \nabla^2 (f_1 / \lambda_1)^c \leq H,
+	-\frac{1-\lambda_1}{\lambda_1} H \leq \nabla^2 g_1, \qquad \nabla^2 (f_1 / \lambda_1)^c \leq H,
 \end{equation}
 where we denote by $H$ a possible bound from above for the hessian of square distance funtion.
 % Recall that $H$ is bounded from above.
@@ -168,6 +158,16 @@ Here the Lipschitz constant $C$ depends on the support of $\mu_1$.
 % we deduce from absolutely continuity of $\bar{\mu}$ and compact support of $\mu_1$ that
 % $\bar{\mu}$ has also compact support.
 
+We have in general that the $c$-conjugate of $f_1 / \lambda_1$ satisfies
+$(f_1 / \lambda_1)^c = g_1^{cc} \geq g_1$,
+and thus $c(w, x_1) \geq (f_1 / \lambda_1)^c(w) + f_1/\lambda_1 (x_1) \geq g_1(w) + f_1/\lambda_1 (x_1)$.
+When $w$ is barycenter for some $x_1$,
+we have $g_1(w) = (f_1 / \lambda_1)^c(w)$.
+Hence, from the definition of $\bar{\mu}$ we have
+$g_1 = (f_1 /\lambda_1)^c$ for $\bar{\mu}$ alomost everywhere.
+And we have by minimallity that,
+$x_1 = \exp_w(- \nabla g_1(w)) = \exp_w(- \nabla (f_1 / \lambda_1)^c(w))$ once gradients exist.
+Therefore, we have $\nabla g_1 = \nabla (f_1 / \lambda_1)^c$ for volume measure almost everywhere.
 % \begin{rmk}
 % 	Once after we prove that $\bar{\mu}$ is indeed absolutely continous.
 % 	$\nabla g$ is invertable and $br(x_1) = \exp_{x_1} \nabla g^c(x_1)$.
@@ -416,6 +416,18 @@ For general $c$-concave function $\mu_i$, we have only upper hessian bound.
 And this is not enough to get an estimation on the absolute value of Jacobian determinants.
 % For instance, in Euclidean space, $DT_i = (\lambda_i -1)/\lambda_i \leq \text{Id}$.
 
+
+There is only one element $\gamma$ in the set $\Gamma$ by uniqueness of optimal plans
+since coupling between $\bar{\mu}$ and $\mu_i$ is optimal.
+% We can get every $\mu_i$ from $\mu_1$ if first push $\mu_1$ to $\bar{\mu}$ through $T_1^{-1}$ then push $\bar{\mu}$ to $\mu_i$ through $T_i$. Hence,
+% \[B \circ (T_1, T_2, \ldots, T_n) \circ T_1^{-1} = T_1^{-1}\]
+% is the unique transfer map from $\mu_1$ to $\bar{\mu}$. That is to say, $\bar{\mu}$-a.e., $B \circ (T_1, T_2, \ldots, T_n) $ is the identity map.
+Hence, $\gamma = (T_1, T_2, \ldots, T_n)_{\#}\bar{\mu}$
+	is concentrated on the image of $(T_1, T_2, \ldots, T_n)$.
+We have $B_{\#}(T_1, T_2, \ldots, T_n)_{\#}\bar{\mu}=\bar{\mu}$,
+thus $B(T_1, T_2, \ldots, T_n) = \text{Id}$ for $\bar{\mu}$ almost everywhere
+by uniqueness of optimal plans from $\bar{\mu}$ to $\bar{\mu}$.
+This is already included in \cref{lem:inverse_barycenter}.
 We differentiate the equality $B(T_1(x), \ldots, T_n(x))=x$ for $\bar{\mu}$-a.e. $x$,
 \begin{align*}
 	\text{Id} =\sum_{i=1}^n \partial_i B\, DT_i

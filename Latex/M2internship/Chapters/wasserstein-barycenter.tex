@@ -52,7 +52,8 @@ By abuse of language, we drop $\delta$ symbol in following discussion when there
 	\[
 		W_p(\mu_n, x) \leq W_p(\mu_n, \mathbb{P}_n)  + W_p(\mathbb{P}_n, x) \leq 2 W_p(\mathbb{P}_n , x),
 	\]
-	we used definition of barycenter in the first inequality. And the last item is bounded as $\mathbb{P}_n$ is a converging sequence.
+	we used definition of barycenter in the second inequality.
+	And the last item is bounded as $\mathbb{P}_n$ is a converging sequence.
 
 	By continuity of Wasserstein distance, we have
 	\[
@@ -132,6 +133,8 @@ This is a standard convex optimization problem as $\mathcal{W}_p(E)$ is a convex
 	% As $E$ is proper, our primary aim is to show that $y_i$ is bounded in $E$.
 
 	Recall that bounded set in Wasserstein space is weakly pre-compact and weakly convergence of Dirac measures has the same topology as base space. Hence we only need to show that $y_i$ is bounded is the Wasserstein space $\mathcal{W}_p(E)$. This comes from that $\eta_j$ is bounded and barycenters of bounded set is bounded as we proved before.
+	This shows that $f(\boldsymbol{x})$ is continous with respect to $\boldsymbol{x}$ since
+	any sequence of $f(\boldsymbol{x_i})$ has a subsequence converging to $f(\boldsymbol{x})$.
 
 	For the first inequality, we need to show the existence of a measurable function $B(\boldsymbol{x}) \in \arg \min_{x \in E} \sum_{i=1}^{n} \lambda_i d(x, x_i)^p$. This is guaranteed by measurable selection theorem. The set
 	\[
@@ -139,9 +142,10 @@ This is a standard convex optimization problem as $\mathcal{W}_p(E)$ is a convex
 		(y,\boldsymbol{x}) \in E^{n+1}\mid  f(\boldsymbol{x}) - \sum_{i=1}^{n} \lambda_i d(y,x_i)^p = 0
 		\}
 	\]
-	is measurable as lower semi-continous function $f$ is a limit of continous function hence Borel measurable.
-In fact, this set is closed because lower level sets for lower semi-continous function are closed
-and all arguments that attains minimun vaule is a level set.
+	is closed as a pre-image of continous function.
+	% is measurable as lower semi-continous function $f$ is a limit of continous function hence Borel measurable.
+% In fact, this set is closed because lower level sets for lower semi-continous function are closed
+% and all arguments that attains minimun vaule is a level set.
 We claim that the sliced set $\Gamma_{\boldsymbol{x}}:=\{y \mid (y, \boldsymbol{x}) \in \Gamma\}$ is compact,
 % is a closed subset of $E$, so it is $\sigma$-compact.
 because barycenters are located in the union of $n$ bounded balls with centers $x_i$.

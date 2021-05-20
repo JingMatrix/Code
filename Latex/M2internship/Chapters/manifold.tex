@@ -89,7 +89,7 @@ We copy following results (tex code) from \cite{cordero2001riemannian}.
 	\[ \inf _ { 0 < | v | < 1 } \frac { \psi \left( \exp _ { x } v \right) + \psi \left( \exp _ { x } - v \right) - 2 \psi ( x ) } { | v | ^ { 2 } } = - \infty \]
 \end{prop}
 \begin{defn} [$c$-transforms and the subset \( \mathcal { I } ^ { c } ( X , Y ) \) of \( c \)-concave functions]
-	Let \( X \) and \( Y \) be two compact subsets of \( M \). The set \( \mathcal{I} ^ { c } ( X , Y ) \) of \( c \) -concave functions (relative to \( X \) and \( Y \) ) is the set of functions \( \phi \) : \( X \rightarrow \mathbf { R } \cup \{ - \infty \} \) not identically \( - \infty \), for which there exists a function \( \psi : Y \rightarrow \mathbf { R } \cup \{ - \infty \} \) such that
+	Let \( X \) and \( Y \) be two compact subsets of \( M \). The set \( \mathcal{I} ^ { c } ( X , Y ) \) of \( c \)-concave functions (relative to \( X \) and \( Y \) ) is the set of functions \( \phi \) : \( X \rightarrow \mathbf { R } \cup \{ - \infty \} \) not identically \( - \infty \), for which there exists a function \( \psi : Y \rightarrow \mathbf { R } \cup \{ - \infty \} \) such that
 	\begin{equation}
 		\label{defn:c_transform}
 		\phi ( x ) = \inf _ { y \in Y } c ( x , y ) - \psi ( y ) \quad \forall x \in X.
@@ -534,6 +534,7 @@ then by definition $f_i /\lambda_i$ is the $c$-conjugate of $g_i$.
 Locally barycenters are contained in a compact set, a union of $n$ closed balls.
 This implies that locally $f_i / \lambda_i $ is a $c$-concave function,
 so it is semi-convex and it has hessian on $M$ almost everywhere with respect to the volume measure.
+Moreover, $f$ is locally Lipschitz on $M^n$.
 
 \begin{lem}
 	Fix \( \left( x _ { 1 } , \ldots , x _ { m } \right)\).
@@ -604,14 +605,14 @@ that is to say,
 % The map $B(T_1, T_2, \ldots, T_n)$ is $\bar{\mu}$-a.e. the identity map on $M$.
 
 We have following \textbf{barycenter formula} holds almost everywhere for volume measure,
-more exactly, where hessian of $f_i$ exists,
+more exactly, where hessian of $f_i$ exists at $x_i$,
 % if $\mu_i$ is absolutey continous
 \begin{equation}
 	\label{formula_barycenter}
-	B = \exp (- \frac{1}{\lambda_i} \nabla_i f).
+	B(x_1, x_2, \ldots, x_n) = \exp_{x_i} (- \frac{1}{\lambda_i} \nabla f_i(x_i)).
 \end{equation}
-where $\nabla_i f$ means partial gradient of $f$,
-i.e., $\nabla_i f (x_1, x_2, \ldots, x_n)  = \nabla f_i (x_i)$.
+% where $\nabla_i f$ means partial gradient of $f$,
+% i.e., $\nabla_i f (x_1, x_2, \ldots, x_n)  = \nabla f_i (x_i)$.
 
 % \begin{proof}
 % We intend to apply discussion of conditional probability in \cref{discussion_conditional_prob} for the case
