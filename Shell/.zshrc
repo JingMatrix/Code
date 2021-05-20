@@ -51,7 +51,7 @@ bindkey "^F" run-help
 bindkey "^K" keep-buffer
 bindkey "^H" backward-kill-word
 
-fortune -e tang300 song100 chinese
+fortune
 
 # zsh-highlight
 

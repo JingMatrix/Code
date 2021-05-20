@@ -12,8 +12,7 @@
 │   ├── opt
 │   │   ├── ale
 │   │   ├── coc.nvim
-│   │   ├── gen_tags.vim
-│   │   └── vim-rooter
+│   │   └── gen_tags.vim
 │   └── start
 │       ├── fzf
 │       ├── fzf.vim
@@ -30,4 +29,4 @@
         ├── vim-airline
         └── vim-airline-themes
 
-30 directories, 0 files
+29 directories, 0 files

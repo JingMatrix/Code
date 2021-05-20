@@ -5,6 +5,7 @@ env:
   FZF_DEFAULT_COMMAND: 'fd --type file --follow --hidden --exclude .git'
   FZF_DEFAULT_OPTS: "--ansi"
   BROWSER: w3m
+  QT_QPA_PLATFORM: wayland
   LANG: fr_FR.UTF-8
 window:
   decorations: none
