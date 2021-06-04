@@ -25,11 +25,9 @@ function _ocr {
 
 compdef _ocr ocr
 
-alias zshconfig="vim $HOME/Documents/Code/Shell/.zshrc"
 alias sg="TERM=xterm googler -n 5"
 alias sd="TERM=xterm ddgr -n 5"
 alias gcl="git clone --recursive --shallow-submodules --depth 1"
-alias notable="nnn -a -T t -P n $HOME/Documents/Notes/notes"
 
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
@@ -50,8 +48,6 @@ bindkey "^Z" undo
 bindkey "^F" run-help
 bindkey "^K" keep-buffer
 bindkey "^H" backward-kill-word
-
-fortune
 
 # zsh-highlight
 
