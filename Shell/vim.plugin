@@ -6,16 +6,16 @@
 │       ├── vim-fugitive
 │       ├── vim-repeat
 │       ├── vim-rsi
+│       ├── vim-startify
 │       ├── vim-surround
 │       └── vim-unimpaired
 ├── project
 │   ├── opt
-│   │   ├── ale
-│   │   ├── coc.nvim
 │   │   └── gen_tags.vim
 │   └── start
 │       ├── fzf
 │       ├── fzf.vim
+│       ├── nvim-lspconfig
 │       ├── ultisnips
 │       ├── vim-matchup
 │       └── vim-snippets
