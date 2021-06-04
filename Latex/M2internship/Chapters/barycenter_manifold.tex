@@ -1,0 +1,131 @@
+%! TEX root = ../barycenter.tex
+\section{Barycenter in manifold}
+
+\label{section:barycenter_manifold}
+Define $c(x, y):=\frac{1}{2} d(x, y)^2$;
+and for $n$ points $x_j \in M, j=1,2,\ldots,n$, we re-define $f$ on $M^n$ with a coefficient $\frac{1}{2}$
+to make later notations easier,
+\[
+	f(x_1, x_2, \ldots, x_n) := \min_{w} \sum_{j=1}^n \lambda_j c(w, x_j) =: \frac{1}{2}W^2(\sum_{j=1}^n \lambda_j \delta_{x_j}, M).
+\]
+Pick an $i, 1 \leq i \leq n$ such that $\lambda_i \neq 0$, then we fix $x_j$ for $j \neq i$ and
+define $f_i (x_i) : = f(x_1, \ldots, x_n)$.
+Take an arbitrary open pre-compact neighbourhood $\mathcal{X} \subset \subset M$ of $x_i$;
+let $Y$ the set of all barycenters of $\sum_{j=1}^n \lambda_j \delta_{x_j}$
+when $x_i$ varies in $\bar{ \mathcal{X} }$.
+Then $Y$ is compact by \cref{rmk:barycenter_compact}.
+% Consider a $c$-concave function $ g_i \in \mathcal{I}(Y, \bar{ \mathcal{X} })$
+% \[
+% 				g_i(w) := - \frac{1}{\lambda_i} \sum_{j\neq i}^n \lambda_j c( x_j, w)  =
+% 				\inf_{x_i \in \bar{ \mathcal{X} }}c( x_i, w ) -
+% 				\frac{1}{\lambda_i} \sum_{j=1}^n \lambda_j c( x_j, w),
+% \]
+We define $g_i(w): = -\sum_{j \neq i} \lambda_j c(w, x_j)$ on $M$,
+then by definition $f_i /\lambda_i \in \mathcal{I}^c (\bar{ \mathcal{X}}, Y)$
+is the $c$-transform of
+$g_i$ restricted to $Y$.
+% and $g_i = (f_i / \lambda_i)^c$ on $Y$.
+The \cref{lem:minimizer_differentiable} tells us two things,
+\begin{itemize}
+	\item $f_i$ is Lipschitz on $\bar{ \mathcal{X} }$;
+	\item If $ \nabla f_i $ exists, then $z: = \exp( - \frac{1}{\lambda_i}\nabla f_i)$ is the
+	      unique barycenter of $\sum_{i=1}^n \lambda_i \delta_{x_i}$.
+\end{itemize}
+Recall that $B$ is a measurable selection of barycenter of
+measure $\sum_{j=1}^{n} \lambda_j \delta_{x_j}$ on $M$.
+% that is to say,
+% \[
+% B(\boldsymbol{x}) \in \arg \min_{w \in M} \sum_{i=1}^{n} \lambda_i d(w, x_i)^2.
+% \]
+We have following \textbf{barycenter formula}
+if $f_i$ is differentiable at $x_i$,
+\begin{equation}
+	\label{equa:formula_barycenter}
+	B(x_1, x_2, \ldots, x_n) = \exp_{x_i} (- \frac{1}{\lambda_i} \nabla f_i(x_i)).
+\end{equation}
+
+The barycenter formula \cref{equa:formula_barycenter} expresses the fact that,
+from point $x_i$,
+we can reach barycenter of $\sum_{j=1}^n \lambda_i \delta_{x_j}$ if we follow the direction $-\nabla_i f$
+and advance $\| \nabla_i f / \lambda_i \| $.
+In the case of Euclidean space,
+\[
+	\frac{1}{\lambda_i} \nabla_i (f_i)(x_i) = x_i - \sum_{j=1}^n \lambda_j x_j;                              \quad
+	\nabla g_i(w)  = \frac{1}{\lambda_i} (w - \sum_{j=1}^n \lambda_j x_j) -(w-x_i).
+\]
+
+The $c$-transform inequality
+$ c(w, x_i) \geq g_i(w) + f_i / \lambda_i (x_i)$
+becomes equality when $z$ is a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$,
+\begin{equation}
+	\label{equa:g_i_conjugate}
+	c(z, x_i) = g_i(z) + \frac{1}{\lambda_i} f_i(x_i).
+\end{equation}
+
+Following fine property of barycenter is stated in \cite[Lemma 3.1]{kim2015multi}.
+\begin{lem}
+	\label{lem:barycenter_out_of_cut_locus}
+	Fix \( \left( x _ { 1 } , \ldots , x _ { n } \right) \in M^n\).
+	Then any barycenter $z$ of $\sum_{j=1}^n \lambda_j \delta_{x_j}$
+	is not in the cut locus of \( x _ { j } \) for any \( j . \)
+\end{lem}
+
+The \cref{lem:barycenter_out_of_cut_locus} implies that $g_i$ is differentiable at
+any barycenter $z$ of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
+% The \cref{lem:barycenter_out_of_cut_locus} above tells that $g_i$ is differentiable at $z$.
+% Since $z$ is not in the cut locus of $x_i$,
+% $x_i$ is then not in the cut locus of $z$ and
+% thus $c(z, x_i)$ is differentiable.
+% If in addition, $f_i / \lambda_i$ is differentiable at $x_i$,
+% then both hand side of \cref{equa:g_i_conjugate} are differentiable at $x_i$ and $z$.
+Differentiate \cref{equa:g_i_conjugate} with respect to % $x_i$ and 
+$z$ and use the minimality property,
+\begin{align*}
+	% z   & = \exp_{x_i}( - \frac{1}{\lambda_i} \nabla f_i), \\
+	x_i & = \exp_{z}( - \nabla g_i).
+\end{align*}
+Therefore, $ \exp(- \nabla g_i) $ is a left inverse to $\exp( - \nabla f_i / \lambda_i)$,
+\[
+	\exp( - \nabla g_i) \circ \exp( - \frac{1}{\lambda_i} \nabla f_i) = \operatorname{Id},
+	\quad \text{if } \nabla f_i \text{ exists}.
+\]
+
+\begin{rmk}[$g_i$ on $Y$ is the $c$-transform of $f_i / \lambda_i$]
+	In general, we have by definition of $c$-transform that
+	$g_i(w) \leq (f_i / \lambda_i)^c(w) := \inf_{x_i \in \bar{ \mathcal{X} } } c(x_i, w) - f_i / \lambda_i (x_i)$.
+	If $ c(z, x_i) = g_i (z) + f_i / \lambda_i (x_i)$,
+	then
+	$g_i(z) = (f_i / \lambda_i)^c (z)$ since $(f_i / \lambda_i)^c(z) + f_i / \lambda_i(x_i) \leq c (z, x_i)$.
+	This implies that $g_i = (f_i / \lambda_i)^c$ on $Y$.
+
+	If $g_i$ is differentiable then $f_i / \lambda_i \geq g_i$ is sub-differentiable
+	and thus differentiable with the same gradient as $g_i$.
+	So $(f_i / \lambda_i)^c$ is differentiable on $Y$.
+	By \cref{example:minimizer_differentiable}, for each barycenter $z \in Y$,
+	there exists a unique $x_i = \exp_z (- \nabla g_i (z))$ such that $z$ is the barycenter
+	of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
+	However, it says nothing on the uniqueness for barycenter of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
+	% Both $g_i$ and $(f_i / \lambda_i)^c$ are continous;
+	% $g_i$ is differentiable alomst everywhere with respect to volume measure.
+	% because in local normal coordinate $g_i$ is differentiable almost everywhere 
+	% with respect to Lesbegue measure.
+
+\end{rmk}
+
+\subsection{Uniqueness and curvature condition}
+
+Whenever barycenter formula \cref{equa:formula_barycenter} holds,
+we have uniqueness for the barycenter of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
+It means that non-uniqueness reveals the fact that Lipschitz function
+$f_i$ on $\bar{ \mathcal{X} }$ is not \emph{a priori} differentiable.
+In addition, on the set where $\nabla f_i$ exists, the map
+$\exp( -\nabla f_i / \lambda_i )$ is injective.
+
+In general, sufficient condition for uniqueness of barycenters of a probability measure $\mu$ on $M$
+involves convex properties of distance function.
+For example, in \cref{prop:uniquness_barycenter_Wasserstein} we prove uniqueness of barycenter in Wasserstein space
+using this perspective.
+In \cite[Proposition IX.7.1]{chavel2006riemannian}, Ricci curvature condition is used
+to impose convexity and hence uniqueness of barycenter.
+We could also use curvature condition for general length space as done by Ohta in \cite{ohta2012barycenters}.
+

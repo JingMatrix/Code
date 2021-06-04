@@ -1,0 +1,297 @@
+%! TEX root = ../barycenter.tex
+\chapter{Paper review}
+\section{Barycenters in Alexandrov spaces of curvature bounded below}
+Then we discuss the infinitesimal structure of an Alexandrov space \( ( X , d )\).
+
+\begin{rmk}[Example 2.1 c]
+	% This example is in contradiction with \href{https://en.wikipedia.org/wiki/Hadamard_space}{Wikipedia: Hadamard space}. The author claims Hilbert space is of non-negative curvature, while Wikipedia says ``a normed space is an Hadamard space if and only if it is a Hilbert space".
+	Hilbert space satisfies equality in triangle comparison with Euclidean space, hence can be regarded ``flat".
+\end{rmk}
+\begin{defn}[space of directions]
+	Fix \( z \in X \) and let \( \hat { \Sigma } _ { z } \) be the set of all unit speed geodesics emanating from \( z \). For \( \gamma , \eta \in \hat { \Sigma } _ { z } , \) by virtue of the curvature bound, the limit
+	\begin{equation}
+		\label{angle_def}
+		\angle _ { z } ( \gamma , \eta ): = \arccos \left( \lim _ { s , t \downarrow 0 } \frac { s ^ { 2 } + t ^ { 2 } - d _ { X }\left( \gamma ( s ) , \eta ( t ) \right) ^ { 2 } } { 2 s t } \right)
+	\end{equation}
+	exists and is regarded as the angle (pseudo-)distance of \( \hat { \Sigma } _ { z } . \) We define the space of directions \( \left( \Sigma _ { z } , \angle _ { z } \right) \) at \( z \) as the completion of \( \Sigma _ { z } / \sim \) with respect to \( \angle _ { z } , \) where \( \gamma \sim \eta \) if \( \angle _ { z } ( \gamma , \eta ) = 0 . \)
+\end{defn}
+
+\begin{defn}[tangent cone]
+	The tangent cone \( \left( C _ { z } , d _ { C _ { z } } \right) \) is defined as the Euclidean cone over \( \left( \Sigma _ { z } , \angle _ { z } \right) , \)
+	that is to say,
+	\begin{align*}
+		C _ { z }:                                           & = \Sigma _ { z } \times [ 0 , \infty ) / \Sigma _ { z } \times \{ 0 \}          \\
+		d _ { C _ { z } } ( ( \gamma , s ) , ( \eta , t ) ): & = \sqrt { s ^ { 2 } + t ^ { 2 } - 2 s t \cos \angle _ { z } ( \gamma , \eta ) }
+	\end{align*}
+\end{defn}
+
+\begin{thm}[Computation of distance in tangent cone]
+	Let $\gamma$ and  $\eta$ be two geodesics from unit interval into $X$ starting at $z$. Then $\gamma^\prime(0)$ and $\eta^\prime(0)$ are naturally elements in $C_z$. We can calculate their distance as:
+	\[  d_{C_z}(\gamma^\prime(0),\eta^\prime(0))=\lim _ { t \downarrow 0 } \frac  {d ( \eta ( t ) , \gamma ( t ) )  }{ t }\]
+\end{thm}
+
+\begin{proof}
+	This is a calculation of angle between $\gamma^\prime(0)$ and $\eta^\prime(0)$ with a specific selected converging process. To apply angle definition in \cref{angle_def}, normalize $\gamma$ and $\eta$ as $\gamma\left(\vert\gamma^\prime(0)\vert \cdot\right)$ and $\eta\left(\vert\eta^\prime(0)\vert \cdot\right)$
+	\[
+		\cos\angle _ { z } ( \gamma , \eta ): = \left( \lim _ { s , t \downarrow 0 } \frac { s ^ { 2 } + t ^ { 2 } - d _ { X }\left( \gamma (\vert \gamma^\prime(0)\vert s ) , \eta (\vert \eta^\prime(0)\vert  t ) \right) ^ { 2 } } { 2 s t } \right)
+	\]
+	To get desired formula, put $ x := \vert  \gamma^\prime(0)\vert s =\vert \eta^\prime(0)\vert t $ and pass $x \downarrow 0$.
+\end{proof}
+
+\begin{rmk}[Lemma 4.5, Lang and Schroeder's inequality]
+	When passing from finite support measures to general ones, the author should use Wasserstein metric $W_p$ convergence but not only weakly convergence. Otherwise, he cannot justify convergence of integrals of distance function $d_{C_z}$. Here we use the fact that finite supported measures is a dense subspace of Wasserstein space $\mathcal{W}_2(X)$ if $X$ is a Polish space (see \cite{villani2008optimal} Theorem 6.18), recalled in this report as \cref{thm:topology_Wasserstein}.
+\end{rmk}
+
+\section{Paper review for Kim and Pass}
+
+This is review of \cite{KIM2017640},
+Wasserstein barycenters over Riemannian manifolds.
+
+\subsection{Remind of basics in Riemannian geometry}
+
+For \( c ( x , y ) = \frac{ 1 } { 2 } d ^ { 2 } ( x , y ) \), to show \( - D _ { x } c ( x , y ) = \exp _ { x } ^ { - 1 } ( y ) \), we should use exponetial coordinate at $T_yM$.
+By Gauss lemma, we have \( \nabla r = \partial _ { r } \).
+As $d c = r dr$, $\nabla c = r \partial r$ and our conculsion follows from that $ r \partial r $ is of length $r$.
+
+It is instructive to recall proof of Gauss lemma in \cite{Petersen2016}.
+On \( U = \exp _ { p } ( B ( 0 , \varepsilon ) ) \) we define the function \( r ( x ) = \left| \exp _ { p } ^ { - 1 } ( x ) \right| . \)
+That is, \( r \) is simply the Euclidean distance function from the origin on \( B ( 0 , \varepsilon ) \subset T _ { p } M \) in exponential coordinates.
+This function can be continuously extended to \( U \) by defining \( r ( \partial U ) = \varepsilon . \)
+
+We know that \( \nabla r = \partial _ { r } = \frac { 1 } { r } x ^ { i } \partial _ { i } \) in Cartesian coordinates
+on \( T _ { p } M . \)
+We show that this is also the gradient with respect to the general metric \( g . \)
+
+\begin{lem}
+	[The Gauss Lemma]
+	On \( ( U , g ) \) the function \( r \) has gradient \( \nabla r = \partial _ { r } \), where \( \partial _ { r } = D \exp _ { p } \left( \partial _ { r } \right) \).
+\end{lem}
+
+\begin{proof}
+	We select an orthonormal basis for \( T _ { p } M \) and introduce
+	Cartesian coordinates.
+	These coordinates are then also used on \( U \) via the exponential map.
+	Denote these coordinates by \( \left( x ^ { 1 } , \ldots , x ^ { n } \right) \) and the coordinate vector fields by
+	\( \partial _ { 1 } , \ldots , \partial _ { n } . \)
+	Then
+	\begin{align*}
+		r ^ { 2 }        & = \left( x ^ { 1 } \right) ^ { 2 } + \cdots + \left( x ^ { n } \right) ^ { 2 } , \\
+		\partial _ { r } & = \frac { 1 } { r } x ^ { i } \partial _ { i }.
+	\end{align*}
+	For this, take a function $f: M \mapsto \mathbb{R}$, we have $ \frac{\partial f}{\partial x_i}=\frac{\partial f}{\partial r}\cdot \frac{\partial r}{\partial x_i}$.
+	Differentiate $ r ^ { 2 } = \left( x ^ { 1 } \right) ^ { 2 } + \cdots + \left( x ^ { n } \right) ^ { 2 } $, we get $\frac{\partial r}{\partial x_i} = \frac{x_i}{r} $.
+	Apply this equality agian, we can solve $\frac{\partial f}{\partial r}$ from $\frac{\partial f}{\partial x_i}$.
+
+	To show that this is the gradient field for \( r ( x ) \) on \( ( M , g ) \), we must prove that \( d r ( v ) = \)
+	\( g \left( \partial _ { r } , v \right) . \)
+	We already know that
+	\[
+		d r = \frac { 1 } { r } \left( x ^ { 1 } d x ^ { 1 } + \cdots + x ^ { n } d x ^ { n } \right),
+	\]
+	but have no knowledge of $g$, since it is just some abstract metric.
+
+	One can show that \( d r ( v ) = g \left( \partial _ { r } , v \right) \) by using suitable Jacobi fields for \( r \) in place of \( v \). Let us start with \( v = \partial _ { r } . \)
+	The right-hand side is 1 as the integral curves for \( \partial _ { r } \) are unit speed geodesics.
+	The left-hand side can be computed directly and is also $1$.
+	Next, take a rotational field \( J = - x ^ { i } \partial _ { j } + x ^ { j } \partial _ { i } , i , j = 1 , \ldots , n , i < j . \)
+	In dimension $2$ this is simply the angular field \( \partial _ { \theta } \).
+	An immediate calculation shows that the left-hand side vanishes: \( d r ( J ) = 0 \).
+	For the right-hand side we first note that \( J \) really is a Jacobi field as \( L _ { \partial _ { r } } J = \left[ \partial _ { r } , J \right] = 0 . \)
+	Using that \( \nabla _ { \partial _ { r } } \partial _ { r } = 0 \) we obtain
+	\[ \begin{aligned}
+			\partial _ { r } g \left( \partial _ { r } , J \right) & = g \left( \nabla _ { \partial _ { r } } \partial _ { r } , J \right) + g \left( \partial _ { r } , \nabla _ { \partial _ { r } } J \right) \\
+			                                                       & = 0 + g \left( \partial _ { r } , \nabla _ { \partial _ { r } } J \right)                                                                   \\
+			                                                       & = g \left( \partial _ { r } , \nabla _ { J } \partial _ { r } \right)                                                                       \\
+			                                                       & = \frac { 1 } { 2 } D _ { J } g \left( \partial _ { r } , \partial _ { r } \right)                                                          \\
+			                                                       & = 0
+		\end{aligned} \]
+	Thus \( g \left( \partial _ { r } , J \right) \) is constant along geodesics emanating from \( p \).
+	To show that it vanishes first observe that
+	\[ \begin{aligned} \left| g \left( \partial _ { r } , J \right) \right| & \leq \left| \partial _ { r } \right| | J |                                                                               \\
+                                                                     & = | J |                                                                                                                  \\
+                                                                     & \leq \left| x ^ { i } \right| \left| \partial _ { j } \right| + \left| x ^ { j } \right| \left| \partial _ { i } \right| \\
+                                                                     & \leq r ( x ) \left( \left| \partial _ { i } \right| + \left| \partial _ { j } \right| \right)\end{aligned} \]
+	Continuity of \( D \exp _ { p } \) shows that \( \partial _ { i } , \partial _ { j } \) are bounded near \( p .  \)
+	Thus \( \left| g \left( \partial _ { r } , J \right) \right| \rightarrow 0 \) as \( r \rightarrow 0 .  \)
+	This forces \( g \left( \partial _ { r } , J \right) = 0 .\)
+	Finally, observe that any vector \( v \) is a linear combination of \( \partial _ { r } \) and rotational fields.
+	This proves the claim.
+\end{proof}
+
+\subsection{Fix typos and correct statements}
+
+We copy original statement and put reference number directly after it.
+
+\begin{rmk}[Remark 2.2]
+	Inspection of the proof above shows that \( ( M \), vol \( ) \) can be replaced with a \cancel{compact separable} metric space \( ( X , \nu ) \) equipped with a reference Borel measure \( \nu \).
+\end{rmk}
+
+We only need an outer regular reference measure. And Borel measure on metric space is regular, see Theorem 7.1.7 in \cite{Bogachev2007}.
+
+\begin{prop}[Proposition 2.9 Distortion under Ric \( \geq 0 \)]
+	Suppose the Ricci curvature of \( M \) is everywhere nonnegative, i.e., Ric \( \geq 0 . \) Then, for any \( x \in M \) and \( \lambda \in P ( M ) \), \textcolor{blue}{if $\lambda$ gives no mass to the cut-locus of its baryceter $\bar{x}$}, we have
+	\[ \alpha _ { \lambda } ( x ) \geq 1 \]
+\end{prop}
+
+\begin{proof}[Proof of Prop 2.9]
+	Minimality of \( z \mapsto \int _ { M } c ( x , z ) \diff \lambda ( x ) \) at the barycenter \( \bar { x } \), combined with semi-concavity of \( z \mapsto c ( x , z ) \) and Fatou's lemma yields
+	\[
+		\int _ { M } \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } c ( x , z ) \diff \lambda ( x ) \geq 0
+	\] as a matrix.
+\end{proof}
+
+Locally $c(x,z)=:d^2_x(z)$ near $\bar{x}$ is a geodesically convex function, by linear intergration so is the integral  \( z \mapsto \int _ { M } d^2_x(z) \diff \lambda ( x ) \).
+As convexity implies local Lipschitz, $d^2_x(z)$ is also differentiable near $\bar{x}$ and so is its integral by compactness of $M$.
+Thus we have locally for $\lambda$-almost all $x$ (not in the cut-locus of $\bar{x}$, arguing with semi-concavity is not strong as this),
+% \textcolor{red}{why differentiability of $d^2_x(z)$ implies smoothness?}
+\begin{equation}
+	\label{equa:convex_distance_inequality}
+	d^2_x \left( \exp _ {\bar{x}} u \right) - d^2_x (\bar{x}) - \langle \nabla d^2_x (\bar{x}) , u \rangle = \frac { 1 } { 2 } \langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z) \, u , u \rangle + o \left( | u | ^ { 2 } \right) > 0
+\end{equation}
+
+To show positivity of matrix, we take a vector $\nu$ and set $\mu = h \nu$ with $h > 0$ small enough.
+Divide by $h$ in \cref{equa:convex_distance_inequality} and then take integral,
+\[
+	\langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } \int_{M} d^2_x(z) \diff \lambda ( x )\, v , v \rangle + \frac{o (h^2)}{h^2} = \int_{M} \langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z)\, v , v \rangle + \frac{o (h^2)}{h^2} \diff \lambda ( x ).
+\]
+Note that here we need compactness of $M$, hence boundness of $ \nabla d^2_x(\bar{x}) $ for $x \in M$, to get inter-change of integral and gradient:
+\[
+	\int_M \langle \nabla d^2_x (\bar{x}) , u \rangle \diff \lambda (x) = \langle \int_M \nabla d^2_x (\bar{x}) \diff \lambda (x) , u \rangle
+\]
+Apply Fatou's lemma, let $f\downarrow 0$,
+\[
+	\langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } \int_{M} d^2_x(z) \diff \lambda ( x )\, v , v \rangle \leq \langle \int_{M} \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z) \diff \lambda(x)\, v, v \rangle.
+\]
+And by minimallity of $\bar{x}$, we know left hand side is non-negative.
+
+This argument is also used in Prop 4.2.
+
+\begin{rmk}[Remark 3.2]
+	... In fact, it holds for any (compact) metric
+	space on which the optimal \cancel{maps} \textcolor{blue}{plans}, \( T _ { \# } \mu = \nu \), exist uniquely for any arbitrary absolutely continuous source measure \( \mu \).
+\end{rmk}
+
+\begin{lem}[Lemma  4.1  a.e. \( x \) and $ \Omega$-a.e. $\mu$ ]
+	Let \( \bar { \mu } \in \cancel{P ( M )} \textcolor{blue}{P_{ac}(M)}\) and for each \( \mu \in P ( M ) \), let \( u _ { \mu } \) be the dual potential (whose gradient is uniquely determined \( \bar { \mu } \) almost everywhere) for the optimal transport problem between \( \bar { \mu } \) and \( \mu . \) Let \( \Omega \) be a Borel probability on \( P ( M ) . \) For volume almost all \( x , x \mapsto u _ { \mu } ( x ) \) is twice differentiable for \( \Omega \) -almost all \( \mu \in P ( M ) . \)
+\end{lem}
+
+\begin{proof}
+	$\forall \mu, x \mapsto \mu_u(x)$ is twice differentiable for $\bar{\mu}$-a.e. $x$. Apply Fubini's theorem then.
+\end{proof}
+
+\begin{prop} [Prop 4.2 Derivatives inside the integral $\int _ { P ( M ) } \diff \Omega$]
+	\begin{equation}
+		\label{equa:first_order}
+		\nabla _ { x } \int _ { P ( M ) } u _ { \mu } ( x ) \diff \Omega ( \mu ) = \int _ { P ( M ) } \nabla _ { x } u _ { \mu } ( x ) \diff \Omega ( \mu )
+	\end{equation}
+	\begin{equation}
+		\label{equa:second_order}
+		\nabla _ { x } ^ { 2 } \int _ { P ( M ) } u _ { \mu } ( x ) \diff \Omega ( \mu ) \geq \int _ { P ( M ) } \nabla _ { x } ^ { 2 } u _ { \mu } ( x ) \diff \Omega ( \mu )
+	\end{equation}
+\end{prop}
+
+\begin{proof}
+	This can be seen by applying the dominated convergence theorem for \cref{equa:first_order} due to uniform Lipschitzness \textcolor{blue}{by \cref{lem:infimal_convolution_Lipschitz}} of \( u _ { \mu } \) and Fatou's lemma for \cref{equa:second_order} due to the semi-convexity
+	of \( u _ { \mu } . \)
+\end{proof}
+
+% This shouldn't be an independent proposition, rather we can only condsider it in the case of Theorem 4.4.
+% $u_{\mu}$ is uniformly Lipschitz on $x\in M$, this shows that $\nabla_{x}u_{\mu}$ is finite but not necessarily bounded (dominated).
+To get rid of measurable selection problem, we consider
+\[ y \mapsto \int_{P(M)} c(y, T_{\mu}(x)) \diff \Omega ( \mu)\]
+at point $x$.
+Here we assume $\bar{\mu}$ is barycenter of $\Omega$ and $T_{\mu}$ is the transfer map from $\bar{\mu}$ to $\mu$.
+Then this integral valued map is well-defined $\mu$-a.e. by Fubini's theorem.
+By stability of Kantorobich potentials (Theorem 1.52 in \cite{Santambrogio2015}), $c(y, T_{\mu}(x))$ is continous with respect to $\mu \in P(M)$.
+Fix a $\mu$, $c(y, T_{\mu}(x))$ is locally Lipschitz with respect to $y$.
+By continuity Lipschitz inequality will hold as well in a neighbourhood of $\mu$.
+Consider these local neighbourhoods cover on compact set $ M \times P(M)$,
+we can then get a uniform boundness on
+\[\left. D_y\right|_{y=x} c(y, T_{\mu}(x)) = - \nabla_x u_{\mu}(x).\]
+
+\begin{lem} [Lem 4.3 Riemannian barycenter from Wasserstein barycenter]
+	\label{lem:inverse_barycenter}
+	Let \( \bar { \mu } \) be a Wasserstein barycenter of the measure \( \Omega \) on \( P ( M ) \) and assume \( \bar { \mu } \) is absolutely continuous with respect to volume;
+	let \( T _ { \mu } \) be an optimal map from \( \bar { \mu } \) to \( \mu . \)
+	Let \( \lambda _ { z } = \left( \mu \mapsto T _ { \mu } ( z ) \right) _ { \# } \Omega . \)
+	Then, for \( \bar { \mu } \) almost every \( z , z \) is a barycenter of \( \lambda _ { z }\).
+	\textcolor{blue}{And $\lambda_z$ gives no mass to the cut-locus of $z$} by \cref{prop:differentiate_optimal_transport}.
+
+	If, in addition, \( \Omega \left( P _ { a c } ( M ) \right) > 0 \), then for \( \bar { \mu } \) almost every \( z , z \) is the unique barycenter of $\lambda _ { z }$.
+
+\end{lem}
+
+There is an explanation behind this lemma. Consider we have random images, and we want to approch a best representative of them by simulation. We process this by compose all barycenters of simulated images into an average image. On the other hand, for each grid point in our average image, we can simulate a new image by transfering that grid point optimally. This lemma claims that that choosen grid point should be a barycenter of the new generated image. This could be related to ergodic theory as there are two kinds of averages involved.
+
+\begin{proof}[Proof of the 1st order balance]
+	...
+	% On the other hand, by Lemma  4.3, for \( \bar { \mu } \) almost every \( x \), we have that \( x \) is the
+	% barycenter of \( \lambda _ { z } = \left( \mu \mapsto T _ { \mu } ( z ) \right) _ { \# } \Omega ; \) that is, a minimizer of
+	% \[ f _ { x } : y \mapsto \int _ { P ( M ) } d ^ { 2 } \left( y , T _ { \mu } ( x ) \right) d \Omega ( \mu ) .\]
+
+	Therefore, the latter function \( f _ { x } \), which is semi-concave is differentiable at \( x : \) due to semi-concavity, there is \( C > 0 \) such that the function \( f _ { x } ( y ) - C \operatorname { dist } ^ { 2 } ( x , y ) \) is locally geodesically concave near \( x \).
+	Minimality at \( x \) implies \( f _ { x } ( y ) - C \operatorname { dist } ^ { 2 } ( x , y ) \geq f _ { x } ( x ) - \) \( C \operatorname { dist } ^ { 2 } ( x , \cancel{x}\, \textcolor{blue}{y} ) \).
+	Since \( y \mapsto f _ { x } ( x ) - C \operatorname { dist } ^ { 2 } ( x , y ) \) has vanishing derivative at \( x \), concavity of \( f _ { x } ( y ) - C \operatorname { dist } ^ { 2 } ( x , y ) \) implies that locally the function \( y \mapsto f _ { x } ( y ) - C \operatorname { dist } ^ { 2 } ( x , y ) \) is also
+	locally bounded from above by the constant \( f _ { x } ( x ) . \) This implies the differentiability of
+	\( f _ { x } \) at \( x \).
+\end{proof}
+
+% \textcolor{cyan}{If we have} that $\lambda_{z}$ is absolutely continous, then we prove first order balance by taking gradient under integral.
+% For the sencond paragraph of argument,
+To simplify, we should prove:
+\begin{lem}
+	For $f, g$ two convex functions near $0$, assume $f(0)=g(0)=g^\prime(0)=0$. If $f \leq g$ and $0$ is a local minimum of $g$, we then have $f \geq 0$ and $f$ is differentiable at $0$.
+\end{lem}
+
+\begin{proof}
+	We need to show that subdifferential $\partial f(0) $ of $f$ is a single point set $ \{ 0 \}$. $\forall u \in \partial f( 0 )$,
+	\[
+		\langle x, u \rangle \leq f(x) - f(0) = f(x) \leq g(x) = g(x) - g(0),
+	\]
+	that is say, $ u \in \partial g(0)$. Hence $ \partial f(0) = \partial g(0) = \{0\}$.
+
+\end{proof}
+
+\begin{proof}[Proof of Theorem 4.6]
+	...\\
+	Note that each \( - D _ { x y } ^ { 2 } c \left( x , T _ { \mu } ( x ) \right) D T _ { \mu } ( x ) = D _ { x x } ^ { 2 } u _ { \mu } ( x ) + D _ { x x } ^ { 2 } c \left( x , T _ { \mu } ( x ) \right) \) is positive semi-definite by the \( c \)-convexity of \( u _ { \mu } \), and hence so is their integral...
+\end{proof}
+
+By definition, we have
+\[
+	\inf_{\textcolor{cyan}{z}} u_\mu(\textcolor{green}{z}) + c(\textcolor{green}{z}, T_\mu(x))= u_\mu(x) + c(x, T_\mu(x)) = - u^c ( T_\mu(x)).
+\]
+If consider derivative with respect to first variable,
+then we have first differential vanishes and Hessian semi-positive.
+
+% \section{Multi-marginal optimal transport on Riemannian manifolds}
+% We will prove uniqueness and Monge solution results for the multi-marginal problem on a compact Riemannian manifold,
+% with cost function
+% \begin{equation}
+% 	\label{equa:mult-imarginal_problem}
+% 	c \left( x _ { 1 } , x _ { 2 } , \ldots , x _ { m } \right) = \inf _ { y \in M } \sum _ { i = 1 } ^ { m } \frac { d ^ { 2 } } { 2 } \left( x _ { i } , y \right)
+% \end{equation}
+
+% \begin{lem}
+% 	The cost function \( c \) is everywhere superdifferentiable with respect to \( x _ { 1 } \).
+% 	That is, for all \( \left( x _ { 1 } , x _ { 2 } , \ldots , x _ { m } \right) \in M ^ { m } \) there exist \( p \in T _ { x _ { 1 } } M \) (the super-gradient) such that, for small \( v \in T _ { x _ { 1 } } M \), we have
+% 	\[ c \left( \exp _ { x _ { 1 } } v , x _ { 2 } , \ldots , x _ { m } \right) \leq c \left( x _ { 1 } , x _ { 2 } , \ldots , x _ { m } \right) + g ( p , v ) + o ( | v | ) \]
+% \end{lem}
+
+% \begin{lem}
+% 	At any point \( \left( x _ { 1 } , \ldots , x _ { m } \right) \) where \( c \) is differentiable with respect to
+% 	\( x _ { 1 } \), there is a unique minimizing \( y \) in \cref{equa:mult-imarginal_problem}, and moreover,
+% 	\[ y = \exp _ { x _ { 1 } } \left( \nabla _ { x _ { 1 } } c \left( x _ { 1 } , \ldots , x _ { m } \right) \right) \]
+% \end{lem}
+
+% \begin{proof}
+% 	For any minimizing \( y \) in \cref{equa:mult-imarginal_problem},
+% 	\( d ^ { 2 } \left( x _ { 1 } , y \right) \) is differentiable as \( y \notin \operatorname { cut } \left( x _ { 1 } \right) \).
+% 	We then have
+% 	\[
+% 		\nabla _ { x _ { 1 } } c \left( x _ { 1 } , \ldots , x _ { m } \right) = \nabla _ { x _ { 1 } } \left( \frac { 1 } { 2 } d ^ { 2 } \left( x _ { 1 } , y \right) \right)
+% 	\]
+% 	This equation implies that \( y \) must equal \( \exp _ { x _ { 1 } } \left( \nabla _ { x _ { 1 } } c \left( x _ { 1 } , \ldots , x _ { m } \right) \right) \);
+% 	uniqueness follows immediately.
+% \end{proof}
+

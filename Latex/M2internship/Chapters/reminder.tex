@@ -1,0 +1,295 @@
+%! TEX root = ../barycenter.tex
+\section{Convex analysis on Riemannian manifold}
+\subsection{Polar factorization of maps on manifolds}
+
+\begin{lem} [Lipschitz cost]
+	\label{lem:Lipschitz_cost}
+	Let \( ( M , d ) \) be a metric space whose diameter \( | M | : = \sup \{ d ( x , z ) \mid x , z \in M \} \) is finite.
+	For each \( y \in M \), the function \( \psi ( x ) = d ^ { 2 } ( x , y ) / 2 \) is Lipschitz continuous:
+	\begin{equation}
+		\label{equa:Lipschitz}
+		| \psi ( x ) - \psi ( z ) | \leq | M | d ( x , z ).
+	\end{equation}
+\end{lem}
+
+\begin{proof}
+	The triangle inequality shows that \( \phi ( x ) : = d ( x , y ) \) has Lipschitz constant one:
+	\[ \phi ( x ) - \phi ( z ) = d ( x , y ) - d ( z , y ) \leq d ( x , z ) \]
+	for all \( x , z \in M\).
+	Also, \( \phi ( x ) = d ( x , y ) \leq | M | < \infty \) is bounded.
+	The desired estimate \cref{equa:Lipschitz} then follows easily for \( \psi ( x ) = \phi ^ { 2 } ( x ) / 2 \) :
+	\begin{align*}
+		2 | \psi ( x ) - \psi ( z ) | & = | \phi ( x ) ( \phi ( x ) - \phi ( z ) ) + \phi ( z ) ( \phi ( x ) - \phi ( z ) ) | \\
+		                              & \leq | M | d ( x , z ) + | M | d ( x , z )
+	\end{align*}
+\end{proof}
+
+\begin{lem} [Infimal convolutions are Lipschitz]
+	\label{lem:infimal_convolution_Lipschitz}
+	Fix a metric space \( ( M , d ) \) having finite diameter.
+	Any \( \psi : M \rightarrow \mathbf { R } \cup \{ \pm \infty \} \) given by an infimal convolution \( \psi = \psi ^ { c c } \) with \( c ( x , y ) = d ^ { 2 } ( x , y ) / 2 \) is either identically infinite \( \psi = \pm \infty \) or Lipschitz continuous throughout \( M\).
+	Indeed, it satisfies \cref{equa:Lipschitz}.
+\end{lem}
+
+\begin{proof}
+	More generally, suppose \( \psi = \phi ^ { c } \) for some \( \phi : M \rightarrow \mathbf { R } \cup \{ \pm \infty \} \) meaning
+	\begin{equation}
+		\label{equa:infimal_convolution}
+		\psi ( x ) = \inf _ { y \in M } c ( x , y ) - \phi ( y )
+	\end{equation}
+	Observe \( 0 \leq c ( x , y ) \leq | M | ^ { 2 } / 2 \) is bounded.
+	Either \( \phi \) is unbounded above, in which case \( ( 11 ) \) yields \( \psi = - \infty \) and the lemma holds trivially, or else \( \psi \) is bounded below.
+	Fix \( z \in M \), and note \( \psi ( z ) = + \infty \) in \cref{equa:infimal_convolution} occurs only if \( \phi : = - \infty \) everywhere, in which case \( \psi = + \infty \) again holds trivially.
+	Thus we may assume that \( \psi \) is finite everywhere.
+	Given any \( \epsilon > 0 \), there exists \( y \in M \)
+	such that \( \psi ( z ) + \epsilon \geq c ( z , y ) - \phi ( y ) \), while \( \psi ( x ) \leq c ( x , y ) - \phi ( y ) \) holds because of \cref{equa:infimal_convolution}.
+	Subtracting these two inequalities yields
+	\begin{align*}
+		\psi ( x ) - \psi ( z ) & \leq c ( x , y ) - c ( z , y ) + \epsilon \\
+		                        & \leq | M | d ( x , z ) + \epsilon
+	\end{align*}
+	by \cref{lem:Lipschitz_cost}. Since the last inequality holds for all \( \epsilon > 0 \), the Lipschitz
+	estimate \cref{equa:Lipschitz} has been proved.
+\end{proof}
+
+One reason to study square distance on manifold could be that under Taylor expansion, it is directlt related to inner product of Riemannian metric.
+An example is to prove super-differentiability of geodesic distance squared in \cite{mccann2001polar}.
+
+\begin{prop}
+	[Superdifferentiability of geodesic distance squared]
+	Let \( ( M , g ) \) be a \( C ^ { 3 } \)-smooth Riemannian manifold, possibly with boundary.
+	Suppose \( \sigma : [ 0,1 ] \rightarrow M \) has minimal length among piecewise \( C ^ { 1 } \) curves joining \( y = \sigma ( 0 ) \) to \( x = \sigma ( 1 ) \notin \partial M \), parameterized with constant speed.
+	Then \( \psi ( \cdot ) = d ^ { 2 } ( \cdot , y ) / 2 \) has super-gradient \( \dot { \sigma } ( 1 ) \in \bar { \partial } \psi _ { x } \) at \( x \).
+\end{prop}
+
+\begin{proof}
+	Since \( x \) lies in the interior of \( M \), there is some \( \epsilon > 0 \) and neighbourhood \( X \subset M \) of \( x \) such that: at each \( z \in X \), the exponential map exp \( _ { z } \) maps
+	the ball \( \mathbf { B } ( \mathbf { 0 } , \epsilon ) \subset T M _ { z } \) diffeomorphically onto some open set \( U _ { z } \supset X \), as in Milnor.
+	The proposition will first be established when
+	\( y = \sigma ( 0 ) \in X \), in which case \( \psi \) is actually differentiable at \( \exp _ { y } \dot { \sigma } ( 0 ) = x \)
+	We compute its derivative by linearizing exp \( _ { x } \mathbf { v } \in X \) around the origin and $\exp _ { y }$ around $ \dot { \sigma } ( 0 )$:
+	\begin{align*}
+		\psi \left( \exp _ { x } \mathbf { v } \right) & = d ^ { 2 } \left( y , \exp _ { y } \left( \exp _ { y } ^ { - 1 } \exp _ { x } \mathbf { v } \right) \right) / 2 \\ & = \left| \exp _ { y } ^ { - 1 } \left( \exp _ { x } \mathbf { v } \right) \right| _ { y } ^ { 2 } / 2 \\ & = \left| \dot { \sigma } ( 0 ) + D \left( \exp _ { y } ^ { - 1 } \right) _ { x } D \left( \exp _ { x } \right) _ { 0 } \mathbf { v } + o \left( | \mathbf { v } | _ { x } \right) \right| _ { y } ^ { 2 } / 2 \\ & = | \dot { \sigma } ( 0 ) | _ { y } ^ { 2 } / 2 + g \left\langle \dot { \sigma } ( 0 ) , \left( D \exp _ { y } \right) _ { \dot { \sigma } ( 0 ) } ^ { - 1 } I \mathbf { v } \right\rangle _ { y } + o \left( | \mathbf { v } | _ { x } \right) \\ & = d ^ { 2 } ( x , y ) / 2 + g \langle \dot { \sigma } ( 1 ) , \mathbf { v } \rangle _ { x } + o \left( | \mathbf { v } | _ { x } \right)
+	\end{align*}
+	so that \( \nabla \psi ( x ) = \dot { \sigma } ( 1 )\).
+
+	Here the last equation follows from \( \dot { \sigma } ( 1 ) = \)
+	\( D \left( \exp _ { y } \right) _ { \dot { \sigma } ( 0 ) } \dot { \sigma } ( 0 ) \) and Gauss' lemma.
+\end{proof}
+
+\section{Multi-marginal optimal transport on Riemannian manifold}
+
+\begin{proof}[Proof of \cref{lem:barycenter_out_of_cut_locus}]
+	Choose a barycenter \( z \) in the cut locus of \( x _ { i } \) for some \( i \);
+	we shall show that \( z \) cannot minimize
+	\( y \mapsto \sum _ { i = 1 } ^ { n } d ^ { 2 } \left( x _ { i } , y \right) \).
+	By \cref{lem:hessian_bound_distance_squared} and compactness,
+	we can find a constant \( K \) such that, for all \( u \in T _ { z } M \),
+	and \( j = 1,2 , \ldots n \), we have
+	\[
+		\frac { d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right) - 2 d ^ { 2 } \left( x _ { j } , z \right) }
+		{ | u | ^ { 2 } } \leq K
+	\]
+	On the other hand, by \cref{prop:distance_cut_locus},
+	we can find some non
+	zero \( u \in T _ { z } M \) such that
+	\[
+		\frac { d ^ { 2 } \left( x _ { i } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { z } ( - u ) \right) - 2 d ^ { 2 } \left( x _ { i } , z \right) } { | u | ^ { 2 } } \leq - n K
+	\]
+	Therefore, we have
+	\begin{align*}
+		\sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) & = \sum _ { j \neq i } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) + d ^ { 2 } \left( x _ { i } , z \right)                                                                                                                   \\
+		                                                                & \geq \frac { - ( n - 1 ) K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } \sum _ { j \neq i } ^ { n } \left( d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right) \right) \\
+		                                                                & + \frac { n K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } d ^ { 2 } \left( x _ { i } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { z } ( - u ) \right)                                                         \\
+		                                                                & > \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right)
+	\end{align*}
+	Therefore, either
+	\[ \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) < \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \]
+	or
+	\[ \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } - u \right) < \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \]
+	in either case, \( z \) cannot minimize \( \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \)
+\end{proof}
+\subsection{A Riemannian interpolation inequality à la Borell, Brascamp and Lieb}
+
+We copy following results (tex code) from \cite{cordero2001riemannian}.
+
+In the sequel, it proves useful to characterize the cut locus \( \operatorname { cut } ( y ) \) as
+the set of points where the distance function \( d _ { y } ^ { 2 } / 2 \) must fail to be smooth.
+As mentioned above,
+\( d _ { y } ^ { 2 } / 2 \) is as smooth as the manifold away from the cut locus of \( y \).
+But \( \operatorname{cut} ( y ) \) consists of two kinds of points:
+\begin{enumerate}
+	\item those connected to \( y \) by multiple minimizing geodesics, and
+	\item	those which are conjugate to \( y \) but do not fall into the first class.
+\end{enumerate}
+The point of the following proposition (\cite[Proposition 2.5]{cordero2001riemannian})
+is that differentiability of \( d _ { y } ^ { 2 } \) must fail --- at first order in the first case,
+and at second order in the second case.
+
+\begin{prop}
+	[Distances fail to be semi-convex at the cut locus]
+	\label{prop:distance_cut_locus}
+	At each \( x \in \operatorname { cut } ( y ) \), the square distance \( \psi : = d _ { y } ^ { 2 } / 2 \) satisfies:
+	\[ \inf _ { 0 < | v | < 1 } \frac { \psi \left( \exp _ { x } v \right) + \psi \left( \exp _ { x } - v \right) - 2 \psi ( x ) } { | v | ^ { 2 } } = - \infty \]
+\end{prop}
+
+\begin{proof}[Proof of \cref{lem:c-super-gradients_imply_super-gradients}]
+	Fix \( ( x , y ) \in \mathcal{X} \times Y \) such that \( y \in \partial ^ { c } \phi ( x ) \).
+	For every \( z \in \mathcal{X} \), \cref{equa:c-super-differential} implies
+	\[ \phi ( z ) \leq \phi ( x ) + c ( z , y ) - c ( x , y ) .\]
+	Any shortest vector \( v \in T _ { x } M \) satisfying \( \exp _ { x } ( - v ) = y \) has length \( | v | = \)
+	\( d ( x , y )  \).
+	Now  \cite[Proposition 6]{mccann2001polar} generalizes
+	\( y = \exp _ { x } \left[ - \nabla d _ { y } ^ { 2 } ( x ) / 2 \right] \)
+	by asserting \( v \in \partial \left( d _ { y } ^ { 2 } / 2 \right) ( x ) \).
+	Thus for \( z = \exp _ { x } u \),
+	\[ c \left( \exp _ { x } u , y \right) - c ( x , y ) \leq \langle v , u \rangle + o ( | u | ) \]
+	as \( u \rightarrow 0 \).
+	Combining the two inequalities yields the desired result \cref{equa:super-differential}.
+\end{proof}
+As we have seen in \cref{lem:barycenter_out_of_cut_locus},
+it is shown by \cite[Lemma 3.1]{kim2015multi} that this proposition implies
+that barycenters on $M$ are not in the cut-locus considered.
+
+First recall that a geodesic ball \( B _ { r } ( x ) \) of radius \( r \) around \( x \in M \) is said to be embedded
+if the exponential map \( \exp _ { x } : \tilde { B } _ { r } ^ { x } ( 0 ) \rightarrow B _ { r } ( x ) \) defines
+a diffeomorphism from the open ball \( \tilde { B } _ { r } ^ { x } ( 0 ) \subset T _ { x } M \) onto \( B _ { r } ( x ) \subset M \).
+A geodesic ball \( B _ { r } ( x ) \) around \( x \) is a convex embedded ball
+if it is embedded and geodesically convex---meaning every pair of points \( y , z \in B _ { r } ( x ) \)
+are joined by a unique geodesic of length less than \( 2 r \),
+and this geodesic is contained in \( B _ { r } ( x )\).
+Small enough balls are always convex embedded balls.
+
+\begin{defn}[Semi-concavity]
+	\label{defn:semi-concavity}
+	Fix \( \Omega \subset M \) open.
+	A function \( \phi : \Omega \rightarrow \mathbb { R } \) is semi-concave at \( x _ { 0 } \in \Omega \)
+	if there exists a convex embedded ball \( B _ { r } \left( x _ { 0 } \right) \) and
+	a smooth function \( V : B _ { r } \left( x _ { 0 } \right) \rightarrow \mathbb { R } \)
+	such that \( \phi + V \) is geodesically concave throughout \( B _ { r } \left( x _ { 0 } \right)\).
+	The function \( \phi \) is semi-concave on \( \Omega \) if
+	it is semi-concave at each point of \( \Omega \).
+\end{defn}
+
+It is remarkable that the converse also holds true: if \( \psi \) is semi-concave around \( x \) then \cref{defn:hessian} follows from \cref{equa:hessian_expan}.
+
+
+\begin{thm}[Aleksandrov-Bangert]
+	Let \( \phi : \Omega \rightarrow M \) be semi-concave function on an open set \( \Omega \subset M . \) Then \( \phi \) admits a Hessian almost everywhere on \( \Omega \).
+\end{thm}
+% A proof from \cite{bangert1979analytiche} is in German.
+% This theorem is also proved in \cite[Theorem 14.1]{villani2008optimal}.
+% It asserts that notion of local semi-convexity
+% with quadratic modulus is invariant by $C^2$ diffeomorphism, so it suffices to prove for $\mathbb{R}^n$.
+
+\begin{lem}[Local characterization of semi-concavity]
+	\label{lem:sufficient_condition_semi-concavity}
+	Let \( \phi : \Omega \rightarrow \mathbb { R } \) be a continuous function and fix \( x _ { 0 } \in \Omega \).
+	Assume that there exists a neighborhood \( U \) of \( x _ { 0 } \) and a positive constant \( C \) such that for every \( x \in U \) and
+	\( u \in T _ { x } M \) one has,
+	\[ \limsup _ { r \rightarrow 0 } \frac { \phi \left( \exp _ { x } r u \right) + \phi \left( \exp _ { x } - r u \right) - 2 \phi ( x ) } { r ^ { 2 } } \leq C \]
+	Then \( \phi \) is semi-concave around \( x _ { 0 } \).
+\end{lem}
+Following lemma (\cite[Lemma 3.12]{cordero2001riemannian}) implies
+the semi-convexity of squared distance function $d_y^2$ at point $x$.
+% Because it is shown in \cite[Lemma 3.11]{cordero2001riemannian} that
+% \cref{equa:hessian_bound_distance_squared} is a sufficient condition to be semi-convex at a point.
+Moreover, one can actually choose the local smooth function in \cref{defn:semi-concavity} as squared distance function
+if we dig the proof of \cref{lem:sufficient_condition_semi-concavity} in \cite[Lemma 3.11]{cordero2001riemannian}.
+
+
+Combining with the definition of $c$-concave,
+\cref{lem:hessian_bound_distance_squared} implies following proposition,
+where we use compactness to ensure a global lower bound for sectional curvatures.
+
+\begin{prop}[\( c \)-concave functions are semi-concave]
+	Fix \(\mathcal{X} \subset \subset M \) open and \( Y \subset M \) compact.
+	A \( c \)-concave function \( \phi \in \mathcal{I} ^ { c } ( \bar { \mathcal{X} } , Y ) \) is semi-concave on \( X \) (and hence admits a Hessian \cref{defn:hessian} almost everywhere in \( X \)).
+\end{prop}
+
+\begin{proof}[Proof for the first point in \cref{prop:differentiate_optimal_transport}]
+	Suppose \( \phi \) admits a Hessian \cref{defn:hessian} at \( x \in X \).
+	Then \( \phi \) is differentiable at \( x \) and
+	\cref{example:minimizer_differentiable} shows that \( \partial ^ { c } \phi ( x ) = \{ F ( x ) \} = \{ y \} \).
+	Thus for every \( z \in \mathcal { X } \), \cref{equa:c-super-differential} yields
+	\begin{equation}
+		\label{equa:c-concave_distance_compare}
+		\phi ( z ) \leq \phi ( x ) + d _ { y } ^ { 2 } ( z ) / 2 - d _ { y } ^ { 2 } ( x ) / 2
+	\end{equation}
+	Taking \( z = \exp _ { x } ( \pm u ) \) and \( \psi : = d _ { y } ^ { 2 } / 2 \) gives
+	\[ \frac { \phi \left( \exp _ { x } u \right) + \phi \left( \exp _ { x } - u \right) - 2 \phi ( x ) } { | u | ^ { 2 } } \leq \frac { \psi \left( \exp _ { x } u \right) + \psi \left( \exp _ { x } - u \right) - 2 \psi ( x ) } { | u | ^ { 2 } } \]
+	As \( | u | \rightarrow 0 \) the left hand side tends to \( \left\langle \operatorname { Hess } _ { x } \phi ( u ) , u \right\rangle \) by hypothesis, so the right hand side is bounded below.
+	Then \cref{prop:distance_cut_locus} ensures that
+	\( x \notin \operatorname { cut } ( y ) \), or equivalently \( y \notin c u t ( x ) \).
+	From \cref{equa:c-concave_distance_compare} we also observe that the function
+	\begin{equation}
+		\label{proof:h_definition}
+		h ( z ) : = d _ { y } ^ { 2 } ( z ) / 2 - \phi ( z )
+	\end{equation}
+	has a minimum at \( z = x \). The Taylor expansion \cref{equa:hessian_expan} then implies the
+	existence and non-negativity of its Hessian: Hess\(_{ x } h = H - \) Hess\(_ { x } \phi \geq 0\).
+\end{proof}
+
+\begin{proof}[Proof for the seconde point in \cref{prop:differentiate_optimal_transport}]
+	Fix a unit tangent vector \( u \in T _ { x } M \) and set \( x _ { s } = \exp _ { x } ( s u ) \).
+	For \( y _ { s } \in \partial ^ { c } \phi \left( x _ { s } \right) \) we want
+	to establish the estimate \( \left| v _ { s } - \diff F _ { x } ( s u ) \right| = o ( s ) \),
+	where \( v _ { s } \in T _ { y } M \) is the shortest vector such that
+	\( y _ { s } = \exp _ { y } v _ { s } \),
+	and the error term is independent of \( u \).
+
+	Introduce \( u _ { s } \in T _ { x _ { s } } M \) such that \( y _ { s } = \exp _ { x _ { s } } u _ { s } \) with \( \left| u _ { s } \right| = d \left( x _ { s } , y _ { s } \right) \)
+	and let \( w _ { s } : = u _ { s } + \nabla d _ { y } ^ { 2 } \left( x _ { s } \right) / 2 \).
+	Then
+	\begin{equation}
+		\label{proof:y_s_definition}
+		y _ { s } = \exp _ { x _ { s } }
+		\left( - \nabla d _ { y } ^ { 2 } \left( x _ { s } \right) / 2 + w _ { s } \right).
+	\end{equation}
+
+	Applying  \cref{lem:c-super-gradients_imply_super-gradients} to \( y _ { s } \in \partial ^ { c } \phi \left( x _ { s } \right) \) yields \( - u _ { s } \in \partial \phi \left( x _ { s } \right) \)
+	and hence
+	\( w _ { s } \in \partial h \left( x _ { s } \right) \),
+	where \( h \) is as in \cref{proof:h_definition}.
+	Recall that \( h \) has a Hessian at \( x \) satisfying \( \diff F _ { x } = Y \operatorname { Hess } _ { x } h \),
+	which by definition \cref{defn:hessian} means
+	\begin{equation}
+		\label{proof:hessian_definition}
+		\Pi _ { x , s u } w _ { s } = s \operatorname{ Hess } _ { x } h ( u ) + o ( s ).
+	\end{equation}
+
+	Thus the curve \( w _ { s } \) through \( ( x , 0 ) \in T M \) is differentiable at \( s = 0 \)
+	and we can
+	identify the vertical component of its tangent vector as
+	\( \dot { w } _ { s = 0 } = \operatorname { Hess } _ { x } h ( u ) . \)
+	Recall that the function \( z \rightarrow \exp _ { z } \left( - \nabla d _ { y } ^ { 2 } ( z ) / 2 \right) = y \)
+	is constant outside \( \operatorname{cut}( y ) \).
+	Differentiating \cref{proof:y_s_definition} using the chain rule then yields
+	\begin{align*}
+		\dot { y } _ { s = 0 } & = \diff \left( \exp _ { x _ { 0 } } \right) _ { - \nabla d _ { y } ^ { 2 } \left( x _ { 0 } \right) / 2 } \left( \dot { w } _ { 0 } \right) \\ & = Y \dot { w } _ { 0 } \\ & = \diff F _ { x } ( u )
+	\end{align*}
+
+	The appearance of \( Y = \diff ( \exp ) _ { - \nabla \phi ( x ) } \) in the second identity follows from
+	\( \nabla h \left( x _ { 0 } \right) = 0 \) in \cref{proof:h_definition}.
+	Finally, since \( y _ { 0 } = y \) we have
+	\begin{align*}
+		y _ { s } & = \exp _ { y } \left( s \dot { y } _ { 0 } + o ( s ) \right)                             \\
+		          & = \exp _ { y } \left( s \diff F _ { x } ( u ) + o ( s ) \right) = \exp _ { y } v _ { s }
+	\end{align*}
+	The size of the error term \( o ( s ) \) here does not depend on the unit vector \( u \)
+	since it did not depend on \( u \) in \cref{proof:hessian_definition}.
+	Comparison with \cref{equa:differentiate_optimal_transport} ends the proof
+	of the proposition.
+\end{proof}
+
+\begin{lem}[Equivalence of algebraic and geometric Jacobians]
+	Let \( x \in \Omega \).
+	Then \( \partial ^ { c } \phi \left( B _ { r } ( x ) \right) \) shrinks nicely to \( y : = F ( x ) \) when \( r \rightarrow 0 \) and
+	\[ \lim _ { r \rightarrow 0 } \frac { \operatorname { vol } \left[ \partial ^ { c } \phi \left( B _ { r } ( x ) \right) \right] } { \operatorname { vol } \left[ B _ { r } ( x ) \right] } = \operatorname { det } d F _ { x } .\]
+\end{lem}
+
+Here shrinks nicely means there exists \( R ( r ) \rightarrow 0 \) as \( r \rightarrow 0 \) such that
+\( \partial ^ { c } \phi \left( B _ { r } ( x ) \right) \subset B _ { R ( r ) } ( y ) \)
+with  \( \operatorname{Vol} \left[\partial^c \phi (B_r (x)) \right] \geq
+\alpha \operatorname{Vol} \left[ B _ { R ( r ) } ( y ) \right]\) 
+for some $\alpha >0$ ; see \cite[140]{Rudin1987real}.

@@ -1,0 +1,135 @@
+%! TEX root = ../barycenter.tex
+\section{Existence for proper space}
+
+A metric space is proper if every bounded closed set is compact.
+A proper (metric) space is complete and separable,
+because we can write a proper metric space as a countable union of compact closed balls.
+This assumption on compactness ensures the existence of barycenter.
+
+\begin{prop}
+	\label{lem:existence_proper_space}
+	If \( ( E , d ) \) is a proper metric space, then any \( \mu \in \mathcal{W}_ { 2 } ( E ) \) has a barycenter.
+\end{prop}
+
+\begin{proof}
+	Fix \( z _ { 0 } \in E \) and take \( r > 1 \) large enough to satisfy
+	\[ \mu \left( B \left( z _ { 0 } , r \right) \right) \geq \frac { 1 } { 2 } , \quad \int _ { E \backslash B \left( z _ { 0 } , r \right) } d \left( z _ { 0 } , y \right) ^ { 2 } \diff \mu ( y ) \leq 1 \]
+	Then we have
+	\[ \int _ { E } d \left( z _ { 0 } , y \right) ^ { 2 } \diff \mu ( y ) \leq r ^ { 2 } \cdot \mu \left( B \left( z _ { 0 } , r \right) \right) + 1 \leq r ^ { 2 } + 1 \]
+	while for every \( x \in E \backslash B \left( z _ { 0 } , 3 r \right) \)
+	\[ \int _ { E } d ( x , y ) ^ { 2 } \diff \mu ( y ) \geq \int _ { B \left( z _ { 0 } , r \right) } d ( x , y ) ^ { 2 } \diff \mu ( y ) > ( 2 r ) ^ { 2 } \cdot \mu \left( B \left( z _ { 0 } , r \right) \right) \geq 2 r ^ { 2 } \]
+	holds.
+	Therefore, it is sufficient to consider the infimum of
+	\[ x \longmapsto \int _ { E } d ( x , y ) ^ { 2 } \diff \mu ( y ) \]
+	only for \( x \in B \left( z _ { 0 } , 3 r \right) , \) and it is achieved at some point due to the compactness of the closure of \( B \left( z _ { 0 } , 3 r \right) . \)
+\end{proof}
+
+Here is a simple example that shows lack of properness
+violates the existence of barycenter given by \cite[Example 3.1 (a)]{ohta2012barycenters}.
+
+\begin{example}
+	\label{example:ellipsoid_subspace}
+	Let \( E \) be the infinite dimensional ellipsoid of axes of lengths \( c _ { n } = ( n + 1 ) / 2 n \) with \( n \in \mathbb { N } , \) namely
+	\[
+		E = \left\{ \left( x _ { 1 } , x _ { 2 } , \ldots \right) \in \ell^2 | \sum _ { n \in \mathbb { N }^* } \frac { x _ { n } ^ { 2 } } { c _ { n } ^ { 2 } } = 1 \right\}
+	\]
+
+	Then \( E \) is complete as a closed subspace of Hilbert space $\ell^2,$
+	but measure $\mu = \frac{1}{2}\delta _ { ( 1,0,0 , \ldots ) } + \frac{1}{2} \delta _ { ( - 1,0,0 , \ldots ) } $  has no barycenter in \( E \).
+\end{example}
+
+\begin{proof}
+	$E$ is closed subspace of Hilbert space $\ell^2$ since $ 1 / 2 \leq c_{n} \leq 1$.
+	Linear Hilbert structure enables us to calculate distance through inner product.
+	Pick $ x \in E$ and set $ e=(1,0,0\ldots)$, by definition,
+	\begin{align*}
+		\int_{E} d(x, \cdot)^2 \diff \mu & = \frac{d(x,e)^2+d(x,-e)^2 }{2}                         \\
+		                                 & =\frac{\| x - e \|^2 + \| x + e \|^2}{2} =\| x \|^2 + 1
+	\end{align*}
+
+	So a barycenter $z$ of $\mu$ in $E$ should minimize its length $\| z \|$,
+	but it is impossible in this space.
+	Assume now vector $z \in E$ attains minimal length.
+	Consider first $n$ coordinate components of $z$,
+	there could not exist any non-zero components except the last one, i.e., $z_i =0$ for $i<n$.
+	Otherwise, we can keep coordinate components $z_j$ for $j>n$, which are out of consideration, unchanged but vanish first $n-1$ coordinate components to get a strictly shorter vector in $E$.
+	This indicates that no such barycenter $z$ could exist in $E$.
+\end{proof}
+
+\begin{rmk}
+	$E$ is not locally compact as a subspace of $\ell^2$, thus not a proper space.
+	Consider the sequence with only one non-zero coordinate component, it has no converging subsequence.
+\end{rmk}
+
+We shall present some counter examples for more geometric metric spaces.
+A discussion on length might give some insight on the existence of barycenter.
+
+\section{Length space but not proper}
+
+Recall that on smooth manifolds, we define Riemannian metric through length of curves.
+Remove assumptions for manifold structure, we arrive at the definition of general length space.
+
+We start with induced length structure, which defines rectifiable curve.
+\begin{defn}[Induced length structure]
+	\label{defn:length_structure}
+	Let \( ( E , d ) \) be a path-connected metric space and \( \gamma \) be a curve in \( E \),
+	i.e., a continuous map \( \gamma: [ a , b ] \rightarrow E \).
+	Consider a partition \( Y \) of \( [ a , b ] \), that is,
+	a finite collection of points \( Y = \left\{ y _ { 0 } , \ldots , y _ { N } \right\} \)
+	such that \( a = y _ { 0 } \leq y _ { 1 } \leq y _ { 2 } \leq \ldots \leq y _ { N } = b \).
+	The supremum of the sums
+	\[
+		\Sigma ( Y ) = \sum _ { i = 1 } ^ { N } d \left( \gamma \left( y _ { i - 1 } \right) , \gamma \left( y _ { i } \right) \right)
+	\]
+	over all the partitions $Y$ is called the length of $\gamma$ with respect to the metric $d$ and denoted $L_d (\gamma)$.
+	A curve is said to be rectifiable if its length is finite.
+\end{defn}
+
+\begin{rmk}
+	For $\gamma : [a, b] \rightarrow E$ a curve and a subinterval $[x , y] \subset [a,b]$,
+	we write $\gamma_{[x , y]}$ the restriction of $\gamma$ to the subinterval $[x , y]$.
+	If \( \gamma \) is rectifiable,
+	the function \( L \left( \gamma | _ { [ x , y ] } \right) = L ( \gamma , x , y ) \) is continuous
+	in \( x \) and \( y \).
+	We prove the continuity of \( L \) in \( y , a < y \leq b \),
+	from the left for illustration purpose.
+	Take \( \varepsilon > 0 \) and
+	consider a partition \( Y \) such that \( L ( \gamma ) - \Sigma ( Y ) < \varepsilon \). One may suppose that
+	\( y _ { j - 1 } < y = y _ { j } \). Then
+	\[
+		L \left( \gamma , y _ { j - 1 } , y \right) - d \left( \gamma \left( y _ { j - 1 } \right) , \gamma ( y ) \right) < \varepsilon
+	\]
+	and the same inequality takes place for each $y^\prime$ such that $y_{j-1} \leq y^\prime \leq y$.
+\end{rmk}
+
+Once we are disposal with a length structure,
+for two points \( x , y \in E \) we set the associated distance \( d_L ( x , y ) \) between them to be the infimum of lengths of rectifiable curves connecting these points:
+\[
+	d _ { L } ( x , y ) = \inf \{ L ( \gamma ) \,|\, \gamma: [ a , b ] \rightarrow E , \gamma \text{ rectifiable }, \gamma ( a ) = x , \gamma ( b ) = y \}.
+\]
+
+\begin{defn}[Length space]
+	\label{defn:length_space}
+	A metric space $(E,d)$ is a length space if the distance $\hat{d} := d_{L_{d}}$ induced
+	from the length structure $L_d$ coincides with $d$. We also call it an intrinsic metric space.
+\end{defn}
+
+We justify this definition by the fact that
+twice induced distance $\hat{\hat{d}}$ of metric $d$ coincides with the induced distance $\hat{d}$ of metric $d$.
+Also, we have $L_{\hat{d}} = L_{d}$ on rectifiable curves.
+Proofs could be found in \cite[Section 2.3]{burago2001course}.
+This is important for understanding the definition,
+so we state it as a theorem.
+
+\begin{thm}[Alternative definition of length space]
+	\( ( X , d ) \) is a length space if and only if for any points
+	\( x , y \in X \) and any \( \varepsilon > 0 \) there exists a curve \( \gamma \) connecting \( x \) and \( y \) such
+	that \( L _ { d } ( \gamma ) < d ( x , y ) + \varepsilon \).
+\end{thm}
+
+Good news is that we get classic Hopf-Rinow theorem in Riemannian geometry for general length spaces.
+This is \cite[Proposition 2.5.22]{burago2001course}.
+
+\begin{prop}
+	A locally compact complete length space is proper.
+\end{prop}

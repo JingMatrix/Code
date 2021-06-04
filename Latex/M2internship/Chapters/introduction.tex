@@ -1,359 +1,70 @@
 %! TEX root = ../barycenter.tex
-\chapter{Introduction and preparation}
-\section{Definition of barycenter}
-To begin with, recall that in physics we define baryceter, i.e.,  center of inertial mass, as a geometric point where we can image gravity acts at. In the case of a system of particles $\boldsymbol{P}_\nu$, $\nu = 1, \ldots , N$, each with mass $m_\nu$ that are located in space with coordinates $\boldsymbol{r}_\nu$, $\nu = 1, \ldots , N$, the coordinate of the center of mass $C$ satisfies condition:
+\chapter{Barycenter in Metric space}
+Recall that in physics we define barycenter, aka center of inertial mass,
+as a geometric point where we can image gravity acts at.
+Consider a system of particles  $\nu = 1, \ldots , N$,
+we assume that each $\nu$ has mass $m_\nu$ and positional vector $\boldsymbol{r}_\nu$.
+Then the positional vector $\boldsymbol{r}_C$ of barycenter $C$ is,
+if we write \( M := \sum _ { \nu = 1 } ^ { N } m _ { \nu }\),
 \[
-	\sum _{\nu=1}^{N} m_{\nu}\boldsymbol {r}_{\nu} -	\sum _{\nu=1}^{N}m_{\nu}\boldsymbol {r}_C = \sum _{\nu=1}^{N}m_{\nu}(\boldsymbol {r} _{\nu}-\boldsymbol {r}_C )=\boldsymbol {0}.
+	\boldsymbol { r }_ { C } =
+	\sum_ { \nu = 1 } ^ { N } \frac{m_ { \nu } }{M}\,\boldsymbol { r }_ { \nu }.
 \]
-Then set \( M := \sum _ { \nu = 1 } ^ { N } m _ { \nu } \), we should have
-\[
-	\boldsymbol { r }_ { C } = \left( \sum_ { \nu = 1 } ^ { N } m_ { \nu } \boldsymbol { r }_ { \nu } \right) / M .
-\]
-We can characterize barycenter as the unique solution of minimizing problem
+We can characterize this formula as the unique solution of minimization problem
 \begin{equation}
 	\label{barycenter_def}
-	\boldsymbol{r}_C = \operatorname{arg} \min_{\boldsymbol{r}} \sum_{\nu= 1}^N \frac{m_\nu}{M} \Vert \boldsymbol{r}_{\nu} - \boldsymbol{r}\Vert^2
+	\boldsymbol{r}_C = \arg \min_{\boldsymbol{r}} \sum_{\nu= 1}^N \frac{m_\nu}{M}
+	\|\boldsymbol{r}_{\nu} - \boldsymbol{r}\|^2,
 \end{equation}
-as norm is calculated as inner product on Euclidean space.
+where $\arg$ stands for ``argument that achieves''.
 
-To generalize \cref{barycenter_def}, notice that norm is not essential here but metric is. We can regard system of particles as finite points supported measure. For a space of measures over metric space $(E,d)$, we firstly define a metric, i.e., Wasserstein metric $W_p$ on this space; then we define barycenter as the projection to the closed subspace consisting of Dirac measures, which can be canonically identified as $E$.
-A barycenter $x \in E$ of measure $\mu$ on $E$ satisfies
-\[
-	W_p(\delta_x, \mu) = \min_{z \in E} \int_{X} d(z, y)^p \diff \mu(y) = \min_{z \in E} W_p(\delta_z, \mu)= W_p(E, \mu).
-\]
-
-\section{Geometry and probability background}
-We should introduce necessary concepts and recall classic results to help our discussion; for the sake of instruction, we present some classic proofs.
-
-\subsection{Metric geometry}
-\begin{defn}
-	\label{defn:length_structure}
-	Let \( ( X , d ) \) be a metric space and \( \gamma \) be a path in \( X \), i.e., a continuous map \( \gamma: [ a , b ] \rightarrow X \). Consider a partition \( Y \) of \( [ a , b ] )\), that is, a finite collection of points \( Y = \left\{ y _ { 0 } , \ldots , y _ { N } \right\} \) such that \( a = y _ { 0 } \leq y _ { 1 } \leq y _ { 2 } \leq \ldots \leq y _ { N } = b \). The supremum of the sums
+\begin{defn}[Barycenter of finite second moment measure on metric space]
+	Consider a metric space $(E,d)$ and a Borel measure $\mu$ on it,
+	we call $z \in E$ a barycenter of $\mu$ if it solves following minimization problem,
 	\[
-		\Sigma ( Y ) = \sum _ { i = 1 } ^ { N } d \left( \gamma \left( y _ { i - 1 } \right) , \gamma \left( y _ { i } \right) \right)
+		z \in \arg\min_{x}\int_{E} d(x, y)^2 \diff \mu (y).
 	\]
-	over all the partitions $Y$ is called the length of $\gamma$ (with respect to the metric $d$ ) and denoted $L_d (\gamma)$. A curve is said to be rectifiable if its length is finite.
+	Usually, we only consider measures with finite second moment.
+	Following definition is independent of the choice of $x_0 \in E$,
+	\[
+					\mathcal{W}_2(E): = \left\{ \mu \text{ Borel probability measure on } E \, |
+		\int_{E} d(x_0, y)^2 \diff \mu (y) < \infty\right\},
+	\]
+	we thus require in the definition of barycenter $z$ of $\mu$ that $\mu \in \mathcal{W}_2(E)$.
 \end{defn}
-
-Once we are disposal with a length structure. For two points \( x , y \in X \) we set the associated distance \( d ( x , y ) \) between them to be the infimum of lengths of admissible paths connecting these points:
-\[
-	d _ { L } ( x , y ) = \inf \{ L ( \gamma ) ; \gamma: [ a , b ] \rightarrow X , \gamma \in A , \gamma ( a ) = x , \gamma ( b ) = y \}.
-\]
-
-\begin{defn}
-	\label{defn:length_space}
-	A metric space $(X,d)$ is a length space if the distance $\hat{d}$ induced from length $L_d$ coindcides with $d$. We also call it an intrinsic metric space.
-\end{defn}
-
-\begin{prop}
-	A locally compact complete length space is proper, i.e., closed balls are compact.
-\end{prop}
-
-
-\subsection{Measure theory}
-
-Let \( X \) be a metric space and \( \mathscr { M } ( X ) \) the space of all measures defined on \( \mathscr { B } _ { X } . \) An element \( \mu \in \mathscr { H } ( X ) \) is a nonnegative, countably additive set function defined on \( \mathscr { B } _ { X } \) with the property \( \mu ( X ) = 1 . \quad C ( X ) \) stands for the space of all bounded real valued continuous functions on \( X \). We shall now topologize the space \( \mathscr { M } ( X ) \) by defining a base of open neighborhoods for any point \( \mu . \) Consider the family of sets of the form
-\( V _ { \mu } \left( f _ { 1 } , f _ { 2 } , \ldots , f _ { k } ; \varepsilon _ { 1 } , \ldots , \varepsilon _ { k } \right) \)
-\[ \left\{\nu \in \mathscr { M } ( X ) \, \mid  \left| \int f _ { i } d v - \int f _ { i } d \mu \right| < \varepsilon _ { i } , \quad i = 1,2 , \ldots , k \right\} \]
-
-where \( f _ { 1 } , f _ { 2 } , \ldots , f _ { k } \) are elements from \( C ( X ) \) and \( \varepsilon _ { 1 } , \varepsilon _ { 2 } , \ldots , \varepsilon _ { k } , \) are positive numbers. It is easy to verify that the family of sets obtained by varying \( k , f _ { 1 } , f _ { 2 } , \ldots , f _ { k } , \varepsilon _ { 1 } , \ldots , \varepsilon _ { k } \) satisfies the axioms of a basis for a topology.
-
-\begin{defn}
-	We shall refer to this as the weak topology  in \( \mathscr { M } ( X ) \).
-\end{defn}
-
-It is then clear that a net \( \left\{ \mu _ { \alpha } \right\} \) of measures converges in the weak topology to a measure \( \mu \) if and only if \( \int f d \mu _ { \alpha } \rightarrow \int f d \mu \) for every \( f \in C ( X ) . \) In such a case we shall say that \( \mu _ { \alpha } \) converges ``weakly" to \( \mu \) or \( \mu _ { \alpha } \Rightarrow \mu \) in symbols. Unless otherwise stated, \( \mathscr { M } ( X ) \) will always be considered as a topological space with the weak topology.
-
-We shall first recall a theorem which yields several useful equivalent definitions of the weak topology.
-
-\begin{thm}
-	Let \( \mu _ { \alpha } \) be a net in \( \mathscr { M } ( X ) . \) Then the following statements are equivalent:
-	\begin{itemize}
-		\label{thm:weak_convergence}
-		\item \( \mu _ { \alpha } \Rightarrow \mu \)
-		\item \( \lim _ { \alpha } \int g d \mu _ { \alpha } = \int g d \mu \) for all \( g \in U ( X ) \) where \( U ( X ) \) is the space of all bounded real valued uniformly continuous functions;
-		\item \( \overline { \lim } _ { \alpha } \mu _ { \alpha } ( C ) \leqslant \mu ( C ) \) for every closed set \( C \)
-		\item \( \lim _ { \alpha } \mu _ { \alpha } ( G ) \geqslant \mu ( G ) \) for every open set \( G \)
-		\item \( \lim _ { \alpha } \mu _ { \alpha } ( A ) = \mu ( A ) \) for every Borel set \( A \) whose boundary has \( \mu \) -measure \( 0 . \)
-	\end{itemize}
-\end{thm}
-
-For each point \( x \in X \) we shall denote by \( p _ { x } \) the measure degenerate at the point \( x \). Denote \( D = \left\{ p _ { x }: x \in X \right\} \).
-
-\begin{lem}
-	\label{dirac_measure_weak_homeomorphic}
-	\( X \) is homeomorphic to the (topological) subset $D$.
-\end{lem}
-
-\begin{proof}
-	For any point \( x \) and \( g \in C ( X ) , \) we have \( \int g d p _ { x } = g ( x ) \). If \( x _ { \alpha } \rightarrow x _ { 0 } \) then \( g \left( x _ { \alpha } \right) \rightarrow g \left( x _ { 0 } \right) . \) Hence \( p _ { x _ { \alpha } } \Rightarrow p _ { x _ { 0 } } \). Conversely, let \( p _ { x _ { \alpha } } \Rightarrow p _ { x _ { 0 } } \) If \( x _ { \alpha } \) does not converge to \( x _ { 0 } \), there is an open set \( G \) and a subnet \( \left\{ x _ { \beta } \right\} \) such that \( x _ { 0 } \in G \) and \( x _ { \beta } \in X - G \) for all \( \beta . \) Let \( g \) be a continuous function such that \( 0 \leqslant g \leqslant 1 , g \left( x _ { 0 } \right) = 0 \) and \( g ( x ) = 1 \) for \( x \in X - G \). Then \( \int g d p _ { x _ { \beta } } = 1 , \) while \( \int g d p _ { x _ { 0 } } = 0 . \) This is a contradiction. This completes the proof.
-\end{proof}
-
-\begin{lem}
-	\( D \) is a sequentially closed subset of \( \mathscr { M } ( X ) \).
-\end{lem}
-
-\begin{proof}
-	Let \( \left\{ x _ { n } \right\} \) be a sequence of points in \( X \) such that \( p _ { x _ { n } } \Rightarrow q \). Suppose \( \left\{ x _ { n } \right\} \) does not have any convergent subsequence. Then the set \( S = \left\{ x _ { 1 } , x _ { 2 } , \ldots \right\} \) is closed and thus is any subset \( C \) of \( S . \) Since \( p _ { x _ { n } } \Rightarrow q \) we have by Theorem \cref{thm:weak_convergence}, \( q ( C ) \geqslant \overline { \lim } p _ { x _ { n } } ( C ) \) for \( C \subseteq S \). It follows that for every infinite subset \( S _ { 1 } \subseteq S , q \left( S _ { 1 } \right) = 1 \). This is a contradiction since \( q \) is a measure.
-
-	Thus there is a subsequence \( \left\{ x _ { n _ { k } } \right\} , x _ { n _ { k } } \rightarrow x . \) By \cref{dirac_measure_weak_homeomorphic}, \( q = p _ { x } \). Hence \( D \) is sequentially closed.
-\end{proof}
-
-
-\begin{thm}
-	\label{finite_support_approximation}
-	Let \( X \) be a separable metric space and \( E \subseteq X \) dense in \( X  \). Then the set of all measures whose supports are finite subsets of \( E \) is dense in \( \mathscr{ M } ( X ) \), the set of all Borel probability measures on $X$.
-\end{thm}
-
-\begin{proof}
-	This proof is copy from Theorem 6.3 in \cite{parthasarathy2005probability}.
-
-	It is obviously enough to prove that the set of all measures whose supports are finite subsets of \( X \) is dense in \( \mathscr { M } ( X ) . \) Let us denote the class of such measures by \( \mathscr { F } ( X ) . \) It is clear that any measure concentrated in a countable subset of \( X \) is a weak limit of measures from \( \mathscr { F } ( X ) . \) Thus it is sufficient to prove that any measure is a weak limit of measures vanishing outside countable subsets of \( X \).
-
-	Choose and fix \( \mu \in \mathscr { M } ( X ) \). Since \( X \) is separable we can, for each integer \( n , \) write \( X \) as \( \bigcup _ { j } A _ { n j } , A _ { n j } \cap A _ { n k } = \phi \) if \( j \neq k , A _ { n j } \in \mathscr { B } _ { X } \) for all \( n \) and \( j \) and the diameter of \( A _ { n j } \) is \( \leq 1 / n \) for all \( j \). Let \( x _ { n j } \in A _ { n j } \) be arbitrary. Let \( \mu _ { n } \) be the measure with masses \( \mu \left( A _ { n j } \right) \) at the points \( x _ { n j } , \) respectively. Let $g$ be an arbitrary uniformly continuous (we can even assume Lipchitz continuous here) bounded function, and let \[ \alpha _ { n j } = \inf _ { x \in A _ { n j } } g ( x ) , \quad \beta _ { n j } = \sup _ { x \in A _ { n j } } g ( x ) \]
-	Since \( g \) is uniformly continuous and since the diameter of \( A _ { n j } \rightarrow 0 \) as \( n \rightarrow \infty \) uniformly in \( j , \sup _ { j } \left( \beta _ { n j } - \alpha _ { n j } \right) \rightarrow 0 \) as \( n \rightarrow \infty \). Now
-	\begin{align*}
-		\left| \int g d \mu _ { n } - \int g d \mu \right| & = \left| \sum \int _ { A _ { n j } } \left( g - g \left( x _ { n j } \right) \right) d \mu \right|     \\
-		                                                   & \leq \sup_{j} \left( \beta _ { n j } - \alpha _ { n j } \right) \xrightarrow{ n \rightarrow \infty} 0.
-	\end{align*}
-\end{proof}
-
-\begin{thm}[Prokhorov's theorem]
-	If \( \mathcal { X } \) is a Polish space, then a set \( \mathcal { P } \subset P ( \mathcal { X } ) \) is pre-compact for the weak topology if and only if it is tight, i.e. for any \( \varepsilon > 0 \) there is a compact set \( K _ { \varepsilon } \) such that \( \mu \left[ \mathcal { X } \backslash K _ { \varepsilon } \right] \leq \varepsilon \) for all \( \mu \in \mathcal { P } \).
-\end{thm}
-
-Later we need to have a measurable selection of barycenter when given measure varies. We refer to Theorem 6.9.6 in \cite{Bogachev2007} for following statement, proof is given as Theorem 35.43 in \cite{kechris1995}.
-
-\begin{thm}
-	\label{thm:measurale_selection}
-	Let \( X \) and \( Y \) be Polish spaces and let \( \Gamma \in \mathcal { B } ( X \times Y ) \). Suppose, additionally, that the set \( \Gamma _ { x }: = \{ y \in Y: ( x , y ) \in \Gamma \} \) is nonempty and \( \sigma \)-compact for all \( x \in X \). Then \( \Gamma \) contains the graph of some Borel mapping \( f: X \rightarrow Y\).
-\end{thm}
-
-\section{Optimal transportation}
-We start with a basic definition in probability theory.
-
-\begin{defn}[Coupling]
-	Let \( ( \mathcal { X } , \mu ) \) and \( ( \mathcal { Y } , \nu ) \) be two probability spaces. Coupling \( \mu \) and \( \nu \) means constructing two random variables \( X \) and \( Y \) on some probability space \( ( \Omega , \mathbb { P } ) , \) such that law \( ( X ) = \mu \), law \( ( Y ) = \nu . \) The couple \( ( X , Y ) \) is called a coupling of \( ( \mu , \nu ) . \) By abuse of language, the law of \( ( X , Y ) \) is also called a coupling of \( ( \mu , \nu ) \).
-\end{defn}
-
-If \( \mu \) and \( \nu \) are the only laws in the problem, then without loss of generality one may choose \( \Omega = \mathcal { X } \times \mathcal { Y } . \) In a more measure-theoretical formulation, coupling \( \mu \) and \( \nu \) means constructing a measure \( \pi \) on \( \mathcal { X } \times \mathcal { Y } \) such that \( \pi \) admits \( \mu \) and \( \nu \) as marginals on \( \mathcal { X } \) and \( \mathcal { Y } \) respectively.
-
-
-We then define the optimal coupling or optimal transport. Here one introduces a cost function \( c ( x , y ) \) on \( \mathcal { X } \times \mathcal { Y } , \) that can be interpreted as the work needed to move one unit of mass from location \( x \) to location \( y . \) Then one considers the Monge-Kantorovich minimization problem
-\[
-	\operatorname{inf}  \mathbb { E } c ( X , Y )
-\]
-where the pair \( ( X , Y ) \) runs over all possible couplings of \( ( \mu , \nu ) ; \) or equivalently, in terms of measures,
-\[ \inf \int _ { \mathcal { X } \times \mathcal { Y } } c ( x , y ) d \pi ( x , y ) \]
-where the infimum runs over all joint probability measures \( \pi \) on \( \mathcal { X } \times \mathcal { Y } \) with marginals \( \mu \) and \( \nu . \) Such joint measures are called trans- ference plans (or transport plans, or transportation plans); those achieving the infimum are called optimal transference plans.
-
-The first good thing about optimal couplings is that they exist:
-\begin{thm}[Existence of an optimal coupling]
-	Let \( ( \mathcal { X } , \mu ) \) and \( ( \mathcal { Y } , \nu ) \) be two Polish probability spaces; let \( a: \mathcal { X } \rightarrow \mathbb { R } \cup \{ - \infty \} \) and \( b: \mathcal { Y } \rightarrow \mathbb { R } \cup \{ - \infty \} \) be two upper semi-continuous functions such that \( a \in L ^ { 1 } ( \mu ) , b \in L ^ { 1 } ( \nu ) . \) Let \( c: \mathcal { X } \times \mathcal { Y } \rightarrow \mathbb { R } \cup \{ + \infty \} \) be a lower semi-continuous cost function, such that \( c ( x , y ) \geq a ( x ) + b ( y ) \) for all \( x , y . \) Then there is a coupling of \( ( \mu , \nu ) \) which minimizes the total cost \( \mathbb { E } c ( X , Y ) \) among all possible couplings \( ( X , Y ) \).
-\end{thm}
-The proof relies on basic variational arguments involving the topology of weak convergence (i.e. imposed by bounded continuous test functions). There are two key properties to check: (a) lower semi-continuity, (b) compactness. These issues are taken care of respectively in two lemmas below.
-
-\begin{lem}[Lower semi-continuity of the cost functional]
-	\label{lower_semi-continuity_of_the_cost_functional}
-	Let \( \mathcal { X } \) and \( \mathcal { Y } \) be two Polish spaces, and \( c: \mathcal { X } \times \mathcal { Y } \rightarrow \mathbb { R } \cup \{ + \infty \} \) a lower semi-continuous cost function. Let \( h: \mathcal { X } \times \mathcal { Y } \rightarrow \mathbb { R } \cup \{ - \infty \} \) be an upper semi-continuous function such that \( c \geq h . \) Let \( \left( \pi _ { k } \right) _ { k \in \mathbb { N } } \) be a sequence of
-	probability measures on \( \mathcal { X } \times \mathcal { Y } , \) converging weakly to some \( \pi \in P ( \mathcal { X } \times \mathcal { Y } ) \), in such a way that \( h \in L ^ { 1 } \left( \pi _ { k } \right) , h \in L ^ { 1 } ( \pi ) , \) and
-	\[ \int _ { \mathcal { X } \times \mathcal { Y } } h d \pi _ { k } \underset { k \rightarrow \infty } { \longrightarrow } \int _ { \mathcal { X } \times \mathcal { Y } } h d \pi \]
-	\[ \int _ { \mathcal { X } \times \mathcal { Y } } c d \pi \leq \liminf _ { k \rightarrow \infty } \int _ { \mathcal { X } \times \mathcal { Y } } c d \pi _ { k } \]
-	In particular, if \( c \) is nonnegative, then \( F: \pi \rightarrow \int c d \pi \) is lower semi-continuous on \( P ( \mathcal { X } \times \mathcal { Y } ) , \) equipped with the topology of weak convergence.
-\end{lem}
-
-\begin{proof}
-	Replacing \( c \) by \( c - h , \) we may assume that \( c \) is a nonnegative lower semi-continuous function. Then \( c \) can be written as the point-wise limit of a non-decreasing family \( \left( c _ { \ell } \right) _ { \ell \in \mathbb { N } } \) of continuous real-valued functions. By monotone convergence,
-	\[ \int c d \pi = \lim _ { \ell \rightarrow \infty } \int c _ { \ell } d \pi = \lim _ { \ell \rightarrow \infty } \lim _ { k \rightarrow \infty } \int c _ { \ell } d \pi _ { k } \leq \liminf _ { k \rightarrow \infty } \int c d \pi _ { k } \]
-\end{proof}
-\begin{lem}[Tightness of transference plans]
-	Let \( \mathcal { X } \) and \( \mathcal { Y } \) be two Polish spaces. Let \( \mathcal { P } \subset P ( \mathcal { X } ) \) and \( \mathcal { Q } \subset P ( \mathcal { Y } ) \) be tight subsets of \( P ( \mathcal { X } ) \) and \( P ( \mathcal { Y } ) \) respectively. Then the set \( \Pi ( \mathcal { P } , \mathcal { Q } ) \) of all transference plans whose marginals lie in \( \mathcal { P } \) and \( \mathcal { Q } \) respectively, is itself tight in \( P ( \mathcal { X } \times \mathcal { Y } ) \).
-\end{lem}
-
-\begin{proof}
-	Let \( \mu \in \mathcal { P } , \nu \in \mathcal { Q } , \) and \( \pi \in \Pi ( \mu , \nu ) . \) By assumption, for any \( \varepsilon > 0 \) there is a compact set \( K _ { \varepsilon } \subset \mathcal { X } , \) independent of the choice of \( \mu \) in \( \mathcal { P } \), such that \( \mu \left[ \mathcal { X } \backslash K _ { \varepsilon } \right] \leq \varepsilon ; \) and similarly there is a compact set \( L _ { \varepsilon } \subset \mathcal { Y } , \) independent of the choice of \( \nu \) in \( \mathcal { Q } , \) such that \( \nu \left[ \mathcal { Y } \backslash L _ { \varepsilon } \right] \leq \varepsilon . \) Then for any coupling \( ( X , Y ) \) of \( ( \mu , \nu ) \)
-	\[ \mathbb { P } \left[ ( X , Y ) \notin K _ { \varepsilon } \times L _ { \varepsilon } \right] \leq \mathbb { P } \left[ X \notin K _ { \varepsilon } \right] + \mathbb { P } \left[ Y \notin L _ { \varepsilon } \right] \leq 2 \varepsilon. \]
-
-	The desired result follows since this bound is independent of the coupling, and \( K _ { \varepsilon } \times L _ { \varepsilon } \) is compact in \( \mathcal { X } \times \mathcal { Y }  \).
-\end{proof}
-
-By passing to the limit in the equation for marginals, we see that \( \Pi ( \mu , \nu ) \) is closed, so it is in fact compact. Then let \( \left( \pi _ { k } \right) _ { k \in \mathbb { N } } \) be a sequence of probability measures on \( \mathcal { X } \times \mathcal { Y } \), such that \( \int c d \pi _ { k } \) converges to the infimum transport cost. Extracting a subsequence if necessary, we may assume that \( \pi _ { k } \) converges to some \( \pi \in \Pi ( \mu , \nu ) . \) The function \( h: ( x , y ) \longmapsto a ( x ) + b ( y ) \) lies in \( L ^ { 1 } \left( \pi _ { k } \right) \) and in \( L ^ { 1 } ( \pi ) \), and \( c \geq h \) by assumption; moreover, \( \int h d \pi _ { k } = \int h d \pi = \) \( \int a d \mu + \int b d \nu \); so Lemma 4.3 implies
-\[ \int c d \pi \leq \liminf _ { k \rightarrow \infty } \int c d \pi _ { k }. \]
-
-Thus $\pi$ is minimizing.
-
-\begin{thm}[Optimality is inherited by restriction]
-	\label{thm:restriction_optimal_plan}
-	Let \( (\mathcal { X } , \mu ) \)
-	and \( ( \mathcal { Y } , \nu ) \) be two Polish spaces, \( a \in L ^ { 1 } ( \mu ) , b \in L ^ { 1 } ( \nu ) \), let \( c : \mathcal { X } \times \mathcal { Y } \rightarrow \)
-	\( \mathbb { R } \cup \{ + \infty \} \) be a measurable cost function such that \( c ( x , y ) \geq a ( x ) + b ( y ) \)
-	for all \( x , y ; \) and let \( C ( \mu , \nu ) \) be the optimal transport cost from \( \mu \) to \( \nu . \)
-	Assume that \( C ( \mu , \nu ) < + \infty \) and let \( \pi \in \Pi ( \mu , \nu ) \) be an optimal transport plan. Let \( \widetilde { \pi } \) be a nonnegative measure on \( \mathcal { X } \times \mathcal { Y } \), such that \( \widetilde { \pi } \leq \pi \)
-	and \( \widetilde { \pi } [ \mathcal { X } \times \mathcal { Y } ] > 0 . \) Then the probability measure
-	\[ \pi ^ { \prime } : = \frac { \widetilde { \pi } } { \widetilde { \pi } [ \mathcal { X } \times \mathcal { Y } ] } \]
-	is an optimal transference plan between its marginals \( \mu ^ { \prime } \) and \( \nu ^ { \prime } \).
-
-	Moreover, if \( \pi \) is the unique optimal transference plan between \( \mu \)
-	and \( \nu \), then also \( \pi ^ { \prime } \) is the unique optimal transference plan between \( \mu ^ { \prime } \)
-	and \( \nu ^ { \prime } \)
-\end{thm}
-
-\begin{proof}
-	Assume that \( \pi ^ { \prime } \) is not optimal; then there exists
-	\( \pi ^ { \prime \prime } \) such that
-	\begin{equation}
-	\label{proof:restriction_project}
-\left( \operatorname { proj } _ { \mathcal { X } } \right) _ { \# } \pi ^ { \prime \prime } = \left( \operatorname { proj } _ { \mathcal { X } } \right) _ { \# } \pi ^ { \prime } = \mu ^ { \prime } , \quad \left( \operatorname { proj } _ { \mathcal { Y } } \right) _ { \# } \pi ^ { \prime \prime } = \left( \operatorname { proj } _ { \mathcal { Y } } \right) _ { \# } \pi ^ { \prime } = \nu ^ { \prime }
-\end{equation}
-	yet
-	\begin{equation}
-	\label{proof:restriction_not_optimal}
-\int c ( x , y ) d \pi ^ { \prime \prime } ( x , y ) < \int c ( x , y ) d \pi ^ { \prime } ( x , y )
-\end{equation}
-	Then consider
-	\[ \widehat { \pi } : = ( \pi - \widetilde { \pi } ) + \widetilde { Z } \pi ^ { \prime \prime } \]
-	where \( \widetilde { Z } = \widetilde { \pi } [ \mathcal { X } \times \mathcal { Y } ] > 0 . \) Clearly, \( \widehat { \pi } \) is a nonnegative measure. On the
-	other hand, it can be written as
-	\[ \widehat { \pi } = \pi + \widetilde { Z } \left( \pi ^ { \prime \prime } - \pi ^ { \prime } \right) \]
-	then \cref{proof:restriction_project} shows that \( \widehat { \pi } \) has the same marginals as \( \pi \),
-	while \cref{proof:restriction_not_optimal} implies that it has a lower transport cost than \( \pi \).
-	(Here I use the fact that the total cost is finite.)
-	This contradicts the optimality of \( \pi \). The conclusion
-	is that \( \pi ^ { \prime } \) is in fact optimal.
-\end{proof}
-
 \begin{rmk}
-	If \( ( X , Y ) \) is an optimal coupling of \( ( \mu , \nu ) \), and \( \mathcal { Z } \subset \mathcal { X } \times \mathcal { Y } \)
-	is such that \( \mathbb { P } [ ( X , Y ) \in \mathcal { Z } ] > 0 \), then the pair \( ( X , Y ) \), conditioned
-	to lie in \( \mathcal { Z } \), is an optimal coupling of \( \left( \mu ^ { \prime } , \nu ^ { \prime } \right) \), where \( \mu ^ { \prime } \) is the law of
-	\( X \) conditioned by the event \( " ( X , Y ) \in \mathcal { Z } " \), and \( \nu ^ { \prime } \) is the law of \( Y \)
-	conditioned by the same event.
-\end{rmk}
-\subsection{Wasserstein space}
-
-\begin{defn}[Wasserstein distances]
-	\label{Wasserstein_distance}
-	Let  \(( \mathcal { X } , d ) \) be a Polish metric space, and let \( p \in [ 1 , \infty ) . \) For any two probability measures \( \mu , \nu \) on \( \mathcal { X } , \) the Wasserstein distance of order \( p \) between \( \mu \) and \( \nu \) is defined by the formula
-	\begin{align*}
-		W _ { p } ( \mu , \nu ) & = \left( \inf _ { \pi \in \Pi ( \mu , \nu ) } \int _ { \mathcal { X } } d ( x , y ) ^ { p } d \pi ( x , y ) \right) ^ { 1 / p }                                                      \\
-		                        & = \inf \left\{ \left[ \mathbb { E } d ( X , Y ) ^ { p } \right] ^ { \frac { 1 } { p } } , \quad \operatorname { law } ( X ) = \mu , \quad \operatorname { law } ( Y ) = \nu \right\}
-	\end{align*}
-\end{defn}
-
-\begin{lem}
-	\label{lower_semicontinous_Wasserstein_distance}
-	Wasserstein distance is lower semi-continuous with respect to weakly convergence of measures on $P(\mathscr{X})$.
-\end{lem}
-
-\begin{proof}
-	This is a direct consequence of lower semi-continuity of the cost functional, see \cref{lower_semi-continuity_of_the_cost_functional}.
-\end{proof}
-
-\begin{defn}[Wasserstein space]
-	\label{Wasserstein_space}
-	With the same conventions as in \cref{Wasserstein_distance} , the Wasserstein space of order \( p \) is defined as
-	\[
-		P _ { p } ( \mathcal { X } ): = \left\{ \mu \in P ( \mathcal { X } ) ; \quad \int _ { \mathcal { X } } d \left( x _ { 0 } , x \right) ^ { p } \mu ( d x ) < + \infty \right\}
-	\]
-	where \( x _ { 0 } \in \mathcal { X } \) is arbitrary. This space does not depend on the choice of the point \( x _ { 0 } \). Then \( W _ { p } \) defines a (finite) distance on \( P _ { p } ( \mathcal { X } ) \).
-\end{defn}
-
-\begin{defn}[Weak convergence in \( P _ { p } \) ]
-	Let \( ( \mathcal { X } , d ) \) be a Polish space, and \( p \in [ 1 , \infty ) \). Let \( \left( \mu _ { k } \right) _ { k \in \mathbb { N } } \) be a sequence of probability measures in \( P _ { p } ( X ) \) and let \( \mu \) be another element of \( P _ { p } ( \mathcal { X } ) . \) Then \( \left( \mu _ { k } \right) \) is said to converge weakly in \( P _ { p } ( \mathcal { X } ) \) if any one of the following equivalent properties is satisfied for some (and then any) \( x _ { 0 } \in \mathcal { X }: \)
-	\begin{enumerate}
-		\item \( \mu _ { k } \longrightarrow \mu \) and \( \int d \left( x _ { 0 } , x \right) ^ { p } d \mu _ { k } ( x ) \longrightarrow \int d \left( x _ { 0 } , x \right) ^ { p } d \mu ( x ) \)
-		\item \( \mu _ { k } \longrightarrow \mu \) and \( \limsup _ { k \rightarrow \infty } \int d \left( x _ { 0 } , x \right) ^ { p } d \mu _ { k } ( x ) \leq \int d \left( x _ { 0 } , x \right) ^ { p } d \mu ( x ) \)
-		\item \( \mu _ { k } \longrightarrow \mu \) and \( \lim _ { R \rightarrow \infty } \limsup _ { k \rightarrow \infty } \int _ { d \left( x _ { 0 } , x \right) \geq R } d \left( x _ { 0 } , x \right) ^ { p } d \mu _ { k } ( x ) = 0 \)
-		\item For all continuous functions \( \varphi \) with \( | \varphi ( x ) | \leq C \left( 1 + d \left( x _ { 0 } , x \right) ^ { p } \right) \)
-		      \( C \in \mathbb { R } \), one has
-		      \[ \int \varphi ( x ) d \mu _ { k } ( x ) \longrightarrow \int \varphi ( x ) d \mu ( x ) \]
-	\end{enumerate}
-\end{defn}
-
-\begin{thm}[$W _ { p }$  metrizes weak convergence \( P _ { p } \)]
-	\label{thm:Wp_metrizes_weak_convergence}
-	Let \( ( \mathcal { X } , d ) \) be a Polish space, and \( p \in [ 1 , \infty ) ; \) then the Wasserstein distance \( W _ { p } \) metrizes the weak convergence in \( P _ { p } ( \mathcal { X } ) . \) In other words, if \( \left( \mu _ { k } \right) _ { k \in \mathbb { N } } \) is a sequence of measures in \( P _ { p } ( \mathcal { X } ) \) and \( \mu \) is another measure in \( P ( \mathcal { X } ) , \) then the statements
-	\[ \mu _ { k } \text { converges weakly in } P _ { p } ( \mathcal { X } ) \text { to } \mu \]
-	and
-	\[ W _ { p } \left( \mu _ { k } , \mu \right) \longrightarrow 0 \]
-	are equivalent.
-\end{thm}
-
-For topology property of Wasserstein space, we refer to Theorem 6.18 in \cite{villani2008optimal}. This result is also a nature extension of general finite support measure approximation \cref{finite_support_approximation}.
-\begin{thm}[Topology of Wasserstein space]
-	\label{topology_Wasserstein}
-	Let \( \mathcal { X } \) be a complete separable metric space and \( p \in [ 1 , \infty ) \). Then the Wasserstein space \( P _ { p } ( \mathcal { X } ) , \) metrized by the Wasserstein distance \( W _ { p } , \) is also a complete separable metric space. In short: The Wasserstein space over a Polish space is itself a Polish space. Moreover, any probability measure can be approximated by a sequence of probability measures with finite support.
-\end{thm}
-
-\begin{thm}[Displacement interpolation as geodesics]
-	\label{geodesic_Wasserstein_space}
-	Let \( ( \mathcal { X } , d ) \) be a complete separable, locally compact length space. Let \( p > 1 \) and let \( P _ { p } ( \mathcal { X } ) \) be the space of probability measures on \( \mathcal { X } \) with finite moment of order \( p , \) metrized by the Wasserstein distance \( W _ { p } . \) Then, given any two \( \mu _ { 0 } , \mu _ { 1 } \in P _ { p } ( \mathcal { X } ) , \) and a continuous curve \( \left( \mu _ { t } \right) _ { 0 \leq t \leq 1 } , \) valued in \( P ( \mathcal { X } ) , \) the following properties are equivalent:
-	\begin{enumerate}
-		\item \( \mu _ { t } \) is the law of \(\gamma _ { t } \) where \( \gamma \) is a random (minimizing, constant speed) geodesic such that \( \left( \gamma _ { 0 } , \gamma _ { 1 } \right) \) is an optimal coupling;
-		\item \( \left( \mu _ { t } \right) _ { 0 \leq t \leq 1 } \) is a geodesic curve in the space \( P _ { p } ( \mathcal { X } ) \)
-	\end{enumerate}
-	Moreover, if \( \mu _ { 0 } \) and \( \mu _ { 1 } \) are given, there exists at least one such curve.
-	More generally, if \( \mathcal { K } _ { 0 } \subset P _ { p } ( \mathcal { X } ) \) and \( \mathcal { K } _ { 1 } \subset \operatorname { P } _ { p } ( \mathcal { X } ) \) are compact subsets of
-	\( P ( \mathcal { X } ) , \) then the set of geodesic curves \( \left( \mu _ { t } \right) _ { 0 < t < 1 } \) such that \( \mu _ { 0 } \in \mathcal { K } _ { 0 } \) and
-	\( \mu _ { 1 } \in \mathcal { K } _ { 1 } \) is compact and nonempty; and also the set of dynamical optimal transference plans \( \Pi \) with \( \left( e _ { 0 } \right) _ { \# } \Pi \in \mathcal { K } _ { 0 } , \left( e _ { 1 } \right) _ { \# } \Pi \in \mathcal { K } _ { 1 } \) is compact
-	and nonempty.
-\end{thm}
-
-\begin{rmk} [Similarity between Wasserstein distance and length structure]
-	% This comparison may be used in the discussion of geometric properties of Wasserstein space.
-	Following comparison seems mysterious and interesting.
-	\begin{itemize}
-		\item Wasserstein distance
-		      \begin{enumerate}
-			      \item lower semi-continuous with respect to weak convergence
-			      \item definition involves infimum
-			      \item isometric embedding between base space and Wasserstein space
-		      \end{enumerate}
-		\item Length structure
-		      \begin{enumerate}
-			      \item lower semi-continuous with repect to point-wise converge of curves
-			      \item definition involves infimum
-			      \item isometric embedding between base space and space of geodesics
-		      \end{enumerate}
-	\end{itemize}
+	In the particles system example, $E$ is the Euclidean space where positional vectors $\boldsymbol{r}$ belongs to
+	and $\mu := \sum \frac{m_\nu}{M} \, \delta_{\boldsymbol{r}_\nu}$ is a finitely supported measure.
+	% Later in some cases, we shall also
 \end{rmk}
 
-\section{Convex analysis}
+For the first chapter of this report, we shall first give a sufficient condition for the existence of barycenter.
+Then we present an example where the existence fails.
+It is an example in metric geometry,
+some definitions and properties are recalled thereby.
+Uniqueness of barycenter usually comes from convex properties of distance function.
+We can derive such kind of properties from non-positive curvature of metric space $E$.
+As a classic example, barycenter between south and north pole on the sphere is not unique.
 
-\subsection{Functional analysis}
+In the second chapter, we study the case when $E$ is a metric space of measures.
+This study has application in Statistics and we are interested in the so-called property consistency.
+Consistency means that convergence of measures implies convergence of their barycenters.
+As a prerequisite, we discuss a special metricization on the space of measures,
+namely the Wasserstein metric.
+We refer the space of measures endowed with this metric as Wasserstein space.
+The study of Wasserstein metric is an interesting part of optimal transportation theory.
+We shall go through a quick review of basic facts in this field.
+With this fruitful field in hand,
+we are able to show existence and consistency of barycenter in the Wasserstein space over a proper space.
+A proper space is a metric space where bounded closed sets are compact.
 
-\begin{thm}[Hahn-Banach Theorem]
-	Given two disjoint, nonempty, convex sets $A$ and $B$ in a topological vector space $X$. If \( A \) is compact, \( B \) is closed, and \( X \) is locally convex, then there exist \( \Lambda \in X ^ { * } , \gamma _ { 1 } \in R , \gamma _ { 2 } \in R , \) such that
-	\[
-		\operatorname { Re } \Lambda x < \gamma _ { 1 } < \gamma _ { 2 } < \operatorname { Re } \Lambda y
-	\]
-\end{thm}
-
-\begin{thm}[Banach-Alaoglu Theorem]
-	% If \( V \) is a neighborhood of 0 in a separable topological vector space \( X , \) and if \( \left\{ \Lambda _ { n } \right\} \) is a sequence in \( X ^ { * } \) such that
-	% \[ \left| \Lambda _ { n } x \right| \leq 1 \quad ( x \in V , n = 1,2,3 , \ldots ) \]
-	% then there is a subsequence \( \left\{ \Lambda _ { n _ { i } } \right\} \) and there is a \( \Lambda \in X ^ { * } \) such that
-	% \[ \Lambda x = \lim _ { i \rightarrow \infty } \Lambda _ { n _ { i } } x \quad ( x \in X ) \]
-	If \( V \) is a neighborhood of 0 in a topological vector space \( X \) and if
-	\[ K = \left\{ \Lambda \in X ^ { * }: | \Lambda x | \leq 1, \forall x \in V \right\} \]
-	then $K$ is weak* compact.
-\end{thm}
-
-\begin{rmk}
-	\begin{itemize}
-		\item Weak convergence of measures coincides with weak* topology on the dual space of bounded continous function $C_b(\mathcal{X})$.
-		\item Wasserstein metric toplogy of measures coincides with weak* topology on the (topological) dual space of $(1 + d(x_0, \cdot)^p) C_b(\mathcal{X})$.
-		\item $C_b(\mathbb{R})$ is not separable, we can consider the uncountable set of bounded functions taking value $0$ or $1$ on all integers.
-		\item The reason why Banach-Alaoglu theorem is not applicable is that the space of measures $P(\mathcal{X})$ is not closed in the weak* topolgy. Otherwise, this space will be weak* compact by Banach-Alaoglu theorem. And since weak convergence is metriziable, compactness is equivalent to sequential compactness. Then there is a classic counterexample of ``escape of mass". Consider Dirac measures on integers, this set has no accumulation points as measures on $\mathbb{R}$. Tightness is a control on the property of $P(\mathcal{X})$ being closed in weak* topology of the dual of $C_b(\mathcal{X})$.
-		\item We can apply Hahn-Banach theorem here:
-		      \begin{equation}
-			      \label{hahn_banach_application}
-			      \mu \in \overline { \operatorname { Conv } } ( \mathcal { K } ) \Longleftrightarrow \mu(f) \leq \sup _ { \nu \in \mathcal { K } } \int _ { \mathcal{X} } f \diff \nu, \quad \forall f \in C _ { b }( \mathcal{X} ).
-		      \end{equation}
-		      For instance we can prove the separability of \( \mathscr { P } ( \mathcal{X} ) \) by choosing \( \mathcal { K }: = \{ \delta _ { x }: x \in D \} \), where \( D \) is a countable dense subset of \( \mathcal{X}\). By \cref{hahn_banach_application} we easily check that \( \operatorname { Conv } (\mathcal { K }) \subset \mathscr { P } ( \mathcal{X} ) \subset \overline { \operatorname { Conv } } (\mathcal { K } \)) and therefore the subset of all the convex combinations with rational coefficients of \( \delta \)-measures concentrated in \( D \) is weakly dense in \( \mathscr { P } ( \mathcal{X} ) \). The same holds for Wasserstein metric topology.
-
-	\end{itemize}
-\end{rmk}
-
-Hence, convex analysis may not help us in the problem of Wasserstein barycenter, as the set of Dirac measures is not convex, not closed in the weak* topology of $C_b(\mathcal{X})$. The main application should optimal transport theory.
-
+In the last chapter, we carry our study on complete manifolds,
+as a special case of proper space.
+Discussion of differentiability is of center importance.
+Basically, we shall investigate convex analysis on manifold for technical preparation.
+We continue to explore in the setting of Wasserstein space.
+Uniqueness of barycenter comes from an generalization of remarkable Brenier's theorem on Euclidean space.
+The main goal of this chapter is to study absolutely continuity (with respect to volume measure) of barycenter in the Wasserstein space.
+Without too much complicated details involved, we prove it for barycenter of measures in the form of
+$\sum_{i=1}^{n} \lambda_i \delta_{\mu_i}$ if one of $\mu_i$ is absolutely continuous.
+The general case is still partly unknown, we shall give a brief discussion on it.

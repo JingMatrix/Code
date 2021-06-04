@@ -9,77 +9,76 @@
 }
 
 \usepackage{amsthm, amsmath, amsfonts, mathrsfs, amssymb, bbm}
-\usepackage[]{cancel} 
+\usepackage[]{cancel}
 \usepackage{cleveref}
+\usepackage{graphicx,wrapfig}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{coro}[thm]{Corollary}
 \newtheorem{lem}[thm]{Lemma}
 \theoremstyle{remark}
 \newtheorem{rmk}{Remark}[chapter]
-\newtheorem{example}{Example}[chapter]
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[chapter]
+\newtheorem{example}[defn]{Example}
 
 \usepackage{biblatex}
 \addbibresource{Bibliography.bib}
 
-
 \newcommand{\diff}{\operatorname{d}}
 
-\title{Existence and Uniqueness of Barycenters in various settings}
+\title{Existence and Uniqueness of Barycenter on Metric Space}
 \author{Jianyu MA}
 \date{\today}
 
 \begin{document}
-\pagenumbering{Alph}
-% \begin{titlepage}
 \maketitle
 
 \begin{abstract}
-	Barycenter, as a geometric concept, has easy generalization in various abstract spaces. Further applications of such a concept rely heavily on its existence and uniqueness. In the report, we study this problem in geometrical and measure-theoretical settings.
-
-	Current working plan is:
-	\begin{itemize}
-		% \item Verify example of non-uniqueness in relation of non-branching: four points by M.Bertrand
-		% \item Hilbert manifold geometric properties
-		% \item Counter examples of non-uniqueness and reasons
-		% \item Familiar with measure theory of metric space
-		% \item Study convex analysis
-		% \item Paper review of \cite{KIM2017640}
-		% \item Formulate a concise proof of main results in \cite{KIM2017640}
-		% \item Measure theory on Riemannian manifold
-		% \item Show that barycenter distance function is continuous.
-		\item More detailed analysis of differentiability of $(f_i / \lambda_i)^c$
-		\item Upper Lipschitz bound of exponential map
-		\item Justify differentiating of barycenter identity
-		\item Consistency of barycenter on manifold, by balance formula
-		\item Write final report
-	\end{itemize}
+	We can generalize physical concept of barycenter from Euclidean space to abstract metric space.
+	Both existence and uniqueness of barycenter are not clear in advance.
+	With this in mind, from abstract to concrete,
+	we investigate these two properties of barycenters on general metric space,
+	Wasserstein space over proper metric space and Wasserstein space over complete manifold.
+	In the last case, a barycenter is a measure on manifold and we discuss its absolutely continuity.
+	% Current working plan is:
+	% \begin{itemize}
+	% \item Verify example of non-uniqueness in relation of non-branching: four points by M.Bertrand
+	% \item Hilbert manifold geometric properties
+	% \item Counter examples of non-uniqueness and reasons
+	% \item Familiar with measure theory of metric space
+	% \item Study convex analysis
+	% \item Paper review of \cite{KIM2017640}
+	% \item Formulate a concise proof of main results in \cite{KIM2017640}
+	% \item Measure theory on Riemannian manifold
+	% \item Show that barycenter distance function is continuous.
+	% \item Write final report
+	% \item Discussion of uniqueness on metric space
+	% \item More detailed analysis of differentiability of $(f_i / \lambda_i)^c$
+	% \item Upper Lipschitz bound of exponential map
+	% \item \textcolor{red}{Impossible:} Justify differentiating of barycenter identity
+	% \item Consistency of barycenter on manifold, shrink nicely by barycenter formula.
+	% \end{itemize}
 \end{abstract}
 
 \tableofcontents
-\pagenumbering{arabic}
-\input{Chapters/review.tex}
+
 \input{Chapters/introduction.tex}
-\part{Barycenters in Geometrical Spaces}
+\input{Chapters/metric_space.tex}
+\input{Chapters/counter_example.tex}
 
-\input{Chapters/metric_geometric.tex}
+\input{Chapters/wasserstein_space.tex}
+\input{Chapters/consistency.tex}
 
-% \chapter{Alexandrov spaces}
-% \section{Curvature bounded above}
-% \section{Curvature bounded below}
-% \section{Hilbert spaces}
+\input{Chapters/analysis_manifold.tex}
+\input{Chapters/barycenter_manifold.tex}
+\input{Chapters/absolutely_continuity.tex}
+\input{Chapters/hessian.tex}
 
-% \chapter{Hilbert Riemannian manifold}
-
-\part{Barycenters in Measurable Spaces}
-\input{Chapters/wasserstein-barycenter.tex}
-\input{Chapters/manifold.tex}
-\input{Chapters/baryenter_measure.tex}
-
-
-
+% \appendix
+% \input{Chapters/notes.tex}
+% \input{Chapters/paper_review.tex}
+% \input{Chapters/reminder.tex}
 
 \printbibliography
 \end{document}
