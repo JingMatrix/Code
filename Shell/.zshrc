@@ -4,22 +4,26 @@ plugins+=(zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 function ocr {
-	if [[ $(wl-paste --list-types | head -1) == image/tiff ]]; then
+	if [[ $(wl-paste --list-types | head -1) =~ ^image ]]; then
 		wl-paste -t image/png >/tmp/clip.png
 	else
 		echo "No images in clipboard, try images on disk"
 	fi
 	if [[ -f /tmp/clip.png ]]; then
-		tesseract /tmp/clip.png - -l $1 1 2>/dev/null &>/dev/tty |
-			head -n -1 | wl-copy
+		tesseract /tmp/clip.png - -l $1 quiet | head -n -1 | wl-copy
+		wl-paste
 	else
 		echo "No images on disk, please take a new screenshot"
 		gnome-screenshot -f /tmp/clip.png -a
 	fi
 }
+
 function _ocr {
 	local -a ocr_langs
-	ocr_langs=('chi_sim:Chinese' 'eng:English' 'fra:French')
+	ocr_langs=('chi_sim:Simplified Chinese'
+		'chi_tra:Traditional Chinese'
+		'eng:English'
+		'fra:French')
 	_describe ocr ocr_langs
 }
 

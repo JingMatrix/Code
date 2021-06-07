@@ -18,7 +18,7 @@ sed -i "/TOREMOVE/,/^$/d" $zathura_history
 
 # pull updates from remote repos
 echo "Updating local git repository"
-for d in ~/.local/share/nvim/site/pack/*/*/* ~/.oh-my-zsh/custom/plugins/* ~/Documents/Project/*; do
+for d in ~/.local/share/nvim/site/pack/*/*/*/ ~/.oh-my-zsh/custom/{plugin,theme}s/*/ ~/Documents/Project/*/; do
 	(
 		cd "$d"
 		if [[ -d .git ]]; then
