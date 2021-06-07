@@ -1,4 +1,5 @@
 %! TEX root = ../barycenter.tex
+\YYCleverefInput{/var/tmp/latex/barycenter.sed}
 \section{Barycenter in Wasserstein space}
 
 In the previous chapter,
@@ -38,7 +39,7 @@ With the help of this theorem, we are ready to prove
 \begin{prop}
 	\label{prop:uniquness_barycenter_Wasserstein}
 	For measure $\mathbb{P} \in \mathcal{W}_2(\mathcal{W}_2(M))$ on $\mathcal{W}_2(M)$,
-	assume $\mathbb{P}$ gives mass to the set of absolutely continous measures $P_{ac}(M) \subset \mathcal{W}_2(M)$,
+	assume $\mathbb{P}$ gives mass to the set of absolutely continuous measures $P_{ac}(M) \subset \mathcal{W}_2(M)$,
 	i.e.,	$\mathbb{P}(P_{ac}(M)) > 0 $.
 	Then $\mathbb{P}$ has a unique barycenter measure on $M$.
 \end{prop}
@@ -157,19 +158,19 @@ Then $\bar{\mu}$ is concentrated on the union of barycenters, compact set $Y$.
 % because $br$ pushes $\mu_1$ to $\bar{\mu}$ by construction of $\bar{\mu}$.
 For $y \in Y$, $g_1$ is smooth by \cref{lem:barycenter_out_of_cut_locus},
 so $\exp( - \nabla g_1)$ is Lipschitz around a ball of $y$.
-Choose a finte cover for $Y$ from these balls,
+Choose a finite cover for $Y$ from these balls,
 and denote by $C$ the global Lipschitz constant of map \(\exp(-\nabla g_1)\) on $Y$.
 Absolutely continuity of $\mu_1$ means that given $\epsilon > 0$,
-we can find a $\delta >0$ such that $ \operatorname{Vol}(E) < \delta \implies \mu_1(E) < \epsilon$.
+we can find a $\delta > 0$ such that $ \operatorname{Vol}(E) < \delta \implies \mu_1(E) < \epsilon$.
 On the other hand, we have for measurable set $E \subset Y$,
-$\operatorname{Vol}(B^{-1}( E\times \{x^\prime\})) < C^n \text{Vol}(E)$,
+$\operatorname{Vol}(B^{-1}( E\times \{x^\prime\})) < C^n \operatorname{Vol}(E)$,
 where we write $x^\prime = (x_2, \ldots, x_n)$.
 Finally,
 \begin{equation}
 	\label{equa:absolutely_continuity_estimation}
 	E \subset Y, \operatorname{Vol}(E) < \delta / C^n \implies \bar{\mu}(E)=\mu_1(B^{-1}(E \times \{x^\prime\})) < \epsilon.
 \end{equation}
-Thus $\bar{\mu}$ is absolutely continous.
+Therefore, $\bar{\mu}$ is absolutely continuous.
 % Here the Lipschitz constant $C$ depends on the support of $\mu_1$.
 % Since $\exp(-\nabla(f_1 / \lambda_1)^c) = \exp(-\nabla g_1) $ is continous for Vol-a.e. $x_1$
 % (outside of cut-locus of $x_j, j \ne 1$),
@@ -201,14 +202,14 @@ Thus $\bar{\mu}$ is absolutely continous.
 % To attack general case when \textcolor{cyan}{
 \subsubsection{$\mu_i, i \geq 2$ are discrete measures}
 To proceed with this slightly general case,
-we should consider conditonal measures of an optimal multi-marginal transfer plan $\gamma$
+we should consider conditional measures of an optimal multi-marginal transfer plan $\gamma$
 with marginals $\mu_i$:
 \[
 	\diff \gamma(x_1, x^\prime)= \gamma(\diff x_1 \mid x^\prime)\, \diff \pi(x^\prime) ,
 \]
 where $\pi$ is the projection of $\gamma$ from $x = (x_1, x^\prime)$ to $x^\prime$,
 by abuse of language we also denote by it the push-forward measure from $\gamma$.
-For $\pi$-a.e $x^\prime$., $\gamma(\cdot \mid x^\prime)$ is a probability measure
+For $\pi$ almost everywhere $x^\prime$., $\gamma(\cdot \mid x^\prime)$ is a probability measure
 concentrated on $M \times \{x^\prime\}$.
 
 One has from the definition of conditional measures that,
@@ -219,7 +220,7 @@ as function on Borel measurable sets,
 
 If we have that for $\gamma$ almost everywhere $x^\prime$ that
 $B_{\#} \gamma(\cdot \mid x^\prime)$
-is absolutely continous,
+is absolutely continuous,
 then $\bar{\mu}(E)=0$ for volume measure zero set $E$ by integration above.
 Note that \cref{equa:absolutely_continuity_estimation} also holds by integration
 for some global Lipschitz constant $C$ of $\exp( - \nabla g_1)$ on the compact set of all possible barycenters.
@@ -247,7 +248,7 @@ Generally speaking, computation of $\gamma(\cdot \mid x^\prime)$ is only possibl
 			      \gamma
 		      }{\pi(x^\prime)}.
 	      \]
-	\item $\gamma$ is absolutely continous with density function $f: M^n \rightarrow \mathbb{R} $.
+	\item $\gamma$ is absolutely continuous with density function $f: M^n \rightarrow \mathbb{R} $.
 	      \[
 		      \gamma(\diff x_1 \mid x^\prime) =
 		      \frac{
@@ -257,7 +258,7 @@ Generally speaking, computation of $\gamma(\cdot \mid x^\prime)$ is only possibl
 		      {\int_{M} f(x_1, x^\prime) \diff \operatorname{Vol}(x_1)
 		      }
 	      \]
-	      where we set the right hand side zero if it is undeterminated
+	      where we set the right hand side zero if it is indeterminate
 	      and we remove this $x^\prime$ from consideration.
 \end{itemize}
 % Note in both cases, $\gamma(\cdot \mid x^\prime)$
@@ -265,7 +266,7 @@ Generally speaking, computation of $\gamma(\cdot \mid x^\prime)$ is only possibl
 % $\mu_1^{x^\prime} := \text{proj}^1_{\#}\gamma(\cdot \mid x^\prime)$
 % to the first coordinate.
 But only in the first case that the measure $\gamma(\cdot \mid x^\prime) \leq \pi(x^\prime) \, \gamma$
-is controled by $\gamma$.
+is controlled by $\gamma$.
 % Or we hope $f$ has positive lower bound,
 % for example \textcolor{cyan}{continous and strictly positive}, like volume measure.
 % In the case $\mu_1=\operatorname{Vol}$? Every point in $\text{spt}\mu_1$ runs over all $\times_i \text{spt}\mu_i$.
@@ -281,9 +282,9 @@ In this case, conditioning of (multi-marginal) optimal plan is still optimal by 
 That is to say, $\gamma(\cdot \mid x^\prime)$ is an optimal plan of its marginals.
 % \textcolor{cyan}{in the case of discrete measure}.
 Apply previous discussion, we know that $B_{\#}\gamma(\cdot, x^\prime)$
-is absolutely continous.
+is absolutely continuous.
 % \[
-	% \exp(-\frac{1}{\lambda_1}\nabla f_1)_{\#}  \mu_1^{x^\prime}=
+% \exp(-\frac{1}{\lambda_1}\nabla f_1)_{\#}  \mu_1^{x^\prime}=
 % \]
 % where $\bar{\mu}^{x^\prime}$ is a barycenter measure.
 % Since conditioning of optimal maps are still optimal,
@@ -327,7 +328,7 @@ in $\mathcal{W}_2(\mathcal{W}_2(M))$.
 By the consistency of barycenters, the unique barycenter $\bar{\mu}_m$ of $\mathbb{P}_m$
 converges in Wasserstein metric to the unique barycenter $\bar{\mu}$ of $\mathbb{P}$.
 % We don't need to find out density explicitly.
-We prove the absolutely continuity by showing that
+We prove the absolute continuity by showing that
 for any $\epsilon > 0$ there is a $\delta > 0$ such that
 \begin{equation}
 	\label{equa:absolutely_continous}

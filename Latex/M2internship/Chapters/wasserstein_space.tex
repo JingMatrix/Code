@@ -1,4 +1,5 @@
 %! TEX root = ../barycenter.tex
+\YYCleverefInput{/var/tmp/latex/barycenter.sed}
 \chapter{Barycenter in Wasserstein space}
 
 In this chapter,
@@ -67,8 +68,8 @@ The proof relies on basic variational arguments involving the topology of weakly
 which is imposed by bounded continuous test functions.
 There are two key properties to check:
 \begin{enumerate}
-	\item lower semi-continuity with respect to weakly convergence,
-	\item compactness in weak topology.
+	\item Lower semi-continuity with respect to weakly convergence,
+	\item Compactness in weak topology.
 \end{enumerate}
 These issues are taken care of respectively in two lemmas below.
 
@@ -120,7 +121,7 @@ These issues are taken care of respectively in two lemmas below.
 	Then \cref{lem:lower_semi-continuity_of_the_cost_functional} gives
 	\[ \int c \diff \pi \leq \liminf _ { k \rightarrow \infty } \int c \diff \pi _ { k }. \]
 
-	Thus $\pi$ is minimizing.
+	Therefore, $\pi$ is minimizing.
 \end{proof}
 
 We shall talk about conditional transference plans in the next chapter,
@@ -177,8 +178,9 @@ for which we prove that the restriction of optimal plan is still optimal (\cite[
 	\label{Wasserstein_distance}
 	Let  \(( E , d ) \) be a Polish metric space, and let \( p \in [ 1 , \infty ) . \) For any two probability measures \( \mu , \nu \) on \( E , \) the Wasserstein distance of order \( p \) between \( \mu \) and \( \nu \) is defined by the formula
 	\begin{align*}
-		W _ { p } ( \mu , \nu ) & = \left( \inf _ { \pi \in \Pi ( \mu , \nu ) } \int _ { E } d ( x , y ) ^ { p } \diff \pi ( x , y ) \right) ^ { 1 / p }                                                              \\
-		                        & = \inf \left\{ \left[ \mathbb{ E } d ( X , Y ) ^ { p } \right] ^ { \frac { 1 } { p } } , \quad \operatorname { law } ( X ) = \mu , \quad \operatorname { law } ( Y ) = \nu \right\}
+		W _ { p } ( \mu , \nu ) 
+		= \left( \inf _ { \pi \in \Pi ( \mu , \nu ) } \int _ { E } d ( x , y ) ^ { p } \diff \pi ( x , y ) \right) ^ { 1 / p  } 
+		= \inf \left\{ \left[ \mathbb{ E } d ( X , Y ) ^ { p } \right] ^ { \frac { 1 } { p } } , \quad \operatorname { law } ( X ) = \mu , \quad \operatorname { law } ( Y ) = \nu \right\}
 	\end{align*}
 \end{defn}
 
@@ -201,12 +203,13 @@ Abstract calculation is possible if $\Pi(\mu,\nu)$ is effectively a singleton.
 \end{lem}
 
 \begin{proof}
-	This is a direct consequence of lower semi-continuity of the cost functional, see \cref{lem:lower_semi-continuity_of_the_cost_functional}.
+	This is a direct consequence of lower semi-continuity of the cost functional,
+	see \cref{lem:lower_semi-continuity_of_the_cost_functional}.
 \end{proof}
 
 \begin{defn}[Wasserstein space]
 	\label{Wasserstein_space}
-	With the same conventions as in \cref{Wasserstein_distance} , the Wasserstein space of order \( p \) is defined as
+	With the same conventions in \cref{Wasserstein_distance}, the Wasserstein space of order \( p \) is defined as
 	\[
 		\mathcal{W}_p(E): = \left\{ \mu \text{ Borel  probability measure on } E \,|
 		\, \int _ { E } d \left( x _ { 0 } , x \right) ^ { p } \diff \mu (x) < + \infty \right\}

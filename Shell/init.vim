@@ -4,14 +4,18 @@ let g:vimtex_compiler_latexmk={'build_dir' : '/var/tmp/latex'}
 let g:vimtex_fold_enabled=1
 let g:vimtex_fold_manual=1
 let g:vimtex_view_method='zathura'
+let g:vimtex_view_zathura_options='--mode=fullscreen'
 let g:vimtex_quickfix_method='pplatex'
 let g:matchup_override_vimtex=1
 let g:vimtex_quickfix_open_on_warning=0
-let g:vimtex_grammar_vlty={'lt_command': 'languagetool'}
+let g:vimtex_syntax_nospell_commands=['YYCleverefInput']
+let g:vimtex_syntax_nospell_comments=1
+let g:vimtex_grammar_vlty={'lt_command': 'languagetool',
+			\'lt_disablecategories': 'TYPOGRAPHY,TYPOS'}
 let g:vimtex_quickfix_ignore_filters=[
-			\ 'Underfull',
-			\ 'Overfull',
-			\ 'Fandol',
+			\'Underfull',
+			\'Overfull',
+			\'Fandol',
 			\'multiple pdfs with page group',
 			\]
 let g:vimtex_fold_types={'comments' : {'enabled' : 1}}
@@ -19,7 +23,7 @@ augroup math_edit
 	autocmd!
 	" Fix latex log jump for project files
 	autocmd FileType tex nmap <localleader>ll :exe 'lcd' b:vimtex.root <bar> VimtexCompile <cr>
-	autocmd FileType tex nmap <buffer> <F9> :silent! w <bar> compiler vlty <bar> make <bar> :cw <cr><esc>
+	autocmd FileType tex nmap <buffer> <F9> :setl spell <bar> silent! w <bar> compiler vlty <bar> make <bar> :cw <cr><esc>
 	autocmd FileType tex setl dictionary+=../.dict | setl iskeyword+=- | setl complete=.,t,k
 	autocmd FileType tex setl keywordprg=texdoc
 	autocmd FileType tex nmap <localleader>ld <Plug>(vimtex-doc-package)

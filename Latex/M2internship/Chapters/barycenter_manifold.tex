@@ -1,4 +1,5 @@
 %! TEX root = ../barycenter.tex
+\YYCleverefInput{/var/tmp/latex/barycenter.sed}
 \section{Barycenter in manifold}
 
 \label{section:barycenter_manifold}
@@ -25,6 +26,27 @@ then by definition $f_i /\lambda_i \in \mathcal{I}^c (\bar{ \mathcal{X}}, Y)$
 is the $c$-transform of
 $g_i$ restricted to $Y$.
 % and $g_i = (f_i / \lambda_i)^c$ on $Y$.
+\begin{rmk}[$g_i$ on $Y$ is the $c$-transform of $f_i / \lambda_i$]
+	In general, we have by definition of $c$-transform that
+	$g_i(w) \leq (f_i / \lambda_i)^c(w) := \inf_{x_i \in \bar{ \mathcal{X} } } c(x_i, w) - f_i / \lambda_i (x_i)$.
+	If $ c(z, x_i) = g_i (z) + f_i / \lambda_i (x_i)$,
+	then
+	$g_i(z) = (f_i / \lambda_i)^c (z)$ since $(f_i / \lambda_i)^c(z) + f_i / \lambda_i(x_i) \leq c (z, x_i)$.
+	This implies that $g_i = (f_i / \lambda_i)^c$ on $Y$.
+
+	If $g_i$ is differentiable then $f_i / \lambda_i \geq g_i$ is sub-differentiable
+	and thus differentiable with the same gradient as $g_i$.
+	So $(f_i / \lambda_i)^c$ is differentiable on $Y$.
+	By \cref{example:minimizer_differentiable}, for each barycenter $z \in Y$,
+	there exists a unique $x_i = \exp_z (- \nabla g_i (z))$ such that $z$ is the barycenter
+	of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
+	However, it says nothing on the uniqueness for barycenter of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
+	% Both $g_i$ and $(f_i / \lambda_i)^c$ are continous;
+	% $g_i$ is differentiable alomst everywhere with respect to volume measure.
+	% because in local normal coordinate $g_i$ is differentiable almost everywhere 
+	% with respect to Lesbegue measure.
+
+\end{rmk}
 The \cref{lem:minimizer_differentiable} tells us two things,
 \begin{itemize}
 	\item $f_i$ is Lipschitz on $\bar{ \mathcal{X} }$;
@@ -37,7 +59,7 @@ measure $\sum_{j=1}^{n} \lambda_j \delta_{x_j}$ on $M$.
 % \[
 % B(\boldsymbol{x}) \in \arg \min_{w \in M} \sum_{i=1}^{n} \lambda_i d(w, x_i)^2.
 % \]
-We have following \textbf{barycenter formula}
+We have the following \textbf{barycenter formula}
 if $f_i$ is differentiable at $x_i$,
 \begin{equation}
 	\label{equa:formula_barycenter}
@@ -90,27 +112,6 @@ Therefore, $ \exp(- \nabla g_i) $ is a left inverse to $\exp( - \nabla f_i / \la
 	\quad \text{if } \nabla f_i \text{ exists}.
 \]
 
-\begin{rmk}[$g_i$ on $Y$ is the $c$-transform of $f_i / \lambda_i$]
-	In general, we have by definition of $c$-transform that
-	$g_i(w) \leq (f_i / \lambda_i)^c(w) := \inf_{x_i \in \bar{ \mathcal{X} } } c(x_i, w) - f_i / \lambda_i (x_i)$.
-	If $ c(z, x_i) = g_i (z) + f_i / \lambda_i (x_i)$,
-	then
-	$g_i(z) = (f_i / \lambda_i)^c (z)$ since $(f_i / \lambda_i)^c(z) + f_i / \lambda_i(x_i) \leq c (z, x_i)$.
-	This implies that $g_i = (f_i / \lambda_i)^c$ on $Y$.
-
-	If $g_i$ is differentiable then $f_i / \lambda_i \geq g_i$ is sub-differentiable
-	and thus differentiable with the same gradient as $g_i$.
-	So $(f_i / \lambda_i)^c$ is differentiable on $Y$.
-	By \cref{example:minimizer_differentiable}, for each barycenter $z \in Y$,
-	there exists a unique $x_i = \exp_z (- \nabla g_i (z))$ such that $z$ is the barycenter
-	of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
-	However, it says nothing on the uniqueness for barycenter of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
-	% Both $g_i$ and $(f_i / \lambda_i)^c$ are continous;
-	% $g_i$ is differentiable alomst everywhere with respect to volume measure.
-	% because in local normal coordinate $g_i$ is differentiable almost everywhere 
-	% with respect to Lesbegue measure.
-
-\end{rmk}
 
 \subsection{Uniqueness and curvature condition}
 

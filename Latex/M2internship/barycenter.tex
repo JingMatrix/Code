@@ -1,16 +1,8 @@
 \documentclass{report}
 
-\usepackage{hyperref}
-\hypersetup{
-	colorlinks=true,
-	linkcolor=blue,
-	filecolor=magenta,
-	urlcolor=cyan,
-}
-
+\usepackage[]{geometry}
 \usepackage{amsthm, amsmath, amsfonts, mathrsfs, amssymb, bbm}
 \usepackage[]{cancel}
-\usepackage{cleveref}
 \usepackage{graphicx,wrapfig}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
@@ -22,12 +14,17 @@
 \newtheorem{defn}{Definition}[chapter]
 \newtheorem{example}[defn]{Example}
 
+\usepackage[poorman]{cleveref}
+\usepackage[colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan]{hyperref}
+% \usepackage{cleveref}
+
 \usepackage{biblatex}
 \addbibresource{Bibliography.bib}
 
 \newcommand{\diff}{\operatorname{d}}
+\newcommand{\YYCleverefInput}[1]{}
 
-\title{Existence and Uniqueness of Barycenter on Metric Space}
+\title{Existence and Uniqueness of Barycenter in Metric Space}
 \author{Jianyu MA}
 \date{\today}
 

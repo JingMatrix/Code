@@ -1,4 +1,5 @@
 %! TEX root = ../barycenter.tex
+\YYCleverefInput{/var/tmp/latex/barycenter.sed}
 \chapter{In the case of Riemannian manifold}
 
 We continue to use notations in the proof of last \cref{thm:barycenter_finite_support_measure}.
@@ -60,7 +61,6 @@ Note that \cref{equa:exponential_map_and_squared_distance_function} requires the
 a minimal geodesic linking \( x \) to \( y \),
 and it is for this reason that completeness of the manifold is required.
 
-
 Both $f$ and $B$, and even optimal transference plan are related to so-called $c$-concave functions.
 
 \begin{defn} [$c$-transforms and the subset \( \mathcal { I } ^ { c } ( X , Y ) \) of \( c \)-concave functions]
@@ -76,9 +76,9 @@ Both $f$ and $B$, and even optimal transference plan are related to so-called $c
 	by writing \( \phi = \psi ^ { c } \).
 	Similarly, given \( \phi \in \mathcal{I} ^ { c } ( X , Y ) \),
 	we define its \( c \)-transform \( \phi ^ { c } \in \mathcal{I} ^ { c } ( Y , X ) \) by
-	\begin{equation} 
-					\label{equa:c_transform_of_c_conjugate}
-	\phi ^ { c } ( y ) : = \inf _ { x \in X } c ( x , y ) - \phi ( x ) \quad \forall y \in Y.
+	\begin{equation}
+		\label{equa:c_transform_of_c_conjugate}
+		\phi ^ { c } ( y ) : = \inf _ { x \in X } c ( x , y ) - \phi ( x ) \quad \forall y \in Y.
 	\end{equation}
 \end{defn}
 
@@ -91,8 +91,8 @@ it follows easily from \cref{equa:c_transform_of_c_conjugate} as in Rachev and R
 which we abbreviate by writing \( \phi ^ { c c } = \phi \), suppressing the domains of definition once more.
 As in \cite{mccann2001polar}, Lipschitz continuity of \( \phi ^ { c } \) follows merely from
 compactness of \( X \) and the locally Lipschitzian character of \( c ( x , y ) \),
-whether or not \( \phi : X \rightarrow \mathbb { R } \cup \{ - \infty \} \) is continuous.
-Thus it costs no generality to
+regardless of whether or not \( \phi : X \rightarrow \mathbb { R } \cup \{ - \infty \} \) is continuous.
+Thus, it costs no generality to
 assume \( \psi \) and \( \phi \) are continuous and real-valued in \cref{defn:c_transform}.
 
 Note that function $c(x,y)$ for fixed $x$ is a $c$-concave function.
@@ -100,7 +100,7 @@ Note that function $c(x,y)$ for fixed $x$ is a $c$-concave function.
 \begin{thm}[Optimal transportation on manifolds]
 	\label{thm:optimal_transport_manifold}
 	Let \( M \) be a complete Riemannian manifold.
-	Fix two Borel probability measures \( \mu \ll \) vol and \( v \) on \( M \),
+	Fix two Borel probability measures \( \mu \ll \) $\operatorname{Vol}$ and \( v \) on \( M \),
 	and two compact subsets \( X \) and \( Y \subset M \) containing the support of \( \mu \) and \( v \),
 	respectively.
 	Then there exists \( \phi \in \mathcal { I } ^ { c } ( X , Y ) \) such that the map

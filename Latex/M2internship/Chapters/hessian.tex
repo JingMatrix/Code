@@ -1,4 +1,5 @@
 %! TEX root = ../barycenter.tex
+\YYCleverefInput{/var/tmp/latex/barycenter.sed}
 \subsection{Absolutely continuity in general case}
 
 In general case, we shall find relations between density functions.
@@ -23,7 +24,7 @@ definition of Hessian using super-differential.
 		\label{defn:hessian}
 		\sup _ { v \in \partial \phi \left( \exp _ { x } u \right) } \left| \Pi _ { x , u } v - \nabla \phi ( x ) - H u \right| = o ( | u | )
 	\end{equation}
-	as \( u \rightarrow 0 \) in \( T _ { x } \) M. Here \( \Pi _ { x , u } : T _ { \exp _ { x } u } M \rightarrow T _ { x } M \) denotes parallel translation to \( x \) along \( \gamma ( t ) : = \exp _ { x } ( t u ) . \) The Hessian of \( \phi \) at \( x \) may also be denoted
+	as \( u \rightarrow 0 \) in \( T _ { x } M \). Here \( \Pi _ { x , u } : T _ { \exp _ { x } u } M \rightarrow T _ { x } M \) denotes parallel translation to \( x \) along \( \gamma ( t ) : = \exp _ { x } ( t u ) . \) The Hessian of \( \phi \) at \( x \) may also be denoted
 	by \( \operatorname { Hess } _ { x } \phi : = H \).
 \end{defn}
 
@@ -90,9 +91,9 @@ This definition gives Jacobian identity (\cite[Theorem 4.2]{cordero2001riemannia
 \begin{thm}
 	[Jacobian identity a.e.]
 	\label{thm:jacobian_identity}
-	Let \( \mu \ll \) Vol and \( \nu \ll \) Vol be
+	Let \( \mu \ll \operatorname{Vol} \) and \( \nu \ll \operatorname{Vol} \) be
 	two compactly supported Borel probability measures and denote their
-	\( L ^ { 1 } ( M, \text{Vol}) \) densities by \( f \) and \( g \), respectively.
+	\( L ^ { 1 } ( M, \operatorname{Vol}) \) densities by \( f \) and \( g \), respectively.
 	Fix domains \( \mathcal{X} \subset \subset M \) and \( \mathcal{Y} \subset \subset M \) containing the support of \( \mu \) and \( v \), respectively.
 	Suppose \( \phi \in \mathcal{I} ^ { c } ( \bar { \mathcal{X} } , \bar { \mathcal{Y} } ) \) induces
 	\( F : \mathcal{X} \rightarrow \bar { \mathcal{Y} } \) defined by \( F ( x ) : = \exp _ { x } ( - \nabla \phi ( x ) ) \)
@@ -129,7 +130,7 @@ while we shall eliminate the Hessian of $\varphi$ at the end.
 % \end{equation}
 
 Rauch theorem gives bound on $Y$ through section curvature, see
-\cite[Theorem IX.2.3]{chavel2006riemannian} for a prove using Jacobi filed.
+\cite[Theorem IX.2.3]{chavel2006riemannian} for a proof using Jacobi filed.
 \begin{prop} [The geometric Rauch theorem]
 	Let $\xi$ be unit tangent vector in $T_p M$
 	and $\gamma$ a geodesic starting at $p \in M$ with initial speed $\xi$.
@@ -247,7 +248,7 @@ Therefore,
 	\bar{g} \leq (v_H v_Y)^m \left[  \sum_{j=1}^k \frac{ \lambda_j }
 		{ (g_j \circ T_j)^{1/m}} \right]^{-m}
 	\leq \frac{ (v_H v_Y)^m }{(\sum_{j=1}^k \lambda_j)^{m+1}}
-	\sum_{j=1}^k \lambda_j g_j \circ T_j.
+	\sum_{j=1}^k \lambda_j g_j \circ T_j
 \end{equation}
 where we used Jensen inequality for convex function $x \mapsto x^{-m}$
 with linear combination $\lambda_j / \sum_{j=1}^k \lambda_j$.
@@ -255,42 +256,48 @@ with linear combination $\lambda_j / \sum_{j=1}^k \lambda_j$.
 % have supports in a common compact set $K \subset M$.
 % Then $\bar{\mu}(E) \leq (v_H v_Y)^m l \operatorname{Vol}(E)$.
 
-For a compact set $K \subset M$ and a positive integrable function $l: K \rightarrow \mathbb{R}$,
-denote by $\mathcal{A}_{K, l} \subset \mathcal{W}_2(M)$ the Borel set of
-all probability measures that have support in $K$ and density function dominated by $l$.
-We are ready to prove,
+For a compact set $K \subset M$ and a positive number $l > 0$,
+denote by $\mathcal{A}_{K, l} \subset \mathcal{W}_2(M)$ the closed set of
+all probability measures that have support in $K$ and density function bounded by $l$.
+$\mathcal{A}_{K, l}$ is closed by classic duality argument
+where we regard measure as functional on $L^1(M)$; see \cite[Theorem 4.4.1]{Bogachev2007}.
 
 \begin{thm}[Absolutely continuity for barycenter]
 	For a measure $\mathbb{P} \in \mathcal{W}_2(\mathcal{W}_2(M))$ on $\mathcal{W}_2(M)$,
 	assume $\mathbb{P}(\mathcal{A}_{K,l}) >0$ for some compact set $A \subset M$ and positive
-	integrable function $l$ on $K$.
+	number $l > 0$.
 	Then the unique barycenter of $\mathbb{P}$
 	% has compact support,
 	is absolutely continuous.
 \end{thm}
 
 \begin{proof}
-	% Write $\mathbb{P} = \eta\, \mathbb{P}_1 + (1 - \eta)\, \mathbb{P}_2$ with
-	% $\eta := \mathbb{P}(\mathcal{A}_{K,l})$ and $\mathbb{P}_1$ the
-	% restriction measure of $\mathbb{P}$ to the measurable set $\mathcal{A}_{K,l}$.
+	Write $\mathbb{P} = \eta\, \mathbb{P}^1 + (1 - \eta)\, \mathbb{P}^2$ with
+	$\eta := \mathbb{P}(\mathcal{A}_{K,l})$ and $\mathbb{P}^1$ the
+	restriction measure of $\mathbb{P}$ to the closed subspace $\mathcal{A}_{K,l} \subset \mathcal{W}_2(M)$.
 	We approximate $\mathbb{P}$ with $ \mathbb{P}_i $
 	% =\eta\, \mathbb{Q}_1^i + (1-\eta)\, \mathbb{Q}_2^i$,
 	that are supported on finite measures with compact supports.
-	We can assume without loss of generality that $\mathbb{P}_i$ gives mass to $\mathcal{A}_{K,l}$ and
+	We could require that $\mathbb{P}_i (\mathcal{A}_{K,l}) = \mathbb{P} (\mathcal{A}_{K,l})$
+	if we approximate $\mathbb{P}^1 $ in $\mathcal{W}_2(\mathcal{A}_{K,l})$
+	and $\mathbb{P}^2$ normally in $\mathcal{W}_2(\mathcal{W}_2(M))$.
+	% We can assume without loss of generality that $\mathbb{P}_i$ gives mass to $\mathcal{A}_{K,l}$ and
 	% $\exists \varepsilon >0$, such that
-	by regularity of $\mu$ that
-	$\limsup_{i}\mathbb{P}_i(\mathcal{A}_{K,l}) \geq \frac{1}{2} \mathbb{P}(\mathcal{A}_{K,l}).$
+	% \textcolor{red}{We want that}
+	% $\limsup_{i}\mathbb{P}_i(\mathcal{A}_{K,l}) > 0$.
+	% \frac{1}{2} \mathbb{P}(\mathcal{A}_{K,l}).$
 	% ;and construct $ \mathbb{Q}_1^i , \mathbb{Q}_2^i$ the same way as $\mathbb{P}_1, \mathbb{P}_2$.
 	Denote by $\mu_i \rightarrow \mu$ barycenters of $\mathbb{P}_i \rightarrow \mathbb{P}$,
 	we deduce from inequality \cref{equa:density_inequality} that,
 	for a pre-compact open set $E \subset M$,
 	\[
 		\mu(E) \leq \liminf_i \mu_i(E) \leq
-		\liminf_i \left(\frac{v_H\, v_Y}{\mathbb{P}_i(\mathcal{A}_{K,l})}\right)^m
-		\, \int_{E \cap K} l \diff \operatorname{Vol},
+		\liminf_i \frac{(v_H\, v_Y)^m}{(\mathbb{P}(\mathcal{A}_{K,l}))^{m+1}}
+		% \, \int_{E \cap K} l \diff \operatorname{Vol},
+		\,l\, \operatorname{Vol}(E),
 	\]
 	where $v_H, v_Y$ are supremums for their point-wise version for points in $\bar{E}$.
-	Here we use the fact that section curvature along all geodesics starting form $\bar{E}$ and
+	Here we use the fact that section curvature along all geodesics starting from $\bar{E}$ and
 	ending at $K$ is bounded;
 	see similar argument in \cite[Corollary 3.3.7]{cordero2001riemannian}.
 

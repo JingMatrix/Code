@@ -1,9 +1,10 @@
 %! TEX root = ../barycenter.tex
+\YYCleverefInput{/var/tmp/latex/barycenter.sed}
 \section{Barycenter in Wasserstein space}
 
 Recall that we only need Polish space to define Wasserstein metric, so we can write $\mathcal{W}_p(\mathcal{W}_p(E))$
 by \cref{thm:topology_Wasserstein} if $E$ is a Polish space.
-We assume always that $p \in [1, \infty)$.
+We always assume that $p \in [1, \infty)$.
 And we slightly generalize the definition for barycenter $\mu \in \mathcal{W}_p(E)$
 of $\mathbb{P} \in \mathcal{W}_p(\mathcal{W}_p(E))$,
 \[
@@ -45,7 +46,7 @@ Following theorem (\cite[Corollary 7.22]{villani2008optimal}) states that Wasser
 	Let \( ( E , d ) \) be a complete separable, locally compact length space (thus a proper and geodesic space).
 	Let \( p > 1 \) and let \( \mathcal{W}_p(E) \) be the space of probability measures
 	on \( E \) with finite moment of order \( p \),
-	metrized by the Wasserstein distance \( W _ { p } \).
+	metricized by the Wasserstein distance \( W _ { p } \).
 	Then, given any two \( \mu _ { 0 }\), \( \mu _ { 1 } \in \mathcal{W}_p(E) \),
 	and a continuous curve \( \left( \mu _ { t } \right) _ { 0 \leq t \leq 1 } \),
 	valued in \( \mathcal{W}_p(E) \),
@@ -87,7 +88,7 @@ Results in this section is fully borrowed from \cite{le2017existence}.
 We present them in a more geometrical style without the purpose of claiming originality.
 
 Wasserstein space is not locally compact unless the base space is compact (\cite[Remark 7.1.9]{Ambrosio2005}).
-But weakly convergence behaves well with Wasserstein metric and we can get weakly compactness with less cost.
+But weakly convergence behaves well with Wasserstein metric, and we can get weakly compactness with less cost.
 Properness of base space gives ``properness'' of Wasserstein space for \underline{weakly convergence topology}.
 
 \begin{prop}
@@ -172,9 +173,9 @@ either in $E$, $\mathcal{W}_p(E)$ or $\mathcal{W}_p(\mathcal{W}_p(E))$.
 		                              & \geq \mathbb{E}\liminf_{n \rightarrow \infty} W_p(\mu_n, \hat{\mu})      \\
 		                              & \geq \mathbb{E}W_p(\mu, \hat{\mu}).
 	\end{align*}
-	The first inequality comes from Fatou's lemma.
+	The first inequality results from Fatou's lemma.
 	From calculation above these two inequalities are in fact equalities.
-	An subsequence of $\mu_n$ will satisfy these equalities as well.
+	A subsequence of $\mu_n$ will satisfy these equalities as well.
 	We can then prove by contradiction that $\liminf$ above can be safely substituted by $\lim$.
 	That is to say,
 	\[
@@ -282,7 +283,7 @@ is to prove it for measures with finite support.
 	For our proof, to be concrete,
 	let $\boldsymbol \gamma$ be a solution to the second inequality,
 	that is to say,
-	an optimal transference plan with marginals $\mu_i$ with respect to (continous) cost function
+	an optimal transference plan with marginals $\mu_i$ with respect to (continuous) cost function
 	$f(\boldsymbol{x}):=\min_{x} \sum_{i=1}^{n} \lambda_i d(x, x_i)^p = : W_p(\sum_{i=1}^n \lambda_i \delta_{x_i}, E)^p$.
 	Then $\mu:= B_{\#}\boldsymbol \gamma$ is a barycenter of $\sum_{i=1}^{n}\lambda_i \delta_{\mu_i}$.
 \end{proof}
@@ -295,7 +296,7 @@ is to prove it for measures with finite support.
 	\[
 		\operatorname{bary}( \boldsymbol{A} ) :
 		=\{y \mid (y, \boldsymbol{x}) \in \Gamma^0, \boldsymbol{x} \in \boldsymbol{A} \}
-		= \cap_{\varepsilon \downarrow 0} \pi ( \overline{ \Gamma^\varepsilon } \cap E \times \boldsymbol{A})
+		= \pi ( \Gamma^0  \cap E \times \boldsymbol{A})
 	\]
 	is compact.
 	It is closed since $\pi$ is an open map.
