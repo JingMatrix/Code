@@ -1,9 +1,10 @@
 env:
   EDITOR: nvim
-  NNN_BMS: "a:~/Mathematics/Textbook_Archive;r:~/Mathematics/Research;c:~/Reading/Computer\ Science\ Documents;l:/var/tmp/latex"
-  NNN_PLUG: "n:preview-note;f:fzcd;z:fzz"
-  FZF_DEFAULT_COMMAND: 'fd --type file --follow --hidden --exclude .git'
-  FZF_DEFAULT_OPTS: "--ansi"
+  NNN_BMS: a:~/Mathematics/Textbook_Archive;r:~/Mathematics/Research;c:~/Reading/Computer
+    Science Documents;l:/var/tmp/latex
+  NNN_PLUG: n:preview-note;f:fzcd;z:fzz
+  FZF_DEFAULT_COMMAND: fd --type file --follow --hidden --exclude .git
+  FZF_DEFAULT_OPTS: --ansi
   BROWSER: w3m
   LANG: fr_FR.UTF-8
 window:
@@ -17,44 +18,46 @@ shell:
   args:
     - --login
 key_bindings:
-  - { key: RControl, action: PasteSelection }
-  - { key: RAlt, action: Paste }
-  - { key: 127, chars: "\x02" }
-  
+  - key: RControl
+    action: PasteSelection
+  - key: RAlt
+    action: Paste
+  - key: 127
+    chars: "\x02"
 background_opacity: 0.6
 font:
   normal:
-    family: MesloLGS NF
+    family: Hack Nerd Font
     style: regular
   bold:
-    family: MesloLGS NF
+    family: Hack Nerd Font
     style: bold
   italic:
-    family: MesloLGS NF
+    family: Hack Nerd Font
     style: italic
   size: 19
-# GNOME Terminal Tango Dark
 colors:
   primary:
-    background: "0x000000"
-    foreground: "0xffffff"
-
+    background: "#000000"
+    foreground: "#ffffff"
+  cursor:
+    text: "#F81CE5"
+    cursor: "#ffffff"
   normal:
-    black: "0x2e3436"
-    red: "0xcc0000"
-    green: "0x4e9a06"
-    yellow: "0xc4a000"
-    blue: "0x3465a4"
-    magenta: "0x75507b"
-    cyan: "0x06989a"
-    white: "0xd3d7cf"
-
+    black: "#000000"
+    red: "#fe0100"
+    green: "#33ff00"
+    yellow: "#feff00"
+    blue: "#0066ff"
+    magenta: "#cc00ff"
+    cyan: "#00ffff"
+    white: "#d0d0d0"
   bright:
-    black: "0x555753"
-    red: "0xef2929"
-    green: "0x8ae234"
-    yellow: "0xfce94f"
-    blue: "0x729fcf"
-    magenta: "0xad7fa8"
-    cyan: "0x34e2e2"
-    white: "0xeeeeec"
+    black: "#808080"
+    red: "#fe0100"
+    green: "#33ff00"
+    yellow: "#feff00"
+    blue: "#0066ff"
+    magenta: "#cc00ff"
+    cyan: "#00ffff"
+    white: "#FFFFFF"
