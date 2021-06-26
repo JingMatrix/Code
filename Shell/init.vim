@@ -10,11 +10,9 @@ let g:matchup_override_vimtex=1
 let g:vimtex_quickfix_open_on_warning=0
 let g:vimtex_syntax_nospell_commands=['YYCleverefInput']
 let g:vimtex_syntax_nospell_comments=1
-let g:vimtex_grammar_vlty={'lt_command': 'languagetool',
-			\'lt_disablecategories': 'TYPOGRAPHY,TYPOS'}
+let g:vimtex_grammar_vlty={'lt_command': 'languagetool'}
+			" \,'lt_disablecategories': 'TYPOGRAPHY,TYPOS'}
 let g:vimtex_quickfix_ignore_filters=[
-			\'Underfull',
-			\'Overfull',
 			\'Fandol',
 			\'multiple pdfs with page group',
 			\]
@@ -31,17 +29,29 @@ augroup end
 
 " startify
 let g:startify_skiplist=['doc/.*\.txt$', '.*/tmp/*', 'Notes/notes/.*\.md$', 'Code/Shell/.*']
-let g:startify_bookmarks=[{'z': '$HOME/Documents/Code/Shell/.zshrc'},
+let g:startify_files_number=5
+let g:startify_bookmarks=[
+			\{'z': '$HOME/Documents/Code/Shell/.zshrc'},
 			\{'n': '$HOME/Notes'},
 			\{'v': '$HOME/Documents/Code/Shell/init.vim'},
 			\{'a': '$HOME/Documents/Code/Shell/alacritty.yml'},
+			\]
+let g:startify_lists=[
+			\{ 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+			\{ 'type': 'sessions',  'header': ['   Sessions']       },
+			\{ 'type': 'bookmarks', 'header': ['   Bookmarks']      },
 			\]
 let g:startify_custom_header_quotes=[
 			\['Where is your improvement in five years?'],
 			\['Do you feel sorry about yourself?'],
 			\['Are you escaping from yourself?']]
 
-let g:airline_theme='lucius'
+" Airline
+" let g:airline_theme='lucius'
+let g:airline#extensions#whitespace#skip_indent_check_ft={'tex': ['indent']}
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#buffer_min_count=2
 
 " Netrw
 let g:netrw_sort_by='time'
@@ -49,7 +59,9 @@ let g:netrw_sort_direction='reverse'
 let g:netrw_preview=1
 let g:netrw_liststyle=3
 let g:netrw_winsize=30
-nmap - :Explore<enter>
+
+" mkdx
+let g:mkdx#settings={'highlight': {'enable': 1}}
 
 " fzf-vim
 " Mapping selecting mappings
@@ -68,20 +80,17 @@ let g:suda_smart_edit=1
 
 " Add system path if not presented
 if stridx($PATH, 'node')==-1
-	let $PATH .=':/home/jing/.nvm/versions/node/v14.16.0/bin'
+	let $PATH .=':/home/jing/.nvm/versions/node/v16.3.0/bin'
 endif
 
 " formater
 augroup formatter
 	autocmd!
-	autocmd FileType sh,zsh,bash nmap <buffer> <localleader>f
-				\ :silent %!shfmt -ln bash -filename % <cr> :w <esc> 2g;
-	autocmd FileType tex,bib nmap <buffer> <localleader>f
-				\	:silent %!latexindent -m -c=/tmp/ <cr> :w <esc> 2g;
-	autocmd FileType javascript,html,vue,markdown,css,xhtml,scss,xml nmap <buffer> <localleader>f
-				\ :silent %!prettier --stdin-filepath % <cr> :w <esc> 2g;
-	autocmd FileType json,jsonc nmap <buffer> <localleader>f
-				\ :silent %!jq '.' <cr> :w <esc> 2g;
+	autocmd FileType sh,zsh,bash setl formatprg=shfmt\ -ln\ bash\ -filename
+	"% <cr> :w <esc> 2g;
+	autocmd FileType tex,bib setl formatprg=latexindent\ -m\ -c=/tmp/
+	autocmd FileType javascript,html,vue,markdown,css,xhtml,scss,xml setl formatprg=prettier\ --stdin-filepath\ %
+	autocmd FileType json,jsonc setl formatprg=jq\ '.'
 augroup END
 
 " writing dairy
@@ -116,26 +125,33 @@ augroup rmundo
 	autocmd VimEnter /tmp/* set noundofile
 augroup END
 
-set spelllang=en_gb
+set spelllang=en_us
 set conceallevel=2
 set concealcursor=nc
 hi Conceal NONE
-hi Comment cterm=italic gui=italic ctermfg=gray
+hi Comment cterm=italic ctermfg=gray
 hi Pmenu ctermbg=NONE ctermfg=white
 hi PmenuSel ctermfg=yellow
 
 set hidden
 set autowrite
 set foldmethod=syntax
-set fillchars=fold:\ 
-set showtabline=0
+set fillchars=fold:\ ,
 set modeline
 
 " completion
-set omnifunc=v:lua.vim.lsp.omnifunc 
+set omnifunc=syntaxcomplete#Complete
 
 " lsp
 lua require('lspconfig').vimls.setup{}
+lua require('lspconfig').vuels.setup{}
 lua require('lspconfig').tsserver.setup{}
-lua require('lspconfig').pyright.setup{}
+" lua require('lspconfig').pyright.setup{}
 lua require('lspconfig').texlab.setup{}
+augroup lsp
+	autocmd!
+	autocmd FileType vim set omnifunc=v:lua.vim.lsp.omnifunc
+augroup END
+
+" tree-sitter
+lua require('nvim-treesitter.configs').setup{ highlight = { enable = true, } }
