@@ -3,53 +3,62 @@
 \section{Barycenter in manifold}
 
 \label{section:barycenter_manifold}
-Define $c(x, y):=\frac{1}{2} d(x, y)^2$;
-and for $n$ points $x_j \in M, j=1,2,\ldots,n$, we re-define $f$ on $M^n$ with a coefficient $\frac{1}{2}$
+Recall that we define $c(x, y):=\frac{1}{2} d(x, y)^2$;
+and for $n$ points $x_j \in M, j=1,2,\ldots,n$, now we re-define $f$ on $M^n$ with a coefficient $\frac{1}{2}$
 to make later notations easier,
 \[
 	f(x_1, x_2, \ldots, x_n) := \min_{w} \sum_{j=1}^n \lambda_j c(w, x_j) =: \frac{1}{2}W^2(\sum_{j=1}^n \lambda_j \delta_{x_j}, M).
 \]
+We remark that this re-definition affects nothing in we discussed before.
+
 Pick an $i, 1 \leq i \leq n$ such that $\lambda_i \neq 0$, then we fix $x_j$ for $j \neq i$ and
 define $f_i (x_i) : = f(x_1, \ldots, x_n)$.
 Take an arbitrary open pre-compact neighbourhood $\mathcal{X} \subset \subset M$ of $x_i$;
 let $Y$ the set of all barycenters of $\sum_{j=1}^n \lambda_j \delta_{x_j}$
-when $x_i$ varies in $\bar{ \mathcal{X} }$.
-Then $Y$ is compact by \cref{rmk:barycenter_compact}.
-% Consider a $c$-concave function $ g_i \in \mathcal{I}(Y, \bar{ \mathcal{X} })$
+when $x_i$ runs through in $\widebar{ \mathcal{X} }$.
+Then $Y$ is compact by \Cref{rmk:barycenter_compact}.
+% Consider a $c$-concave function $ g_i \in \mathcal{I}(Y, \widebar{ \mathcal{X} })$
 % \[
 % 				g_i(w) := - \frac{1}{\lambda_i} \sum_{j\neq i}^n \lambda_j c( x_j, w)  =
-% 				\inf_{x_i \in \bar{ \mathcal{X} }}c( x_i, w ) -
+% 				\inf_{x_i \in \widebar{ \mathcal{X} }}c( x_i, w ) -
 % 				\frac{1}{\lambda_i} \sum_{j=1}^n \lambda_j c( x_j, w),
 % \]
-We define $g_i(w): = -\sum_{j \neq i} \lambda_j c(w, x_j)$ on $M$,
-then by definition $f_i /\lambda_i \in \mathcal{I}^c (\bar{ \mathcal{X}}, Y)$
+
+We define $g_i(w): = - 1/ \lambda_i \sum_{j \neq i} \lambda_j c(w, x_j) $ on $M$,
+then by definition $f_i /\lambda_i \in \mathcal{I}^c (\widebar{ \mathcal{X}}, Y)$
 is the $c$-transform of
 $g_i$ restricted to $Y$.
-% and $g_i = (f_i / \lambda_i)^c$ on $Y$.
+The $c$-transform inequality
+$ c(w, x_i) \geq g_i(w) + f_i / \lambda_i (x_i)$
+becomes equality when $z$ is a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$,
+\begin{equation}
+	\label{equa:g_i_conjugate}
+	c(z, x_i) = g_i(z) + \frac{1}{\lambda_i} f_i(x_i).
+\end{equation}
+
 \begin{rmk}[$g_i$ on $Y$ is the $c$-transform of $f_i / \lambda_i$]
 	In general, we have by definition of $c$-transform that
-	$g_i(w) \leq (f_i / \lambda_i)^c(w) := \inf_{x_i \in \bar{ \mathcal{X} } } c(x_i, w) - f_i / \lambda_i (x_i)$.
+	$g_i(w) \leq (f_i / \lambda_i)^c(w) := \inf_{x_i \in \widebar{ \mathcal{X} } } c(x_i, w) - f_i / \lambda_i (x_i)$.
 	If $ c(z, x_i) = g_i (z) + f_i / \lambda_i (x_i)$,
 	then
 	$g_i(z) = (f_i / \lambda_i)^c (z)$ since $(f_i / \lambda_i)^c(z) + f_i / \lambda_i(x_i) \leq c (z, x_i)$.
 	This implies that $g_i = (f_i / \lambda_i)^c$ on $Y$.
-
-	If $g_i$ is differentiable then $f_i / \lambda_i \geq g_i$ is sub-differentiable
-	and thus differentiable with the same gradient as $g_i$.
-	So $(f_i / \lambda_i)^c$ is differentiable on $Y$.
-	By \cref{example:minimizer_differentiable}, for each barycenter $z \in Y$,
-	there exists a unique $x_i = \exp_z (- \nabla g_i (z))$ such that $z$ is the barycenter
-	of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
-	However, it says nothing on the uniqueness for barycenter of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
+	% If $g_i$ is differentiable then $f_i / \lambda_i \geq g_i$ is sub-differentiable
+	% and thus differentiable with the same gradient as $g_i$.
+	% So $(f_i / \lambda_i)^c$ is differentiable on $Y$.
+	% By \Cref{example:minimizer_differentiable}, for each barycenter $z \in Y$,
+	% there exists a unique $x_i = \exp_z (- \nabla g_i (z))$ such that $z$ is the barycenter
+	% of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
+	% However, it says nothing on the uniqueness for barycenter of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
 	% Both $g_i$ and $(f_i / \lambda_i)^c$ are continous;
 	% $g_i$ is differentiable alomst everywhere with respect to volume measure.
-	% because in local normal coordinate $g_i$ is differentiable almost everywhere 
+	% because in local normal coordinate $g_i$ is differentiable almost everywhere
 	% with respect to Lesbegue measure.
-
 \end{rmk}
-The \cref{lem:minimizer_differentiable} tells us two things,
+
+Moreover, \Cref{lem:minimizer_differentiable} tells us two things,
 \begin{itemize}
-	\item $f_i$ is Lipschitz on $\bar{ \mathcal{X} }$;
+	\item $f_i$ is Lipschitz on $\widebar{ \mathcal{X} }$;
 	\item If $ \nabla f_i $ exists, then $z: = \exp( - \frac{1}{\lambda_i}\nabla f_i)$ is the
 	      unique barycenter of $\sum_{i=1}^n \lambda_i \delta_{x_i}$.
 \end{itemize}
@@ -68,23 +77,17 @@ if $f_i$ is differentiable at $x_i$,
 
 The barycenter formula \cref{equa:formula_barycenter} expresses the fact that,
 from point $x_i$,
-we can reach barycenter of $\sum_{j=1}^n \lambda_i \delta_{x_j}$ if we follow the direction $-\nabla_i f$
-and advance $\| \nabla_i f / \lambda_i \| $.
+we can reach barycenter of $\sum_{j=1}^n \lambda_i \delta_{x_j}$ if we follow the direction $-\nabla f_i$
+and advance $\| \nabla f_i / \lambda_i \| $.
 In the case of Euclidean space,
 \[
-	\frac{1}{\lambda_i} \nabla_i (f_i)(x_i) = x_i - \sum_{j=1}^n \lambda_j x_j;                              \quad
+	\frac{1}{\lambda_i} \nabla f_i(x_i) = x_i - \sum_{j=1}^n \lambda_j x_j;                              \quad
 	\nabla g_i(w)  = \frac{1}{\lambda_i} (w - \sum_{j=1}^n \lambda_j x_j) -(w-x_i).
 \]
 
-The $c$-transform inequality
-$ c(w, x_i) \geq g_i(w) + f_i / \lambda_i (x_i)$
-becomes equality when $z$ is a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$,
-\begin{equation}
-	\label{equa:g_i_conjugate}
-	c(z, x_i) = g_i(z) + \frac{1}{\lambda_i} f_i(x_i).
-\end{equation}
 
-Following fine property of barycenter is stated in \cite[Lemma 3.1]{kim2015multi}.
+The following fine property of barycenter is stated in \cite[Lemma 3.1]{kim2015multi}.
+We emphasize the fact that this lemma connects the notion of barycenter with geometry of our manifold $M$.
 \begin{lem}
 	\label{lem:barycenter_out_of_cut_locus}
 	Fix \( \left( x _ { 1 } , \ldots , x _ { n } \right) \in M^n\).
@@ -92,16 +95,47 @@ Following fine property of barycenter is stated in \cite[Lemma 3.1]{kim2015multi
 	is not in the cut locus of \( x _ { j } \) for any \( j . \)
 \end{lem}
 
-The \cref{lem:barycenter_out_of_cut_locus} implies that $g_i$ is differentiable at
+\begin{proof}
+	Choose a barycenter \( z \) in the cut locus of \( x _ { i } \) for some \( i \);
+	we shall show that \( z \) cannot minimize
+	\( y \mapsto \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , y \right) \).
+	By \Cref{lem:hessian_bound_distance_squared} (for the sake of later convenience, we state it the next section) and compactness,
+	we can find a constant \( K \) such that, for all \( u \in T _ { z } M \),
+	and \( j = 1,2 , \ldots n \), we have
+	\[
+		\frac { d ^ { 2 }_{x _ { j } } \left(  \exp _ { z } u \right) + d ^ { 2 }_{x _ { j } } \left( \exp _ { z } ( - u ) \right) - 2 d ^ { 2 }_{ x_j} \left( z \right) }
+		{ | u | ^ { 2 } } \leq K
+	\]
+	On the other hand, by \Cref{prop:distance_cut_locus},
+	we can find some non
+	zero \( u \in T _ { z } M \) such that
+	\[
+		\frac { d ^ { 2 }_{x _ { i } } \left(  \exp _ { z } u \right) + d ^ { 2 }_{x _ { i } } \left( \exp _ { z } ( - u ) \right) - 2 d ^ { 2 }_{ x_i} \left( z \right) }
+		{ | u | ^ { 2 } } \leq - n K
+	\]
+	Therefore, we have
+	\begin{align*}
+		\sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) & = \sum _ { j \neq i } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) + d ^ { 2 } \left( x _ { i } , z \right)                                                                                                                   \\
+		                                                                & \geq \frac { - ( n - 1 ) K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } \sum _ { j \neq i } ^ { n } \left( d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right) \right) \\
+		                                                                & + \frac { n K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } d ^ { 2 } \left( x _ { i } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { z } ( - u ) \right)                                                         \\
+		                                                                & > \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right)
+	\end{align*}
+	Therefore, either
+	\[ \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) < \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \]
+	or
+	\[ \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } - u \right) < \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \]
+	in either case, \( z \) cannot minimize \( \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \)
+\end{proof}
+This \Cref{lem:barycenter_out_of_cut_locus} implies that $g_i$ is differentiable at
 any barycenter $z$ of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
-% The \cref{lem:barycenter_out_of_cut_locus} above tells that $g_i$ is differentiable at $z$.
+% The \Cref{lem:barycenter_out_of_cut_locus} above tells that $g_i$ is differentiable at $z$.
 % Since $z$ is not in the cut locus of $x_i$,
 % $x_i$ is then not in the cut locus of $z$ and
 % thus $c(z, x_i)$ is differentiable.
 % If in addition, $f_i / \lambda_i$ is differentiable at $x_i$,
 % then both hand side of \cref{equa:g_i_conjugate} are differentiable at $x_i$ and $z$.
-Differentiate \cref{equa:g_i_conjugate} with respect to % $x_i$ and 
-$z$ and use the minimality property,
+Differentiating \cref{equa:g_i_conjugate} with respect to % $x_i$ and
+$z$ and using the minimality property, we obtain,
 \begin{align*}
 	% z   & = \exp_{x_i}( - \frac{1}{\lambda_i} \nabla f_i), \\
 	x_i & = \exp_{z}( - \nabla g_i).
@@ -115,18 +149,21 @@ Therefore, $ \exp(- \nabla g_i) $ is a left inverse to $\exp( - \nabla f_i / \la
 
 \subsection{Uniqueness and curvature condition}
 
-Whenever barycenter formula \cref{equa:formula_barycenter} holds,
-we have uniqueness for the barycenter of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
-It means that non-uniqueness reveals the fact that Lipschitz function
-$f_i$ on $\bar{ \mathcal{X} }$ is not \emph{a priori} differentiable.
+\label{section:uniqueness_and_curvature}
+
+Whenever the barycenter formula \cref{equa:formula_barycenter} holds,
+the barycenter of $\sum_{j=1}^n \lambda_j \delta_{x_j}$ is unique.
+It means that non-uniqueness reveals the fact that the Lipschitz function
+$f_i$ on $\widebar{ \mathcal{X} }$ is not \emph{a priori} differentiable.
 In addition, on the set where $\nabla f_i$ exists, the map
 $\exp( -\nabla f_i / \lambda_i )$ is injective.
 
 In general, sufficient condition for uniqueness of barycenters of a probability measure $\mu$ on $M$
 involves convex properties of distance function.
-For example, in \cref{prop:uniquness_barycenter_Wasserstein} we prove uniqueness of barycenter in Wasserstein space
-using this perspective.
-In \cite[Proposition IX.7.1]{chavel2006riemannian}, Ricci curvature condition is used
-to impose convexity and hence uniqueness of barycenter.
+For example, in \Cref{prop:uniquness_barycenter_Wasserstein} we prove uniqueness of barycenter in Wasserstein space
+from this perspective.
+In \cite[Proposition IX.7.1]{chavel2006riemannian},
+Ricci curvature bound from above plus bounded support for measure $\mu$ are used
+to impose uniqueness of barycenter of $\mu$.
 We could also use curvature condition for general length space as done by Ohta in \cite{ohta2012barycenters}.
 

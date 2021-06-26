@@ -1,12 +1,35 @@
 \documentclass{report}
 
-\usepackage[]{geometry}
+% \usepackage[poorman]{cleveref}
+\usepackage[colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan]{hyperref}
+
+\usepackage[total={6.5in, 7.3in}]{geometry}
 \usepackage{amsthm, amsmath, amsfonts, mathrsfs, amssymb, bbm}
+\makeatletter
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+\newcommand*\widebar[1]{%
+  \begingroup
+  \def\mathaccent##1##2{%
+    \rel@kern{0.8}%
+    \overline{\rel@kern{-0.8}\macc@nucleus\rel@kern{0.2}}%
+    \rel@kern{-0.2}%
+  }%
+  \macc@depth\@ne
+  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+  \macc@set@skewchar\relax
+  \let\mathaccentV\macc@nested@a
+  \macc@nested@a\relax111{#1}%
+  \endgroup
+}
+\makeatother
 \usepackage[]{cancel}
 \usepackage{graphicx,wrapfig}
+\usepackage{cleveref}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{coro}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
 \newtheorem{lem}[thm]{Lemma}
 \theoremstyle{remark}
 \newtheorem{rmk}{Remark}[chapter]
@@ -14,9 +37,6 @@
 \newtheorem{defn}{Definition}[chapter]
 \newtheorem{example}[defn]{Example}
 
-\usepackage[poorman]{cleveref}
-\usepackage[colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan]{hyperref}
-% \usepackage{cleveref}
 
 \usepackage{biblatex}
 \addbibresource{Bibliography.bib}
@@ -31,13 +51,15 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-	We can generalize physical concept of barycenter from Euclidean space to abstract metric space.
-	Both existence and uniqueness of barycenter are not clear in advance.
-	With this in mind, from abstract to concrete,
-	we investigate these two properties of barycenters on general metric space,
-	Wasserstein space over proper metric space and Wasserstein space over complete manifold.
-	In the last case, a barycenter is a measure on manifold and we discuss its absolutely continuity.
+% \begin{abstract}
+	% Write a abstract mentioning references.
+	% We can generalize the physical concept of barycenter from
+	% Euclidean space to abstract metric space.
+	% Both existence and uniqueness of barycenter are not clear in advance.
+	% With this in mind, from abstract to concrete,
+	% we investigate these two properties of barycenters in general metric spaces,
+	% Wasserstein spaces over proper metric space and Wasserstein spaces over complete manifold.
+	% In the last case, a barycenter is a measure on the manifold and we discuss its absolute continuity.
 	% Current working plan is:
 	% \begin{itemize}
 	% \item Verify example of non-uniqueness in relation of non-branching: four points by M.Bertrand
@@ -54,12 +76,16 @@
 	% \item More detailed analysis of differentiability of $(f_i / \lambda_i)^c$
 	% \item Upper Lipschitz bound of exponential map
 	% \item \textcolor{red}{Impossible:} Justify differentiating of barycenter identity
-	% \item Consistency of barycenter on manifold, shrink nicely by barycenter formula.
+	% \item Consistency of barycenter on manifold, shrink nicely by barycentre formula.
 	% \end{itemize}
-\end{abstract}
+% \end{abstract}
+\pagenumbering{roman}
 
+\input{frontmatter.tex}
 \tableofcontents
 
+\clearpage
+\pagenumbering{arabic}
 \input{Chapters/introduction.tex}
 \input{Chapters/metric_space.tex}
 \input{Chapters/counter_example.tex}

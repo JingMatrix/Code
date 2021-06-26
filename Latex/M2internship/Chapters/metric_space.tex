@@ -1,4 +1,6 @@
 %! TEX root = ../barycenter.tex
+\chapter{Barycenter in Metric space}
+\label{chapter:metric_space}
 \section{Existence for proper space}
 
 A metric space is proper if every bounded closed set is compact.
@@ -57,14 +59,14 @@ violates the existence of barycenter given by \cite[Example 3.1 (a)]{ohta2012bar
 \end{proof}
 
 \begin{rmk}
-	$E$ is not locally compact as a subspace of $\ell^2$, thus not a proper space.
-	Consider the sequence with only one non-zero coordinate component, it has no converging subsequence.
+	$E$ is not locally compact thus not a proper space.
+	Indeed, consider the sequence with only one non-zero coordinate component, it has no converging subsequence.
 \end{rmk}
 
 We shall present some counter examples for more geometric metric spaces.
 A discussion on length might give some insight on the existence of barycenter.
 
-\section{Length space but not proper}
+\section{Non-proper length space}
 
 Recall that on smooth manifolds, we define Riemannian metric through length of curves.
 Remove assumptions for manifold structure, we arrive at the definition of general length space.
@@ -86,6 +88,7 @@ We start with induced length structure, which defines rectifiable curve.
 \end{defn}
 
 \begin{rmk}
+	\label{rmk:curve_continuity_endpoints}
 	For $\gamma : [a, b] \rightarrow E$ a curve and a subinterval $[x , y] \subset [a,b]$,
 	we write $\gamma_{[x , y]}$ the restriction of $\gamma$ to the subinterval $[x , y]$.
 	If \( \gamma \) is rectifiable,

@@ -31,7 +31,7 @@ Then we discuss the infinitesimal structure of an Alexandrov space \( ( X , d )\
 \end{thm}
 
 \begin{proof}
-	This is a calculation of angle between $\gamma^\prime(0)$ and $\eta^\prime(0)$ with a specific selected converging process. To apply angle definition in \cref{angle_def}, normalize $\gamma$ and $\eta$ as $\gamma\left(\vert\gamma^\prime(0)\vert \cdot\right)$ and $\eta\left(\vert\eta^\prime(0)\vert \cdot\right)$
+	This is a calculation of angle between $\gamma^\prime(0)$ and $\eta^\prime(0)$ with a specific selected converging process. To apply angle definition in \Cref{angle_def}, normalize $\gamma$ and $\eta$ as $\gamma\left(\vert\gamma^\prime(0)\vert \cdot\right)$ and $\eta\left(\vert\eta^\prime(0)\vert \cdot\right)$
 	\[
 		\cos\angle _ { z } ( \gamma , \eta ): = \left( \lim _ { s , t \downarrow 0 } \frac { s ^ { 2 } + t ^ { 2 } - d _ { X }\left( \gamma (\vert \gamma^\prime(0)\vert s ) , \eta (\vert \eta^\prime(0)\vert  t ) \right) ^ { 2 } } { 2 s t } \right)
 	\]
@@ -39,7 +39,7 @@ Then we discuss the infinitesimal structure of an Alexandrov space \( ( X , d )\
 \end{proof}
 
 \begin{rmk}[Lemma 4.5, Lang and Schroeder's inequality]
-	When passing from finite support measures to general ones, the author should use Wasserstein metric $W_p$ convergence but not only weakly convergence. Otherwise, he cannot justify convergence of integrals of distance function $d_{C_z}$. Here we use the fact that finite supported measures is a dense subspace of Wasserstein space $\mathcal{W}_2(X)$ if $X$ is a Polish space (see \cite{villani2008optimal} Theorem 6.18), recalled in this report as \cref{thm:topology_Wasserstein}.
+	When passing from finite support measures to general ones, the author should use Wasserstein metric $W_p$ convergence but not only weak convergence. Otherwise, he cannot justify convergence of integrals of distance function $d_{C_z}$. Here we use the fact that finite supported measures is a dense subspace of Wasserstein space $\mathcal{W}_2(X)$ if $X$ is a Polish space (see \cite{villani2008optimal} Theorem 6.18), recalled in this report as \Cref{thm:topology_Wasserstein}.
 \end{rmk}
 
 \section{Paper review for Kim and Pass}
@@ -129,40 +129,40 @@ We copy original statement and put reference number directly after it.
 We only need an outer regular reference measure. And Borel measure on metric space is regular, see Theorem 7.1.7 in \cite{Bogachev2007}.
 
 \begin{prop}[Proposition 2.9 Distortion under Ric \( \geq 0 \)]
-	Suppose the Ricci curvature of \( M \) is everywhere nonnegative, i.e., Ric \( \geq 0 . \) Then, for any \( x \in M \) and \( \lambda \in P ( M ) \), \textcolor{blue}{if $\lambda$ gives no mass to the cut-locus of its baryceter $\bar{x}$}, we have
+	Suppose the Ricci curvature of \( M \) is everywhere nonnegative, i.e., Ric \( \geq 0 . \) Then, for any \( x \in M \) and \( \lambda \in P ( M ) \), \textcolor{blue}{if $\lambda$ gives no mass to the cut-locus of its baryceter $\widebar{x}$}, we have
 	\[ \alpha _ { \lambda } ( x ) \geq 1 \]
 \end{prop}
 
 \begin{proof}[Proof of Prop 2.9]
-	Minimality of \( z \mapsto \int _ { M } c ( x , z ) \diff \lambda ( x ) \) at the barycenter \( \bar { x } \), combined with semi-concavity of \( z \mapsto c ( x , z ) \) and Fatou's lemma yields
+	Minimality of \( z \mapsto \int _ { M } c ( x , z ) \diff \lambda ( x ) \) at the barycenter \( \widebar { x } \), combined with semi-concavity of \( z \mapsto c ( x , z ) \) and Fatou's lemma yields
 	\[
-		\int _ { M } \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } c ( x , z ) \diff \lambda ( x ) \geq 0
+		\int _ { M } \left. D _ { z z } ^ { 2 } \right| _ { z = \widebar { x } } c ( x , z ) \diff \lambda ( x ) \geq 0
 	\] as a matrix.
 \end{proof}
 
-Locally $c(x,z)=:d^2_x(z)$ near $\bar{x}$ is a geodesically convex function, by linear intergration so is the integral  \( z \mapsto \int _ { M } d^2_x(z) \diff \lambda ( x ) \).
-As convexity implies local Lipschitz, $d^2_x(z)$ is also differentiable near $\bar{x}$ and so is its integral by compactness of $M$.
-Thus we have locally for $\lambda$-almost all $x$ (not in the cut-locus of $\bar{x}$, arguing with semi-concavity is not strong as this),
+Locally $c(x,z)=:d^2_x(z)$ near $\widebar{x}$ is a geodesically convex function, by linear intergration so is the integral  \( z \mapsto \int _ { M } d^2_x(z) \diff \lambda ( x ) \).
+As convexity implies local Lipschitz, $d^2_x(z)$ is also differentiable near $\widebar{x}$ and so is its integral by compactness of $M$.
+Thus we have locally for $\lambda$-almost all $x$ (not in the cut-locus of $\widebar{x}$, arguing with semi-concavity is not strong as this),
 % \textcolor{red}{why differentiability of $d^2_x(z)$ implies smoothness?}
 \begin{equation}
 	\label{equa:convex_distance_inequality}
-	d^2_x \left( \exp _ {\bar{x}} u \right) - d^2_x (\bar{x}) - \langle \nabla d^2_x (\bar{x}) , u \rangle = \frac { 1 } { 2 } \langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z) \, u , u \rangle + o \left( | u | ^ { 2 } \right) > 0
+	d^2_x \left( \exp _ {\widebar{x}} u \right) - d^2_x (\widebar{x}) - \langle \nabla d^2_x (\bar{x}) , u \rangle = \frac { 1 } { 2 } \langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z) \, u , u \rangle + o \left( | u | ^ { 2 } \right) > 0
 \end{equation}
 
 To show positivity of matrix, we take a vector $\nu$ and set $\mu = h \nu$ with $h > 0$ small enough.
 Divide by $h$ in \cref{equa:convex_distance_inequality} and then take integral,
 \[
-	\langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } \int_{M} d^2_x(z) \diff \lambda ( x )\, v , v \rangle + \frac{o (h^2)}{h^2} = \int_{M} \langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z)\, v , v \rangle + \frac{o (h^2)}{h^2} \diff \lambda ( x ).
+	\langle \left. D _ { z z } ^ { 2 } \right| _ { z = \widebar { x } } \int_{M} d^2_x(z) \diff \lambda ( x )\, v , v \rangle + \frac{o (h^2)}{h^2} = \int_{M} \langle \left. D _ { z z } ^ { 2 } \right| _ { z = \widebar { x } } d^2_x(z)\, v , v \rangle + \frac{o (h^2)}{h^2} \diff \lambda ( x ).
 \]
-Note that here we need compactness of $M$, hence boundness of $ \nabla d^2_x(\bar{x}) $ for $x \in M$, to get inter-change of integral and gradient:
+Note that here we need compactness of $M$, hence boundness of $ \nabla d^2_x(\widebar{x}) $ for $x \in M$, to get inter-change of integral and gradient:
 \[
-	\int_M \langle \nabla d^2_x (\bar{x}) , u \rangle \diff \lambda (x) = \langle \int_M \nabla d^2_x (\bar{x}) \diff \lambda (x) , u \rangle
+	\int_M \langle \nabla d^2_x (\widebar{x}) , u \rangle \diff \lambda (x) = \langle \int_M \nabla d^2_x (\widebar{x}) \diff \lambda (x) , u \rangle
 \]
 Apply Fatou's lemma, let $f\downarrow 0$,
 \[
-	\langle \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } \int_{M} d^2_x(z) \diff \lambda ( x )\, v , v \rangle \leq \langle \int_{M} \left. D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } d^2_x(z) \diff \lambda(x)\, v, v \rangle.
+	\langle \left. D _ { z z } ^ { 2 } \right| _ { z = \widebar { x } } \int_{M} d^2_x(z) \diff \lambda ( x )\, v , v \rangle \leq \langle \int_{M} \left. D _ { z z } ^ { 2 } \right| _ { z = \widebar { x } } d^2_x(z) \diff \lambda(x)\, v, v \rangle.
 \]
-And by minimallity of $\bar{x}$, we know left hand side is non-negative.
+And by minimallity of $\widebar{x}$, we know left hand side is non-negative.
 
 This argument is also used in Prop 4.2.
 
@@ -172,11 +172,11 @@ This argument is also used in Prop 4.2.
 \end{rmk}
 
 \begin{lem}[Lemma  4.1  a.e. \( x \) and $ \Omega$-a.e. $\mu$ ]
-	Let \( \bar { \mu } \in \cancel{P ( M )} \textcolor{blue}{P_{ac}(M)}\) and for each \( \mu \in P ( M ) \), let \( u _ { \mu } \) be the dual potential (whose gradient is uniquely determined \( \bar { \mu } \) almost everywhere) for the optimal transport problem between \( \bar { \mu } \) and \( \mu . \) Let \( \Omega \) be a Borel probability on \( P ( M ) . \) For volume almost all \( x , x \mapsto u _ { \mu } ( x ) \) is twice differentiable for \( \Omega \) -almost all \( \mu \in P ( M ) . \)
+	Let \( \widebar { \mu } \in \cancel{P ( M )} \textcolor{blue}{P_{ac}(M)}\) and for each \( \mu \in P ( M ) \), let \( u _ { \mu } \) be the dual potential (whose gradient is uniquely determined \( \widebar { \mu } \) almost everywhere) for the optimal transport problem between \( \bar { \mu } \) and \( \mu . \) Let \( \Omega \) be a Borel probability on \( P ( M ) . \) For volume almost all \( x , x \mapsto u _ { \mu } ( x ) \) is twice differentiable for \( \Omega \) -almost all \( \mu \in P ( M ) . \)
 \end{lem}
 
 \begin{proof}
-	$\forall \mu, x \mapsto \mu_u(x)$ is twice differentiable for $\bar{\mu}$-a.e. $x$. Apply Fubini's theorem then.
+	$\forall \mu, x \mapsto \mu_u(x)$ is twice differentiable for $\widebar{\mu}$-a.e. $x$. Apply Fubini's theorem then.
 \end{proof}
 
 \begin{prop} [Prop 4.2 Derivatives inside the integral $\int _ { P ( M ) } \diff \Omega$]
@@ -200,7 +200,7 @@ This argument is also used in Prop 4.2.
 To get rid of measurable selection problem, we consider
 \[ y \mapsto \int_{P(M)} c(y, T_{\mu}(x)) \diff \Omega ( \mu)\]
 at point $x$.
-Here we assume $\bar{\mu}$ is barycenter of $\Omega$ and $T_{\mu}$ is the transfer map from $\bar{\mu}$ to $\mu$.
+Here we assume $\widebar{\mu}$ is barycenter of $\Omega$ and $T_{\mu}$ is the transfer map from $\widebar{\mu}$ to $\mu$.
 Then this integral valued map is well-defined $\mu$-a.e. by Fubini's theorem.
 By stability of Kantorobich potentials (Theorem 1.52 in \cite{Santambrogio2015}), $c(y, T_{\mu}(x))$ is continous with respect to $\mu \in P(M)$.
 Fix a $\mu$, $c(y, T_{\mu}(x))$ is locally Lipschitz with respect to $y$.
@@ -211,13 +211,13 @@ we can then get a uniform boundness on
 
 \begin{lem} [Lem 4.3 Riemannian barycenter from Wasserstein barycenter]
 	\label{lem:inverse_barycenter}
-	Let \( \bar { \mu } \) be a Wasserstein barycenter of the measure \( \Omega \) on \( P ( M ) \) and assume \( \bar { \mu } \) is absolutely continuous with respect to volume;
-	let \( T _ { \mu } \) be an optimal map from \( \bar { \mu } \) to \( \mu . \)
+	Let \( \widebar { \mu } \) be a Wasserstein barycenter of the measure \( \Omega \) on \( P ( M ) \) and assume \( \widebar { \mu } \) is absolutely continuous with respect to volume;
+	let \( T _ { \mu } \) be an optimal map from \( \widebar { \mu } \) to \( \mu . \)
 	Let \( \lambda _ { z } = \left( \mu \mapsto T _ { \mu } ( z ) \right) _ { \# } \Omega . \)
-	Then, for \( \bar { \mu } \) almost every \( z , z \) is a barycenter of \( \lambda _ { z }\).
-	\textcolor{blue}{And $\lambda_z$ gives no mass to the cut-locus of $z$} by \cref{prop:differentiate_optimal_transport}.
+	Then, for \( \widebar { \mu } \) almost every \( z , z \) is a barycenter of \( \lambda _ { z }\).
+	\textcolor{blue}{And $\lambda_z$ gives no mass to the cut-locus of $z$} by \Cref{prop:differentiate_optimal_transport}.
 
-	If, in addition, \( \Omega \left( P _ { a c } ( M ) \right) > 0 \), then for \( \bar { \mu } \) almost every \( z , z \) is the unique barycenter of $\lambda _ { z }$.
+	If, in addition, \( \Omega \left( P _ { a c } ( M ) \right) > 0 \), then for \( \widebar { \mu } \) almost every \( z , z \) is the unique barycenter of $\lambda _ { z }$.
 
 \end{lem}
 
@@ -225,7 +225,7 @@ There is an explanation behind this lemma. Consider we have random images, and w
 
 \begin{proof}[Proof of the 1st order balance]
 	...
-	% On the other hand, by Lemma  4.3, for \( \bar { \mu } \) almost every \( x \), we have that \( x \) is the
+	% On the other hand, by Lemma  4.3, for \( \widebar { \mu } \) almost every \( x \), we have that \( x \) is the
 	% barycenter of \( \lambda _ { z } = \left( \mu \mapsto T _ { \mu } ( z ) \right) _ { \# } \Omega ; \) that is, a minimizer of
 	% \[ f _ { x } : y \mapsto \int _ { P ( M ) } d ^ { 2 } \left( y , T _ { \mu } ( x ) \right) d \Omega ( \mu ) .\]
 

@@ -1,55 +1,44 @@
 %! TEX root = ../barycenter.tex
 \YYCleverefInput{/var/tmp/latex/barycenter.sed}
 \section{Barycenter in Wasserstein space}
-
-In the previous chapter,
-we used consistency to build existence of barycenter in the Wasserstein space
-$\mathcal{W}_p(E)$ over a proper space $E$.
-And we proved existence for measures of shape $\sum_{j=1}^{n} \lambda_j \delta_{\mu_j}$;
-the barycenter we constructed is $B_{\#}\boldsymbol{\gamma} \in \mathcal{W}_p(E)$,
-where $B$ is a measurable function from $n$ points $x_j \in E$ to a barycenter of
-$\sum_{j=1}^{n} \lambda_j \delta_{x_j}$
-and $\boldsymbol{\gamma}$ is an optimal plan with marginals $\mu_j$ with respect to a continuous cost function $f$.
-
-We shall firstly show that barycenter of $\sum_{j=1}^n \lambda_j \delta_{\mu_j}$
-is unique if some $\mu_i$
-is absolutely continuous with respect to volume measure on the manifold $M$.
-
 \subsection{Uniqueness of barycenter measure}
 
-We start with a description (\cite[Theorem 10.41]{villani2008optimal})
-for optimal transportation on Riemannian manifold.
-\begin{thm}[Uniqueness of optimal transference map for the square distance]
+We start with a description \cite[Theorem 10.41]{villani2008optimal}
+for optimal mass transport on Riemannian manifold.
+\begin{thm}[Uniqueness of optimal transport map for the square distance]
 	\label{thm:uniquness_monge_problem_manifold}
 	Let \( M \) be a Riemannian manifold, and \( c ( x , y ) = \frac{1}{2} d ( x , y ) ^ { 2 } \).
 	Let \( \mu , \nu \) be two probability measures on \( M \), such that the optimal cost
 	between \( \mu \) and \( \nu \) is finite.
 	If \( \mu \) is absolutely continuous (with respect to volume measure $\operatorname{Vol}$ on $M$),
-	then the Monge-Kantorovich mass transportation
-	problem between \( \mu \) and \( \nu \) admits a unique optimal transference plan, and it
+	then the mass transport
+	problem between \( \mu \) and \( \nu \) admits a unique optimal transport plan, and it
 	has the form \( \diff \pi ( x , y ) = \diff \mu ( x ) \delta [ y = T ( x ) ] \),
 	or equivalently \[ \pi = ( \mathrm { Id } \times T )_{\#} \mu , \]
 	where \( T \) is uniquely determined, \( \mu \)-almost everywhere,
 	by the requirements that \( T_{\#} \mu = \nu \).
 \end{thm}
 
-The map \( T \) may be referred to either as
-the optimal map or optimal transference map between \( \mu \) and \( v \).
+The map \( T \) may be referred as
+the optimal (mass) transport map pushing \( \mu \) to \( v \).
+% Recall that in \Cref{thm:optimal_transport_manifold} we gave a description of $T$
+% as $\exp_x(- \nabla \phi(x))$ when both $\mu$ and $\nu$ have compact supports.
 With the help of this theorem, we are ready to prove
 \begin{prop}
 	\label{prop:uniquness_barycenter_Wasserstein}
-	For measure $\mathbb{P} \in \mathcal{W}_2(\mathcal{W}_2(M))$ on $\mathcal{W}_2(M)$,
+	Given a measure $\mathbb{P} \in \mathcal{W}_2(\mathcal{W}_2(M))$,
 	assume $\mathbb{P}$ gives mass to the set of absolutely continuous measures $P_{ac}(M) \subset \mathcal{W}_2(M)$,
 	i.e.,	$\mathbb{P}(P_{ac}(M)) > 0 $.
-	Then $\mathbb{P}$ has a unique barycenter measure on $M$.
+	Then $\mathbb{P}$ has a unique barycenter in $\mathcal{W}_2(M)$, which is probability measure on $M$.
 \end{prop}
 
-We remark that $P_{ac}(M)$ is a Borel measurable subset of $(\mathcal{W}_2(M), W_2)$,
-see \cite[Proposition 2.1]{KIM2017640} for a proof.
+\begin{rmk}
+	$P_{ac}(M)$ is a Borel measurable subset of $(\mathcal{W}_2(M), W_2)$,
+	see \cite[Proposition 2.1]{KIM2017640} for a proof.
+\end{rmk}
 
 \begin{proof}
-	We consider space $\mathcal{W}_2(\mathcal{W}_2(M))$, probability measures on $\mathcal{W}_2(M)$,
-	any convex combination of elements in this space is still inside it.
+	Note that any convex combination of elements the in space $\mathcal{W}_2(\mathcal{W}_2(M))$ is still inside it.
 	The squared Wasserstein distance function $W^2_2(\mu, \cdot)$ is convex by definition of optimal plan,
 	for $0 \leq \lambda_1, \lambda_2 \leq 1, \gamma_1 + \gamma_2 =1 $ and $ \nu_1,\nu_2 \in \mathcal{W}_2(M)$,
 	\begin{equation}
@@ -57,11 +46,13 @@ see \cite[Proposition 2.1]{KIM2017640} for a proof.
 		W_2^2(\mu, \lambda_1 \nu_2 + \lambda_2 \nu_2) \leq \lambda_1 W_2^2(\mu, \nu_1) + \lambda_2 W_2^2(\mu, \nu_2).
 	\end{equation}
 
-	And when $\mu \in \mathcal{W}_2(M)$ is absolutely continuous, convexity above becomes strict convexity.
-	It means inequality \cref{equa:convexity_Wassersetein_distance} becomes equality only when
-	$\lambda_1=0$ or $\lambda_2=0$.
+	And when $\mu \in \mathcal{W}_2(M)$ is absolutely continuous,
+	we claim that inequality \cref{equa:convexity_Wassersetein_distance} becomes an equality only when
+	$\lambda_1=0$ or $\lambda_2=0$,
+	i.e.,
+	convexity above becomes strict convexity.
 	To prove this claim,
-	through \cref{thm:uniquness_monge_problem_manifold} we write
+	according to \Cref{thm:uniquness_monge_problem_manifold} we write
 	$\gamma_1 : = (\operatorname{Id}  \times T_1)_{\#}\mu$ the optimal plan from $\mu$ to $\nu_1$ and
 	$\gamma_2 : = (\operatorname{Id}  \times T_2)_{\#}\mu$ the optimal plan from $\mu$ to $\nu_2$.
 
@@ -74,42 +65,55 @@ see \cite[Proposition 2.1]{KIM2017640} for a proof.
 		                                                          & =	\lambda_1 W_2^2(\mu, \nu_1) + \lambda_2 W_2^2(\mu, \nu_2)
 	\end{align*}
 	Then $\gamma$ is an optimal plan from $ \mu$ to $\lambda_1 \nu_1 + \lambda_2 \nu_2$,
-	but it is not in the form of transform map unless $\lambda_1 =0$ or $\lambda_2 =0$.
+	but it cannot be induced by a map $T$ unless $\lambda_1 =0$ or $\lambda_2 =0$.
 
-	After integration with respect to $\mathbb{P} \in \mathcal{W}_2(\mathcal{W}_2(M))$,
-	we get a convex function $\int_{\mathcal{W}_2(M)} W_2^2(\mu, \cdot) \diff \mathbb{P}(\mu)$.
-	And it is strictly convex if $\mathbb{P}$ gives mass to absolutely continuous measures.
-	Hence, barycenter of $\mathbb{P}$ is unique.
+	After integrating \cref{equa:convexity_Wassersetein_distance} with respect to $\mathbb{P} \in \mathcal{W}_2(\mathcal{W}_2(M))$,
+	we get a convex function
+	\[\int_{\mathcal{W}_2(M)} W_2^2(\mu, \cdot) \diff \mathbb{P}(\mu),\]
+	which is strictly convex if $\mathbb{P}$ gives mass to $P_{ac}(M)$, the set of absolutely continuous measures.
+	Hence, the barycenter of $\mathbb{P}$ is unique.
 \end{proof}
 
-\subsection{Absolutely continuity of barycenter for measures with finite support}
+\subsection{Absolute continuity of barycenter for measures with finite support}
 
-All main ideas in proving absolutely continuity come from \cite{KIM2017640},
-we basically re-write their proof in following sections.
+\label{section:absolute_continuity_finite_support}
+Recall that in \Cref{thm:barycenter_finite_support_measure},
+% we used consistency to prove existence of barycenter in the Wasserstein space
+% $\mathcal{W}_p(E)$ over a proper space $E$.
+we proved the existence of barycenter for measure $\sum_{j=1}^{n} \lambda_j \delta_{\mu_j}$ on $\mathcal{W}_p(E)$;
+the barycenter we constructed is $B_{\#}\boldsymbol{\gamma} \in \mathcal{W}_p(E)$,
+where $B$ is a measurable function from $n$ points $x_j \in E$ to a barycenter of
+$\sum_{j=1}^{n} \lambda_j \delta_{x_j}$
+and $\boldsymbol{\gamma}$ is an optimal plan with marginals $\mu_j$ with respect to the continuous cost function $f$.
 
-We start with measure
-$\sum_{j}^{n} \lambda_{j} \delta_{\mu_j}$ on $\mathcal{W}_{2}(M)$.
+We shall first show that barycenter of $\sum_{j=1}^n \lambda_j \delta_{\mu_j}$
+is unique if some $\mu_i$
+is absolutely continuous with respect to volume measure on the manifold $M$.
+All main ideas in proving absolute continuity come from \cite{KIM2017640},
+we basically re-write their proof in the following sections.
+% We start with measure
+% $\sum_{j}^{n} \lambda_{j} \delta_{\mu_j}$ on $\mathcal{W}_{2}(M)$.
 % for $M$ a complete Riemannian manifold.
-To use results and notation in \cref{section:barycenter_manifold},
+To use results and notation in \Cref{section:barycenter_manifold},
 we fix $i = 1$ there.
-Recall that we could define $f_1 \in \mathcal{I}( \bar{ \mathcal{X} }, Y)$
-as a $c$-concave function.
 Assume from now on \textcolor{cyan}{
 	$ \lambda_1 \neq 0$ and that $\mu_1$ is absolutely continuous and
-	concentrated in the compact set $\bar{ \mathcal{X} }$
+	concentrated in a pre-compact open set $ \mathcal{X} \subset M $
 }.
-The barycenter measure $\bar{\mu}$ of $\sum_{i}^{n} \lambda_{i} \delta_{\mu_i}$ is unique by \cref{prop:uniquness_barycenter_Wasserstein}.
+Recall that we could define $f_1 \in \mathcal{I}^c( \widebar{ \mathcal{X} }, Y)$
+as a $c$-concave function.
+The barycenter measure $\widebar{\mu}$ of $\sum_{i}^{n} \lambda_{i} \delta_{\mu_i}$ is unique by \Cref{prop:uniquness_barycenter_Wasserstein}.
 % because this measure gives mass to element in $P_{ac}(M)$.
-
 % \subsubsection{One measure absolutely continous and others Dirac}
 % We firstly consider the case when \textcolor{cyan}
 \subsubsection{$\mu_i = \delta_{x_i}, i \geq 2$ are Dirac measures}
 
 In this case, there is only one measure $\boldsymbol{\gamma}$ with marginals $\mu_i$.
-As a consequence, $\exp(-\nabla f_1 / \lambda_1)$ pushes $\mu_1$ to $\bar{\mu}$.
+As a consequence, $\exp(-\nabla f_1 / \lambda_1)$ pushes $\mu_1$ to $\widebar{\mu}$.
 As a left inverse to $\exp(-\nabla f_1/\lambda_1)$,
-\(\exp(-\nabla g_1)\) pushes $\bar{\mu}$ to $\mu_1$.
-Then $\bar{\mu}$ is concentrated on the union of barycenters, compact set $Y$.
+\(\exp(-\nabla g_1)\) pushes $\widebar{\mu}$ to $\mu_1$.
+Then $\widebar{\mu}$ is concentrated on the union of barycenters,
+i.e., the compact set $Y$ by definition.
 % We shall show soon $\exp(- \nabla g_1)$ could be almost everywhere Lipschitz
 % with respect to volume measure if $M$ has lower bound for Ricci curvature.
 % Now assume that is the case.
@@ -121,12 +125,12 @@ Then $\bar{\mu}$ is concentrated on the union of barycenters, compact set $Y$.
 % and as a corollary $\nabla g_i = \nabla (f_i / \lambda_i)^c$.
 % Therefore, two locally Lipschitz function $g_i$ and $f_i /\lambda_i$ coincide almost everywhere.
 % If follows $g_i=f_i /\lambda_i$ on $M$.
-% We discuss following in the sense of $\bar{\mu}$ almost everywhere.
+% We discuss following in the sense of $\widebar{\mu}$ almost everywhere.
 % The function $g_1$ is by definition just a sum of squared distance functions.
 % Now we aim to find out when $ \exp(- \nabla g_1 )$ is a Lipschitz function.
 % with Lipschitz constant depending only on $M$ and $\lambda_1$.
 % As $M$ is compact, though tangent bundle $TM$ is not compact, local Lipschitz plus bounded diameter of $M$ implies global Lipschitz of $\exp$.
-% Function $g_1$ has hessian upper bound by \cref{prop:differentiate_optimal_transport},
+% Function $g_1$ has hessian upper bound by \Cref{prop:differentiate_optimal_transport},
 % here we treat it as an infimal convolution over a fixed sigleton set $\{x_1\}$.
 % Note that from $ \nabla g_1 = \nabla (f_1 / \lambda_1)^c$,
 % $g_1$ and $(f_1 / \lambda_1)^c$ have the same hessian.
@@ -153,41 +157,44 @@ Then $\bar{\mu}$ is concentrated on the union of barycenters, compact set $Y$.
 % We always take the second condition in following discussion.
 % When $x_1$ runs through a bounded set,
 % all possible barycenters are included in a bounded set.
-% Hence $\bar{\mu}$ has compact support.
+% Hence $\widebar{\mu}$ has compact support.
 % As we actually only consider measures with compact support, the first assumption is fullfilled as well.
-% because $br$ pushes $\mu_1$ to $\bar{\mu}$ by construction of $\bar{\mu}$.
-For $y \in Y$, $g_1$ is smooth by \cref{lem:barycenter_out_of_cut_locus},
-so $\exp( - \nabla g_1)$ is Lipschitz around a ball of $y$.
+% because $br$ pushes $\mu_1$ to $\widebar{\mu}$ by construction of $\widebar{\mu}$.
+For $y \in Y$, $g_1$ is smooth by \Cref{lem:barycenter_out_of_cut_locus},
+so $\exp( - \nabla g_1)$ is Lipschitz in a small open ball centring at $y$.
 Choose a finite cover for $Y$ from these balls,
-and denote by $C$ the global Lipschitz constant of map \(\exp(-\nabla g_1)\) on $Y$.
-Absolutely continuity of $\mu_1$ means that given $\epsilon > 0$,
+and denote by $C$ \underline{a global Lipschitz constant} of map \(\exp(-\nabla g_1)\) on $Y$.
+Absolute continuity of $\mu_1$ means that given $\epsilon > 0$,
 we can find a $\delta > 0$ such that $ \operatorname{Vol}(E) < \delta \implies \mu_1(E) < \epsilon$.
-On the other hand, we have for measurable set $E \subset Y$,
-$\operatorname{Vol}(B^{-1}( E\times \{x^\prime\})) < C^n \operatorname{Vol}(E)$,
-where we write $x^\prime = (x_2, \ldots, x_n)$.
+On the other hand, we have for measurable set $E$,
+$\nabla g_1$ is well-defined on $E \cap Y$ and
+$\operatorname{Vol}( \exp(- \nabla g_1 )( E \cap Y )) < C^n \operatorname{Vol}(E \cap Y)$
+since volume measure is in fact a Hausdorff measure,
+see \cite[Propositions 12.6 and 12.12]{TaylorMichaelEugene1946} for details.
 Finally,
 \begin{equation}
 	\label{equa:absolutely_continuity_estimation}
-	E \subset Y, \operatorname{Vol}(E) < \delta / C^n \implies \bar{\mu}(E)=\mu_1(B^{-1}(E \times \{x^\prime\})) < \epsilon.
+	 \operatorname{Vol}(E) < \delta / C^n \implies \widebar{\mu}(E)
+	=\mu_1(\exp(-\nabla g_1)(E \cap Y)) < \epsilon.
 \end{equation}
-Therefore, $\bar{\mu}$ is absolutely continuous.
+Therefore, $\widebar{\mu}$ is absolutely continuous.
 % Here the Lipschitz constant $C$ depends on the support of $\mu_1$.
 % Since $\exp(-\nabla(f_1 / \lambda_1)^c) = \exp(-\nabla g_1) $ is continous for Vol-a.e. $x_1$
 % (outside of cut-locus of $x_j, j \ne 1$),
-% we deduce from absolutely continuity of $\bar{\mu}$ and compact support of $\mu_1$ that
-% $\bar{\mu}$ has also compact support.
+% we deduce from absolute continuity of $\widebar{\mu}$ and compact support of $\mu_1$ that
+% $\widebar{\mu}$ has also compact support.
 % We have in general that the $c$-conjugate of $f_1 / \lambda_1$ satisfies
 % $(f_1 / \lambda_1)^c = g_1^{cc} \geq g_1$,
 % and thus $c(w, x_1) \geq (f_1 / \lambda_1)^c(w) + f_1/\lambda_1 (x_1) \geq g_1(w) + f_1/\lambda_1 (x_1)$.
 % When $w$ is barycenter for some $x_1$,
 % we have $g_1(w) = (f_1 / \lambda_1)^c(w)$.
-% Hence, from the definition of $\bar{\mu}$ we have
-% $g_1 = (f_1 /\lambda_1)^c$ for $\bar{\mu}$ alomost everywhere.
+% Hence, from the definition of $\widebar{\mu}$ we have
+% $g_1 = (f_1 /\lambda_1)^c$ for $\widebar{\mu}$ alomost everywhere.
 % And we have by minimallity that,
 % $x_1 = \exp_w(- \nabla g_1(w)) = \exp_w(- \nabla (f_1 / \lambda_1)^c(w))$ once gradients exist.
 % Therefore, we have $\nabla g_1 = \nabla (f_1 / \lambda_1)^c$ for volume measure almost everywhere.
 % \begin{rmk}
-% 	Once after we prove that $\bar{\mu}$ is indeed absolutely continous.
+% 	Once after we prove that $\widebar{\mu}$ is indeed absolutely continous.
 % 	$\nabla g$ is invertable and $br(x_1) = \exp_{x_1} \nabla g^c(x_1)$.
 % 	It is not surprised that
 % 	\[
@@ -201,152 +208,114 @@ Therefore, $\bar{\mu}$ is absolutely continuous.
 % \label{discussion_conditional_prob}
 % To attack general case when \textcolor{cyan}{
 \subsubsection{$\mu_i, i \geq 2$ are discrete measures}
-To proceed with this slightly general case,
-we should consider conditional measures of an optimal multi-marginal transfer plan $\gamma$
+To proceed with this slightly more general case,
+we should consider (regular) conditional measures \cite[Section 10.4]{Bogachev2007} of an optimal multi-marginal transport plan $\gamma$
 with marginals $\mu_i$:
-\[
-	\diff \gamma(x_1, x^\prime)= \gamma(\diff x_1 \mid x^\prime)\, \diff \pi(x^\prime) ,
-\]
-where $\pi$ is the projection of $\gamma$ from $x = (x_1, x^\prime)$ to $x^\prime$,
-by abuse of language we also denote by it the push-forward measure from $\gamma$.
-For $\pi$ almost everywhere $x^\prime$., $\gamma(\cdot \mid x^\prime)$ is a probability measure
-concentrated on $M \times \{x^\prime\}$.
+\begin{equation}
+	\label{equa:conditional_measure}
+	\diff \gamma(x) = \gamma(\diff x \mid x^\prime)\, \diff \pi(x^\prime) ,
+\end{equation}
+where $x^\prime = (x_2, \ldots, x_n) \in M^{n-1}$ is the last $n-1$ coordinate components
+of $x = (x_1, x_2, \ldots, x_n) \in M^n$ and
+$\pi$ is the push-forward measure on $M^{n-1}$ from $\gamma$ by
+the projection $x = (x_1, x^\prime) \mapsto x^\prime$.
+As a definition \cite[Definition 10.4.1]{Bogachev2007}, \cref{equa:conditional_measure} means that,
+\begin{enumerate}
+	\item for $\pi$ almost everywhere $x^\prime$, $\gamma(\cdot \mid x^\prime)$ is a probability measure
+	      concentrated on $M \times \{x^\prime\} \subset M^n$;
+	\item for Borel sets $R \subset M^n$ , the function $ x^\prime \mapsto \gamma(R \mid x^\prime)$ is measurable and
+	\item for Borel set $S \subset M^{n-1}$,
+	      $\gamma(R \cap M \times S) = \int_{S} \gamma( R \mid x^\prime) \diff \pi(x^\prime)$.
+\end{enumerate}
 
-One has from the definition of conditional measures that,
-as function on Borel measurable sets,
-\[
-	\bar{\mu} = B_{\#} \gamma = \int_{M^{n-1}} B_{\#} \gamma(\cdot \mid x^\prime)\, \diff \pi(x^\prime).
-\]
+It follows that as a function on Borel subsets of $M$,
+\begin{equation}
+	\label{equa:push_forward_conditional_measure}
+	\widebar{\mu}(\cdot) = B_{\#} \gamma (\cdot)= \int_{M^{n-1}} B_{\#} \gamma(\cdot \mid x^\prime)\, \diff \pi(x^\prime).
+\end{equation}
 
-If we have that for $\gamma$ almost everywhere $x^\prime$ that
-$B_{\#} \gamma(\cdot \mid x^\prime)$
-is absolutely continuous,
-then $\bar{\mu}(E)=0$ for volume measure zero set $E$ by integration above.
-Note that \cref{equa:absolutely_continuity_estimation} also holds by integration
-for some global Lipschitz constant $C$ of $\exp( - \nabla g_1)$ on the compact set of all possible barycenters.
+If we show that for $\pi$ almost everywhere $x^\prime$ that
+$B_{\#} \gamma(\cdot \mid x^\prime)$ is absolutely continuous,
+then we could infer from \cref{equa:push_forward_conditional_measure} above that
+$\widebar{\mu}(E)=0$ for any $\text{Vol}$-negligible set $E \subset M$ by integrating.
 % \[
-% 	\bar{\mu}(E)
+% 	\widebar{\mu}(E)
 % =\int_{M^{n-1}}
 % \frac{ \mu_1( br^{-1}(E) \cap A_{x^\prime} )}{\mu_1(A_{x^\prime})}
 % \diff \pi(x^\prime)
 % =\int_{M^{n-1}}
-% \bar{\mu}^{x^\prime}(E)
+% \widebar{\mu}^{x^\prime}(E)
 % \diff \pi(x^\prime)
 % \leq \int_{M^{n-1}} C\,\mu_1^{\prime}(E) \diff \pi(x^\prime) \leq C\, \mu_1(E).
 % = 0.
 % \]
 
-Generally speaking, computation of $\gamma(\cdot \mid x^\prime)$ is only possible when
+% Generally speaking, computation of $\gamma(\cdot \mid x^\prime)$ is only possible when
+Heuristically, $\gamma(\diff x \mid x^\prime) = \diff \gamma(x) / \diff \pi (x^\prime)$ is a direct generalization of
+classic conditional probability formula $P(A \mid B) = P(A B) / P(B)$.
+For illustration, we calculate $\gamma(\cdot \mid x^\prime)$ in two cases,
 \begin{itemize}
-	\item $\pi$ is has countable support.
-	      This is equivalent to that all $\mu_i, i \geq 2$ have countable support.
-	      Fix any $x^\prime$ in the support of $\pi$, by direct verification
+	\item $\pi$ is has finite support.
+	      This is equivalent to that all $\mu_i, i \geq 2$ are discrete measures.
+	      Fix any $x^\prime$ in the support of $\pi$ such that $\pi(\{x^\prime\}) >0$, by setting $S=\{x^\prime\}$ we get
 	      \[
 		      \gamma(\cdot \mid x^\prime) =
 		      \frac{
 			      \mathbbm{1}_{M \times \{x^\prime\}}
-			      \gamma
-		      }{\pi(x^\prime)}.
+			      \gamma(\cdot)
+		      }{\pi(\{x^\prime\})}.
 	      \]
-	\item $\gamma$ is absolutely continuous with density function $f: M^n \rightarrow \mathbb{R} $.
+	\item $\gamma$ has density function $f: M^n \rightarrow \mathbb{R} $.
+	      Then $\pi$ has density $\int_{M} f(x_1, x^\prime) \diff \operatorname{Vol}(x_1)$ and
 	      \[
-		      \gamma(\diff x_1 \mid x^\prime) =
-		      \frac{
-			      f(x_1, x^\prime) \diff \operatorname{Vol}(x_1)
-			      % \diff \gamma (x_1, x^\prime)
-		      }
-		      {\int_{M} f(x_1, x^\prime) \diff \operatorname{Vol}(x_1)
-		      }
+		      \gamma(\diff x \mid x^\prime) =
+		      \frac{ f(x_1, x^\prime)} {\int_{M} f(x_1, x^\prime) \diff \operatorname{Vol}(x_1)}\diff \operatorname{Vol}(x)
 	      \]
-	      where we set the right hand side zero if it is indeterminate
-	      and we remove this $x^\prime$ from consideration.
+	      where we set the right hand side zero if it is indeterminate.
+	      % and we remove this $x^\prime$ from consideration.
 \end{itemize}
 % Note in both cases, $\gamma(\cdot \mid x^\prime)$
 % has absolutely continous push-forward measure
 % $\mu_1^{x^\prime} := \text{proj}^1_{\#}\gamma(\cdot \mid x^\prime)$
 % to the first coordinate.
-But only in the first case that the measure $\gamma(\cdot \mid x^\prime) \leq \pi(x^\prime) \, \gamma$
+But only in the first case that the measure $\gamma(\cdot \mid x^\prime) \leq \pi(x^\prime) \, \gamma(\cdot)$
 is controlled by $\gamma$.
 % Or we hope $f$ has positive lower bound,
 % for example \textcolor{cyan}{continous and strictly positive}, like volume measure.
 % In the case $\mu_1=\operatorname{Vol}$? Every point in $\text{spt}\mu_1$ runs over all $\times_i \text{spt}\mu_i$.
 % \textcolor{red}{Unfortunately, this control is required to apply conditioning optimal plan.}
 % One may consider the case when at least one marginal is discrete,
-% but no absolutely continuity can be derived without barycenter push-forward.
+% but no absolute continuity can be derived without barycenter push-forward.
 % It is true that we have $\gamma$ is an optimal plan for all its marginals
 % \[
-% 	B_{\#} \gamma              = \bar{\mu} \text{ and }
+% 	B_{\#} \gamma              = \widebar{\mu} \text{ and }
 % 	\text{proj}^1_{\#} \gamma  = \mu_1,
 % \]
-In this case, conditioning of (multi-marginal) optimal plan is still optimal by \cref{thm:restriction_optimal_plan}.
+In this case, conditioning of (multi-marginal) optimal plan is still optimal by \Cref{thm:restriction_optimal_plan}.
 That is to say, $\gamma(\cdot \mid x^\prime)$ is an optimal plan of its marginals.
 % \textcolor{cyan}{in the case of discrete measure}.
 Apply previous discussion, we know that $B_{\#}\gamma(\cdot, x^\prime)$
 is absolutely continuous.
-% \[
-% \exp(-\frac{1}{\lambda_1}\nabla f_1)_{\#}  \mu_1^{x^\prime}=
-% \]
-% where $\bar{\mu}^{x^\prime}$ is a barycenter measure.
-% Since conditioning of optimal maps are still optimal,
-% barycenter formula \cref{formula_barycenter} still holds.
-% We already know $T_1 := \exp(-\nabla g_1)$ is the optimal transfer map from $\bar{\mu}^{x^\prime}$ to $\mu_1^{x^\prime}$,
-% then $T_1 = \exp(- \nabla g_1)$ for $\mu_1^{x^\prime}$ almost everyhere and
-% \begin{align*}
-% 	\bar{\mu} = B_{\#} \gamma & =
-% 	\int_{M^{n-1}}\bar{\mu}^{x^\prime} \, \diff \pi(x^\prime)                                            \\
-% 	                          & = \int_{M^{n-1}} \gamma( T_1(\cdot) \mid x^\prime) \diff \pi(x^\prime)   \\
-% 														& = \gamma \circ \exp(-\nabla g_1)
-% 														% &= \exp (- \frac{1}{\lambda_1} \nabla_1 f)_{\#} \gamma
-% 	.
-% \end{align*}
-% Again, $\bar{\mu}$ has compact support as $T_1$ is Vol-a.e. continous.
-% One possible \textbf{investigation}: Conditional optimal plan, not just the simple case of restriction.
-% Hence, the push-forward measure
-% $\bar{\mu}^{x^\prime} = br_{\#} \diff \mu_1^{x^\prime}$ is absolutely continous as well.
-% We thus have
-% \[
-% 	B_{\#} \diff \gamma = \int_{M^{n-1}} f(\cdot, x^\prime)  \diff \pi(x^\prime) \, \diff \operatorname{Vol}(\cdot).
-% \]
-% Moreover, the previous integral is in fact a finite sum.
-% For a measurable set $E \subset \text{spt}(\bar{\mu})$ with volume measure $0$,
-% So $\bar{\mu} = B_{\#} \diff \gamma$ is absolutely continous with respect to $\mu_1$.
-% \begin{rmk}
-% 	\textcolor{red}{NEED further investigation}, maybe one can use \cref{formula_barycenter}.
-% 	We may guess that	the density of $\bar{\mu}$,
-% 	$\int_{M^{n-1}} f(\cdot, x^\prime)  \diff \pi(x^\prime)$
-% 	is dominated by density of $\mu_1$ up to a constant coefficient.
-% 	% Lipschitz constant of \( \exp _ { z } \nabla g ( z ) \).
-% \end{rmk}
 
-\subsubsection{$\mu_i, i \geq 2$ have compact supports}
+\begin{rmk}
+	\label{rmk:global_Lipschitz_constant}
+	Note that the Lipschitz constant $C$ in \cref{equa:absolutely_continuity_estimation}
+	not only depends on the compact supports of $\widebar{\mu}$ and $\mu_i$
+	but also depends on $x^\prime$
+	since in the definition of $g_1(x):=- \frac{1}{\lambda_1}\sum_{j=2}^n \lambda_j d^2(x, x_j)$
+	we already fix an $x^\prime = (x_2, \ldots, x_n)$.
 
-For simplicity that we only consider the case $n=2$.
-Approximate $\mu_2$ in Wasserstein metric by a sequence of measures $\mu_2^{m}$,
-then $\mathbb{P}_m := \lambda_1 \delta_{\mu_1} + \lambda_2 \delta_{\mu_2^m}$ converges to $\mathbb{P}$
-in $\mathcal{W}_2(\mathcal{W}_2(M))$.
-
-By the consistency of barycenters, the unique barycenter $\bar{\mu}_m$ of $\mathbb{P}_m$
-converges in Wasserstein metric to the unique barycenter $\bar{\mu}$ of $\mathbb{P}$.
-% We don't need to find out density explicitly.
-We prove the absolute continuity by showing that
-for any $\epsilon > 0$ there is a $\delta > 0$ such that
-\begin{equation}
-	\label{equa:absolutely_continous}
-	\forall E \subset M \, \text{measurable, } \operatorname{Vol}(E) < \delta
-	\implies \bar{\mu}(E) < \epsilon
-\end{equation}
-We argue the same way as \cref{equa:absolutely_continuity_estimation}.
-In our situation, a uniform $\delta$ can be chosen for all $\bar{\mu}_m$
-because a global Lipschitz constant (independent of $m$)
-of $\exp( - \nabla g_1)$ exists on the compact set of all possible barycenters.
-Note that $\bar{\mu}$ is concentrated on this compact set.
-% $\bar{\mu}_m$ is pushed by $T_1^{m}$ from $\mu_1$ with a Lipschitz constant bound
-% independent of $m$.
-
-Recall for open set $E \subset M$, $\bar{\mu}(E) \leq \liminf \bar{\mu}_m(E)$,
-because indicator function of open set is lower semi-continuous.
-Hence, \cref{equa:absolutely_continous} holds for all open sets.
-As Borel measure is outer regular, for general measurable $E$ with $\operatorname{Vol}(E) < \frac{\delta}{2}$,
-we select an open set $E^\prime$ such that
-$ E \subset E^\prime$ and $ \operatorname{Vol}(E^\prime) < \delta$,
-then $\bar{\mu}(E) \leq \bar{\mu}(E^\prime) < \epsilon$.
+	We choose $C$ a global Lipschitz constant for all $x^\prime$ (finitely many) in the support of $\pi$,
+	it means that $\operatorname{Vol}(E) < \delta /C^n \implies B_{\#} \gamma(E \mid x^\prime) < \epsilon$
+	for those $x^\prime$.
+	By \cref{equa:push_forward_conditional_measure}, we get again that
+	\[
+		\operatorname{Vol}(E) < \delta / C^n \implies \widebar{\mu}(E)
+		= \int_{M^{n-1}} B_{\#}\gamma(E \mid x^\prime) \diff \pi(x^\prime) < \epsilon.
+	\]
+	However, if all $x^\prime = (x_2, \ldots, x_n)$ in consideration varies infinitely
+	in $x_j$ for $2 \leq j \leq n$,
+	we need more complicated tools to find such a global Lipschitz constant $C$;
+	see the proof of \Cref{thm:absolute_continuity_discrete}.
+\end{rmk}
+% \subsubsection{$\mu_i, i \geq 2$ have compact supports}

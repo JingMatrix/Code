@@ -2,14 +2,15 @@
 
 An example of locally compact,
 separable and complete but not proper metric space is $\mathbb{R}$ with metric $d(x,y)=\min\{|x-y|,1\}$.
-We remark that this example coincides with the restriction of Prokhorov metric, which metricizes weakly convergence of Borel measures on $\mathbb{R}$, to Dirac measures on $\mathbb{R}$.
+We remark that this example coincides with the restriction of Prokhorov metric, which metricizes weak convergence of Borel measures on $\mathbb{R}$, to Dirac measures on $\mathbb{R}$.
 Discussion for metricized space of measures are available in the next chapter,
 now we focus on length space $(E,d)$. Recall that $(E,d)$ is path-connected by assumption.
 We prove following proposition for the purpose of constructing counter-examples.
 
 \begin{prop}[Barycenter and midpoint]
 	\label{prop:barycenter_midpoint}
-	For two points $x,y$ in a length space $(E,d)$, the barycenter of $\mu:=\frac{1}{2}\delta_x + \frac{1}{2}\delta_y$ must be a midpoint between $x$ and $y$. That is to say, a barycenter $z$ satisfies $d(x,z)=d(z,y)=\frac{1}{2}d(x,y)$.
+	For two points $x,y$ in a length space $(E,d)$, barycenters of $\mu:=\frac{1}{2}\delta_x + \frac{1}{2}\delta_y$ are exactly midpoints between $x$ and $y$.
+	That is to say, a barycenter $z$ satisfies $d(x,z)=d(z,y)=\frac{1}{2}d(x,y)$.
 \end{prop}
 
 \begin{proof}
@@ -25,7 +26,7 @@ We prove following proposition for the purpose of constructing counter-examples.
 	denote $\Gamma$ the set of all rectifiable curves from $x$ to $y$.
 	Denote by $L(\gamma)$ the length of rectifiable curve $\gamma$
 	and by $\gamma_\frac{1}{2}$ the midpoint of $\gamma$ which exists from the continuity of length
-	structure with respect to end points.
+	structure with respect to concatenation, see \Cref{rmk:curve_continuity_endpoints}.
 	By definition of midpoint $\gamma_{\frac{1}{2}}$ and barycenter $z$,
 	$L(\gamma_{[x, \gamma_\frac{1}{2}]}) = L(\gamma_{[\gamma_\frac{1}{2}, y]})$ for $\gamma \in \Gamma$ and
 	\[
@@ -36,12 +37,12 @@ We prove following proposition for the purpose of constructing counter-examples.
 \end{proof}
 
 \begin{example}[Non-existence of barycenter for length space]
-	Locally compact complete length is proper and hence guarantees the existence of barycenter.
+	A locally compact complete length space is proper and hence guarantees the existence of barycenter.
 	\begin{enumerate}
 		\item Locally compact length space is not sufficient for the existence of barycenter.
 		      Consider unit disk without origin,
 		      from physical intuition and there is no barycenter for uniform measure on it.
-		      Or we can take two centre-symmetric points $x = - y$ and
+		      Or we can take two center-symmetric points $x = - y$ and
 		      consider measure $\frac{1}{2}\delta_x + \frac{1}{2}\delta_y$ for example.
 		\item Complete length space is not sufficient for the existence of barycenter.
 		      As we saw in previous proposition, if barycenters always exists then midpoint always exists.
@@ -49,24 +50,29 @@ We prove following proposition for the purpose of constructing counter-examples.
 		      see \cite[Theorem 2.4.16]{burago2001course} for detail.
 		      The idea of proof is to firstly construct our shortest path on rational points and then extend it
 		      as a well-defined path by completeness and Lipschitz continuous of induced length structure with respect to rational points.
-		      We know in addition that there exists complete but not geodesic ``manifold'' in \underline{infinite dimension}.
+		      We know in addition that there exists complete but not geodesic ``manifold''
+		      in \underline{infinite dimension}, see \Cref{lem:infinite_not_geodesic_manifold} below.
 	\end{enumerate}
 \end{example}
 
-A length space is geodesic if shortest path always exists.
-It is the same as saying that distance between two points is always realized by the length of some rectifiable curve.
+\begin{defn}
+	A length space is geodesic if shortest path always exists.
+	It is the same as saying that distance between two points is always realized by the length of some rectifiable curve.
+\end{defn}
 
 \begin{lem}
+	\label{lem:infinite_not_geodesic_manifold}
 	In infinite dimension, there exists a complete but not geodesic Hilbert Riemannian manifold.
 \end{lem}
 
-One such example is the infinite dimensional ellipse in Hilbert space $\ell^2$, let $c_n$ be a strictly decreasing sequence with a positive lower bound, define
+One such example is the infinite dimensional ellipse in Hilbert space $\ell^2$,
+let $(c_n)_{n \in \mathbb{N}^*}$ be a strictly decreasing sequence with a positive lower bound, define
 \[
 	E = \left\{ \left( x _ { 1 } , x _ { 2 } , \ldots \right) \in \ell^2 \mid \sum _ { n \in \mathbb { N }^* } \frac { x _ { n } ^ { 2 } } { c _ { n } ^ { 2 } } = 1 \right\}.
 \]
-We have met the space $E$ in \cref{example:ellipsoid_subspace},
-but now we consider smooth structure on it.
-Following proof is adapted from \cite[Example 5.1]{grossman1965hilbert}.
+We have met the space $E$ in \Cref{example:ellipsoid_subspace},
+but now we consider a smooth structure on it.
+The following proof is adapted from \cite[Example 5.1]{grossman1965hilbert}.
 
 \begin{proof}
 	Take points $e=(c_1, 0,0,\ldots)$ and $-e=(-c_1, 0,0,\ldots)$,
@@ -86,26 +92,25 @@ Following proof is adapted from \cite[Example 5.1]{grossman1965hilbert}.
 	For a smooth curve $\gamma: [0,1] \rightarrow E$ with arc-length proportional parametrization,
 	\[
 		L(\gamma) := \int_{0}^{1} \| \gamma^\prime \| \diff \lambda \geq
-		\int_{0}^{1} \| T^\prime \cdot \gamma^\prime \| \diff \lambda =: L(T \circ \gamma)
+		\int_{0}^{1} \| T^\prime(\gamma^\prime) \cdot \gamma^\prime \| \diff \lambda =: L(T \circ \gamma)
 	\]
 
 	Here the tangent map $T^\prime$ is an infinite dimensional matrix with
 	diagonal $(1,0,{c_3}/{c_2}, \ldots)$.
 	Since $\gamma^\prime$ is continuous,
-	we remain to show that at least in an open interval we have strict inequality
-	$\| \gamma^\prime \| > \| T^\prime \cdot \gamma^\prime \|$.
+	we are left with proving that in an open interval $\| \gamma^\prime \| > \| T^\prime(\gamma^\prime) \cdot \gamma^\prime \|$.
 	Otherwise, $\gamma^\prime$ has only the first coordinate component on every open interval.
 	Integrate $\gamma^\prime$ we should get $\gamma \in \{ e, -e\}$, this is a contradiction.
 \end{proof}
 
 To get rid of Hilbert Riemannian manifold theory,
 we prove a non-smooth version for this example.
-Apparently, $E$ with the metric inherited form $\ell^2$ is not a length space.
+We can show that $E$ with the metric inherited form $\ell^2$ is not a length space.
 To explore more of this example,
-we should start to consider induced length metric $\hat{d}$ on $E$ by inherited metric from $\ell^2$.
+we start to consider induced length metric $\hat{d}$ on $E$ by inherited metric from $\ell^2$.
 
 \begin{lem}
-	For $(E, d)$ in \cref{example:ellipsoid_subspace}, where $d$ is the inherited metric from $\ell^2$,
+	For $(E, d)$ in \Cref{example:ellipsoid_subspace}, where $d$ is the inherited metric from $\ell^2$,
 	there is again no shortest path $\gamma$ between two poles $e$ and $-e$
 	so that $\hat{d}(e, -e) = L_d (\gamma)$.
 \end{lem}
@@ -115,30 +120,40 @@ this lemma tells that the length space $(E, \hat{d})$ is not geodesic.
 In this sense, this lemma is a non-smooth version of the previous one.
 
 \begin{proof}
-	We start with a discussion of Lipschitz curves from $[0,1]$ to $(E,d)$ connecting $e$ and $-e$.
+	We start with a discussion of \underline{Lipschitz curves} from $[0,1]$ to $(E,d)$ connecting $e$ and $-e$.
 	For a Lipschitz curve $\gamma$,
 	one can define its derivative $\gamma^\prime: [0,1] \rightarrow \mathbb{R}^\mathbb{N}$ almost everywhere
-	and recover classic arc-length integral formula by argument similar to the proof of bounded variation formula
-	(\cite[Section 5.3]{Bogachev2007}).
-	A rectifiable curve $\gamma$ could take arc-length proportional parametrization on $[0,1]$;
+	since each coordinate component of $\gamma$ is a Lipschitz function from $[0,1]$ to $\mathbb{R}$.
+	Moreover, for metric space $(E,d)$ our \cref{defn:length_structure} of length structure is the same as
+	the total variation of Lipschitz function from $[0,1]$ to $\mathbb{R}^\mathbb{N}$.
+	One can thus recover classic arc-length integral formula
+	\[
+		L_d(\gamma |_{[s,t]}):= \int_s^t \| \gamma^\prime \| \diff \lambda
+	\]
+	by argument similar to the proof of bounded variation formula
+	$\operatorname{V}(f, [s , t] )= \int_s^t |f^\prime| \diff \lambda$ whenever $f: [0,1] \rightarrow \mathbb{R}$ is absolutely continuous,
+	see \cite[Section 5.3]{Bogachev2007} for details.
+
+	We remind that a rectifiable curve $\gamma$ could take arc-length proportional parametrization on $[0,1]$;
 	with this parametrization
 	it becomes a Lipschitz curve and $\| \gamma^\prime \|$ is constant almost everywhere.
-
-	Assume now that there exists a minimal geodesic between $e$ and $-e$.
+	Assume now that there exists a minimal geodesic between $e$ and $-e$,
+	then it could be realized as a Lipschitz curve.
 	We claim that arc-length variation has the same solution as energy variation
-	over Lipschitz curves on $[0,1]$:
+	over \emph{Lipschitz curves on $[0,1]$}:
 	\begin{equation}
 		\label{equa:energy_variation_in_E}
 		\arg \min_{\gamma} L (\gamma) :=
 		\arg \min_{\gamma} \int_{0}^{1} \| \gamma^\prime \| \diff \lambda =
-		\arg \min_{\gamma} \int_{0}^{1} \| \gamma^\prime \| ^2 \diff \lambda.
+		\arg \min_{\gamma} \int_{0}^{1} \| \gamma^\prime \| ^2 \diff \lambda
+		\text{, where } \gamma \text{ is Lipschitz}.
 	\end{equation}
 	To justify \cref{equa:energy_variation_in_E},
-	Cauchy-Schwartz inequality implies that
+	Cauchy-Schwarz inequality implies that
 	solutions to energy variation should have arc-length proportional parametrizations.
 	In this case, energy is exactly the square of arc-length, so they attain minimum simultaneously.
 
-	We aim to prove that there is no solution to this energy variation problem,
+	We aim to prove that there is no solution to this energy variational problem,
 	and thus get a contradiction.
 	Pick an integer $n \geq 2$,
 	we shall modify $\gamma$ leaving $\gamma_k$ for $ k > n$ unchanged to lower the energy of $\gamma$.
@@ -160,7 +175,15 @@ In this sense, this lemma is a non-smooth version of the previous one.
 		(\frac{c_n}{c_1} \frac{\gamma_1}{c_1}, \ldots, \frac{c_n}{c_n} \frac{\gamma_n}{c_n}))^2            \\
 		                                            & \geq 0
 	\end{align*}
-	where we apply Cauchy-Schwartz inequality and the assumption that $c_i$ is strictly decreasing.
+	where we apply Cauchy-Schwarz inequality and the assumption that $c_i$ is strictly decreasing.
 	It becomes strict in the set where $\| (\gamma_1^\prime(t), \ldots, \gamma_{n-1}^\prime(t)\| \ne 0$,
 	which by our choice of $n$ is not of measure zero.
 \end{proof}
+
+\begin{rmk}
+	In this non-smooth version counter-example, our proof relies heavily on the
+	strategy that we restrict our attention to only Lipschitz curves.
+	% which enables us to define arc-length and energy variation in an analytic way.
+	The good thing is that we can consider coordinate components for curves in $E \subset \mathbb{R}^\mathbb{N}$.
+	Hence, we are allowed to apply classic non-smooth analysis for Lipschitz function from $[0,1]$ to $\mathbb{R}$.
+\end{rmk}

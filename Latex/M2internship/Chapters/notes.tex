@@ -76,9 +76,9 @@ For each point \( x \in X \) we shall denote by \( p _ { x } \) the measure dege
 \end{lem}
 
 \begin{proof}
-	Let \( \left\{ x _ { n } \right\} \) be a sequence of points in \( X \) such that \( p _ { x _ { n } } \Rightarrow q \). Suppose \( \left\{ x _ { n } \right\} \) does not have any convergent subsequence. Then the set \( S = \left\{ x _ { 1 } , x _ { 2 } , \ldots \right\} \) is closed and thus is any subset \( C \) of \( S . \) Since \( p _ { x _ { n } } \Rightarrow q \) we have by Theorem \cref{thm:weak_convergence}, \( q ( C ) \geqslant \overline { \lim } p _ { x _ { n } } ( C ) \) for \( C \subseteq S \). It follows that for every infinite subset \( S _ { 1 } \subseteq S , q \left( S _ { 1 } \right) = 1 \). This is a contradiction since \( q \) is a measure.
+	Let \( \left\{ x _ { n } \right\} \) be a sequence of points in \( X \) such that \( p _ { x _ { n } } \Rightarrow q \). Suppose \( \left\{ x _ { n } \right\} \) does not have any convergent subsequence. Then the set \( S = \left\{ x _ { 1 } , x _ { 2 } , \ldots \right\} \) is closed and thus is any subset \( C \) of \( S . \) Since \( p _ { x _ { n } } \Rightarrow q \) we have by Theorem \Cref{thm:weak_convergence}, \( q ( C ) \geqslant \overline { \lim } p _ { x _ { n } } ( C ) \) for \( C \subseteq S \). It follows that for every infinite subset \( S _ { 1 } \subseteq S , q \left( S _ { 1 } \right) = 1 \). This is a contradiction since \( q \) is a measure.
 
-	Thus there is a subsequence \( \left\{ x _ { n _ { k } } \right\} , x _ { n _ { k } } \rightarrow x . \) By \cref{dirac_measure_weak_homeomorphic}, \( q = p _ { x } \). Hence \( D \) is sequentially closed.
+	Thus there is a subsequence \( \left\{ x _ { n _ { k } } \right\} , x _ { n _ { k } } \rightarrow x . \) By \Cref{dirac_measure_weak_homeomorphic}, \( q = p _ { x } \). Hence \( D \) is sequentially closed.
 \end{proof}
 
 \begin{thm}
@@ -117,7 +117,7 @@ Later we need to have a measurable selection of barycenter when given measure va
 	\begin{itemize}
 		\item Wasserstein distance
 		      \begin{enumerate}
-			      \item lower semi-continuous with respect to weakly convergence
+			      \item lower semi-continuous with respect to weak convergence
 			      \item definition involves infimum
 			      \item isometric embedding between base space and Wasserstein space
 		      \end{enumerate}
@@ -154,13 +154,13 @@ Later we need to have a measurable selection of barycenter when given measure va
 		\item Weak convergence of measures coincides with weak* topology on the dual space of bounded continous function $C_b(\mathcal{X})$.
 		\item Wasserstein metric toplogy of measures coincides with weak* topology on the (topological) dual space of $(1 + d(x_0, \cdot)^p) C_b(\mathcal{X})$.
 		\item $C_b(\mathbb{R})$ is not separable, we can consider the uncountable set of bounded functions taking value $0$ or $1$ on all integers.
-		\item The reason why Banach-Alaoglu theorem is not applicable is that the space of measures $P(\mathcal{X})$ is not closed in the weak* topolgy. Otherwise, this space will be weak* compact by Banach-Alaoglu theorem. And since weakly convergence is metriziable, compactness is equivalent to sequential compactness. Then there is a classic counterexample of ``escape of mass". Consider Dirac measures on integers, this set has no accumulation points as measures on $\mathbb{R}$. Tightness is a control on the property of $P(\mathcal{X})$ being closed in weak* topology of the dual of $C_b(\mathcal{X})$.
+		\item The reason why Banach-Alaoglu theorem is not applicable is that the space of measures $P(\mathcal{X})$ is not closed in the weak* topolgy. Otherwise, this space will be weak* compact by Banach-Alaoglu theorem. And since weak convergence is metriziable, compactness is equivalent to sequential compactness. Then there is a classic counterexample of ``escape of mass". Consider Dirac measures on integers, this set has no accumulation points as measures on $\mathbb{R}$. Tightness is a control on the property of $P(\mathcal{X})$ being closed in weak* topology of the dual of $C_b(\mathcal{X})$.
 		\item We can apply Hahn-Banach theorem here:
 		      \begin{equation}
 			      \label{hahn_banach_application}
 			      \mu \in \overline { \operatorname { Conv } } ( \mathcal { K } ) \Longleftrightarrow \mu(f) \leq \sup _ { \nu \in \mathcal { K } } \int _ { \mathcal{X} } f \diff \nu, \quad \forall f \in C _ { b }( \mathcal{X} ).
 		      \end{equation}
-		      For instance we can prove the separability of \( \mathscr { P } ( \mathcal{X} ) \) by choosing \( \mathcal { K }: = \{ \delta _ { x }: x \in D \} \), where \( D \) is a countable dense subset of \( \mathcal{X}\). By \cref{hahn_banach_application} we easily check that \( \operatorname { Conv } (\mathcal { K }) \subset \mathscr { P } ( \mathcal{X} ) \subset \overline { \operatorname { Conv } } (\mathcal { K } \)) and therefore the subset of all the convex combinations with rational coefficients of \( \delta \)-measures concentrated in \( D \) is weakly dense in \( \mathscr { P } ( \mathcal{X} ) \). The same holds for Wasserstein metric topology.
+		      For instance we can prove the separability of \( \mathscr { P } ( \mathcal{X} ) \) by choosing \( \mathcal { K }: = \{ \delta _ { x }: x \in D \} \), where \( D \) is a countable dense subset of \( \mathcal{X}\). By \Cref{hahn_banach_application} we easily check that \( \operatorname { Conv } (\mathcal { K }) \subset \mathscr { P } ( \mathcal{X} ) \subset \overline { \operatorname { Conv } } (\mathcal { K } \)) and therefore the subset of all the convex combinations with rational coefficients of \( \delta \)-measures concentrated in \( D \) is weakly dense in \( \mathscr { P } ( \mathcal{X} ) \). The same holds for Wasserstein metric topology.
 
 	\end{itemize}
 \end{rmk}
@@ -171,7 +171,7 @@ Hence, convex analysis may not help us in the problem of Wasserstein barycenter,
 
 \subsection{Countinous selection of barycenter}
 
-From proof of \cref{thm:barycenter_finite_support_measure},
+From proof of \Cref{thm:barycenter_finite_support_measure},
 we can define almost everywhere a
 selection of barycenter by barycenter formula \cref{equa:formula_barycenter}
 and then extend it by countinuity to a bigger domain.
@@ -181,9 +181,9 @@ even the barycenter formula \cref{equa:formula_barycenter} is not defined everyw
 
 \subsection{Calculate density function}
 
-Recall that there is no duality between $L^{\infty}(\bar{\mu})$ (possible non-separable) and $L^1 (\bar{\mu})$
+Recall that there is no duality between $L^{\infty}(\widebar{\mu})$ (possible non-separable) and $L^1 (\widebar{\mu})$
 in functional analysis even when $M$ is compact with Lebesgue measure.
-According to Proposition 4.4.2 in \cite{Bogachev2007} below, we need to show that $\bar{\mu}$ is a linear functional on $L^{\infty}(\bar{\mu})$.
+According to Proposition 4.4.2 in \cite{Bogachev2007} below, we need to show that $\widebar{\mu}$ is a linear functional on $L^{\infty}(\widebar{\mu})$.
 \begin{prop}
 	Let \( \mu \) be a finite nonnegative measure.
 	A continuous linear function \( \Psi \) on \( L ^ { \infty } ( \mu ) \) has the form
@@ -191,16 +191,16 @@ According to Proposition 4.4.2 in \cite{Bogachev2007} below, we need to show tha
 	, where \( g \in L ^ { 1 } ( \mu ) \),
 	precisely when the set function \( A \mapsto \Psi \left( I _ { A } \right) \) is countably additive.
 \end{prop}
-We define $\Psi(f):= \int_M f \diff \bar{\mu} = \lim_m \int_M f \diff \bar{\mu}_m$ for $f$ continous.
-Extend $\Psi$ to be a continous linear functional on $L^{\infty}(\bar{\mu})$ by Hahn-Banach theorem.
-Do we still have $\Psi(I_A) = \bar{\mu}(A)$?
+We define $\Psi(f):= \int_M f \diff \widebar{\mu} = \lim_m \int_M f \diff \widebar{\mu}_m$ for $f$ continous.
+Extend $\Psi$ to be a continous linear functional on $L^{\infty}(\widebar{\mu})$ by Hahn-Banach theorem.
+Do we still have $\Psi(I_A) = \widebar{\mu}(A)$?
 
 A related discussion is available on
 \href{https://math.stackexchange.com/questions/574130/does-weak-convergence-with-uniformly-bounded-densities-imply-absolute-continuity/574888#574888}{math Stack Exchange}.
 Think about this example carefully.
 Let $\lambda$ be the arglength measure and $\phi_n \ge 0$ a continuous function on $\mathbb T$ with $\int_{\mathbb T} \phi_n\, d\lambda = 1$ and $\phi_n(x) = 0$ if $|x-1| \ge \frac 1n$. Then for each continuous function $f\colon \mathbb T \to \mathbb R$ we have $\int_{\mathbb T} f\phi_n d\lambda \to f(1)$, that is $\phi_n \lambda \to \delta_1$ weakly. But $\delta_1$ is not $\lambda$-continuous.
 
-A digression, generally for question if density of $\bar{\mu}_m$ converges to density of $\bar{\mu}$,
+A digression, generally for question if density of $\widebar{\mu}_m$ converges to density of $\widebar{\mu}$,
 we possibly need asymptotically equicontinuous in \cite{Sweeting1986Converse}.
 
 To attack even more general case,
@@ -217,15 +217,15 @@ One way to do so is to assume $\mu_1$ has bounded density.
 Note that, since the bound on the \( L ^ { \infty } \) norm is preserved under weak-* convergence,
 \( \mathcal { A } _ { L } \) is a countable union of weakly-* closed set, and thus Borel measurable, subset of \( W_2( M ) \).
 
-% If $\mu_1 \in \mathcal{A}_L$, then by duality between $L^p(\bar{\mu})$ and $L^q(\bar{\mu})$
+% If $\mu_1 \in \mathcal{A}_L$, then by duality between $L^p(\widebar{\mu})$ and $L^q(\widebar{\mu})$
 % and that they are separable spaces,
-% we have that $\bar{\mu}$ has density in $L^p(\bar{\mu})$ for
+% we have that $\widebar{\mu}$ has density in $L^p(\widebar{\mu})$ for
 % $p < \infty$ with a upper norm bound depending only on constat $L$ (, $\lambda_1$ and $M$).
-% We pass $p$ to infity to get $\bar{\mu} \in \mathcal{A}_L$.
+% We pass $p$ to infity to get $\widebar{\mu} \in \mathcal{A}_L$.
 % Hence, our conclusion holds for any $\mathbb{P}$ that is not atomless on $\mathcal{A}_L$.
 
 Finally, if we are given $\mathbb{P}$ with only assumption that $\mathbb{P}(\mathcal{A}_L(M)) > 0$,
-we need more control on the density function of $\bar{\mu}_m$
+we need more control on the density function of $\widebar{\mu}_m$
 to ``remove'' the dependency of its upper bound on a singled-out coefficient $\lambda_1$.
 One hope is that $\lambda_1$ is replaced by $\mathbb{P}(\mathcal{A}_L(M))$.
 
@@ -238,12 +238,12 @@ By convention, we denote by $g$ the density function for absolutely measure $\mu
 One principle of differential geometry is to differentiate everything once we could.
 
 % If we only apply general bound on $c$-concave function
-Recall change of variable in \cref{thm:jacobian_identity} (Theorem 4.2 in \cite{cordero2001riemannian}),
+Recall change of variable in \Cref{thm:jacobian_identity} (Theorem 4.2 in \cite{cordero2001riemannian}),
 \[
-	\bar{g} = g_i \circ T_i \det D T_i :
+	\widebar{g} = g_i \circ T_i \det D T_i :
 	= g_i \circ T_i \det[Y(H-\text{Hess} u_i)]
 \]
-where $T_i = \exp(-\nabla u_i)$ is the unique optimal maps from $\bar{\mu}$ to $\mu_i$.
+where $T_i = \exp(-\nabla u_i)$ is the unique optimal maps from $\widebar{\mu}$ to $\mu_i$.
 Note that this is why we need that all measures have compact support.
 
 For general $c$-concave function $\mu_i$, we have only upper hessian bound.
@@ -252,17 +252,17 @@ And this is not enough to get an estimation on the absolute value of Jacobian de
 
 
 There is only one element $\gamma$ in the set $\Gamma$ by uniqueness of optimal plans
-since coupling between $\bar{\mu}$ and $\mu_i$ is optimal.
-% We can get every $\mu_i$ from $\mu_1$ if first push $\mu_1$ to $\bar{\mu}$ through $T_1^{-1}$ then push $\bar{\mu}$ to $\mu_i$ through $T_i$. Hence,
+since coupling between $\widebar{\mu}$ and $\mu_i$ is optimal.
+% We can get every $\mu_i$ from $\mu_1$ if first push $\mu_1$ to $\widebar{\mu}$ through $T_1^{-1}$ then push $\widebar{\mu}$ to $\mu_i$ through $T_i$. Hence,
 % \[B \circ (T_1, T_2, \ldots, T_n) \circ T_1^{-1} = T_1^{-1}\]
-% is the unique transfer map from $\mu_1$ to $\bar{\mu}$. That is to say, $\bar{\mu}$-a.e., $B \circ (T_1, T_2, \ldots, T_n) $ is the identity map.
-Hence, $\gamma = (T_1, T_2, \ldots, T_n)_{\#}\bar{\mu}$
+% is the unique transfer map from $\mu_1$ to $\widebar{\mu}$. That is to say, $\widebar{\mu}$-a.e., $B \circ (T_1, T_2, \ldots, T_n) $ is the identity map.
+Hence, $\gamma = (T_1, T_2, \ldots, T_n)_{\#}\widebar{\mu}$
 	is concentrated on the image of $(T_1, T_2, \ldots, T_n)$.
-We have $B_{\#}(T_1, T_2, \ldots, T_n)_{\#}\bar{\mu}=\bar{\mu}$,
-thus $B(T_1, T_2, \ldots, T_n) = \text{Id}$ for $\bar{\mu}$ almost everywhere
-by uniqueness of optimal plans from $\bar{\mu}$ to $\bar{\mu}$.
-This is already included in \cref{lem:inverse_barycenter}.
-We differentiate the equality $B(T_1(x), \ldots, T_n(x))=x$ for $\bar{\mu}$-a.e. $x$,
+We have $B_{\#}(T_1, T_2, \ldots, T_n)_{\#}\widebar{\mu}=\widebar{\mu}$,
+thus $B(T_1, T_2, \ldots, T_n) = \text{Id}$ for $\widebar{\mu}$ almost everywhere
+by uniqueness of optimal plans from $\widebar{\mu}$ to $\widebar{\mu}$.
+This is already included in \Cref{lem:inverse_barycenter}.
+We differentiate the equality $B(T_1(x), \ldots, T_n(x))=x$ for $\widebar{\mu}$-a.e. $x$,
 \begin{align*}
 	\text{Id} =\sum_{i=1}^n \partial_i B\, DT_i
 	 & =\sum_{i=1}^n D \exp(-\frac{1}{\lambda_i}\nabla f_i) \, D \exp(-\nabla u_i)                     \\
@@ -287,7 +287,7 @@ where $C > 0$ depends only on hessian bound of square distance function and Lips
 
 Combine these two inequalities, and we then apply Jensen inequlity
 \[
-	\bar{g} \leq
+	\widebar{g} \leq
 	\left[ \sum_{i=1}^n \frac{\det[\partial_i B]^{1/n}}
 	{g_i^{1/n} \circ T_i}\right]^{-n}
 	< \left[ \sum_{i=1}^n \frac{C \, \lambda_i}
@@ -303,21 +303,21 @@ then it has a unique absolutely continous barycenter.
 This is done by Kim and Pass.
 \begin{defn}[Volume distortion]
 	Let \( \lambda \) be a Borel probability measure on \( M \) with a
-	unique barycenter \( \bar { x } \) (that is, such that \( B C ( \lambda ) \) is a singleton). We define the generalized,
-	or barycentric, volume distortion coefficients at \( y \notin \operatorname { cut } ( \bar { x } ) \)
+	unique barycenter \( \widebar { x } \) (that is, such that \( B C ( \lambda ) \) is a singleton). We define the generalized,
+	or barycentric, volume distortion coefficients at \( y \notin \operatorname { cut } ( \widebar { x } ) \)
 
-	\[ \alpha _ { \lambda } ( y ) : = \frac { \operatorname { det } \left[ - \left. D _ { y z } ^ { 2 } \right| _ { z = \bar { x } } c ( y , z ) \right] } { \operatorname { det } \left[ \left. \int _ { M } D _ { z z } ^ { 2 } \right| _ { z = \bar { x } } c ( x , z ) d \lambda ( x ) \right] } \]
+	\[ \alpha _ { \lambda } ( y ) : = \frac { \operatorname { det } \left[ - \left. D _ { y z } ^ { 2 } \right| _ { z = \widebar { x } } c ( y , z ) \right] } { \operatorname { det } \left[ \left. \int _ { M } D _ { z z } ^ { 2 } \right| _ { z = \widebar { x } } c ( x , z ) d \lambda ( x ) \right] } \]
 	where \( D _ { z z } ^ { 2 } c ( x , z ) \) denotes the Hessian of the function \( z \mapsto c ( x , z ) \), and the determinants
-	are computed in exponential local coordinates at \( \bar { x } \) and \( y . \)
+	are computed in exponential local coordinates at \( \widebar { x } \) and \( y . \)
 \end{defn}
 
 \begin{thm}
 	[Jacobian determinant inequality for the Wasserstein barycenter]
-	Assume that the Wasserstein barycenter \( \bar { \mu } \) of the measure \( \Omega \) on \( P ( M ) \) is absolutely continuous.
-	Letting \( T _ { \mu } \) denote the optimal map from \( \bar { \mu } \) to \( \mu \), consider the measure on \( M \) given by
+	Assume that the Wasserstein barycenter \( \widebar { \mu } \) of the measure \( \Omega \) on \( P ( M ) \) is absolutely continuous.
+	Letting \( T _ { \mu } \) denote the optimal map from \( \widebar { \mu } \) to \( \mu \), consider the measure on \( M \) given by
 	\[ \lambda _ { x } : = \int _ { P ( M ) } \delta _ { T _ { \mu } ( x ) } d \Omega ( \mu ) \]
 	which is defined with respect to a.e. $x$.
-	Then, for \( \bar { \mu } \)-a.e. \(x\),
+	Then, for \( \widebar { \mu } \)-a.e. \(x\),
 	\[ 1 \geq \int _ { P ( M ) } \alpha _ { \lambda _ { x } } ^ { 1 / n } \left( T _ { \mu } ( x ) \right) \operatorname { det } ^ { 1 / n } D T _ { \mu } ( x ) d \Omega ( \mu ) \]
 \end{thm}
 

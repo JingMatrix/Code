@@ -1,6 +1,6 @@
 %! TEX root = ../barycenter.tex
-\chapter{Barycenter in Metric space}
-Recall that in physics we define barycenter, aka centre of inertial mass,
+\chapter*{Introduction}
+Recall that in physics we define barycenter, aka center of inertial mass,
 as a geometric point where we can image gravity acts at.
 Consider a system of particles  $\nu = 1, \ldots , N$,
 we assume that each $\nu$ has mass $m_\nu$ and positional vector $\boldsymbol{r}_\nu$.
@@ -20,17 +20,17 @@ where $\arg$ stands for ``argument that achieves''.
 
 \begin{defn}[Barycenter of finite second moment measure on metric space]
 	Consider a metric space $(E,d)$ and a Borel measure $\mu$ on it,
-	we call $z \in E$ a barycenter of $\mu$ if it solves following minimization problem,
+	we call $z \in E$ a \emph{barycenter} of $\mu$ if it solves following minimization problem,
 	\[
 		z \in \arg\min_{x}\int_{E} d(x, y)^2 \diff \mu (y).
 	\]
 	Usually, we only consider measures with finite second moment.
-	Following definition is independent of the choice of $x_0 \in E$,
+	The following definition is independent of the choice of $x_0 \in E$,
 	\[
-					\mathcal{W}_2(E): = \left\{ \mu \text{ Borel probability measure on } E \, |
-		\int_{E} d(x_0, y)^2 \diff \mu (y) < \infty\right\},
+					\mathcal{W}_2(E): = \left\{ \mu \text{ Borel probability measure on } E \, \left|
+				\int_{E} d(x_0, y)^2 \diff \mu (y) < \infty \right. \right\},
 	\]
-	we thus require in the definition of barycenter $z$ of $\mu$ that $\mu \in \mathcal{W}_2(E)$.
+	we thus require  $\mu \in \mathcal{W}_2(E)$ in the definition of barycenter.
 \end{defn}
 \begin{rmk}
 	In the example of particles system,
@@ -46,14 +46,15 @@ some definitions and properties are recalled thereby.
 Uniqueness of barycenter usually comes from convex properties of distance function.
 We can derive such kind of properties from non-positive curvature of metric space $E$.
 As a classic example, barycenter between south and north pole on the sphere is not unique.
+Discussions are postponed to \Cref{section:uniqueness_and_curvature}.
 
 In the second chapter, we study the case when $E$ is a metric space of measures.
 This study has application in Statistics, and we are interested in the so-called property consistency.
 Consistency means that convergence of measures implies convergence of their barycenters.
 As a prerequisite, we discuss a special metricization on the space of measures,
 namely the Wasserstein metric.
-We refer the space of measures endowed with this metric as Wasserstein space.
-The study of Wasserstein metric is an interesting part of optimal transportation theory.
+We refer to the space of measures endowed with this metric as Wasserstein space.
+The study of Wasserstein metric is an interesting part of optimal mass transport theory.
 We shall go through a quick review of basic facts in this field.
 With this fruitful field in hand,
 we are able to show existence and consistency of barycenter in the Wasserstein space over a proper space.
@@ -66,7 +67,7 @@ Basically, we shall investigate convex analysis on manifold for technical prepar
 We continue to explore in the setting of Wasserstein space.
 Uniqueness of barycenter comes from a generalization of
 remarkable Brenier's theorem (\cite[Theorem 2.12]{villani2003topics}) on Euclidean space.
-The main goal of this chapter is to study absolutely continuity (with respect to volume measure) of barycenter in the Wasserstein space.
+The main goal of this chapter is to study absolute continuity (with respect to volume measure) of barycenter in the Wasserstein space.
 Without too much complicated details involved, we prove it for barycenter of measures in the form of
 $\sum_{i=1}^{n} \lambda_i \delta_{\mu_i}$ if one of $\mu_i$ is absolutely continuous.
 The general case is still partly unknown, we shall give a brief discussion on it.

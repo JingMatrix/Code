@@ -3,29 +3,31 @@
 \chapter{Barycenter in Wasserstein space}
 
 In this chapter,
-we focus on spaces of measures with Wasserstein metric, namely Wasserstein space.
+we focus on the space of measures endowed with Wasserstein metric, namely the Wasserstein space.
 Study on these spaces has application in statistics,
 as summarized in \cite{le2017existence}.
 It is also possible to have visualization if we plot uniform measure as their support;
-jump to \cref{example:barycenter_sphere} for a quick view.
+see \Cref{example:barycenter_sphere} for a quick view.
 
+We give an overview of what we going to talk later,
+references are given therein.
 It is possible to define Wasserstein metric for measures on a Polish space,
 i.e., a complete and separable metric space.
 Wasserstein spaces turn out to be Polish as well.
-Moreover, if the base space $(E,d)$ of measures is geodesic,
-then the Wasserstein space $(\mathcal{W}_p(E), W_p)$ over it is also geodesic.
+Moreover, if the base space of measures $(E,d)$ is geodesic,
+then the Wasserstein space $(\mathcal{W}_p(E), W_p)$ over it is also geodesic, where $p \in [1, + \infty)$.
 In previous chapter, we saw existence of barycenter in a proper (metric) space.
 However, for $\mathcal{W}_p(E)$ to be locally compact we have necessarily that
-$E$ must be compact.
+$E$ must be compact and then $\mathcal{W}_p(E)$ is compact.
 Having seen some counter-examples,
 we should be cautious for the existence of barycenter in a Wasserstein space.
 A sufficient condition is to assume that $(E,d)$ is proper,
 and we shall cover the proof of this claim.
 
-The definition of Wasserstein metric starts with optimal transportation theory.
+The definition of Wasserstein metric starts with optimal mass transport theory.
 We introduce it with slight abstraction for later application in our proofs.
 
-\section{Optimal transportation}
+\section{Optimal mass transport}
 
 \begin{defn}[Coupling]
 	Let \(  \mu \) and \(  \nu  \) be two probability measures on $E$.
@@ -36,24 +38,24 @@ We introduce it with slight abstraction for later application in our proofs.
 	the law of \( ( X , Y ) \) is also called a coupling of \( ( \mu , \nu ) \).
 \end{defn}
 
-If \( \mu \) and \( \nu \) are the only laws in the problem,
+If \( \mu \) and \( \nu \) are the only measures in the problem,
 then without loss of generality one may choose \( \Omega = E \times E .
 \) In a more measure-theoretical formulation,
-coupling \( \mu \) and \( \nu \) means constructing a measure \( \pi \) on \( E \times E \) such that \( \pi \) admits \( \mu \) and \( \nu \) as marginals on \( E \) and \( E \) respectively.
+coupling \( \mu \) and \( \nu \) means constructing a measure \( \pi \) on \( E \times E \) such that \( \pi \) admits \( \mu \) and \( \nu \) as marginals on \( E \).
 
-We then define the optimal coupling or optimal transport.
-Here one introduces a cost function \( c ( x , y ) \) on \( E \times E \),
+We then define the optimal coupling.
+Here, one introduces a cost function \( c ( x , y ) \) on \( E \times E \),
 which can be interpreted as the work needed to move one unit of mass from location \( x \) to location \( y \).
-Then one considers the Monge-Kantorovich minimization problem
+Then, one considers the Monge-Kantorovich minimization problem
 \[
 	\inf  \mathbb{ E } c ( X , Y )
 \]
 where the pair \( ( X , Y ) \) runs over all possible couplings of \( ( \mu , \nu ) \);
 or equivalently, in terms of measures,
-\[ \inf \int _ { E \times E } c ( x , y ) \diff \pi ( x , y ) \]
+\[ \inf \int _ { E \times E } c ( x , y ) \diff \pi ( x , y ), \]
 where the infimum runs over all joint probability measures \( \pi \) on \( E \times E \) with marginals \( \mu \) and \( \nu \).
-Such joint measures are called transference plans (or transport plans, or transportation plans);
-those achieving the infimum are called optimal transference plans.
+Such joint measures are called transport plans;
+those achieving the infimum are called optimal transport plans.
 
 The first good thing about optimal couplings is that they exist (\cite[Theorem 4.1]{villani2008optimal}):
 \begin{thm}[Existence of an optimal coupling]
@@ -64,11 +66,11 @@ The first good thing about optimal couplings is that they exist (\cite[Theorem 4
 	Then there is a coupling of \( ( \mu , \nu ) \) which minimizes the total cost \( \mathbb{ E } c ( X , Y ) \) among all possible couplings \( ( X , Y ) \).
 \end{thm}
 
-The proof relies on basic variational arguments involving the topology of weakly convergence,
+The proof relies on basic variational arguments involving the topology of weak convergence,
 which is imposed by bounded continuous test functions.
 There are two key properties to check:
 \begin{enumerate}
-	\item Lower semi-continuity with respect to weakly convergence,
+	\item Lower semi-continuity with respect to weak convergence,
 	\item Compactness in weak topology.
 \end{enumerate}
 These issues are taken care of respectively in two lemmas below.
@@ -85,16 +87,16 @@ These issues are taken care of respectively in two lemmas below.
 		\int _ { E } f \diff \pi \leq \liminf _ { k \rightarrow \infty } \int _ { E } f \diff \pi _ { k }.
 	\]
 	In other words, \( F: \pi \mapsto \int f \diff \pi \) is lower semi-continuous
-	with respect to weakly convergence of probability measures on $E$.
+	with respect to weak convergence of probability measures on $E$.
 \end{lem}
 
 \begin{proof}
-	We write \( f \)  as the point-wise limit of a non-decreasing family \( \left( f _ { \ell } \right) _ { \ell \in \mathbb{ N } } \) of  bounded continuous real-valued functions.
+	We write \( f \)  as the pointwise limit of a non-decreasing family \( \left( f _ { \ell } \right) _ { \ell \in \mathbb{ N } } \) of  bounded continuous real-valued functions.
 	By monotone convergence,
 	\[
 		\int f \diff \pi = \lim _ { \ell \rightarrow \infty } \int f _ { \ell } \diff \pi = \lim _ { \ell \rightarrow \infty } \lim _ { k \rightarrow \infty } \int f _ { \ell } \diff \pi _ { k } \leq \liminf _ { k \rightarrow \infty } \int f \diff \pi _ { k },
 	\]
-	where we use $c_\ell \leq c$ and pass to the infimum limit in the last inequality.
+	where we use $f_\ell \leq f$ and pass to the infimum limit in the last inequality.
 \end{proof}
 
 \begin{lem}[Tightness of transference plans]
@@ -113,12 +115,12 @@ These issues are taken care of respectively in two lemmas below.
 
 \begin{proof}[Proof of existence of optimal plan]
 	By standard passing to the limit argument for the definition of marginals,
-	we see that \( \Pi ( \mu , \nu ) \) is closed with respect to weakly convergence,
+	we see that \( \Pi ( \mu , \nu ) \) is closed with respect to weak convergence,
 	so it is in fact compact.
 	Then let \( \left( \pi _ { k } \right) _ { k \in \mathbb{ N } } \) be a sequence of probability measures on \( E \times E \),
 	such that \( \int c \diff \pi _ { k } \) converges to the infimum transport cost.
 	Extracting a subsequence if necessary, we may assume that \( \pi _ { k } \) converges to some \( \pi \in \Pi ( \mu , \nu ) \).
-	Then \cref{lem:lower_semi-continuity_of_the_cost_functional} gives
+	Then \Cref{lem:lower_semi-continuity_of_the_cost_functional} gives
 	\[ \int c \diff \pi \leq \liminf _ { k \rightarrow \infty } \int c \diff \pi _ { k }. \]
 
 	Therefore, $\pi$ is minimizing.
@@ -138,11 +140,11 @@ for which we prove that the restriction of optimal plan is still optimal (\cite[
 	and \( \widetilde { \pi } [ E \times E ] > 0\).
 	Then the probability measure
 	\[ \pi ^ { \prime } : = \frac { \widetilde { \pi } } { \widetilde { \pi } [ E \times E ] } \]
-	is an optimal transference plan between its marginals \( \mu ^ { \prime } \) and \( \nu ^ { \prime } \).
+	is an optimal transport plan between its marginals \( \mu ^ { \prime } \) and \( \nu ^ { \prime } \).
 
-	Moreover, if \( \pi \) is the unique optimal transference plan between \( \mu \)
+	Moreover, if \( \pi \) is the unique optimal transport plan between \( \mu \)
 	and \( \nu \),
-	then also \( \pi ^ { \prime } \) is the unique optimal transference plan between \( \mu ^ { \prime } \)
+	then also \( \pi ^ { \prime } \) is the unique optimal transport plan between \( \mu ^ { \prime } \)
 	and \( \nu ^ { \prime } \)
 \end{thm}
 
@@ -165,8 +167,8 @@ for which we prove that the restriction of optimal plan is still optimal (\cite[
 	where \( \widetilde { Z } = \widetilde { \pi } [ E \times E ] > 0 . \) Clearly, \( \widehat { \pi } \) is a non-negative measure. On the
 	other hand, it can be written as
 	\[ \widehat { \pi } = \pi + \widetilde { Z } \left( \pi ^ { \prime \prime } - \pi ^ { \prime } \right) \]
-	then \cref{proof:restriction_project} shows that \( \widehat { \pi } \) has the same marginals as \( \pi \),
-	while \cref{proof:restriction_not_optimal} implies that it has a lower transport cost than \( \pi \).
+	then \Cref{proof:restriction_project} shows that \( \widehat { \pi } \) has the same marginals as \( \pi \),
+	while \Cref{proof:restriction_not_optimal} implies that it has a lower transport cost than \( \pi \).
 	Here we use the fact that the total cost is finite.
 	This contradicts the optimality of \( \pi \). The conclusion
 	is that \( \pi ^ { \prime } \) is in fact optimal.
@@ -178,14 +180,14 @@ for which we prove that the restriction of optimal plan is still optimal (\cite[
 	\label{Wasserstein_distance}
 	Let  \(( E , d ) \) be a Polish metric space, and let \( p \in [ 1 , \infty ) . \) For any two probability measures \( \mu , \nu \) on \( E , \) the Wasserstein distance of order \( p \) between \( \mu \) and \( \nu \) is defined by the formula
 	\begin{align*}
-		W _ { p } ( \mu , \nu ) 
-		= \left( \inf _ { \pi \in \Pi ( \mu , \nu ) } \int _ { E } d ( x , y ) ^ { p } \diff \pi ( x , y ) \right) ^ { 1 / p  } 
+		W _ { p } ( \mu , \nu )
+		= \left( \inf _ { \pi \in \Pi ( \mu , \nu ) } \int _ { E } d ( x , y ) ^ { p } \diff \pi ( x , y ) \right) ^ { 1 / p  }
 		= \inf \left\{ \left[ \mathbb{ E } d ( X , Y ) ^ { p } \right] ^ { \frac { 1 } { p } } , \quad \operatorname { law } ( X ) = \mu , \quad \operatorname { law } ( Y ) = \nu \right\}
 	\end{align*}
 \end{defn}
 
-Abstract calculation is possible if $\Pi(\mu,\nu)$ is effectively a singleton.
-\begin{example}[Wasserstein distance of Delta measures]
+More explicit calculation is possible if $\Pi(\mu,\nu)$ is effectively a singleton.
+\begin{example}[Wasserstein distance involving Dirac measure]
 	\label{example:delta_measure_Wasserstein_distance}
 	If $\mu=\delta_x$ for some $x \in E$,
 	then $\Pi(\delta_x, \nu)$ consists of only one element since $\delta_x$ is always independent with $\nu$.
@@ -194,22 +196,22 @@ Abstract calculation is possible if $\Pi(\mu,\nu)$ is effectively a singleton.
 		W_p(\delta_x, \nu)^p = \int_{E} d(x, y)^p \diff \nu(y).
 	\]
 	Especially, we have $W_p(\delta_x, \delta_y) = d(x,y)$ for $x,y \in E$.
-	This means that $x \mapsto \delta_x$ gives an isometric embedding from $E$ to $\mathcal{W}_p(E)$.
+	This means that $x \mapsto \delta_x$ is an isometric embedding from $E$ to $\mathcal{W}_p(E)$.
 \end{example}
 
 \begin{lem}
 	\label{lem:lower_semicontinous_Wasserstein_distance}
-	Wasserstein distance is lower semi-continuous with respect to weakly convergence of measures on $E$.
+	Wasserstein distance is lower semi-continuous with respect to weak convergence of measures on $E$.
 \end{lem}
 
 \begin{proof}
 	This is a direct consequence of lower semi-continuity of the cost functional,
-	see \cref{lem:lower_semi-continuity_of_the_cost_functional}.
+	see \Cref{lem:lower_semi-continuity_of_the_cost_functional}.
 \end{proof}
 
 \begin{defn}[Wasserstein space]
 	\label{Wasserstein_space}
-	With the same conventions in \cref{Wasserstein_distance}, the Wasserstein space of order \( p \) is defined as
+	With the same conventions in \Cref{Wasserstein_distance}, the Wasserstein space of order \( p \) is defined as
 	\[
 		\mathcal{W}_p(E): = \left\{ \mu \text{ Borel  probability measure on } E \,|
 		\, \int _ { E } d \left( x _ { 0 } , x \right) ^ { p } \diff \mu (x) < + \infty \right\}
@@ -217,18 +219,18 @@ Abstract calculation is possible if $\Pi(\mu,\nu)$ is effectively a singleton.
 	where \( x _ { 0 } \in E \) is arbitrary. This space does not depend on the choice of the point \( x _ { 0 } \). Then \( W _ { p } \) defines a (finite) distance on \( \mathcal{W}_p(E) \).
 \end{defn}
 
-$W_p$ metric convergence is closely related to weakly convergence,
-as one may guess from \cref{lem:lower_semicontinous_Wasserstein_distance}.
+As one may guess from \Cref{lem:lower_semicontinous_Wasserstein_distance},
+$W_p$ metric convergence is closely related to weak convergence.
 Following theorem is a more precise description of it (\cite[Theorem 6.9]{villani2008optimal}).
-We use $\rightharpoonup$ to indicate weakly convergence of measures.
+We use $\rightharpoonup$ to indicate weak convergence of measures.
 
-\begin{thm}[$W_p$  metric and weakly convergence]
+\begin{thm}[$W_p$  metric and weak convergence]
 	\label{thm:Wp_metricizes_weak_convergence}
 	Let \( ( E , d ) \) be a Polish space, and \( p \in [ 1 , \infty ) \).
 	Let \( \left( \mu _ { k } \right) _ { k \in \mathbb{ N } } \) be a
 	sequence of probability measures in \( \mathcal{W}_p ( E ) \)
-	converges weakly to \( \mu \in \mathcal{W}_p(E)	\);
-	we denote it by $\mu_k \rightharpoonup \mu$.
+	converging weakly to \( \mu \in \mathcal{W}_p(E)	\).
+	% we denote it by $\mu_k \rightharpoonup \mu$.
 
 	Then \( W_p \left( \mu _ { k }, \mu \right) \rightarrow 0 \)
 	if and only if we have convergence of $p$ moment for
@@ -241,7 +243,7 @@ We use $\rightharpoonup$ to indicate weakly convergence of measures.
 \end{thm}
 
 Metric properties of $(\mathcal{W}_p, W_p)$ are also of interest.
-In fact, we shall use following theorem \cite[Theorem 6.18]{villani2008optimal} throughout remained discussion.
+In fact, we shall use following theorem (\cite[Theorem 6.18]{villani2008optimal}) throughout the sequel.
 It is also an extension of general finite support measure approximation theorem.
 \begin{thm}[Topology of Wasserstein space]
 	\label{thm:topology_Wasserstein}
@@ -250,5 +252,6 @@ It is also an extension of general finite support measure approximation theorem.
 	metricized by the Wasserstein distance \( W _ { p }\),
 	is also a complete separable metric space.
 	In short: The Wasserstein space over a Polish space is itself a Polish space.
-	Moreover, any probability measure can be approximated by a sequence of probability measures with finite support.
+	Moreover, any probability measure can be approximated by a sequence of probability measures with finite support
+	with respect to Wasserstein distance.
 \end{thm}

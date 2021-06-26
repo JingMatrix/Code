@@ -1,71 +1,45 @@
 %! TEX root = ../barycenter.tex
 \YYCleverefInput{/var/tmp/latex/barycenter.sed}
-\chapter{In the case of Riemannian manifold}
+\chapter{The case of Wasserstein space over Riemannian manifold}
 
-We continue to use notations in the proof of last \cref{thm:barycenter_finite_support_measure}.
+We continue to use the notation in the proof of last \Cref{thm:barycenter_finite_support_measure}.
 There is a measurable function $B$ from $n$ points $x_i \in E$ to a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x_i}$;
 and we have shown that
-\[f(\boldsymbol{x}) :=W_p(\sum_{i=1}^n \lambda_i \delta_{\mu_i}, E)^p =\min_x \sum_{i=1}^n \lambda_i d(x, x_i)^p\]
+\[f(\boldsymbol{x}) :=W_p(\sum_{i=1}^n \lambda_i \delta_{\mu_i}, E)^p =\min_{x \in E} \sum_{i=1}^n \lambda_i d(x, x_i)^p\]
 is continuous.
 For the study in the case when $E$ is a complete manifold $M$,
 we set $p = 2$ and apply some possible (non-)smooth analysis.
-We firstly establish some fine properties of two functions $f$ and $B$.
+To begin with, we shall establish some fine properties of two functions $f$ and $B$.
 % As an infimum involution, $f$ is locally Lipschitz;
-% while $B$, not necessarily continuous, shares similar properties as optimal transference maps
+% while $B$, not necessarily continuous, shares similar properties as optimal transport maps
 % and we should talk about their differentiability only with respect to some reference measure.
 As we shall see later from \cref{equa:formula_barycenter},
-% both optimal transference map $T$ in \cref{thm:uniquness_monge_problem_manifold} and
+% both optimal transport map $T$ in \Cref{thm:uniquness_monge_problem_manifold} and
 barycenter map $B$
 has the form $\exp( - \nabla h)$ for some $c$-concave
-function $h$ that is differentiable almost everywhere.
+function $h$ that is differentiable almost everywhere with respect to the volume measure.
 % \section{Details for analysis on manifolds}
 \section{\texorpdfstring{$c$}{c}-concave function}
 
-Most content is this section is a copy-paste from \cite{cordero2001riemannian},
-detailed proofs and reference are given there.
+Most content in this section is a copy-paste from \cite{cordero2001riemannian},
+detailed proofs and references are given therein.
 From now on, $M$ is always a complete Riemannian manifold.
 % But $ \nabla h$ is not defined everywhere.
 % And even for compact manifold $M$,
-% $\exp( - \nabla h)$ as an optimal transference map could be discontinuous.
+% $\exp( - \nabla h)$ as an optimal transport map could be discontinuous.
 % A proper definition of the differential $\diff \exp(- \nabla h)$,
 % of course only possible almost everywhere,
 % is the main goal of this section.
 
 % \subsection{Differentiate squared distance function}
 
-For \( x \in M \), the \emph{cut locus} refers to the set \( \operatorname{cut}( x ) \subset M \) of all \( z \in M \) which
-cannot be linked to \( x \) by an extendable minimizing geodesic.
-The exponential map \( \exp _ { x } : T _ { x } M \rightarrow M \) is differentiable
-at any tangent vector \( v \in T _ { x } M \) satisfying \( \exp _ { x } v \notin \operatorname{cut}( x )\),
-and its differential \( \diff \left( \exp _ { x } \right) _ { v } \) gives a linear bijection between the tangent
-spaces \( T _ { x } M \) and \( T _ { \exp _ { x } v} M\).
 
-For any \( y \in M \) denote by \( d _ { y } ( \cdot ) : = d ( \cdot , y ) \)
-the distance function to \( y \).
-The relationship between this distance and the
-exponential map is summarized by the formula \( d _ { y } \left( \exp _ { y } v \right) = | v | \),
-which holds for any \( v \) from the star-shaped domain around \( 0 \in T _ { y } M \)
-which does not intersect \( \left( \exp _ { y } \right) ^ { - 1 } [ \operatorname{cut} ( y ) ]\).
-This shows the exponential map generates the minimal geodesics through \( y \),
-and that the function \( d _ { y } ^ { 2 } / 2 \) is smooth around any \( x \notin \operatorname{cut} ( y ) \).
-Where \( d _ { y } ^ { 2 } / 2 \) is differentiable,
-its gradient is related to the exponential map by the formula,
-\begin{equation}
-	\label{equa:exponential_map_and_squared_distance_function}
-	y = \exp _ { x } \left[ - \nabla d _ { y } ^ { 2 } ( x ) / 2 \right]
-\end{equation}
-and for \( x \notin \operatorname { cut } ( y ) \) its Hessian \( H = \operatorname{ Hess} _ { x } d _ { y } ^ { 2 } / 2 \) can be viewed either as a symmetric quadratic form on \( T _ { x } M \),
-or --- more frequently --- as a self-adjoint operator
-\( H : T _ { x } M \rightarrow T _ { x } M \).
-Note that \cref{equa:exponential_map_and_squared_distance_function} requires the existence of
-a minimal geodesic linking \( x \) to \( y \),
-and it is for this reason that completeness of the manifold is required.
-
-Both $f$ and $B$, and even optimal transference plan are related to so-called $c$-concave functions.
+Both $f$ and $B$, and even optimal transport plan are related to so-called $c$-concave functions.
+For $x,y \in M$, we define a function $c(x,y): = \frac{1}{2} d^2(x,y)$ as the half of distance between $x$ and $y$.
 
 \begin{defn} [$c$-transforms and the subset \( \mathcal { I } ^ { c } ( X , Y ) \) of \( c \)-concave functions]
 	Let \( X \) and \( Y \) be two compact subsets of \( M \).
-	The set \( \mathcal{I} ^ { c } ( X , Y ) \) of \( c \)-concave functions (relative to \( X \) and \( Y \) ) is
+	The set \( \mathcal{I} ^ { c } ( X , Y ) \) of \( c \)-concave functions (relative to \( X \) and \( Y \)) is
 	the set of functions \( \phi \) : \( X \rightarrow \mathbb { R } \cup \{ - \infty \} \) not identically \( - \infty \),
 	for which there exists a function \( \psi : Y \rightarrow \mathbb { R } \cup \{ - \infty \} \) such that
 	\begin{equation}
@@ -86,7 +60,7 @@ We hope no confusion results from the tacit dependence of
 these transformations on the domain of the function being transformed.
 For \( \phi \in \) \( \mathcal { I } ^ { c } ( X , Y ) \),
 it follows easily from \cref{equa:c_transform_of_c_conjugate} as in Rachev and Rüschendorf
-(\cite[Section 3.3]{Rachev1998}) that
+\cite[Section 3.3]{Rachev1998} that
 \[ \phi ( x ) = \inf _ { y \in Y } c ( x , y ) - \phi ^ { c } ( y ) \quad \forall x \in X \]
 which we abbreviate by writing \( \phi ^ { c c } = \phi \), suppressing the domains of definition once more.
 As in \cite{mccann2001polar}, Lipschitz continuity of \( \phi ^ { c } \) follows merely from
@@ -95,27 +69,17 @@ regardless of whether or not \( \phi : X \rightarrow \mathbb { R } \cup \{ - \in
 Thus, it costs no generality to
 assume \( \psi \) and \( \phi \) are continuous and real-valued in \cref{defn:c_transform}.
 
-Note that function $c(x,y)$ for fixed $x$ is a $c$-concave function.
+For any \( y \in M \), we denote by \( d _ { y } ( \cdot ) : = d ( \cdot , y ) \)
+the distance function to \( y \).
+\begin{example}[$d^2_y(x)$ is a $c$-concave function]
+	\label{example:square_distance_c-concave}
+	For two compact sets $X,Y \subset M$, we fix a $y \in Y$ then
+	$d^2_y(\cdot) \in \mathcal{I}^c (X,Y)$ for a fixed $y$ is a $c$-concave function.
+	Because we can define a desired $\psi$ by setting $\psi (y) := 0$ and $\psi (z) := - \infty$ for $ z \neq y, z \in Y$.
+\end{example}
 
-\begin{thm}[Optimal transportation on manifolds]
-	\label{thm:optimal_transport_manifold}
-	Let \( M \) be a complete Riemannian manifold.
-	Fix two Borel probability measures \( \mu \ll \) $\operatorname{Vol}$ and \( v \) on \( M \),
-	and two compact subsets \( X \) and \( Y \subset M \) containing the support of \( \mu \) and \( v \),
-	respectively.
-	Then there exists \( \phi \in \mathcal { I } ^ { c } ( X , Y ) \) such that the map
-	\begin{equation}
-		\label{equa:transform_map}
-		T ( x ) : = \exp _ { x } ( - \nabla \phi ( x ) )
-	\end{equation}
-	pushes \( \mu \) forward to \( v \).
-	This map is uniquely characterized among all maps pushing \( \mu \) forward \( v \) by formula \cref{equa:transform_map} with \( \phi \in \mathcal{I} ^ { c } ( X , Y )\).
-
-	Furthermore, $T$ is the optimal transference map asserted in \cref{thm:uniquness_monge_problem_manifold}.
-\end{thm}
-
-Let us also recall one of the basic lemmas from its proof,
-which illuminates the structure of the map \( T \).
+% Let us also recall one of the basic lemmas from its proof,
+% which illuminates the structure of the map \( T \).
 Given two compact subsets \( X \) and \( Y \subset M \) with \( \phi \in \mathcal { I } ^ { c } ( X , Y ) \),
 one sees every \( ( x , y ) \in X \times Y \) satisfy
 \begin{equation}
@@ -124,71 +88,77 @@ one sees every \( ( x , y ) \in X \times Y \) satisfy
 \end{equation}
 with equality when \( \phi ( x ) = \inf _ { y ^ { \prime } \in Y } c \left( x , y ^ { \prime } \right) - \phi ^ { c } \left( y ^ { \prime } \right) = c ( x , y ) - \phi ^ { c } ( y ) . \)
 
+The following lemma \cite[Lemma 3.2]{cordero2001riemannian} is fundamental in sequel discussion,
+detailed proofs can be found in \cite[Lemmas 2 and 7]{mccann2001polar}.
 \begin{lem}
 	[Elementary properties of \( c \)-concave functions]
 	\label{lem:minimizer_differentiable}
-	Fix \( \mathcal{X} \subset \subset M \) open and \( Y \subset M \) compact.
-	For \( \phi \in \mathcal{I} ^ { c } ( \bar { \mathcal{X} } , Y ) \) define \( F ( x ) : = \)
+	Fix \( \mathcal{X} \subset \subset M \) open and \( Y \subset M \) compact,
+	where $ \mathcal{X} \subset \subset M $ means that $\mathcal{X}$ is a pre-compact subset of $M$.
+	For \( \phi \in \mathcal{I} ^ { c } ( \widebar { \mathcal{X} } , Y ) \) define \( F ( x ) : = \)
 	\( \exp _ { x } ( - \nabla \phi ( x ) ) \).
 	\begin{enumerate}
-		\item The function \( \phi \) is Lipschitz on \( \bar { \mathcal{X} } \) and hence differentiable almost every-
-		      where on \( \mathcal{X} \).
-		\item Fix any point \( x \in X \) where \( \phi \) is differentiable. Then \( y = F ( x ) \) if and
+		\item The function \( \phi \) is Lipschitz on \( \widebar { \mathcal{X} } \) and
+		      hence differentiable almost everywhere on \( \mathcal{X} \) with respect to the volume measure.
+		\item Fix any point \( x \in  \mathcal{X} \) where \( \phi \) is differentiable. Then \( y = F ( x ) \) if and
 		      only if \( y \) minimizes \cref{equa:c-concave_conjugate} among \( y ^ { \prime } \in Y . \) In the latter case one has
 		      \( \nabla \phi ( x ) = \nabla d _ { y } ^ { 2 } ( x ) / 2 \).
 	\end{enumerate}
 \end{lem}
 
-Following definitions generalize the concept gradient and
-always exist for $c$-concave functions in contrast to the usual gradient.
-We shall use them to give a proper definition of Hessian when gradient of
-function is not defined everywhere.
+As we mentioned in \Cref{example:square_distance_c-concave},
+the squared distance function $d^2_y(\cdot)$ is a $c$-concave function and \Cref{lem:minimizer_differentiable} applies.
+And it turns out that conclusions from this lemma is quite natural from the perspective of cut locus.
 
-\begin{defn}
-	[$c$-super-differential \( \partial ^ { c } \phi \)]
-	Let \( X , Y \) be two compact sets of M. For \( \phi \in \mathcal { I } ^ { c } ( X , Y ) \)
-	and \( x \in X \), the \( c \)-super-differential of \( \phi \) at \( x \) is the non-empty set
-	\begin{align}
-		\partial ^ { c } \phi ( x ) & : = \left\{ y \in Y \mid \phi ( x ) + \phi ^ { c } ( y ) = c ( x , y ) \right\}                   \\
-		                            & = \{ y \in Y \mid \phi ( z ) \leq \phi ( x ) + c ( z , y ) - c ( x , y ) \quad \forall z \in X \}
-		\label{equa:c-super-differential}
-	\end{align}
-\end{defn}
+\subsection{Reminder for cut locus}
 
-\begin{example} [Multivalued extension]
-	\label{example:minimizer_differentiable}
-	If \( \phi \in \mathcal { I } ^ { c } ( \bar {\mathcal{X} } , Y ) \) is differentiable at
-	\( x \in \mathcal { X } \subset \subset M \),
-	then \( \partial ^ { c } \phi ( x ) = \{ F ( x ) \} = \left\{ \exp _ { x } ( - \nabla \phi ( x ) ) \right\} \) according to \cref{lem:minimizer_differentiable}.
-\end{example}
+For \( x \in M \), the \emph{cut locus} refers to the set \( \operatorname{cut}( x ) \subset M \) of all \( z \in M \) which
+which do not belong to the (relative) interior of a minimizing geodesic going
+through $x$.
+% cannot be linked to \( x \) by an extendable minimizing geodesic.
+The exponential map \( \exp _ { x } : T _ { x } M \rightarrow M \) is differentiable
+at any tangent vector \( v \in T _ { x } M \) satisfying \( \exp _ { x } v \notin \operatorname{cut}( x )\),
+and its differential \( \diff \left( \exp _ { x } \right) _ { v } \) gives a linear bijection between the tangent
+spaces \( T _ { x } M \) and \( T _ { \exp _ { x } v} M\).
+We mention that the cut locus $\operatorname{cut} (x)$ is a closed set with measure zero with respect to the volume measure.
 
-\begin{defn}
-	A function \( \phi : \Omega \rightarrow \mathbb { R } \) defined on an open subset \( \Omega \) of \( M \)
-	is said to be super-differentiable at \( x \in \Omega \) with super-gradient \( v \in T _ { x } M \) if for
-	\( u \rightarrow 0 \in T _ { x } M \),
-	\begin{equation}
-		\label{equa:super-differential}
-		\phi \left( \exp _ { x } u \right) \leq \phi ( x ) + \langle v , u \rangle + o ( | u | )
-	\end{equation}
-	The super-differential of \( \phi \) at \( x \) refers to the convex set \( \partial \phi ( x ) \subset T _ { x } M \) of all
-	super-gradients at \( x \).
-\end{defn}
+The relationship between distance function $d_y(\cdot) : = d(\cdot, y) $ and the
+exponential map is summarized by the formula \( d _ { y } \left( \exp _ { y } v \right) = | v | \),
+which holds for any \( v \) from the star-shaped domain around \( 0 \in T _ { y } M \)
+which does not intersect \( \left( \exp _ { y } \right) ^ { - 1 } [ \operatorname{cut} ( y ) ]\).
+This shows the exponential map generates the minimal geodesics through \( y \),
+and that the function \( d _ { y } ^ { 2 } / 2 \) is smooth around any \( x \notin \operatorname{cut} ( y ) \).
+Where \( d _ { y } ^ { 2 } / 2 \) is differentiable,
+its gradient is related to the exponential map by the formula
+\begin{equation}
+	\label{equa:exponential_map_and_squared_distance_function}
+	y = \exp _ { x } \left[ - \nabla d _ { y } ^ { 2 } ( x ) / 2 \right],
+\end{equation}
+and for \( x \notin \operatorname { cut } ( y ) \) its Hessian \( H = \operatorname{ Hess} _ { x } d _ { y } ^ { 2 } / 2 \) can be viewed either as a symmetric quadratic form on \( T _ { x } M \) or as a self-adjoint operator
+\( H : T _ { x } M \rightarrow T _ { x } M \).
+Note that \cref{equa:exponential_map_and_squared_distance_function} requires the existence of
+a minimal geodesic linking \( x \) to \( y \),
+and it is for this reason that completeness of the manifold is required.
 
-One can easily check that a function is differentiable if it is both
-super-differentiable and sub-differentiable.
-A typical example of a function which admits super-gradients everywhere
-is the square distance \( d _ { y } ^ { 2 } / 2 \) to \( y \in M \).
-Indeed, if \( \gamma \) is a minimal geodesic
-joining \( x = \gamma ( 0 ) \) to \( y = \gamma ( 1 ) \),
-then \( - \dot { \gamma } ( 0 ) \in \partial \left( d _ { y } ^ { 2 } / 2 \right) ( x ) \)  as shown in \cite[Proposition 7]{mccann2001polar}.
+In the sequel, it proves useful to characterize the cut locus \( \operatorname { cut } ( y ) \) as
+the set of points where the distance function \( d _ { y } ^ { 2 } / 2 \) must fail to be smooth.
+As mentioned above,
+\( d _ { y } ^ { 2 } / 2 \) is as smooth as the manifold away from the cut locus of \( y \).
+But \( \operatorname{cut} ( y ) \) consists of two kinds of points:
+\begin{enumerate}
+	\item those connected to \( y \) by multiple minimizing geodesics, and
+	\item	those which are conjugate to \( y \) but do not fall into the first class.
+\end{enumerate}
+The point of the following proposition \cite[Proposition 2.5]{cordero2001riemannian}
+is that differentiability of \( d _ { y } ^ { 2 } \) must fail --- at first order in the first case,
+and at second order in the second case.
+Moreover, the failure occurs with a definite sign:
+the Hessian diverges to $-\infty$ while remaining bounded above, according to \Cref{lem:hessian_bound_distance_squared}.
 
-\begin{lem}[$c$-super-gradients imply super-gradients]
-	\label{lem:c-super-gradients_imply_super-gradients}
-	Fix \( \mathcal { X } \subset \subset M \) open,
-	\( Y \subset M \) compact, and \( \phi \in \mathcal { I } ^ { c } ( \bar { \mathcal{X} } , Y ) \).
-	Let \( ( x , y ) \in \mathcal { X } \times Y \) and \( v \in T _ { x } M \) satisfy
-	\( | v | = d ( x , y ) \) and \( \exp _ { x } ( - v ) = y\).
-	If \( y \in \partial ^ { c } \phi ( x ) \) then
-	\( v \in \partial \phi ( x ) \).
-\end{lem}
-
+\begin{prop}
+	[Distances fail to be semi-convex at the cut locus]
+	\label{prop:distance_cut_locus}
+	At each \( x \in \operatorname { cut } ( y ) \), the square distance \( d _ { y } ^ { 2 } / 2 \) satisfies:
+	\[ \inf _ { 0 < | v | < 1 } \frac { d_y^2 \left( \exp _ { x } v \right) + d_y^2 \left( \exp _ { x } - v \right)
+		- 2 d_y^2 ( x ) } { | v | ^ { 2 } } = - \infty \]
+\end{prop}

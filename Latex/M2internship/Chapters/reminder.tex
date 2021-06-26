@@ -48,7 +48,7 @@
 		\psi ( x ) - \psi ( z ) & \leq c ( x , y ) - c ( z , y ) + \epsilon \\
 		                        & \leq | M | d ( x , z ) + \epsilon
 	\end{align*}
-	by \cref{lem:Lipschitz_cost}. Since the last inequality holds for all \( \epsilon > 0 \), the Lipschitz
+	by \Cref{lem:Lipschitz_cost}. Since the last inequality holds for all \( \epsilon > 0 \), the Lipschitz
 	estimate \cref{equa:Lipschitz} has been proved.
 \end{proof}
 
@@ -59,7 +59,7 @@ An example is to prove super-differentiability of geodesic distance squared in \
 	[Superdifferentiability of geodesic distance squared]
 	Let \( ( M , g ) \) be a \( C ^ { 3 } \)-smooth Riemannian manifold, possibly with boundary.
 	Suppose \( \sigma : [ 0,1 ] \rightarrow M \) has minimal length among piecewise \( C ^ { 1 } \) curves joining \( y = \sigma ( 0 ) \) to \( x = \sigma ( 1 ) \notin \partial M \), parameterized with constant speed.
-	Then \( \psi ( \cdot ) = d ^ { 2 } ( \cdot , y ) / 2 \) has super-gradient \( \dot { \sigma } ( 1 ) \in \bar { \partial } \psi _ { x } \) at \( x \).
+	Then \( \psi ( \cdot ) = d ^ { 2 } ( \cdot , y ) / 2 \) has super-gradient \( \dot { \sigma } ( 1 ) \in \widebar { \partial } \psi _ { x } \) at \( x \).
 \end{prop}
 
 \begin{proof}
@@ -77,63 +77,13 @@ An example is to prove super-differentiability of geodesic distance squared in \
 	\( D \left( \exp _ { y } \right) _ { \dot { \sigma } ( 0 ) } \dot { \sigma } ( 0 ) \) and Gauss' lemma.
 \end{proof}
 
-\section{Multi-marginal optimal transport on Riemannian manifold}
+% \section{Multi-marginal optimal transport on Riemannian manifold}
 
-\begin{proof}[Proof of \cref{lem:barycenter_out_of_cut_locus}]
-	Choose a barycenter \( z \) in the cut locus of \( x _ { i } \) for some \( i \);
-	we shall show that \( z \) cannot minimize
-	\( y \mapsto \sum _ { i = 1 } ^ { n } d ^ { 2 } \left( x _ { i } , y \right) \).
-	By \cref{lem:hessian_bound_distance_squared} and compactness,
-	we can find a constant \( K \) such that, for all \( u \in T _ { z } M \),
-	and \( j = 1,2 , \ldots n \), we have
-	\[
-		\frac { d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right) - 2 d ^ { 2 } \left( x _ { j } , z \right) }
-		{ | u | ^ { 2 } } \leq K
-	\]
-	On the other hand, by \cref{prop:distance_cut_locus},
-	we can find some non
-	zero \( u \in T _ { z } M \) such that
-	\[
-		\frac { d ^ { 2 } \left( x _ { i } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { z } ( - u ) \right) - 2 d ^ { 2 } \left( x _ { i } , z \right) } { | u | ^ { 2 } } \leq - n K
-	\]
-	Therefore, we have
-	\begin{align*}
-		\sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) & = \sum _ { j \neq i } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) + d ^ { 2 } \left( x _ { i } , z \right)                                                                                                                   \\
-		                                                                & \geq \frac { - ( n - 1 ) K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } \sum _ { j \neq i } ^ { n } \left( d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right) \right) \\
-		                                                                & + \frac { n K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } d ^ { 2 } \left( x _ { i } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { z } ( - u ) \right)                                                         \\
-		                                                                & > \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right)
-	\end{align*}
-	Therefore, either
-	\[ \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) < \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \]
-	or
-	\[ \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } - u \right) < \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \]
-	in either case, \( z \) cannot minimize \( \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \)
-\end{proof}
 \subsection{A Riemannian interpolation inequality à la Borell, Brascamp and Lieb}
 
 We copy following results (tex code) from \cite{cordero2001riemannian}.
 
-In the sequel, it proves useful to characterize the cut locus \( \operatorname { cut } ( y ) \) as
-the set of points where the distance function \( d _ { y } ^ { 2 } / 2 \) must fail to be smooth.
-As mentioned above,
-\( d _ { y } ^ { 2 } / 2 \) is as smooth as the manifold away from the cut locus of \( y \).
-But \( \operatorname{cut} ( y ) \) consists of two kinds of points:
-\begin{enumerate}
-	\item those connected to \( y \) by multiple minimizing geodesics, and
-	\item	those which are conjugate to \( y \) but do not fall into the first class.
-\end{enumerate}
-The point of the following proposition (\cite[Proposition 2.5]{cordero2001riemannian})
-is that differentiability of \( d _ { y } ^ { 2 } \) must fail --- at first order in the first case,
-and at second order in the second case.
-
-\begin{prop}
-	[Distances fail to be semi-convex at the cut locus]
-	\label{prop:distance_cut_locus}
-	At each \( x \in \operatorname { cut } ( y ) \), the square distance \( \psi : = d _ { y } ^ { 2 } / 2 \) satisfies:
-	\[ \inf _ { 0 < | v | < 1 } \frac { \psi \left( \exp _ { x } v \right) + \psi \left( \exp _ { x } - v \right) - 2 \psi ( x ) } { | v | ^ { 2 } } = - \infty \]
-\end{prop}
-
-\begin{proof}[Proof of \cref{lem:c-super-gradients_imply_super-gradients}]
+\begin{proof}[Proof of \Cref{lem:c-super-gradients_imply_super-gradients}]
 	Fix \( ( x , y ) \in \mathcal{X} \times Y \) such that \( y \in \partial ^ { c } \phi ( x ) \).
 	For every \( z \in \mathcal{X} \), \cref{equa:c-super-differential} implies
 	\[ \phi ( z ) \leq \phi ( x ) + c ( z , y ) - c ( x , y ) .\]
@@ -147,7 +97,7 @@ and at second order in the second case.
 	as \( u \rightarrow 0 \).
 	Combining the two inequalities yields the desired result \cref{equa:super-differential}.
 \end{proof}
-As we have seen in \cref{lem:barycenter_out_of_cut_locus},
+As we have seen in \Cref{lem:barycenter_out_of_cut_locus},
 it is shown by \cite[Lemma 3.1]{kim2015multi} that this proposition implies
 that barycenters on $M$ are not in the cut-locus considered.
 
@@ -195,22 +145,22 @@ the semi-convexity of squared distance function $d_y^2$ at point $x$.
 % Because it is shown in \cite[Lemma 3.11]{cordero2001riemannian} that
 % \cref{equa:hessian_bound_distance_squared} is a sufficient condition to be semi-convex at a point.
 Moreover, one can actually choose the local smooth function in \cref{defn:semi-concavity} as squared distance function
-if we dig the proof of \cref{lem:sufficient_condition_semi-concavity} in \cite[Lemma 3.11]{cordero2001riemannian}.
+if we dig the proof of \Cref{lem:sufficient_condition_semi-concavity} in \cite[Lemma 3.11]{cordero2001riemannian}.
 
 
 Combining with the definition of $c$-concave,
-\cref{lem:hessian_bound_distance_squared} implies following proposition,
+\Cref{lem:hessian_bound_distance_squared} implies following proposition,
 where we use compactness to ensure a global lower bound for sectional curvatures.
 
 \begin{prop}[\( c \)-concave functions are semi-concave]
 	Fix \(\mathcal{X} \subset \subset M \) open and \( Y \subset M \) compact.
-	A \( c \)-concave function \( \phi \in \mathcal{I} ^ { c } ( \bar { \mathcal{X} } , Y ) \) is semi-concave on \( X \) (and hence admits a Hessian \cref{defn:hessian} almost everywhere in \( X \)).
+	A \( c \)-concave function \( \phi \in \mathcal{I} ^ { c } ( \widebar { \mathcal{X} } , Y ) \) is semi-concave on \( X \) (and hence admits a Hessian \cref{defn:hessian} almost everywhere in \( X \)).
 \end{prop}
 
-\begin{proof}[Proof for the first point in \cref{prop:differentiate_optimal_transport}]
+\begin{proof}[Proof for the first point in \Cref{prop:differentiate_optimal_transport}]
 	Suppose \( \phi \) admits a Hessian \cref{defn:hessian} at \( x \in X \).
 	Then \( \phi \) is differentiable at \( x \) and
-	\cref{example:minimizer_differentiable} shows that \( \partial ^ { c } \phi ( x ) = \{ F ( x ) \} = \{ y \} \).
+	\Cref{example:minimizer_differentiable} shows that \( \partial ^ { c } \phi ( x ) = \{ F ( x ) \} = \{ y \} \).
 	Thus for every \( z \in \mathcal { X } \), \cref{equa:c-super-differential} yields
 	\begin{equation}
 		\label{equa:c-concave_distance_compare}
@@ -219,7 +169,7 @@ where we use compactness to ensure a global lower bound for sectional curvatures
 	Taking \( z = \exp _ { x } ( \pm u ) \) and \( \psi : = d _ { y } ^ { 2 } / 2 \) gives
 	\[ \frac { \phi \left( \exp _ { x } u \right) + \phi \left( \exp _ { x } - u \right) - 2 \phi ( x ) } { | u | ^ { 2 } } \leq \frac { \psi \left( \exp _ { x } u \right) + \psi \left( \exp _ { x } - u \right) - 2 \psi ( x ) } { | u | ^ { 2 } } \]
 	As \( | u | \rightarrow 0 \) the left hand side tends to \( \left\langle \operatorname { Hess } _ { x } \phi ( u ) , u \right\rangle \) by hypothesis, so the right hand side is bounded below.
-	Then \cref{prop:distance_cut_locus} ensures that
+	Then \Cref{prop:distance_cut_locus} ensures that
 	\( x \notin \operatorname { cut } ( y ) \), or equivalently \( y \notin c u t ( x ) \).
 	From \cref{equa:c-concave_distance_compare} we also observe that the function
 	\begin{equation}
@@ -230,7 +180,7 @@ where we use compactness to ensure a global lower bound for sectional curvatures
 	existence and non-negativity of its Hessian: Hess\(_{ x } h = H - \) Hess\(_ { x } \phi \geq 0\).
 \end{proof}
 
-\begin{proof}[Proof for the seconde point in \cref{prop:differentiate_optimal_transport}]
+\begin{proof}[Proof for the seconde point in \Cref{prop:differentiate_optimal_transport}]
 	Fix a unit tangent vector \( u \in T _ { x } M \) and set \( x _ { s } = \exp _ { x } ( s u ) \).
 	For \( y _ { s } \in \partial ^ { c } \phi \left( x _ { s } \right) \) we want
 	to establish the estimate \( \left| v _ { s } - \diff F _ { x } ( s u ) \right| = o ( s ) \),
@@ -247,10 +197,10 @@ where we use compactness to ensure a global lower bound for sectional curvatures
 		\left( - \nabla d _ { y } ^ { 2 } \left( x _ { s } \right) / 2 + w _ { s } \right).
 	\end{equation}
 
-	Applying  \cref{lem:c-super-gradients_imply_super-gradients} to \( y _ { s } \in \partial ^ { c } \phi \left( x _ { s } \right) \) yields \( - u _ { s } \in \partial \phi \left( x _ { s } \right) \)
+	Applying  \Cref{lem:c-super-gradients_imply_super-gradients} to \( y _ { s } \in \partial ^ { c } \phi \left( x _ { s } \right) \) yields \( - u _ { s } \in \partial \phi \left( x _ { s } \right) \)
 	and hence
 	\( w _ { s } \in \partial h \left( x _ { s } \right) \),
-	where \( h \) is as in \cref{proof:h_definition}.
+	where \( h \) is as in \Cref{proof:h_definition}.
 	Recall that \( h \) has a Hessian at \( x \) satisfying \( \diff F _ { x } = Y \operatorname { Hess } _ { x } h \),
 	which by definition \cref{defn:hessian} means
 	\begin{equation}
@@ -264,20 +214,20 @@ where we use compactness to ensure a global lower bound for sectional curvatures
 	\( \dot { w } _ { s = 0 } = \operatorname { Hess } _ { x } h ( u ) . \)
 	Recall that the function \( z \rightarrow \exp _ { z } \left( - \nabla d _ { y } ^ { 2 } ( z ) / 2 \right) = y \)
 	is constant outside \( \operatorname{cut}( y ) \).
-	Differentiating \cref{proof:y_s_definition} using the chain rule then yields
+	Differentiating \Cref{proof:y_s_definition} using the chain rule then yields
 	\begin{align*}
 		\dot { y } _ { s = 0 } & = \diff \left( \exp _ { x _ { 0 } } \right) _ { - \nabla d _ { y } ^ { 2 } \left( x _ { 0 } \right) / 2 } \left( \dot { w } _ { 0 } \right) \\ & = Y \dot { w } _ { 0 } \\ & = \diff F _ { x } ( u )
 	\end{align*}
 
 	The appearance of \( Y = \diff ( \exp ) _ { - \nabla \phi ( x ) } \) in the second identity follows from
-	\( \nabla h \left( x _ { 0 } \right) = 0 \) in \cref{proof:h_definition}.
+	\( \nabla h \left( x _ { 0 } \right) = 0 \) in \Cref{proof:h_definition}.
 	Finally, since \( y _ { 0 } = y \) we have
 	\begin{align*}
 		y _ { s } & = \exp _ { y } \left( s \dot { y } _ { 0 } + o ( s ) \right)                             \\
 		          & = \exp _ { y } \left( s \diff F _ { x } ( u ) + o ( s ) \right) = \exp _ { y } v _ { s }
 	\end{align*}
 	The size of the error term \( o ( s ) \) here does not depend on the unit vector \( u \)
-	since it did not depend on \( u \) in \cref{proof:hessian_definition}.
+	since it did not depend on \( u \) in \Cref{proof:hessian_definition}.
 	Comparison with \cref{equa:differentiate_optimal_transport} ends the proof
 	of the proposition.
 \end{proof}
@@ -291,5 +241,5 @@ where we use compactness to ensure a global lower bound for sectional curvatures
 Here shrinks nicely means there exists \( R ( r ) \rightarrow 0 \) as \( r \rightarrow 0 \) such that
 \( \partial ^ { c } \phi \left( B _ { r } ( x ) \right) \subset B _ { R ( r ) } ( y ) \)
 with  \( \operatorname{Vol} \left[\partial^c \phi (B_r (x)) \right] \geq
-\alpha \operatorname{Vol} \left[ B _ { R ( r ) } ( y ) \right]\) 
+\alpha \operatorname{Vol} \left[ B _ { R ( r ) } ( y ) \right]\)
 for some $\alpha >0$ ; see \cite[140]{Rudin1987real}.
