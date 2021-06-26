@@ -1,6 +1,7 @@
-plugins=(git nvm npm zsh_reload vi-mode pip)
+plugins=(git nvm zsh_reload vi-mode pip)
 plugins+=(z.lua)
 plugins+=(zsh-syntax-highlighting)
+plugins+=(zsh-interactive-cd)
 source $ZSH/oh-my-zsh.sh
 
 function ocr {
@@ -32,6 +33,8 @@ compdef _ocr ocr
 alias sg="TERM=xterm googler -n 5"
 alias sd="TERM=xterm ddgr -n 5"
 alias gcl="git clone --recursive --shallow-submodules --depth 1"
+alias lc=colorls
+alias l="colorls -al"
 
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"

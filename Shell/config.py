@@ -5,7 +5,7 @@ from qutebrowser.config.config import ConfigContainer  # noqa: F401
 config: ConfigAPI = config  # noqa: F821 pylint: disable = E0602,C0103
 c: ConfigContainer = c  # noqa: F821 pylint: disable = E0602,C0103
 
-import sys, os
+# import sys, os
 
 # Load autoconfig before the rest of python config
 config.load_autoconfig(False)
@@ -17,22 +17,25 @@ config.bind('zo', 'set-cmd-text :open file:///home/jing/')
 
 c.zoom.default = '150%'
 c.aliases['mpv'] = 'spawn --userscript view_in_mpv'
+c.aliases['readability'] = 'spawn --userscript readability-js'
 c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt',
         'https://easylist.to/easylist/easyprivacy.txt',
         'https://raw.githubusercontent.com/easylist/easylistchina/master/easylistchina.txt',
-        'https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt',
+        # 'https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt',
+        # 'https://www.i-dont-care-about-cookies.eu/abp/',
+        # 'https://secure.fanboy.co.nz/fanboy-cookiemonster.txt',
         'file:///home/jing/Documents/Code/Web/adblock.txt']
 c.content.blocking.method = 'both'
 c.content.autoplay = False
 c.content.pdfjs = True
-c.downloads.remove_finished = 3000
+c.downloads.remove_finished = 4000
 c.fileselect.handler = 'external'
 c.fileselect.single_file.command = ['alacritty','-e','nnn','-n','-p','{}']
 c.fileselect.multiple_files.command = ['alacritty','-e','nnn','-n','-p','{}']
 c.fileselect.folder.command = ['alacritty','-e','nnn','-n','-p','{}']
 
 c.window.hide_decoration = True
-c.colors.webpage.darkmode.enabled = True
+# c.colors.webpage.darkmode.enabled = True
 c.fonts.default_size = '12pt'
 c.fonts.web.family.standard = 'Manjari'
 c.fonts.web.size.default = 17
