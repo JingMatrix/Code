@@ -1,10 +1,11 @@
 \documentclass{report}
 
+\usepackage[total={5.5in, 8.6in}]{geometry}
+\usepackage{amsthm, amsmath, amsfonts, mathrsfs, amssymb, bbm}
+
 % \usepackage[poorman]{cleveref}
 \usepackage[colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan]{hyperref}
 
-\usepackage[total={6.5in, 7.3in}]{geometry}
-\usepackage{amsthm, amsmath, amsfonts, mathrsfs, amssymb, bbm}
 \makeatletter
 \newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
 \newcommand*\widebar[1]{%
@@ -24,18 +25,18 @@
 }
 \makeatother
 \usepackage[]{cancel}
-\usepackage{graphicx,wrapfig}
+\usepackage{graphicx, float, wrapfig}
 \usepackage{cleveref}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{coro}[thm]{Corollary}
 \newtheorem{conj}[thm]{Conjecture}
 \newtheorem{lem}[thm]{Lemma}
-\theoremstyle{remark}
-\newtheorem{rmk}{Remark}[chapter]
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[chapter]
 \newtheorem{example}[defn]{Example}
+\theoremstyle{remark}
+\newtheorem{rmk}[defn]{Remark}
 
 
 \usepackage{biblatex}
@@ -44,7 +45,7 @@
 \newcommand{\diff}{\operatorname{d}}
 \newcommand{\YYCleverefInput}[1]{}
 
-\title{Existence and Uniqueness of Barycenter in Metric Space}
+\title{Existence and Uniqueness of Barycenter in Metric Spaces}
 \author{Jianyu MA}
 \date{\today}
 
@@ -103,5 +104,6 @@
 % \input{Chapters/paper_review.tex}
 % \input{Chapters/reminder.tex}
 
-\printbibliography
+\printbibliography[heading=bibintoc]
+% \addcontentsline{toc}{chapter}{Bibliography}
 \end{document}

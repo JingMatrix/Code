@@ -15,7 +15,8 @@
 │       └── vim-vinegar
 ├── project
 │   ├── opt
-│   │   └── gen_tags.vim
+│   │   ├── gen_tags.vim
+│   │   └── tabnine-vim
 │   └── start
 │       ├── fzf
 │       ├── fzf.vim
@@ -34,4 +35,4 @@
         ├── vim-airline
         └── vim-airline-themes
 
-34 directories, 0 files
+35 directories, 0 files

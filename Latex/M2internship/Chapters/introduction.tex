@@ -1,16 +1,19 @@
 %! TEX root = ../barycenter.tex
+\YYCleverefInput{/var/tmp/latex/barycenter.sed}
 \chapter*{Introduction}
-Recall that in physics we define barycenter, aka center of inertial mass,
-as a geometric point where we can image gravity acts at.
+\addcontentsline{toc}{chapter}{Introduction}
+In physics the barycenter is defined
+as a geometric point where we can image gravity acts at ---
+also known as center of inertial mass.
 Consider a system of particles  $\nu = 1, \ldots , N$,
-we assume that each $\nu$ has mass $m_\nu$ and positional vector $\boldsymbol{r}_\nu$.
-Then the positional vector $\boldsymbol{r}_C$ of barycenter $C$ is,
-if we write \( M := \sum _ { \nu = 1 } ^ { N } m _ { \nu }\),
+where each $\nu$ has mass $m_\nu$ and positional vector $\boldsymbol{r}_\nu$.
+Then the positional vector $\boldsymbol{r}_C$ of barycenter $C$,
+if we write \( M := \sum _ { \nu = 1 } ^ { N } m _ { \nu }\), is
 \[
 	\boldsymbol { r }_ { C } =
 	\sum_ { \nu = 1 } ^ { N } \frac{m_ { \nu } }{M}\,\boldsymbol { r }_ { \nu }.
 \]
-We can characterize this formula as the unique solution of minimization problem
+We can characterize this formula as the unique solution to the following minimization problem
 \begin{equation}
 	\label{barycenter_def}
 	\boldsymbol{r}_C = \arg \min_{\boldsymbol{r}} \sum_{\nu= 1}^N \frac{m_\nu}{M}
@@ -18,56 +21,105 @@ We can characterize this formula as the unique solution of minimization problem
 \end{equation}
 where $\arg$ stands for ``argument that achieves''.
 
-\begin{defn}[Barycenter of finite second moment measure on metric space]
+\begin{defn}[Barycenter of a measure with finite second moment on a metric space]
 	Consider a metric space $(E,d)$ and a Borel measure $\mu$ on it,
-	we call $z \in E$ a \emph{barycenter} of $\mu$ if it solves following minimization problem,
+	we call $z \in E$ a \emph{barycenter} of $\mu$ if it solves the following minimization problem,
 	\[
 		z \in \arg\min_{x}\int_{E} d(x, y)^2 \diff \mu (y).
 	\]
 	Usually, we only consider measures with finite second moment.
 	The following definition is independent of the choice of $x_0 \in E$,
 	\[
-					\mathcal{W}_2(E): = \left\{ \mu \text{ Borel probability measure on } E \, \left|
+					\mathcal{W}_2(E): = \left\{ \mu \text{ a Borel probability measure on } E \, \left|
 				\int_{E} d(x_0, y)^2 \diff \mu (y) < \infty \right. \right\},
 	\]
 	we thus require  $\mu \in \mathcal{W}_2(E)$ in the definition of barycenter.
 \end{defn}
+
 \begin{rmk}
 	In the example of particles system,
-	$E$ is the Euclidean space where positional vectors $\boldsymbol{r}$ belongs to
-	and $\mu := \sum \frac{m_\nu}{M} \, \delta_{\boldsymbol{r}_\nu}$ is a measure with finite support.
+	$E$ is the Euclidean space where positional vector $\boldsymbol{r}$ belongs to
+	and $\mu := \sum \frac{m_\nu}{M} \, \delta_{\boldsymbol{r}_\nu}$ is a probability measure with finite support.
 	% Later in some cases, we shall also
 \end{rmk}
 
-For the first chapter of this report, we shall first give a sufficient condition for the existence of barycenter.
-Then we present an example where the existence fails.
-It is an example in metric geometry,
-some definitions and properties are recalled thereby.
-Uniqueness of barycenter usually comes from convex properties of distance function.
-We can derive such kind of properties from non-positive curvature of metric space $E$.
-As a classic example, barycenter between south and north pole on the sphere is not unique.
-Discussions are postponed to \Cref{section:uniqueness_and_curvature}.
 
-In the second chapter, we study the case when $E$ is a metric space of measures.
-This study has application in Statistics, and we are interested in the so-called property consistency.
-Consistency means that convergence of measures implies convergence of their barycenters.
+The existence of barycenter is not guaranteed a priori,
+% \section*{Structure of this report}
+% For the first chapter of this report, we shall first 
+we give a sufficient condition for it,
+i.e., when the metric space is proper ---
+a proper space is a metric space where bounded closed sets are compact.
+Then we present some counter-examples to the barycenter's existence.
+Most examples involves length space, a concept in metric geometry,
+so some definitions and properties are introduced.
+The uniqueness of barycenter usually comes from convex properties of distance function $d$.
+We can derive such kind of properties from non-positive curvature of the metric space $E$.
+As a classic example, on the sphere,
+all points in the equator are barycenters
+between south and north poles.
+Discussions on uniqueness are postponed to \Cref{section:uniqueness_and_curvature}.
+
+Then we study the case when $E$ is a metric space of measures.
 As a prerequisite, we discuss a special metricization on the space of measures,
 namely the Wasserstein metric.
 We refer to the space of measures endowed with this metric as Wasserstein space.
 The study of Wasserstein metric is an interesting part of optimal mass transport theory.
-We shall go through a quick review of basic facts in this field.
-With this fruitful field in hand,
-we are able to show existence and consistency of barycenter in the Wasserstein space over a proper space.
-A proper space is a metric space where bounded closed sets are compact.
+We present a brief review of basic known facts in this field.
+This study also has applications in Statistics, as explained in \cite{le2017existence}.
+To show the existence of barycenter in Wasserstein spaces,
+we are led to study a so-called property consistency.
+Consistency means that convergence of measures implies convergence of their barycenters.
+With some classic results from optimal mass transport theory at hand,
+we are able to show the existence and consistency of barycenter in Wasserstein spaces over a proper space.
 
-In the last chapter, we carry our study on complete manifolds,
-as a special case of proper space.
-Discussion of differentiability is of central importance.
-Basically, we shall investigate convex analysis on manifold for technical preparation.
-We continue to explore in the setting of Wasserstein space.
-Uniqueness of barycenter comes from a generalization of
-remarkable Brenier's theorem (\cite[Theorem 2.12]{villani2003topics}) on Euclidean space.
-The main goal of this chapter is to study absolute continuity (with respect to volume measure) of barycenter in the Wasserstein space.
-Without too much complicated details involved, we prove it for barycenter of measures in the form of
-$\sum_{i=1}^{n} \lambda_i \delta_{\mu_i}$ if one of $\mu_i$ is absolutely continuous.
-The general case is still partly unknown, we shall give a brief discussion on it.
+We carry out a study on a complete Riemannian manifold,
+as a special case of proper spaces.
+% Discussion of differentiability is of central importance.
+% Basically, we shall investigate convex analysis on manifold for technical preparation.
+We first introduce some analytic preliminary propositions on
+complete Riemannian manifolds developed in \cite{mccann2001polar} and \cite{cordero2001riemannian}.
+Then we continue to explore in the setting of the Wasserstein space over a complete Riemannian manifold.
+% The existence of barycenter is already shown in the second chapter,
+The uniqueness of barycenter follows from strict convexity of Wasserstein metric.
+% remarkable Brenier's theorem (\cite[Theorem 2.12]{villani2003topics}) on Euclidean space.
+Then we study the
+absolute continuity (with respect to volume measure) of barycenter;
+here the barycenter is a measure on manifold as the Wasserstein space is a space of measures.
+We prove the absolute continuity for barycenter of measures in the form of
+$\sum_{i=1}^{n} \lambda_i \delta_{\mu_i}$ where each $\mu_i$ has compact support and one of them is absolutely continuous.
+The general case is not completely understood, we give a brief discussion on it.
+
+In the first chapter, we discuss barycenter's existence on general metric spaces and
+construct some counter-examples.
+In the second chapter, we show the existence and consistency of
+barycenter in Wasserstein spaces over a proper space.
+In the last chapter, we apply results from the previous two chapters
+to the case of a complete Riemannian manifold.
+Moreover, we study barycenter's uniqueness and absolute continuity.
+
+
+\section*{Bibliographical notes}
+
+Ohta's paper \cite{ohta2012barycenters} is the starting point of our exploration on the topic of barycenter.
+His work discusses barycenter in general geodesic spaces and inspires some of our counter-examples
+(see \Cref{example:ellipsoid_subspaces}, \Cref{lem:infinite_not_geodesic_manifold} and \Cref{lem:ellipsoid_example_non_smooth}).
+
+In \cite{le2017existence}, Le Gouic and Loubes proved the existence and consistency of barycenter in Wasserstein spaces
+over a proper space.
+Our second chapter presents their work with a slight different proof of barycenter's existence
+for a finite supported measure (see \Cref{thm:barycenter_finite_support_measure}).
+
+Kim and Pass studied the uniqueness and absolute continuity
+of barycenter in the Wasserstein space over a compact Riemannian manifold in \cite{KIM2017640}.
+One of our main goals is to extend their results to general complete Riemannian manifolds
+(see \Cref{prop:uniquness_barycenter_Wasserstein}, \Cref{thm:absolute_continuity_discrete} and \Cref{thm:absolute_continuity_general}).
+However, this general case is still not fully understood in this report.
+Our discussion at the end shall point out what blocks us.
+
+McCann's paper \cite{mccann2001polar} is the cornerstone of our last chapter's discussion.
+Most propositions there can be found in \cite{cordero2001riemannian},
+which restates and extends McCann's original work.
+As for optimal mass transport theory, we mainly consulted Villani's
+books \cite{villani2008optimal} and \cite{villani2003topics}.
+Ambrosio's book \cite{ambrosio2005gradient} and Santambrogio's book \cite{Santambrogio2015} are good complements to them.

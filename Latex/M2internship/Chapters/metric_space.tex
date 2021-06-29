@@ -1,15 +1,21 @@
 %! TEX root = ../barycenter.tex
-\chapter{Barycenter in Metric space}
-\label{chapter:metric_space}
-\section{Existence for proper space}
+\chapter{Barycenter in Metric spaces}
+\label{chapter:metric_spaces}
 
-A metric space is proper if every bounded closed set is compact.
+In this chapter, we prove barycenter's existence for proper spaces\cite[Lemma 3.2]{ohta2012barycenters}.
+Recall that we call $z$ a barycenter of $\mu$ if $ z \in \arg\min_{x}\int_{E} d(x, y)^2 \diff \mu (y)$.
+And a metric space is proper if every bounded closed set is compact.
+Then we construct some counter-examples in the rest of this chapter.
+
+
+\section{Barycenter's existence for proper spaces}
+
 A proper (metric) space is complete and separable,
 because we can write a proper metric space as a countable union of compact closed balls.
 This assumption on compactness ensures the existence of barycenter.
 
 \begin{prop}
-	\label{lem:existence_proper_space}
+	\label{lem:existence_proper_spaces}
 	If \( ( E , d ) \) is a proper metric space, then any \( \mu \in \mathcal{W}_ { 2 } ( E ) \) has a barycenter.
 \end{prop}
 
@@ -26,12 +32,12 @@ This assumption on compactness ensures the existence of barycenter.
 	only for \( x \in B \left( z _ { 0 } , 3 r \right) , \) and it is achieved at some point due to the compactness of the closure of \( B \left( z _ { 0 } , 3 r \right) . \)
 \end{proof}
 
-Here is a simple example that shows lack of properness
-violates the existence of barycenter given by \cite[Example 3.1 (a)]{ohta2012barycenters}.
+Here is a simple example \cite[Example 3.1 (a)]{ohta2012barycenters}
+showing that lack of properness violates the existence of barycenter.
 
-\begin{example}
-	\label{example:ellipsoid_subspace}
-	Let \( E \) be the infinite dimensional ellipsoid of axes of lengths \( c _ { n } = ( n + 1 ) / 2 n \) with \( n \in \mathbb { N } , \) namely
+\begin{example}[A complete space with a measure without barycenter]
+	\label{example:ellipsoid_subspaces}
+	Let \( E \) be the infinite dimensional ellipsoid of axes of length \( c _ { n } = ( n + 1 ) / 2 n \) with \( n \in \mathbb { N}^* , \) namely
 	\[
 		E = \left\{ \left( x _ { 1 } , x _ { 2 } , \ldots \right) \in \ell^2 | \sum _ { n \in \mathbb { N }^* } \frac { x _ { n } ^ { 2 } } { c _ { n } ^ { 2 } } = 1 \right\}
 	\]
@@ -41,7 +47,7 @@ violates the existence of barycenter given by \cite[Example 3.1 (a)]{ohta2012bar
 \end{example}
 
 \begin{proof}
-	$E$ is closed subspace of Hilbert space $\ell^2$ since $ 1 / 2 \leq c_{n} \leq 1$.
+	$E$ is a closed subspace of Hilbert space $\ell^2$ since $ 1 / 2 \leq c_{n} \leq 1$.
 	Linear Hilbert structure enables us to calculate distance through inner product.
 	Pick $ x \in E$ and set $ e=(1,0,0\ldots)$, by definition,
 	\begin{align*}
@@ -50,12 +56,15 @@ violates the existence of barycenter given by \cite[Example 3.1 (a)]{ohta2012bar
 	\end{align*}
 
 	So a barycenter $z$ of $\mu$ in $E$ should minimize its length $\| z \|$,
-	but it is impossible in this space.
-	Assume now vector $z \in E$ attains minimal length.
-	Consider first $n$ coordinate components of $z$,
+	but this is impossible in the space $E$.
+	We prove it by contradiction.
+	Assume now a vector $z \in E$ attains minimal length.
+	Consider the first $n$ coordinate components of $z$,
 	there could not exist any non-zero components except the last one, i.e., $z_i =0$ for $i<n$.
-	Otherwise, we can keep coordinate components $z_j$ for $j>n$, which are out of consideration, unchanged but vanish first $n-1$ coordinate components to get a strictly shorter vector in $E$.
-	This indicates that no such barycenter $z$ could exist in $E$.
+	Otherwise, we can keep its coordinate components $z_j$ for $j>n$,
+	which are out of consideration,
+	unchanged but vanish its first $n-1$ coordinate components to get a strictly shorter vector in $E$.
+	This contradiction implies that no such a barycenter $z$ could exist in $E$.
 \end{proof}
 
 \begin{rmk}
@@ -64,15 +73,16 @@ violates the existence of barycenter given by \cite[Example 3.1 (a)]{ohta2012bar
 \end{rmk}
 
 We shall present some counter examples for more geometric metric spaces.
-A discussion on length might give some insight on the existence of barycenter.
+A discussion on length spaces might give some insight on the existence of barycenter.
 
-\section{Non-proper length space}
+\section{Non-proper length spaces}
 
 Recall that on smooth manifolds, we define Riemannian metric through length of curves.
-Remove assumptions for manifold structure, we arrive at the definition of general length space.
+If we remove the assumptions concerning manifold structure,
+we arrive at the definition of a general length space.
 
-We start with induced length structure, which defines rectifiable curve.
-\begin{defn}[Induced length structure]
+We start with induced length structures, which define rectifiable curves.
+\begin{defn}[Induced length structures]
 	\label{defn:length_structure}
 	Let \( ( E , d ) \) be a path-connected metric space and \( \gamma \) be a curve in \( E \),
 	i.e., a continuous map \( \gamma: [ a , b ] \rightarrow E \).
@@ -83,7 +93,8 @@ We start with induced length structure, which defines rectifiable curve.
 	\[
 		\Sigma ( Y ) = \sum _ { i = 1 } ^ { N } d \left( \gamma \left( y _ { i - 1 } \right) , \gamma \left( y _ { i } \right) \right)
 	\]
-	over all the partitions $Y$ is called the length of $\gamma$ with respect to the metric $d$ and denoted $L_d (\gamma)$.
+	over all the partitions $Y$ is called the length of $\gamma$
+	with respect to the metric $d$ and denoted by $L_d (\gamma)$.
 	A curve is said to be rectifiable if its length is finite.
 \end{defn}
 
@@ -92,10 +103,10 @@ We start with induced length structure, which defines rectifiable curve.
 	For $\gamma : [a, b] \rightarrow E$ a curve and a subinterval $[x , y] \subset [a,b]$,
 	we write $\gamma_{[x , y]}$ the restriction of $\gamma$ to the subinterval $[x , y]$.
 	If \( \gamma \) is rectifiable,
-	the function \( L \left( \gamma | _ { [ x , y ] } \right) = L ( \gamma , x , y ) \) is continuous
+	the function $ L ( \gamma , x , y ) = L \left( \gamma | _ { [ x , y ] } \right)$ is continuous
 	in \( x \) and \( y \).
 	We prove the continuity of \( L \) in \( y , a < y \leq b \),
-	from the left for illustration purpose.
+	from the left for illustration.
 	Take \( \varepsilon > 0 \) and
 	consider a partition \( Y \) such that \( L ( \gamma ) - \Sigma ( Y ) < \varepsilon \). One may suppose that
 	\( y _ { j - 1 } < y = y _ { j } \). Then
@@ -103,24 +114,33 @@ We start with induced length structure, which defines rectifiable curve.
 		L \left( \gamma , y _ { j - 1 } , y \right) - d \left( \gamma \left( y _ { j - 1 } \right) , \gamma ( y ) \right) < \varepsilon
 	\]
 	and the same inequality takes place for each $y^\prime$ such that $y_{j-1} \leq y^\prime \leq y$.
+	Hence, we have shown that $L(\gamma, z, y) \rightarrow 0$ as $z \rightarrow y$ with $z<y$.
+	Note that for $x < z <y$, we have
+	$L(\gamma, x, z) + L(\gamma, z, y) = L(\gamma, x, y)$.
+	So we have proved the left continuity of $L(\gamma, x,y)$ in $y$.
 \end{rmk}
 
-Once we are disposal with a length structure,
+Once we have a length structure,
 for two points \( x , y \in E \) we set the associated distance \( d_L ( x , y ) \) between them to be the infimum of lengths of rectifiable curves connecting these points:
 \[
 	d _ { L } ( x , y ) = \inf \{ L ( \gamma ) \,|\, \gamma: [ a , b ] \rightarrow E , \gamma \text{ rectifiable }, \gamma ( a ) = x , \gamma ( b ) = y \}.
 \]
 
 \begin{defn}[Length space]
-	\label{defn:length_space}
-	A metric space $(E,d)$ is a length space if the distance $\hat{d} := d_{L_{d}}$ induced
-	from the length structure $L_d$ coincides with $d$. We also call it an intrinsic metric space.
+	\label{defn:length_spaces}
+	A metric space $(E,d)$ is a length space if the distance $\hat{d} := d_{L_{d}}$ defined by
+	the induced length structure $L_d$ coincides with $d$.
+
+	% We also call it an intrinsic metric space.
+	We call $\hat{d}$ the intrinsic metric induced by $d$.
 \end{defn}
 
-We justify this definition by the fact that
-twice induced distance $\hat{\hat{d}}$ of metric $d$ coincides with the induced distance $\hat{d}$ of metric $d$.
-Also, we have $L_{\hat{d}} = L_{d}$ on rectifiable curves.
-Proofs could be found in \cite[Section 2.3]{burago2001course}.
+We can justify this definition by \cite[Proposition 2.3.12]{burago2001course}
+\begin{itemize}
+	\item $L_{\hat{d}} = L_{d}$ on rectifiable curves.
+	\item The intrinsic metric induced by \( \hat { d } \) coincides with \( \hat { d }\).
+\end{itemize}
+% Proofs could be found in \cite[Section 2.3]{burago2001course}.
 This is important for understanding the definition,
 so we state it as a theorem.
 
@@ -130,9 +150,9 @@ so we state it as a theorem.
 	that \( L _ { d } ( \gamma ) < d ( x , y ) + \varepsilon \).
 \end{thm}
 
-Good news is that we get classic Hopf-Rinow theorem in Riemannian geometry for general length spaces.
-This is \cite[Proposition 2.5.22]{burago2001course}.
-
-\begin{prop}
+A good thing is that we still have classic Hopf-Rinow theorem
+in Riemannian geometry for general length spaces.
+That is
+\begin{prop}[Proposition 2.5.22 in \cite{burago2001course}]
 	A locally compact complete length space is proper.
 \end{prop}

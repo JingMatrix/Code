@@ -28,6 +28,7 @@ augroup math_edit
 augroup end
 
 " startify
+let g:startify_change_to_dir=1
 let g:startify_skiplist=['doc/.*\.txt$', '.*/tmp/*', 'Notes/notes/.*\.md$', 'Code/Shell/.*']
 let g:startify_files_number=5
 let g:startify_bookmarks=[
@@ -47,7 +48,7 @@ let g:startify_custom_header_quotes=[
 			\['Are you escaping from yourself?']]
 
 " Airline
-" let g:airline_theme='lucius'
+let g:airline_theme='apprentice'
 let g:airline#extensions#whitespace#skip_indent_check_ft={'tex': ['indent']}
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
@@ -135,6 +136,7 @@ hi PmenuSel ctermfg=yellow
 
 set hidden
 set autowrite
+set autochdir
 set foldmethod=syntax
 set fillchars=fold:\ ,
 set modeline

@@ -1,15 +1,15 @@
 %! TEX root = ../barycenter.tex
 \YYCleverefInput{/var/tmp/latex/barycenter.sed}
-\section{Barycenter in manifold}
+\section{Barycenter in manifolds}
 
 \label{section:barycenter_manifold}
-Recall that we define $c(x, y):=\frac{1}{2} d(x, y)^2$;
-and for $n$ points $x_j \in M, j=1,2,\ldots,n$, now we re-define $f$ on $M^n$ with a coefficient $\frac{1}{2}$
+Recall that we define $c(x, y):=\frac{1}{2} d(x, y)^2$.
+Now for $n$ points $x_j \in M, j=1,2,\ldots,n$, we re-define $f$ on $M^n$ with a coefficient $\frac{1}{2}$
 to make later notations easier,
 \[
-	f(x_1, x_2, \ldots, x_n) := \min_{w} \sum_{j=1}^n \lambda_j c(w, x_j) =: \frac{1}{2}W^2(\sum_{j=1}^n \lambda_j \delta_{x_j}, M).
+	f(x_1, x_2, \ldots, x_n) := \min_{w} \sum_{j=1}^n \lambda_j c(w, x_j) =: \frac{1}{2}W_2(\sum_{j=1}^n \lambda_j \delta_{x_j}, M)^2.
 \]
-We remark that this re-definition affects nothing in we discussed before.
+We remark that this re-definition affects nothing of what we have discussed before.
 
 Pick an $i, 1 \leq i \leq n$ such that $\lambda_i \neq 0$, then we fix $x_j$ for $j \neq i$ and
 define $f_i (x_i) : = f(x_1, \ldots, x_n)$.
@@ -37,7 +37,7 @@ becomes equality when $z$ is a barycenter of $\sum_{i=1}^{n} \lambda_i \delta_{x
 \end{equation}
 
 \begin{rmk}[$g_i$ on $Y$ is the $c$-transform of $f_i / \lambda_i$]
-	In general, we have by definition of $c$-transform that
+	In general, we have by the definition of $c$-transform that
 	$g_i(w) \leq (f_i / \lambda_i)^c(w) := \inf_{x_i \in \widebar{ \mathcal{X} } } c(x_i, w) - f_i / \lambda_i (x_i)$.
 	If $ c(z, x_i) = g_i (z) + f_i / \lambda_i (x_i)$,
 	then
@@ -77,7 +77,7 @@ if $f_i$ is differentiable at $x_i$,
 
 The barycenter formula \cref{equa:formula_barycenter} expresses the fact that,
 from point $x_i$,
-we can reach barycenter of $\sum_{j=1}^n \lambda_i \delta_{x_j}$ if we follow the direction $-\nabla f_i$
+we can reach the unique barycenter of $\sum_{j=1}^n \lambda_i \delta_{x_j}$ if we follow the direction $-\nabla f_i$
 and advance $\| \nabla f_i / \lambda_i \| $.
 In the case of Euclidean space,
 \[
@@ -85,12 +85,13 @@ In the case of Euclidean space,
 	\nabla g_i(w)  = \frac{1}{\lambda_i} (w - \sum_{j=1}^n \lambda_j x_j) -(w-x_i).
 \]
 
-
 The following fine property of barycenter is stated in \cite[Lemma 3.1]{kim2015multi}.
 We emphasize the fact that this lemma connects the notion of barycenter with geometry of our manifold $M$.
 \begin{lem}
 	\label{lem:barycenter_out_of_cut_locus}
 	Fix \( \left( x _ { 1 } , \ldots , x _ { n } \right) \in M^n\).
+	Let $\lambda_j >0, 1 \leq j \leq n$ be $n$ positive numbers such that
+	$\sum_{j=1}^n \lambda_j =1$.
 	Then any barycenter $z$ of $\sum_{j=1}^n \lambda_j \delta_{x_j}$
 	is not in the cut locus of \( x _ { j } \) for any \( j . \)
 \end{lem}
@@ -98,7 +99,7 @@ We emphasize the fact that this lemma connects the notion of barycenter with geo
 \begin{proof}
 	Choose a barycenter \( z \) in the cut locus of \( x _ { i } \) for some \( i \);
 	we shall show that \( z \) cannot minimize
-	\( y \mapsto \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , y \right) \).
+	\( y \mapsto \sum _ { j = 1 } ^ { n } \lambda_j d ^ { 2 } \left( x _ { j } , y \right) \).
 	By \Cref{lem:hessian_bound_distance_squared} (for the sake of later convenience, we state it the next section) and compactness,
 	we can find a constant \( K \) such that, for all \( u \in T _ { z } M \),
 	and \( j = 1,2 , \ldots n \), we have
@@ -111,22 +112,44 @@ We emphasize the fact that this lemma connects the notion of barycenter with geo
 	zero \( u \in T _ { z } M \) such that
 	\[
 		\frac { d ^ { 2 }_{x _ { i } } \left(  \exp _ { z } u \right) + d ^ { 2 }_{x _ { i } } \left( \exp _ { z } ( - u ) \right) - 2 d ^ { 2 }_{ x_i} \left( z \right) }
-		{ | u | ^ { 2 } } \leq - n K
+		{ | u | ^ { 2 } } \leq - \frac{1}{\lambda_i} K
 	\]
 	Therefore, we have
 	\begin{align*}
-		\sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) & = \sum _ { j \neq i } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) + d ^ { 2 } \left( x _ { i } , z \right)                                                                                                                   \\
-		                                                                & \geq \frac { - ( n - 1 ) K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } \sum _ { j \neq i } ^ { n } \left( d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right) \right) \\
-		                                                                & + \frac { n K | u | ^ { 2 } } { 2 } + \frac { 1 } { 2 } d ^ { 2 } \left( x _ { i } , \exp _ { z } u \right) + d ^ { 2 } \left( x _ { i } , \exp _ { z } ( - u ) \right)                                                         \\
-		                                                                & > \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) + \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } ( - u ) \right)
+	\sum _ { j = 1 } ^ { n } \lambda_j d ^ { 2 }_{ x _ { j } }( z ) & =
+\sum _ { j \neq i } ^ { n } \lambda_j d ^ { 2 }_{ x _ { j } }(z ) + \lambda_i d ^ { 2 } _ { x _ { i } } \left( z \right) \\
+											  & \geq \frac { - ( 1 - \lambda_i ) K | u | ^ { 2 } } { 2 } +
+											  \frac { 1 } { 2 } \sum _ { j \neq i } ^ { n } \lambda_j \left( d ^ { 2 } _{ x _ { j } }( \exp _ { z } u ) +
+									  d ^ { 2 } _{ x _ { j }} \left( \exp _ { z } ( - u ) \right) \right) \\
+											  & + \frac { K | u | ^ { 2 } } { 2 } + \frac { \lambda_i } { 2 }
+											  \left( d ^ { 2 } _{ x _ { i }} \left( \exp _ { z } u \right) +
+											  d ^ { 2 } _{ x _ { i }} \left( \exp _ { z } ( - u ) \right)  \right)                                                       \\
+											  & > \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } \lambda_j d ^ { 2 } _{ x _ { j } } \left( \exp _ { z } u \right)
+											  + \frac { 1 } { 2 } \sum _ { j = 1 } ^ { n } \lambda_j d ^ { 2 }_{ x _ { j }} \left( \exp _ { z } ( - u ) \right)
 	\end{align*}
 	Therefore, either
-	\[ \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } u \right) < \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \]
+	\[ \sum _ { j = 1 } ^ { n } \lambda_j d ^ { 2 } _{ x _ { j } }\left( \exp _ { z } (u) \right)
+	< \sum _ { j = 1 } ^ { n } d ^ { 2 } _{ x _ { j }} \left( z \right) \]
 	or
-	\[ \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , \exp _ { z } - u \right) < \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \]
-	in either case, \( z \) cannot minimize \( \sum _ { j = 1 } ^ { n } d ^ { 2 } \left( x _ { j } , z \right) \)
+	\[ \sum _ { j = 1 } ^ { n } \lambda_j d ^ { 2 } _{ x _ { j } }\left( \exp _ { z } (-u) \right)
+	< \sum _ { j = 1 } ^ { n } d ^ { 2 } _{ x _ { j }} \left( z \right) \]
+	in either case, \( z \) cannot minimize \( \sum _ { j = 1 } ^ { n } \lambda_j d ^ { 2 } \left( x _ { j } , z \right) \)
 \end{proof}
-This \Cref{lem:barycenter_out_of_cut_locus} implies that $g_i$ is differentiable at
+
+\begin{rmk}[Idea behind the proof of \Cref{lem:barycenter_out_of_cut_locus}]
+The barycenter $z$ achieves the minimum of function $y \mapsto \sum_{i=1}^n \lambda_i d^2_{x_i}(y)$.
+And assume we already know that, just for the purpose of illustration in this remark,
+the Hessian of this function exists at point $z$,
+then this Hessian must be positive as $z$ achieves minimum.
+That is to say, $\sum_{i=1}^n \lambda_i \operatorname{Hess}_z d^2_{x_i} \geq 0$.
+\Cref{lem:hessian_bound_distance_squared} tells that each $\operatorname{Hess}_z d^2_{x_i}$
+has a upper bound constant $K$, so it must have a lower bound constant $(1-\lambda_i)/\lambda_i K$.
+While \Cref{prop:distance_cut_locus} says that at cut locus
+the Hessian diverges to $-\infty$,
+hence the barycenter $z$ could not locate at the cut locus of any $x_i$.
+\end{rmk}
+
+\Cref{lem:barycenter_out_of_cut_locus} implies that $g_i$ is differentiable at
 any barycenter $z$ of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
 % The \Cref{lem:barycenter_out_of_cut_locus} above tells that $g_i$ is differentiable at $z$.
 % Since $z$ is not in the cut locus of $x_i$,
@@ -135,19 +158,20 @@ any barycenter $z$ of $\sum_{j=1}^n \lambda_j \delta_{x_j}$.
 % If in addition, $f_i / \lambda_i$ is differentiable at $x_i$,
 % then both hand side of \cref{equa:g_i_conjugate} are differentiable at $x_i$ and $z$.
 Differentiating \cref{equa:g_i_conjugate} with respect to % $x_i$ and
-$z$ and using the minimality property, we obtain,
+$z$ and using the minimality property,
+applying \cref{equa:exponential_map_and_squared_distance_function} we obtain,
 \begin{align*}
 	% z   & = \exp_{x_i}( - \frac{1}{\lambda_i} \nabla f_i), \\
 	x_i & = \exp_{z}( - \nabla g_i).
 \end{align*}
 Therefore, $ \exp(- \nabla g_i) $ is a left inverse to $\exp( - \nabla f_i / \lambda_i)$,
-\[
+\begin{equation}
+	\label{equa:left_inverse_barycenter_map}
 	\exp( - \nabla g_i) \circ \exp( - \frac{1}{\lambda_i} \nabla f_i) = \operatorname{Id},
 	\quad \text{if } \nabla f_i \text{ exists}.
-\]
+\end{equation}
 
-
-\subsection{Uniqueness and curvature condition}
+\subsection{Uniqueness and curvature conditions}
 
 \label{section:uniqueness_and_curvature}
 
@@ -156,7 +180,7 @@ the barycenter of $\sum_{j=1}^n \lambda_j \delta_{x_j}$ is unique.
 It means that non-uniqueness reveals the fact that the Lipschitz function
 $f_i$ on $\widebar{ \mathcal{X} }$ is not \emph{a priori} differentiable.
 In addition, on the set where $\nabla f_i$ exists, the map
-$\exp( -\nabla f_i / \lambda_i )$ is injective.
+$\exp( -\nabla f_i / \lambda_i )$ is injective by \cref{equa:left_inverse_barycenter_map}.
 
 In general, sufficient condition for uniqueness of barycenters of a probability measure $\mu$ on $M$
 involves convex properties of distance function.
@@ -165,5 +189,5 @@ from this perspective.
 In \cite[Proposition IX.7.1]{chavel2006riemannian},
 Ricci curvature bound from above plus bounded support for measure $\mu$ are used
 to impose uniqueness of barycenter of $\mu$.
-We could also use curvature condition for general length space as done by Ohta in \cite{ohta2012barycenters}.
-
+We could also use curvature condition for general length space as done by Ohta in \cite{ohta2012barycenters},
+which also summarizes related works.
