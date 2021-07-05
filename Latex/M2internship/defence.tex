@@ -4,19 +4,26 @@
 \usepackage{lmodern}
 \usepackage{array}
 \usepackage{romannum}
-\usepackage{amsmath}
+\usepackage{amsmath, bm}
 \usepackage{soul}
+\usefonttheme[onlymath]{serif}
+% \usepackage[absolute, overlay]{textpos}
 \usepackage[overridenote, duration=20]{pdfpc}
 
 \beamertemplatenavigationsymbolsempty
 \setbeamertemplate{footline}[frame number]{}
 \setbeamertemplate{caption}{\raggedright\insertcaption\par}
 \newcommand{\diff}{\operatorname{d}}
+\newcommand{\refs}[1]{\textcolor{gray}{\small \textsuperscript{[#1]}}}
+\newcommand{\vect}[1]{\widetilde{\bm{#1}}}
 
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
-\title{Barycenter's exsitence in the Wasserstein space\\ over a proper space}
-\author{Jianyu MA}
+\title{Barycenter's existence in the Wasserstein space\\ over a proper space}
+\author{Jianyu MA\\[0.3cm]
+	\href{https://www.math.univ-toulouse.fr/~bertrand/}
+	{{\scriptsize supervisor:} \textcolor{blue}{Jérôme Bertrand}}}
 \date{\today}
+\everymath{\displaystyle}
 
 \begin{document}
 
@@ -26,8 +33,7 @@
 \begin{frame}
 	\frametitle{Barycenter in a metric space $(E,d)$}
 	\setbeamercovered{
-		% still covered={\opaqueness<1->{8}},
-		again covered={\opaqueness<2->{15}}
+		again covered={\opaqueness<1->{50}}
 	}
 	\begin{definition}
 		\onslide<1>{
@@ -41,38 +47,64 @@
 		\]
 	\end{definition}
 	\begin{overlayarea}{\textwidth}{1.5cm}
-		\begin{description}
-			\item<2 | only@2>[Intuition] $ \displaystyle E = \mathbb{R} \implies z = \int_{\mathbb{R}} y \diff \mu(y) $
-			\\[0.2cm]
-			In Statistics, $z$ is a mean of $\mu$.
-			\item<3 | only@3>[Unknown] \textcolor{purple}{Existence} and uniqueness
-		\end{description}
+		\only<2>{
+			\textcolor{beamer@blendedblue}{Intuition}\\
+			\[ E = \mathbb{R} \implies z = \int_{\mathbb{R}} y \diff \mu(y) \]
+			In Statistics, we call $z$ a mean of $\mu$.
+		}
+		\only<3,4>{
+			\textcolor{beamer@blendedblue}
+			{Research: barycenter in the%
+				\only<3>{
+					\textcolor{black}{space of measures} on a}%
+				\only<4>{
+			\textcolor{black}{\textbf{Wasserstein space}} over a} }
+		}
+		\onslide<3>{
+			\begin{enumerate}
+				\item Alexandrov space%
+				      \refs{Ohta, 2009}: \textcolor{cyan}{quantitative estimates}
+				\item proper space%
+				      \refs{Le Gouic \& Loubes, 2017}: \textcolor{cyan}{existence and consistency}
+				\item compact manifold%
+				      \refs{Kim \& Pass, 2017}: \textcolor{cyan}{absolute continuity}
+			\end{enumerate}
+		}
 	\end{overlayarea}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Barycenter's existence in $(E,d)$}
-	\setbeamercovered{
-		still covered={\opaqueness<1>{15}},
-		% again covered={\opaqueness<1>{10}}
-	}
 	\onslide<1,2>{When $(E,d)$ is a}
 	\begin{description}
 		\item<1,3>[proper space:] \textcolor{teal}{closed + bounded = compact}%
 		\onslide<1>{,\\[0.1cm]
 			barycenter always exists.}
-		\item<2,3>[length space:] \textcolor{teal}{distance = inf of length of curves}%
+		\item<2,3>[length space:] \textcolor{teal}{distance = inf of the lengths of curves}%
 		\onslide<2>{,\\[0.1cm]
 			$z$ a barycenter of $\frac{1}{2}\delta_x + \frac{1}{2}\delta_y \Longleftrightarrow
 				d(x,z)=d(z,y) = \frac{1}{2}d(x,y)$.}
 	\end{description}
-	% \setbeamercovered{invisible}
-	\vfill
-	\onslide<3>{
-		\begin{theorem}[Hopf-Rinow]
-			Locally compact + complete + length space $\implies$ proper
-		\end{theorem}
-	}
+	\begin{overlayarea}{\textwidth}{1.5cm}
+		\only<1>{
+			{\small \textcolor{gray}{proof}}\\
+			Let $\{ x_j \}$ be a minimizing sequence of
+			$x \mapsto \int_{E} d(x, y)^2 \diff \mu(y)$
+			\[
+				d(x_i, x_j)^2 \leq 2 \int_{E} d(x_i, y)^2 + d(x_j, y)^2 \diff \mu(y)
+			\]
+		}
+		\only<2>{
+			\begin{center}
+				\includegraphics[height=0.22\linewidth]{Chapters/lengths.pdf}
+			\end{center}
+		}
+		\only<3>{
+			\begin{theorem}[Hopf-Rinow]
+				Locally compact + complete + length space $\implies$ proper
+			\end{theorem}
+		}
+	\end{overlayarea}
 \end{frame}
 
 \begin{frame}[t]
@@ -86,12 +118,12 @@
 				\begin{minipage}{.49\textwidth}
 					\centering
 					\includegraphics[height=.48\linewidth]{Chapters/example_phi.pdf}
-					\caption{$ \displaystyle d(x,y):=\phi(|x-y|)$}
+					\caption{$ d(x,y):=\phi(|x-y|)$}
 				\end{minipage}
 				\begin{minipage}{.49\textwidth}
 					\centering
 					\includegraphics[height=.50\linewidth]{Chapters/example_f.pdf}
-					\caption{$\displaystyle f(x) :=\int_{\mathbb{R}} d^2(x,y) \diff \mu(y)$}
+					\caption{$f(x) :=\int_{\mathbb{R}} d^2(x,y) \diff \mu(y)$}
 				\end{minipage}
 			\end{figure}
 		\end{example}
@@ -99,15 +131,21 @@
 	\only<2>{
 		\begin{example}[Locally compact \textcolor{gray}{\st{complete}} length space]
 			The unit disk with center removed.
-			% $\mathbb{D} \backslash \{0,0\}$
-			\\[0.3in]
-			\textcolor{gray}{
-				No barycenter of
-				\begin{enumerate}
-					\item uniform measure
-					\item $\frac{1}{2}\delta_x + \frac{1}{2}\delta_{-x}$
-				\end{enumerate}
-			}
+			\\[0.2cm]
+			\begin{columns}
+				\column{0.4\textwidth}
+				\textcolor{gray}{
+					No barycenter of
+					\begin{enumerate}
+						\item uniform measure
+						\item $\frac{1}{2}\delta_x + \frac{1}{2}\delta_{-x}$
+					\end{enumerate}
+				}
+				\column{0.6\textwidth}
+				\begin{center}
+					\includegraphics[height=0.4\linewidth]{Chapters/disk.pdf}
+				\end{center}
+			\end{columns}
 		\end{example}
 	}
 
@@ -127,20 +165,27 @@
 \section{Wasserstein space}
 \begin{frame}
 	\frametitle{Wasserstein space $(\mathcal{W}(E), W)$ of probability measures}
-	% \setbeamercovered{transparent}
 	\setbeamercovered{
-		still covered={\opaqueness<1->{8}},
-		again covered={\opaqueness<1>{50}}
+		again covered={\opaqueness<1>{40}}
 	}
 	Assume $(E,d)$ is
 	\textcolor{teal}{complete and separable}
-	\onslide<1>{
-		\[
-			\mathcal{W}(E) = \left\{ \mu
-			\, \left| \,
-			\int_{E} d(x_0, y)^2 \diff \mu (y) < + \infty \right. \right\}
-		\]
-	}
+	\begin{overlayarea}{\textwidth}{0.5cm}
+		\only<1>{
+			\[
+				\mathcal{W}(E) = \left\{ \mu \text{ probability measure on } E
+				\, \left| \,
+				\int_{E} d(x_0, y)^2 \diff \mu (y) < + \infty \right. \right\}
+			\]
+		}
+		\only<3>{
+			\[
+				\mathcal{W}(E) = \left\{ \mu \text{ probability measure on } E
+				\, \left| \,
+				W(\delta_{x_0}, \mu)^2 < + \infty \right. \right\}
+			\]
+		}
+	\end{overlayarea}
 	\onslide<2>{
 		\textcolor{gray}{
 			\begin{align*}
@@ -156,7 +201,7 @@
 	}
 	\onslide<3>{
 		\textcolor{gray}{Example:}
-		$\displaystyle W(\delta_{x_0} , \mu)^2 = \int_{E} d(x_0, y)^2 \diff \mu(y)
+		$W(\delta_{x_0} , \mu)^2 = \int_{E} d(x_0, y)^2 \diff \mu(y)
 			,\quad W(\delta_x, \delta_y)=d(x,y) $
 	}
 \end{frame}
@@ -164,8 +209,7 @@
 \begin{frame}
 	\frametitle{Details of Wasserstein metric $W$}
 	\setbeamercovered{
-		still covered={\opaqueness<1->{0}},
-		again covered={\opaqueness<1>{35}}
+		again covered={\opaqueness<1->{35}}
 	}
 	\begin{theorem}[Existence of an optimal coupling]
 		% Let $(E,d)$ be a Polish space.\\
@@ -185,14 +229,29 @@
 			\textcolor{cyan}{optimal coupling} if $\operatorname{law}(X,Y) = \pi$.
 		}
 	\end{theorem}
-	{\small \textcolor{gray}{proof} \;}
-	\pause
-	by \textcolor{purple}{weak convergence}:
-	\begin{enumerate}
-		\item the set of all couplings is tight
-		\item $\displaystyle f \text{ conti.} \implies \pi \mapsto
-			      \int f \diff \pi \text{ lower semi-conti.}$
-	\end{enumerate}
+	\begin{overlayarea}{\textwidth}{3cm}
+		{\small \textcolor{gray}{proof} \;}
+		consider \textcolor{purple}{weak convergence}:\\[0.2cm]
+		\pause
+		\textcolor{teal}{1. } the set of all couplings is \textcolor{teal}{tight}%
+		\only<2,3>{:\\[0.2cm]
+			\textcolor{teal}{
+				$\forall \varepsilon > 0,\, \exists$ a compact $K_1 \subset E$ s.t.\@
+				$\mu(E \backslash K_1) \leq \varepsilon$}
+			\pause
+			and likewise, $\nu(E \backslash K_2) \leq \varepsilon$
+			\[
+				\pi(E \times E \backslash K_1 \times K_2 ) \leq
+				\mu(E \backslash K_1)  + \nu(E \backslash K_2) \leq 2 \varepsilon
+			\]
+		}%
+		\only<4>{
+			$\implies$ converging subsequence\\[0.2cm]
+			\textcolor{teal}{2. }
+			$f \text{ conti.} \implies \pi \mapsto
+				\int f \diff \pi \text{ lower semi-conti.}$
+		}
+	\end{overlayarea}
 \end{frame}
 
 \begin{frame}
@@ -223,38 +282,39 @@
 
 \begin{frame}
 	\frametitle{Barycenter's existence for measure
-		$ \displaystyle \sum_{i=1}^n \lambda_i \delta_{\mu_i}$ on $\mathcal{W}(E)$}
-	% \setbeamercovered{transparent}
-	\onslide<1>{
-		Assume $(E,d)$ proper.
-		Pick $(X,X_1,\ldots,X_n)$ s.t.\@}
-	% $\operatorname{law}(X) = \mu$, $\operatorname{law}(X_i) = \mu_i$ and
-	\onslide<1>{
-		$W(\mu, \mu_i)^2 = \mathbb{E} d(X, X_i)^2$
-	}
-	\onslide<1>{, then
-	}
-	% \onslide<1,3,5>{
-	\begin{equation}
-		\label{equa:barycenter_selection}
+		$ \sum_{i=1}^n \lambda_i \delta_{\mu_i}$ on $\mathcal{W}(E)$}
+	Assume $(E,d)$ is a proper space.
+	\begin{align*}
+		\onslide<1>{\text{Pick}} \hspace{3.5cm}
+		(X,X_1,\ldots,X_n) \text{ s.t.\@ }
+		W(\mu, \mu_i)^2 & = \mathbb{E} d(X, X_i)^2
+		\onslide<1>{,}                                        \\
+		\onslide<1>{\text{then}} \hspace{2.6cm}
 		\sum_{i=1}^n \lambda_i W(\mu, \mu_i)^2 = \mathbb{E} \sum_{i=1}^n \lambda_i d(X, X_i)^2
-		\geq \mathbb{E} f(X_1, \ldots, X_n)
+		                & \geq \mathbb{E} f(X_1, \ldots, X_n)
 		\onslide<1>{,}
-	\end{equation}
-	% }
-	\onslide<1>{
-		where }
-	\onslide<1-4>{
-		$ \displaystyle f(x_1, \ldots, x_n) = \min_{x}
-			\sum_{i=1}^n \lambda_i d(x, x_i)^2
-			% \min_{x} W^2 (\delta_x, \sum_{i=1}^n \lambda_i \delta_{x_i})
-		$ \onslide<1>{.}
-		\\[0.3cm]
-		\setbeamercovered{invisible}
-		\pause
-		\textcolor{red}{Claim: $f$ is continuous.}
-		$\implies$ existences of
-	}
+		\onslide<4>{
+			\hspace{1.5cm} \textcolor{blue}{(1)}}
+	\end{align*}%
+	\vspace{-0.7cm}
+	\begin{overlayarea}{\textwidth}{1.5cm}
+		\only<1-4>{
+			\onslide<1>{where}
+			\onslide<1-4>{
+				$ f(x_1, \ldots, x_n) := \min_{x} \sum_{i=1}^n \lambda_i d(x, x_i)^2
+				$ \onslide<1>{.}\\[0.3cm]
+				\pause
+				\textcolor{red}{Claim: $f$ is conti.}
+				$\implies$ the existence of
+			}
+		}
+		\only<5>{
+			\vspace{0.2cm}
+			\textcolor{blue}{$\bar{\mu} := B_{\#} \gamma$} is a barycenter of
+			$ \sum_{i=1}^n \lambda_i \delta_{\mu_i}$
+			with $\gamma$ the law of an optimal $(X_1, \ldots, X_n)$:
+		}
+	\end{overlayarea}
 	\begin{enumerate}
 		\item $\min \mathbb{E} f(X_1, \ldots, X_n)$ \textcolor{gray}{over all possible $X_i$}
 		      \pause
@@ -263,14 +323,78 @@
 			      \textcolor{black}{barycenters of $\sum_{i=1}^n \lambda_i \delta_{x_i}$}
 			      on $E$}\\
 		      \onslide<4>{
-			      $\implies$ \emph{\textcolor{gray}{eq.\@ (\ref{equa:barycenter_selection})}} achieves an equality.
+			      $\implies$ \emph{\textcolor{blue}{eq.(1)}} achieves an equality.
 		      }
 	\end{enumerate}
-	\setbeamercovered{invisible}
-	\onslide<5>{
-		Finally, barycenter \textcolor{blue}{$\bar{\mu} := B_{\#} \gamma$}, where $\gamma$
-		is the law of an optimal $(X_1, \ldots, X_n)$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof: $f$ is conti.\@ when $E$ is proper}
+	\setbeamercovered{
+		again covered={\opaqueness<1->{40}}
 	}
+	For $\vect{x} = (x_1, \ldots, x_n) \in E^n$, define $\eta = \sum_{i=1}^n \lambda_i \delta_{x_i}$ and
+	let $y$ be a barycenter of $\eta$.\\
+	Then $f(\vect{x}):= \min_x \sum_{i=1}^n \lambda_i
+		\delta_{x_i} = W(\delta_y, \eta)^2$
+	is continuous in $\vect{x}$.
+	\begin{overlayarea}{\textwidth}{4.0cm}
+		\vspace{-0.7cm}
+		\begin{columns}
+			\column{0.49\textwidth}
+			{\small \textcolor{gray}{proof}}
+			\onslide<2->{
+				define similarly $\eta_j$ and $y_j$ for $\vect{x_j}$\\[0.2cm]
+			}
+			\onslide<3>{%
+				\textcolor{beamer@blendedblue}{1. }
+				$\vect{x_j} \rightarrow \vect{x} \implies W(\eta_j, \eta)^2 \rightarrow 0$\\
+			}
+			\onslide<4>{%
+				\textcolor{beamer@blendedblue}{2. }
+				$\{y_j\}$ is bounded\\
+			}
+			\onslide<5>{%
+				\textcolor{beamer@blendedblue}{3. }
+				$y_j \rightarrow y^\prime \implies y^\prime$ is a barycenter of $\eta$\\
+			}
+			\begin{overlayarea}{\textwidth}{1cm}
+				\vspace{0.10cm}
+				\only<5>{
+					$W(\delta_{y^\prime}, \eta)^2 = \lim W(\delta_{y_j},\eta_j)^2$\\
+					\hspace{1.7cm}
+					$\leq \lim W(\delta_{y}, \eta_j)^2 = W(\delta_{y}, \eta)^2$
+				}
+				\only<6>{
+					\textcolor{purple}{
+						$W(\delta_{y^\prime}, \eta)^2 = \lim W(\delta_{y_j},\eta_j)^2$%
+					}%
+					,\\[0.3cm]
+					passing to a subsequence, $f(\vect{x_j}) \rightarrow f(\vect{x})$.
+				}
+			\end{overlayarea}
+			\column{0.51\textwidth}
+			\hspace{1cm}
+			\only<1>{
+				\includegraphics[width=0.6\linewidth]{Chapters/discrete_1.pdf}
+			}
+			\only<2>{
+				\includegraphics[width=0.6\linewidth]{Chapters/discrete_2.pdf}
+			}
+			\only<3>{
+				\includegraphics[width=0.6\linewidth]{Chapters/discrete_3.pdf}
+			}
+			\only<4>{
+				\includegraphics[width=0.6\linewidth]{Chapters/discrete_4.pdf}
+			}
+			\only<5>{
+				\includegraphics[width=0.6\linewidth]{Chapters/discrete_5.pdf}
+			}
+			\only<6>{
+				\includegraphics[width=0.6\linewidth]{Chapters/discrete_6.pdf}
+			}
+		\end{columns}
+	\end{overlayarea}
 \end{frame}
 
 \begin{frame}
@@ -295,8 +419,8 @@
 
 	For barycenters in $\mathcal{W}(E)$, we
 	\only<1>{prove}\only<2->{study}
-	their \\[0.3cm]
-	\begin{overlayarea}{\textwidth}{1.5cm}
+	their \\[0.35cm]
+	\begin{overlayarea}{\textwidth}{2.5cm}
 		\only<1>{
 			\textcolor{beamer@blendedblue}{Uniqueness}
 			\begin{enumerate}
@@ -304,7 +428,7 @@
 				\item $W(\lambda_1 \, \mu_1 + \lambda_2 \, \mu_2, \nu)^2
 					      \leq \lambda_1 \, W(\mu_1, \nu)^2 + \lambda_2 \, W(\mu_2, \nu)^2$
 				\item
-				      \textcolor{beamer@blendedblue}{1} +
+				      \textcolor{beamer@blendedblue}{1} and
 				      \textcolor{beamer@blendedblue}{2} $\implies$
 				      $W(\cdot, \nu)^2$ is strictly convex
 			\end{enumerate}
@@ -313,13 +437,14 @@
 			\textcolor{beamer@blendedblue}{Absolute Continuity}\\
 		}
 		\only<2,3>{
-			Analysis of \textcolor{purple}{$c$-convex functions}
-			\textcolor{gray}{\textsuperscript{[McCann, 2001]}},}
+			Analysis of \textcolor{purple}{$c$-concave functions}%
+			\refs{McCann, 2001},}
 		\only<2>{examples:\\
 			\begin{enumerate}
-				\item $x \mapsto d(x, y)^2$
-				\item $\displaystyle x_1 \mapsto \frac{1}{\lambda_1}
-					\min_{x} \sum_{i=1}^n \lambda_i d(x, x_i)^2$
+				\item $x \mapsto \frac{1}{2}d(x, y)^2$
+				\item $x_1 \mapsto \frac{1}{2 \lambda_1}
+					      \min_{x} \sum_{i=1}^n \lambda_i d(x, x_i)^2
+					      = \textcolor{gray} {\frac{1}{2 \lambda_i} f(x_1,\ldots,x_n)}$
 				\item Assume $\mu, \nu$ are absolutely continuous and have compact supports,\\
 				      $(X,Y)$ optimal coupling $\implies Y = \exp(-\nabla \textcolor{blue}{\varphi}) \circ X$
 			\end{enumerate}
@@ -333,8 +458,9 @@
 		\only<4>{
 			\begin{enumerate}
 				\item Assume $\mu_i$ have compact supports and $\mu_1$ absolutely continuous, then\\
-				the unique barycenter	$\sum_{i=1}^n \lambda_i \delta_{\mu_i}$ is absolutely continuous.
-				\item The general case is not fully understood.
+				      the unique barycenter	$\sum_{i=1}^n \lambda_i \delta_{\mu_i}$ is absolutely continuous.
+				\item The general case is not fully understood,
+				      depends on $E$'s compactness.
 			\end{enumerate}
 		}
 	\end{overlayarea}
