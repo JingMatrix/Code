@@ -75,15 +75,12 @@
 
 \begin{frame}
 	\frametitle{Barycenter's existence in $(E,d)$}
-	\onslide<1,2>{When $(E,d)$ is a}
+	\onslide<1,2,3>{When $(E,d)$ is a}
 	\begin{description}
-		\item<1,3>[proper space:] \textcolor{teal}{closed + bounded = compact}%
+		\item<1,4>[proper space:] \textcolor{teal}{closed + bounded = compact}%
 		\onslide<1>{,\\[0.1cm]
 			barycenter always exists.}
-		\item<2,3>[length space:] \textcolor{teal}{distance = inf of the lengths of curves}%
-		\onslide<2>{,\\[0.1cm]
-			$z$ a barycenter of $\frac{1}{2}\delta_x + \frac{1}{2}\delta_y \Longleftrightarrow
-				d(x,z)=d(z,y) = \frac{1}{2}d(x,y)$.}
+		\item<2,3,4>[length space:] \textcolor{teal}{distance = inf of the lengths of curves}%
 	\end{description}
 	\begin{overlayarea}{\textwidth}{1.5cm}
 		\only<1>{
@@ -100,6 +97,10 @@
 			\end{center}
 		}
 		\only<3>{
+			\vspace{0.2cm}\hspace{2.2cm}
+			$z$ a barycenter of $\frac{1}{2}\delta_x + \frac{1}{2}\delta_y \Longleftrightarrow
+				d(x,z)=d(z,y) = \frac{1}{2}d(x,y)$}
+		\only<4>{
 			\begin{theorem}[Hopf-Rinow]
 				Locally compact + complete + length space $\implies$ proper
 			\end{theorem}
@@ -148,7 +149,6 @@
 			\end{columns}
 		\end{example}
 	}
-
 	\only<3>{
 		\begin{example}[\textcolor{gray}{\st{Locally compact}} complete length space]
 			Infinite dimensional ellipsoid with axes of decreasing length $c_n := \frac{n+1}{2n}$,
