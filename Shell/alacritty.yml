@@ -24,7 +24,7 @@ key_bindings:
     action: Paste
   - key: 127
     chars: "\x02"
-background_opacity: 0.6
+background_opacity: 0.70
 font:
   normal:
     family: Hack Nerd Font

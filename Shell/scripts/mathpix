@@ -2,8 +2,6 @@
 # use mathpix api for math ocr
 # set -e
 
-/home/jing/Documents/Code/Shell/wifi_login
-
 gnome-screenshot -f /tmp/latex.png -a
 if [[ -f /tmp/latex.png ]]; then
 	image=$(base64 -i /tmp/latex.png | tr -d \\n)
