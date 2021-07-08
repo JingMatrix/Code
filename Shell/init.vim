@@ -11,7 +11,6 @@ let g:vimtex_quickfix_open_on_warning=0
 let g:vimtex_syntax_nospell_commands=['YYCleverefInput']
 let g:vimtex_syntax_nospell_comments=1
 let g:vimtex_grammar_vlty={'lt_command': 'languagetool'}
-			" \,'lt_disablecategories': 'TYPOGRAPHY,TYPOS'}
 let g:vimtex_quickfix_ignore_filters=[
 			\'Fandol',
 			\'multiple pdfs with page group',
@@ -46,6 +45,7 @@ let g:startify_custom_header_quotes=[
 			\['Where is your improvement in five years?'],
 			\['Do you feel sorry about yourself?'],
 			\['Are you escaping from yourself?']]
+nnoremap <c-h> :Startify<cr><esc>
 
 " Airline
 let g:airline_theme='apprentice'
@@ -62,7 +62,9 @@ let g:netrw_liststyle=3
 let g:netrw_winsize=30
 
 " mkdx
-let g:mkdx#settings={'highlight': {'enable': 1}}
+let g:mkdx#settings={'highlight': {'enable': 1},
+			\'enter': {'enable': 0},
+			\'fold': {'enable': 1}}
 
 " fzf-vim
 " Mapping selecting mappings
@@ -94,24 +96,36 @@ augroup formatter
 	autocmd FileType json,jsonc setl formatprg=jq\ '.'
 augroup END
 
+
+" input Chinese
+function ToggleChineseInput()
+	if !exists('#chinese#InsertEnter')
+		augroup chinese
+			autocmd! * <buffer>
+			autocmd InsertEnter <buffer> silent !fcitx5-remote -c &>/dev/null
+			autocmd InsertLeave <buffer> silent !fcitx5-remote -o &>/dev/null
+		augroup END
+	else
+		augroup chinese
+			autocmd! * <buffer>
+		augroup END
+	endif
+endfunction
+nmap yoz :call ToggleChineseInput()<cr>
+augroup toggles
+	autocmd!
+	autocmd BufEnter /tmp/tmp*.txt,*otes/*.md normal yoz
+augroup END
+
 " writing dairy
 augroup notable
 	autocmd!
 	autocmd BufWritePre *otes/*.md 1,7s/\v^modified:\ "\zs.*\ze"$/\=system('date -Is | head -c -1')
-	autocmd InsertEnter *otes/*.md silent !fcitx5-remote -c &>/dev/null
-	autocmd BufEnter,InsertLeave *otes/*.md silent !fcitx5-remote -o &>/dev/null
-augroup END
-
-" input Chinese
-augroup chinese
-	autocmd!
-	" for tg
-	autocmd InsertEnter /tmp/tmp*.txt silent !fcitx5-remote -c &>/dev/null
-	autocmd BufEnter,InsertLeave /tmp/tmp*.txt silent !fcitx5-remote -o &>/dev/null
-	" for mutt
-	autocmd BufEnter,InsertLeave /var/tmp/mutt-Matrix-* silent !fcitx5-remote -o &>/dev/null
 	autocmd FileType markdown setl spelllang+=cjk
 augroup END
+
+" custom mapping
+nnoremap <c-t> :vsplit \| terminal<cr>i
 
 " use <Shift> key to select; see https://stackoverflow.com/a/4608387/7870953
 set mouse=a
@@ -146,55 +160,3 @@ set omnifunc=syntaxcomplete#Complete
 
 " tree-sitter
 lua require('nvim-treesitter.configs').setup{ highlight = { enable = true, } }
-
-" nvim-lspconfig
-augroup lsp
-	autocmd!
-	autocmd FileType vim,python set omnifunc=v:lua.vim.lsp.omnifunc
-augroup END
-lua << EOF
-local nvim_lsp = require('lspconfig')
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
-end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "jedi_language_server", "texlab", "tsserver", "vuels" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
-EOF
-
