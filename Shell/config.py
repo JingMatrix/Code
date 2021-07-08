@@ -35,7 +35,7 @@ c.fileselect.multiple_files.command = ['alacritty','-e','nnn','-n','-p','{}']
 c.fileselect.folder.command = ['alacritty','-e','nnn','-n','-p','{}']
 
 c.window.hide_decoration = True
-# c.colors.webpage.darkmode.enabled = True
+c.colors.webpage.darkmode.enabled = True
 c.fonts.default_size = '12pt'
 c.fonts.web.family.standard = 'Manjari'
 c.fonts.web.size.default = 17

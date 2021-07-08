@@ -1,8 +1,9 @@
 env:
   EDITOR: nvim
   NNN_BMS: a:~/Mathematics/Textbook_Archive;r:~/Mathematics/Research;c:~/Reading/Computer
-    Science Documents;l:/var/tmp/latex
   NNN_PLUG: n:preview-note;f:fzcd;z:fzz
+  NNN_TRASH: "1"
+  NNN_OPTS: acQu
   FZF_DEFAULT_COMMAND: fd --type file --follow --hidden --exclude .git
   FZF_DEFAULT_OPTS: --ansi
   BROWSER: w3m
@@ -24,7 +25,7 @@ key_bindings:
     action: Paste
   - key: 127
     chars: "\x02"
-background_opacity: 0.70
+background_opacity: 0.40
 font:
   normal:
     family: Hack Nerd Font
